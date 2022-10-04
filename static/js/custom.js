@@ -848,7 +848,7 @@ function calculateSalary(){
   document.getElementById("gtax2").value = gtax
   document.getElementById("ot4").value = overtime
   document.getElementById("falw4").value = fixAllow
-  // document.getElementById("cgrs2").value = cgross
+  document.getElementById("cgrs2").value = cgross
   document.getElementById("oalw4").value = otherAllow
   document.getElementById("piet2").value = piet
   document.getElementById("pgrs2").value = pgross
@@ -915,7 +915,6 @@ function Export2Word(element, filename = 'paysheet'){
   
   document.body.removeChild(downloadLink);
 }
-
 
 // New Function To Word File Landscape
  /* HTML to Microsoft Word Export Demo 
