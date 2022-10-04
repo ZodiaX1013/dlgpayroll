@@ -2595,7 +2595,10 @@ def process_salary():
                     emp_data2 = list(arrays[i])
                     # emp_data2 = list(emp_data[0])
 
-                    car = int(emp_data2[0])
+                    car = emp_data2[0]
+                    print(car)
+                    print(type(car))
+                    
                     tbasic = int(emp_data2[1])
                     fixAllow = int(emp_data2[2])
                     trans = int(emp_data2[3])
