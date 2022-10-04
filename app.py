@@ -665,6 +665,7 @@ def employee():
         lname = request.form["lname"]
         title = request.form["title"]
         dob = request.form["dob"]
+        print(dob)
         clocked = request.form["optradio"]
         address = request.form["add"]
         city = request.form["city"]
@@ -687,6 +688,11 @@ def employee():
         nps = request.form["optradio2"]
         car = request.form["car"]
         hire = request.form["hire"]
+        if hire == "":
+            hire = "0001-01-01"
+        else:
+            hire = hire
+        
         salary = request.form["sal"]
         position = request.form["pos"]
         dep = request.form["dep"]
@@ -711,7 +717,7 @@ def employee():
         if working == "No":
             lwork = request.form["lwork"]
         else:
-            lwork = "0000-00-00"
+            lwork = "0001-01-01"
         spbonus = request.form["spbonus"]
         wdays = request.form["wday"]
 
