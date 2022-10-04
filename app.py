@@ -2595,7 +2595,7 @@ def process_salary():
                     emp_data2 = list(arrays[i])
                     # emp_data2 = list(emp_data[0])
 
-                    car = emp_data2[0]
+                    car = int(emp_data2[0])
                     print(car)
                     print(type(car))
                     
