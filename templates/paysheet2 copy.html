@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from technext.github.io/flat_able/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Aug 2022 05:38:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Care Edge</title>
+    <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 11]>
+    	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    	<![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
+    <!-- <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" > -->
+    <!-- <link rel="stylesheet" href="H:/VsCode/Payroll/static/css/style.css"> -->
+
+    <!-- vendor css -->
+    <link href="{{ url_for('static', filename='css/style.css', _external=True) }}" rel="stylesheet" >
+    <!-- <link rel="stylesheet" href="../static/css/style.css" , _external="true"> -->
+    <script src="https://kit.fontawesome.com/e6163d7cbc.js" crossorigin="anonymous"></script>
+    
+    
+
+</head>
+<body class="">
+	<!-- [ Header ] start -->
+	<!-- <header class="navbar pcoded-header navbar-expand-lg navbar-light header-dark" style="background-color: white;" >
+		<div class="m-header">
+			<a class="mobile-menu" id="mobile-collapse" href="{{url_for('dashboard')}}"><span></span></a>
+			<a href="{{url_for('dashboard')}}" class="b-brand">
+				 ========   change your logo hear   ============ 
+				
+                <img src="../static/images/logo.png" alt="" class="logo">
+				<img src="../static/images/logo-icon.png" alt="" class="logo-thumb">
+				<i class="fa-solid fa-house" style="margin-right: 0.5rem;"></i>HOME
+			</a>
+			<a href="{{url_for('dashboard')}}" class="mob-toggler">
+				<i class="feather icon-more-vertical"></i>
+			</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<div class="dropdown">
+						<a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown">
+							File
+						</a>
+						
+						<div class="dropdown-menu profile-notification ">
+							<ul class="pro-body">
+								<li><a href="employee" class="dropdown-item"><i class="fas fa-circle"></i> Employee</a></li>
+								<li><a href="qualification" class="dropdown-item"><i class="fas fa-circle"></i> Qualification</a></li>
+								<li><a href="loan" class="dropdown-item"><i class="fas fa-circle"></i> Loan Type</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<div class="dropdown">
+						<a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown">
+							Process
+						</a>
+						<div class="dropdown-menu profile-notification ">
+							<ul class="pro-body">
+								<li><a href="leave" class="dropdown-item"><i class="fas fa-circle"></i> Daily Leave Input </a></li>
+								<li><a href="process_salary" class="dropdown-item"><i class="fas fa-circle"></i> Process Salary </a></li>
+								<li><a href="salary" class="dropdown-item"><i class="fas fa-circle"></i> Modify Salary</a></li>
+								<li><a href="EOY" class="dropdown-item"><i class="fas fa-circle"></i> End Of Year Bonus</a></li>
+								<li><a href="lock_salary" class="dropdown-item"><i class="fas fa-circle"></i> Lock Salary</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<div class="dropdown">
+						<a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown">
+							Reports
+						</a>
+						<div class="dropdown-menu profile-notification ">
+							<ul class="pro-body">
+								<li><a href="ibanking" class="dropdown-item"><i class="fas fa-circle"></i> Internet Banking</a></li>
+								<li><a href="cheque" class="dropdown-item"><i class="fas fa-circle"></i> Cheque and cash list</a></li>
+								<li><a href="payslip" class="dropdown-item"><i class="fas fa-circle"></i> Payslip</a></li>
+								<li><a href="paysheet" class="dropdown-item"><i class="fas fa-circle"></i> Paysheet</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<div class="dropdown" >
+						<a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown" aria-disabled="true">
+							Utility
+						</a>
+						<div class="dropdown-menu profile-notification ">
+							<ul class="pro-body">
+								<li><a href="user" class="dropdown-item"><i class="fas fa-circle"></i> User Account</a></li>
+								<li><a href="change_pass" class="dropdown-item"><i class="fas fa-circle"></i> Change Password</a></li>
+								<li><a href="audit" class="dropdown-item"><i class="fas fa-circle"></i> Audit Trial</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<div class="dropdown">
+						<a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown">
+							Window
+						</a>
+						<div class="dropdown-menu profile-notification ">
+							<ul class="pro-body">
+								<li><a href="#" class="dropdown-item"><i class="fas fa-circle"></i> Option 1</a></li>
+								<li><a href="#" class="dropdown-item"><i class="fas fa-circle"></i> Option 2</a></li>
+								<li><a href="#" class="dropdown-item"><i class="fas fa-circle"></i> Option 3</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<div class="dropdown">
+						<a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown">
+							Help
+						</a>
+						<div class="dropdown-menu profile-notification ">
+							<ul class="pro-body">
+								<li><a href="#" class="dropdown-item"><i class="fas fa-circle"></i>option 1</a></li>
+								<li><a href="#" class="dropdown-item"><i class="fas fa-circle"></i>option 2</a></li>
+								<li><a href="#" class="dropdown-item"><i class="fas fa-circle"></i>option 3</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+</header> -->
+    <!-- [ Main Content ] start -->
+    <!-- <div class="pcoded-main-container"> -->
+    <div>
+        <div class="pcoded-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <!-- [ Main Content ] start -->
+            <!-- <form action=""> -->
+                <div class="">
+                    <div class="card">
+                        <div class="card-header">
+                            <center><h4>MAXCITY ASSET MANAGERS LTD</h4>
+                            <h5>Paysheet for the month of July 2022</h5>
+                            </center>
+                            <div class="card-body">
+                                <!-- <h6 class="mb-3"><b><u> Leave Register </u></b></h6> -->
+                                <!-- Leave Table -->
+                                <!-- <h4>Table Here</h4> -->
+                                <table class="table table-striped" style="width: 100%;">
+                                    <!-- <table style="width: 100%;"> -->
+                                    <tr>
+                                        <!-- <th></th> -->
+                                        <th>Employee</th>
+                                        <th>Basic</th>
+                                        <th>Arrears</th>
+                                        <th>Overseas</th>
+                                        <th>Travel Allow</th>
+                                        <th>Other Allow</th>
+                                        <th>Gross</th>
+                                        <th>PAYE</th>
+                                        <th>CSG Emp</th>
+                                        <th>NSF Emp</th>
+                                        <th>Med Con</th>
+                                        <th>S.Levy</th>
+                                        <th>Net Pay</th>
+                                    </tr>
+                                    <tr style="font-weight: bold ;">
+                                        <td> Management MCPF Dept</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    {% for row in data %}
+                                    <tr>
+                                        {% for cell in row %}
+                                        <td>{{cell}}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    {% endfor %}
+                                    <!-- <tr>
+                                        <td>1</td>
+                                        <td>Heeroo Aveenash Kumar</td>
+                                        <td>103,692</td>
+                                        <td>0</td>
+                                        <td>0.00</td>
+                                        <td>0</td>
+                                        <td>1,500</td>
+                                        <td>105,192</td>
+                                        <td>10,585</td>
+                                        <td>3,111</td>
+                                        <td>213</td>
+                                        <td>0</td>
+                                        <td>0.00</td>
+                                        <td>91,283</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Samy Prisca Angeline</td>
+                                        <td>78,000</td>
+                                        <td>0</td>
+                                        <td>0.00</td>
+                                        <td>25,000</td>
+                                        <td>1,000</td>
+                                        <td>104,000</td>
+                                        <td>9,837</td>
+                                        <td>2,340</td>
+                                        <td>213</td>
+                                        <td>0</td>
+                                        <td>0.00</td>
+                                        <td>91,610</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Ramsamy Rannoojee Corinne</td>
+                                        <td>139,932</td>
+                                        <td>0</td>
+                                        <td>0.00</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>139,932</td>
+                                        <td>16,126</td>
+                                        <td>4,198</td>
+                                        <td>213</td>
+                                        <td>0</td>
+                                        <td>0.00</td>
+                                        <td>119,395</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Ah Ching Cheong Shaow</td>
+                                        <td>310,150</td>
+                                        <td>0</td>
+                                        <td>20,000.00</td>
+                                        <td>0</td>
+                                        <td>17,990</td>
+                                        <td>348,140</td>
+                                        <td>41,007</td>
+                                        <td>9,305</td>
+                                        <td>213</td>
+                                        <td>0</td>
+                                        <td>10,652.00</td>
+                                        <td>286,963</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Dindoyal Ian</td>
+                                        <td>75,750</td>
+                                        <td>0</td>
+                                        <td>0.00</td>
+                                        <td>0</td>
+                                        <td>21,000</td>
+                                        <td>96,750</td>
+                                        <td>10,763</td>
+                                        <td>2,273</td>
+                                        <td>213</td>
+                                        <td>0</td>
+                                        <td>0.00</td>
+                                        <td>83,501</td>
+                                    </tr>
+                                    <tr style="font-weight: bold ;">
+                                        <td></td>
+                                        <td>Sub Total</td>
+                                        <td>707,524</td>
+                                        <td>0</td>
+                                        <td>20,000</td>
+                                        <td>25,000</td>
+                                        <td>41,490</td>
+                                        <td>794,014</td>
+                                        <td>88,318</td>
+                                        <td>21,227</td>
+                                        <td>1,065</td>
+                                        <td>0</td>
+                                        <td>10,652</td>
+                                        <td>672,752</td>
+                                    </tr> -->
+                                    
+                                </table>
+                                <!-- End Leave Table -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- </form> -->
+            <!-- [ Main Content ] end -->
+        </div>
+    </div>
+        <!-- Required Js -->
+        <script src="../static/js/vendor-all.min.js"></script>
+        <script src="../static/js/plugins/bootstrap.min.js"></script>
+        <script src="../static/js/pcoded.min.js"></script>
+
+        <!-- Apex Chart -->
+        <script src="../static/js/plugins/apexcharts.min.js"></script>
+
+
+        <!-- custom-chart js -->
+        <script src="../static/js/pages/dashboard-main.js"></script>
+        <script src="../static/js/custom.js"></script>
+</body>
+<!-- Mirrored from technext.github.io/flat_able/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Aug 2022 05:38:50 GMT -->
+</html>
