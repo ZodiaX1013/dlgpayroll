@@ -2623,6 +2623,8 @@ def process_salary():
                     # print(mon)
                     # print(type(mon))
                     mon = mon[0][0]
+                    print(mon)
+                    print(id)
 
                     print("out If")
                     print("ID ", id)
