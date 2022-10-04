@@ -581,13 +581,9 @@ function calculateSalary(){
 
   var arrears = document.getElementById("arr").value
   var localRef = document.getElementById("lref").value
-<<<<<<< HEAD
   var tfixAllow  = document.getElementById("falw").value
   var dfixAllow = document.getElementById("falw2").value
   var fixAllow = parseInt(tfixAllow) + parseInt(dfixAllow)
-=======
-  var fixAllow  = document.getElementById("falw").value
->>>>>>> f196d842f34d33279a48f881def481e6acd40c39
   var DiscBonus = document.getElementById("dbns").value
   var attBns = document.getElementById("atbns").value
   var transport1 = document.getElementById("tran").value
@@ -607,11 +603,7 @@ function calculateSalary(){
   var transport = parseInt(transport1) + parseInt(transport2)
   var overseas = parseInt(tax) + parseInt(ntax)
 
-<<<<<<< HEAD
   var tbasic = document.getElementById("bsal").value
-=======
-  var basic = document.getElementById("bsal").value
->>>>>>> f196d842f34d33279a48f881def481e6acd40c39
   var overtime = parseInt(ot1) + parseInt(ot2) +parseInt(ot3)
   var eoy = document.getElementById("eoy").value
   var speProBns = document.getElementById("spbonus3").value
@@ -634,11 +626,7 @@ function calculateSalary(){
   var piet = document.getElementById("piet").value
   var ppaye = document.getElementById("ppaye").value
 
-<<<<<<< HEAD
   var basic = parseInt(tbasic) - parseInt(abs)
-=======
-
->>>>>>> f196d842f34d33279a48f881def481e6acd40c39
 
 
   var payable = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(transport) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(speBns) + parseInt(speProBns) + parseInt(fixAllow) + parseInt(DiscBonus) + parseInt(tax) + parseInt(ntax) + parseInt(attBns)
@@ -654,21 +642,14 @@ function calculateSalary(){
 
   var cgross
   var ptransport = 0
-<<<<<<< HEAD
   if(transport > 20000){
-=======
-  if(transport > 11500){
->>>>>>> f196d842f34d33279a48f881def481e6acd40c39
     cgross = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(transport) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(speBns) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car)
   }
   else{
     cgross = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(speBns) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car)
   }
 
-<<<<<<< HEAD
   var gtax = parseInt(cgross) + parseInt(transport)
-=======
->>>>>>> f196d842f34d33279a48f881def481e6acd40c39
   var gross = pgross + cgross
 
   var tciet = parseInt(edf) + parseInt(medicalRel) + parseInt(educationRel)
@@ -677,31 +658,23 @@ function calculateSalary(){
   var iet = parseInt(ciet) + parseInt(piet)
 
   var netch = parseInt(gross) - parseInt(iet)
-<<<<<<< HEAD
   if(netch < 0){
     netch = 0
   }
   else{
     netch = netch
   }
-=======
->>>>>>> f196d842f34d33279a48f881def481e6acd40c39
 
   var nps
   var cpaye
   var enps
   if(basic > 50000){
     nps = Math.round(parseInt(basic) * 0.03)
-<<<<<<< HEAD
     // cpaye = Math.round(parseInt(netch) * 0.15)
-=======
-    cpaye = Math.round(parseInt(netch) * 0.15)
->>>>>>> f196d842f34d33279a48f881def481e6acd40c39
     enps = Math.round(parseInt(basic) * 0.06)
   }
   else{
     nps = Math.round(parseInt(basic) * 0.015)
-<<<<<<< HEAD
     // cpaye = Math.round(parseInt(netch) * 0.1)
     enps = Math.round(parseInt(basic) * 0.03)
   }
@@ -743,17 +716,6 @@ function calculateSalary(){
 
   if(nsf > 214){
     nsf = 214
-=======
-    cpaye = Math.round(parseInt(netch) * 0.1)
-    enps = Math.round(parseInt(basic) * 0.03)
-  }
-
-  paye = parseInt(cpaye) - parseInt(ppaye)
-  nsf = Math.round(parseInt(basic) * 0.01)
-
-  if(nsf > 213){
-    nsf = 213
->>>>>>> f196d842f34d33279a48f881def481e6acd40c39
   }
   else{
     nsf = parseInt(nsf)
@@ -777,13 +739,8 @@ function calculateSalary(){
     slevy = 0
   }
   var ensf = Math.round(parseInt(basic) * 0.025)
-<<<<<<< HEAD
   if(ensf > 536){
     ensf = 536
-=======
-  if(ensf > 531){
-    ensf = 531
->>>>>>> f196d842f34d33279a48f881def481e6acd40c39
   }
   else{
     ensf = Math.round(ensf)
@@ -793,7 +750,6 @@ function calculateSalary(){
   var deduction = parseInt(loan) + parseInt(paye) + parseInt(lateness) + parseInt(nps) + parseInt(otherDed) + parseInt(nsf) + parseInt(medical)
 
   var net = parseInt(payable) - parseInt(deduction)
-<<<<<<< HEAD
   var pnet = parseInt(net) - parseInt(slevy)
 
   var ths = Math.round(3000000/13)
@@ -829,9 +785,6 @@ function calculateSalary(){
   var pths = 0
   var plevy = 0
   var levypay = Math.round(clevy)
-=======
-
->>>>>>> f196d842f34d33279a48f881def481e6acd40c39
   document.getElementById("bsal").value = basic
   document.getElementById("falw2").value = fixAllow
   document.getElementById("oded2").value = otherDed
@@ -861,18 +814,11 @@ function calculateSalary(){
   document.getElementById("mrel").value = medicalRel
   document.getElementById("pay").value = payable
   document.getElementById("ded").value = deduction
-<<<<<<< HEAD
   document.getElementById("pnet").value = pnet
   document.getElementById("npay").value = net
   document.getElementById("bsal2").value = basic
   document.getElementById("dbns3").value = DiscBonus
   document.getElementById("cgrs").value = gtax
-=======
-  document.getElementById("npay").value = net
-  document.getElementById("bsal2").value = basic
-  document.getElementById("dbns3").value = DiscBonus
-  document.getElementById("cgrs").value = cgross
->>>>>>> f196d842f34d33279a48f881def481e6acd40c39
   document.getElementById("ot3").value = overtime
   document.getElementById("falw3").value = fixAllow
   document.getElementById("pgrs").value = pgross
@@ -894,7 +840,6 @@ function calculateSalary(){
   document.getElementById("nps2").value = enps
   document.getElementById("nsf2").value = ensf
   document.getElementById("ivbt").value = levy
-<<<<<<< HEAD
   document.getElementById("gtax").value = cgross
   document.getElementById("prgf").value = eprgf
 
@@ -923,9 +868,6 @@ function calculateSalary(){
   document.getElementById("plevy").value =plevy
   document.getElementById("levypay").value =levypay
   alert("Calculation Complete")
-=======
-
->>>>>>> f196d842f34d33279a48f881def481e6acd40c39
 }
 
 // Function For Export To Word File
@@ -974,10 +916,7 @@ function Export2Word(element, filename = 'paysheet'){
   document.body.removeChild(downloadLink);
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> f196d842f34d33279a48f881def481e6acd40c39
 // New Function To Word File Landscape
  /* HTML to Microsoft Word Export Demo 
   * This code demonstrates how to export an html element to Microsoft Word
