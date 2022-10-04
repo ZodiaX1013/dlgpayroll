@@ -580,7 +580,7 @@ def employee():
         if working == "No":
             lwork = request.form["lwork"]
         else:
-            lwork = "0000-00-00"
+            lwork = "0001-01-01"
         spbonus = request.form["spbonus"]
         wdays = request.form["wday"]
 
