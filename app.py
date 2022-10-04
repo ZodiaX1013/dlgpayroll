@@ -14,6 +14,7 @@ import calendar
 UPLOAD_FOLDER = 'static/images/'
 WKHTMLTOPDF_PATH = 'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf'
 
+
 app = Flask(__name__)
 app.secret_key = "asndjaheh912yeuwbqduiqasgdyq"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -38,10 +39,13 @@ def login():
         mail = request.form["email"]
         psw = request.form["password"]
 
+        print(mail)
+        print(psw)
         try:
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
@@ -88,7 +92,7 @@ def login():
 
 @app.route("/reset", methods=["GET","POST"])
 def reset():
-    global connection
+    # global connection
     if request.method == "POST":
         old_pass = request.form["opass"]
         new_pass = request.form["npass"]
@@ -97,6 +101,7 @@ def reset():
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
@@ -143,7 +148,7 @@ def reset():
 
 @app.route("/dashboard", methods=["GET" , "POST"])
 def dashboard():
-    global connection
+    # global connection
     if request.method == "POST":
         eid = request.form["search"]
         if eid:
@@ -153,6 +158,7 @@ def dashboard():
                 connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
                 cursor = connection.cursor(buffered=True)
 
@@ -193,6 +199,7 @@ def dashboard():
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True) 
 
@@ -242,7 +249,7 @@ def dashboard():
 
 @app.route("/employee", methods=["GET" , "POST"])
 def employee():
-    global connection
+    # global connection
     # Back To Employee Page
 
     if request.method == "POST" and request.form['action'] == 'back':      
@@ -270,6 +277,7 @@ def employee():
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
             
@@ -580,6 +588,7 @@ def employee():
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
@@ -710,6 +719,7 @@ def employee():
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
             query2 =""" INSERT INTO employee (
@@ -1303,7 +1313,7 @@ def employee():
 
 @app.route("/salary", methods=["GET" , "POST"])
 def salary():
-    global connection
+    # global connection
     # Search Data
     if request.method == "POST" and request.form['action'] == 'search':
         eid = request.form["eid"]
@@ -1313,6 +1323,7 @@ def salary():
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True) 
 
@@ -1870,6 +1881,7 @@ def salary():
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
             print("Before Query Execute")
@@ -2096,13 +2108,14 @@ def salary():
 
 @app.route("/leave", methods=["GET" , "POST", "PUT"])
 def leave():
-    global connection
+    # global connection
     if request.method == 'POST':
         eid = request.form['eid']
         try:
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True) 
 
@@ -2177,7 +2190,7 @@ def lock_salary():
 
 @app.route("/process_salary", methods=["GET" , "POST"])
 def process_salary():
-    global connection
+    # global connection
     if request.method == "POST":
         eid = request.form["eid"]
         month = request.form["mon"]
@@ -2190,6 +2203,7 @@ def process_salary():
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
             if eid != "ALL":
@@ -3105,13 +3119,14 @@ def process_salary():
 
 @app.route("/payslip", methods=["GET" , "POST"])
 def payslip():
-    global connection
+    # global connection
     if request.method == "POST" and request.form['action'] == 'word':
         month = request.form["mon"]
         try:
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
@@ -3167,7 +3182,7 @@ def payslip():
 
 @app.route("/paysheet", methods=["GET" , "POST"])
 def paysheet():
-    global connection
+    # global connection
     # For Pdf Generate
     if request.method == "POST" and request.form['action'] == 'pdf':
         month = request.form["mon"]
@@ -3175,6 +3190,7 @@ def paysheet():
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
@@ -3206,6 +3222,7 @@ def paysheet():
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
                                                     user='doadmin',
+                                                    port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
