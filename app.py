@@ -1,20 +1,12 @@
-from cmath import pi
-from crypt import methods
-from dis import dis
 import hashlib
-import json
-from logging import basicConfig
 import os
-import re
-from socket import CMSG_LEN
-from flask import Flask, flash, request, redirect, url_for, render_template, session, send_file
+from flask import Flask, request, redirect, url_for, render_template, session, send_file
 from werkzeug.utils import secure_filename
 from PIL import Image
 import os
 import mysql.connector
 from mysql.connector import *
 import random, string
-from datetime import datetime
 import pdfkit
 import calendar
 # from flask_wkhtmltopdf import Wkhtmltopdf
@@ -47,10 +39,10 @@ def login():
         psw = request.form["password"]
 
         try:
-            connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                    database='heroku_2454cdb096d1842',
-                                                    user='b85c92b4b95561',
-                                                    password='3668be4b') # @ZodiaX1013
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
             query1 = "SELECT username FROM cred"
@@ -102,10 +94,10 @@ def reset():
         new_pass = request.form["npass"]
         rnew_pass = request.form["rpass"]
         try:
-            connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                    database='heroku_2454cdb096d1842',
-                                                    user='b85c92b4b95561',
-                                                    password='3668be4b') # @ZodiaX1013
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
             query1 = "SELECT password FROM cred"
@@ -158,10 +150,10 @@ def dashboard():
             data1 = [eid]
             print("In If")
             try:
-                connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                        database='heroku_2454cdb096d1842',
-                                                        user='b85c92b4b95561',
-                                                        password='3668be4b') # @ZodiaX1013
+                connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
                 cursor = connection.cursor(buffered=True)
 
                 # query1 = f"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'employee' AND ORDINAL_POSITION between 2 AND 4;"
@@ -198,10 +190,10 @@ def dashboard():
         # eid = request.form["search"]
         # data1 = [eid]
         try:
-            connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                    database='heroku_2454cdb096d1842',
-                                                    user='b85c92b4b95561',
-                                                    password='3668be4b') # @ZodiaX1013
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True) 
 
             # query1 = f"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'employee'"
@@ -275,10 +267,10 @@ def employee():
         eid = request.form["eid"]      
         data = [eid]
         try:
-            connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                database='heroku_2454cdb096d1842',
-                                                user='b85c92b4b95561',
-                                                password='3668be4b') # @ZodiaX1013
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
             
             query1 = "SELECT FirstName From employee WHERE EmployeeID = %s"
@@ -585,10 +577,10 @@ def employee():
         wdays = request.form["wday"]
 
         try:
-            connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                database='heroku_2454cdb096d1842',
-                                                user='b85c92b4b95561',
-                                                password='3668be4b') # @ZodiaX1013
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
             update_query = """
@@ -715,10 +707,10 @@ def employee():
         wdays = request.form["wday"]
 
         try:
-            connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                database='heroku_2454cdb096d1842',
-                                                user='b85c92b4b95561',
-                                                password='3668be4b') # @ZodiaX1013
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
             query2 =""" INSERT INTO employee (
                 EmployeeID,
@@ -1318,10 +1310,10 @@ def salary():
         month = request.form["mon"]
         year = request.form["year"]
         try:
-            connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                database='heroku_2454cdb096d1842',
-                                                user='b85c92b4b95561',
-                                                password='3668be4b') # @ZodiaX1013
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True) 
 
             # query1 = "SELECT salary FROM employee WHERE EmployeeID = %s"
@@ -1875,10 +1867,10 @@ def salary():
         # unqcode = lname + " " + mon
 
         try:
-            connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                database='heroku_2454cdb096d1842',
-                                                user='b85c92b4b95561',
-                                                password='3668be4b') # @ZodiaX1013
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
             print("Before Query Execute")
             query1 = """UPDATE salary
@@ -2108,10 +2100,10 @@ def leave():
     if request.method == 'POST':
         eid = request.form['eid']
         try:
-            connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                database='heroku_2454cdb096d1842',
-                                                user='b85c92b4b95561',
-                                                password='3668be4b') # @ZodiaX1013
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True) 
 
             # query1 = f"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'employee'"
@@ -2195,10 +2187,10 @@ def process_salary():
         month = month.lower()
         # print(month)
         try:
-            connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                database='heroku_2454cdb096d1842',
-                                                user='b85c92b4b95561',
-                                                password='3668be4b') # @ZodiaX1013
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
             if eid != "ALL":
                 if month == "January" or "january":
@@ -3117,10 +3109,10 @@ def payslip():
     if request.method == "POST" and request.form['action'] == 'word':
         month = request.form["mon"]
         try:
-            connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                database='heroku_2454cdb096d1842',
-                                                user='b85c92b4b95561',
-                                                password='3668be4b') # @ZodiaX1013
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
             # query1 = "SELECT * FROM paysheet"
@@ -3180,10 +3172,10 @@ def paysheet():
     if request.method == "POST" and request.form['action'] == 'pdf':
         month = request.form["mon"]
         try:
-            connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                database='heroku_2454cdb096d1842',
-                                                user='b85c92b4b95561',
-                                                password='3668be4b') # @ZodiaX1013
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
             data1 = [month]
@@ -3211,10 +3203,10 @@ def paysheet():
 
     if request.method == "POST" and request.form['action'] == 'excel':
         try:
-            connection = mysql.connector.connect(host='us-cdbr-east-06.cleardb.net',
-                                                database='heroku_2454cdb096d1842',
-                                                user='b85c92b4b95561',
-                                                password='3668be4b') # @ZodiaX1013
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
             # query1 = "SELECT * FROM paysheet"
