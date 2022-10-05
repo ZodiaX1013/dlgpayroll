@@ -2583,21 +2583,21 @@ def process_salary():
                 cursor.execute(query)
                 emp_data = cursor.fetchall()
 
-                print(emp_data)
+                # print(emp_data)
 
                 arrays = {}
                 for index,lst in enumerate(emp_data):
                     arrays[str(index+1)] = lst
-                print(arrays)
+                # print(arrays)
                 
                 for i in arrays:
-                    print(i)
+                    # print(i)
                     emp_data2 = list(arrays[i])
                     # emp_data2 = list(emp_data[0])
 
                     car = int(emp_data2[0])
-                    print(car)
-                    print(type(car))
+                    # print(car)
+                    # print(type(car))
                     
                     tbasic = int(emp_data2[1])
                     fixAllow = int(emp_data2[2])
@@ -2617,22 +2617,22 @@ def process_salary():
                     data2 = [eid,month2]
                     # print(month2)
 
-                    query1_1 = "SELECT MONTH(Lastwork) AS Month FROM employee WHERE EmployeeID= %s"
+                    query1_1 = "SELECT MONTH(Lastwork) AS Month, YEAR(Lastwork) AS Year FROM employee WHERE EmployeeID= %s"
                     cursor.execute(query1_1, data)
                     mon = cursor.fetchall()
-                    # print(mon)
+                    print(mon)
                     # print(type(mon))
                     mon = mon[0][0]
                     print(mon)
                     print(id)
 
-                    print("out If")
-                    print("ID ", id)
-                    print("mon ", mon)
+                    # print("out If")
+                    # print("ID ", id)
+                    # print("mon ", mon)
                     if mon == 0:
                         mon = id
                     # if id <= mon:
-                    print("In If")
+                    # print("In If")
 
                     query4 = "SELECT hire, position, NICno FROM employee WHERE EmployeeID = %s"
                     cursor.execute(query4,data)
@@ -2732,13 +2732,13 @@ def process_salary():
                             pos = " "
                     if pos != 0:
                         pos = ''.join(map(str,pos))
-                    print(pos)
+                    # print(pos)
                     
 
                     query10 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
                     cursor.execute(query10,data)
                     nic = cursor.fetchall()
-                    print(nic)
+                    # print(nic)
                     for i in range(len(nic)):
                         if nic[0][0] != None:
                             nic = ''.join(nic[i])
@@ -3082,11 +3082,11 @@ def process_salary():
                     );
                     """
                     data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevy, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, gross, grossTax,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, plevy, slevypay, ab, month, year, UNQ]
-                    cursor.execute(insert_query, data1)
+                    # cursor.execute(insert_query, data1)
                     print("Process Query Executed")
 
                     data3 = [hire, "Demo" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, month ]
-                    cursor.execute(query, data3)
+                    # cursor.execute(query, data3)
                     print("Payslip Query Executed")
 
                     # print("Do Something Else")
