@@ -287,7 +287,7 @@ function calculateSalary(){
 
   var arrears = document.getElementById("arr").value
   alert(arrears)
-  if(arrears == null){
+  if(arrears == ""){
     alert("Yes")
   }
   else{
