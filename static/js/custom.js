@@ -286,7 +286,8 @@ function calculateSalary(){
   // Changable Amount is travel allowance
 
   var arrears = document.getElementById("arr").value
-  if(arrears){
+  alert(arrears)
+  if(arrears == null){
     alert("Yes")
   }
   else{
