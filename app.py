@@ -2667,7 +2667,7 @@ def process_salary():
                     for i in range(len(lname)):
                         lname = ''.join(lname[i])
 
-                    query3 = "SELECT CurrentGross FROM salary WHERE EmployeeID= %s AND Month = %s"
+                    query3 = "SELECT cGrossTax FROM salary WHERE EmployeeID= %s AND Month = %s"
                     cursor.execute(query3,data2)
                     prevGross = cursor.fetchall()
                     for i in range(len(prevGross)):
