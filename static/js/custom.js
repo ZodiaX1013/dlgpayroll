@@ -286,14 +286,14 @@ function calculateSalary(){
   // Changable Amount is travel allowance
 
   var arrears = document.getElementById("arr").value
-  alert(arrears)
+  
   if(arrears == ""){
     arrears = 0
   }
   else{
     arrears = parseInt(arrears)
   }
-
+  alert("arrears" ,arrears)
   var localRef = document.getElementById("lref").value
   if(localRef == ""){
     localRef = 0
@@ -301,7 +301,7 @@ function calculateSalary(){
   else{
     localRef = parseInt(localRef)
   }
-
+  alert("local ", localRef)
   var tfixAllow  = document.getElementById("falw").value
   if(tfixAllow == ""){
     tfixAllow = 0
