@@ -2626,7 +2626,7 @@ def process_salary():
                     print(mon)
                     year = dt[0][1]
                     print(year)
-                    check_date = mon + year
+                    check_date = str(mon) + str(year)
                     print(check_date)
 
                     # print("out If")
