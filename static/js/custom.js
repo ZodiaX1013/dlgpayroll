@@ -288,14 +288,14 @@ function calculateSalary(){
   var arrears = document.getElementById("arr").value
   
   if(arrears == ""){
-    arrears = 0
+    arrears = parseInt(0)
     alert("In If")
   }
   else{
     arrears = parseInt(arrears)
     alert("In Else")
   }
-  alert("arrears" ,arrears)
+  alert(arrears)
   var localRef = document.getElementById("lref").value
   if(localRef == ""){
     localRef = 0
