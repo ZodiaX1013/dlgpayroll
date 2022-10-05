@@ -2929,7 +2929,10 @@ def process_salary():
                     else:
                         ppaye = int(ppaye)
 
+                    print("cpaye", cpaye)
+                    print("ppaye", ppaye)
                     paye = int(cpaye) - int(ppaye)
+                    print("paye", paye)
                     if paye < 0:
                         paye =0
                     else:
