@@ -288,35 +288,159 @@ function calculateSalary(){
   var arrears = document.getElementById("arr").value
   alert(arrears)
   if(arrears == ""){
-    alert("Yes")
+    arrears = 0
   }
   else{
-    print("No")
+    arrears = parseInt(arrears)
   }
-  var localRef = document.getElementById("lref").value
-  var tfixAllow  = document.getElementById("falw").value
-  var dfixAllow = document.getElementById("falw2").value
-  var fixAllow = parseInt(tfixAllow) + parseInt(dfixAllow)
-  var DiscBonus = document.getElementById("dbns").value
-  var attBns = document.getElementById("atbns").value
-  var transport1 = document.getElementById("tran").value
-  var transport2 = document.getElementById("tran2").value
-  var transport = parseInt(transport1) + parseInt(transport2)
-  var sick = document.getElementById("sref").value
-  var speBns = document.getElementById("sbns").value
-  var otherAllow = document.getElementById("oalw").value
-  var otherDed = document.getElementById("oded").value
-  var abs = document.getElementById("abs").value
-  var ot1 = document.getElementById("am1").value
-  var ot2 = document.getElementById("am2").value
-  var ot3 = document.getElementById("am3").value
-  var lateness = document.getElementById("am4").value
-  var tax = document.getElementById("amt1").value
-  var ntax = document.getElementById("amt2").value
-  
-  
-  var overseas = parseInt(tax) + parseInt(ntax)
 
+  var localRef = document.getElementById("lref").value
+  if(localRef == ""){
+    localRef = 0
+  }
+  else{
+    localRef = parseInt(localRef)
+  }
+
+  var tfixAllow  = document.getElementById("falw").value
+  if(tfixAllow == ""){
+    tfixAllow = 0
+  }
+  else{
+    tfixAllow = parseInt(tfixAllow)
+  }
+
+  var dfixAllow = document.getElementById("falw2").value
+  if(dfixAllow == ""){
+    dfixAllow = 0
+  }
+  else{
+    dfixAllow = parseInt(dfixAllow)
+  }
+
+  var DiscBonus = document.getElementById("dbns").value
+  if(DiscBonus == ""){
+    DiscBonus = 0
+  }
+  else{
+    DiscBonus = parseInt(DiscBonus)
+  }
+
+  var attBns = document.getElementById("atbns").value
+  if(attBns == ""){
+    attBns = 0
+  }
+  else{
+    attBns = parseInt(attBns)
+  }
+
+  var transport1 = document.getElementById("tran").value
+  if(transport1 == ""){
+    transport1 = 0
+  }
+  else{
+    transport1 = parseInt(transport1)
+  }
+
+  var transport2 = document.getElementById("tran2").value
+  if(transport2 == ""){
+    transport2 = 0
+  }
+  else{
+    transport2 = parseInt(transport2)
+  }
+
+  var sick = document.getElementById("sref").value
+  if(sick == ""){
+    sick = 0
+  }
+  else{
+    sick = parseInt(sick)
+  }
+
+  var speBns = document.getElementById("sbns").value
+  if(speBns == ""){
+    speBns = 0
+  }
+  else{
+    speBns = parseInt(speBns)
+  }
+
+  var otherAllow = document.getElementById("oalw").value
+  if(otherAllow == ""){
+    otherAllow = 0
+  }
+  else{
+    otherAllow = parseInt(otherAllow)
+  }
+
+  var otherDed = document.getElementById("oded").value
+  if(otherDed == ""){
+    otherDed = 0
+  }
+  else{
+    otherDed = parseInt(otherDed)
+  }
+
+  var abs = document.getElementById("abs").value
+  if(abs == ""){
+    abs = 0
+  }
+  else{
+    abs = parseInt(abs)
+  }
+  
+  var ot1 = document.getElementById("am1").value
+  if(ot1 == ""){
+    ot1 = 0
+  }
+  else{
+    ot1 = parseInt(ot1)
+  }
+
+  var ot2 = document.getElementById("am2").value
+  if(ot2 == ""){
+    ot2 = 0
+  }
+  else{
+    ot2 = parseInt(ot2)
+  }
+
+  var ot3 = document.getElementById("am3").value
+  if(ot3 == ""){
+    ot3 = 0
+  }
+  else{
+    ot3 = parseInt(ot3)
+  }
+
+  var lateness = document.getElementById("am4").value
+  if(lateness == ""){
+    lateness = 0
+  }
+  else{
+    lateness = parseInt(lateness)
+  }
+
+  var tax = document.getElementById("amt1").value
+  if(tax == ""){
+    tax = 0
+  }
+  else{
+    tax = parseInt(tax)
+  }
+
+  var ntax = document.getElementById("amt2").value
+  if(ntax == ""){
+    ntax = 0
+  }
+  else{
+    ntax = parseInt(ntax)
+  }
+  
+  var transport = parseInt(transport1) + parseInt(transport2)
+  var overseas = parseInt(tax) + parseInt(ntax)
+  var fixAllow = parseInt(tfixAllow) + parseInt(dfixAllow)
   var tbasic = document.getElementById("bsal").value
   var overtime = parseInt(ot1) + parseInt(ot2) +parseInt(ot3)
   var eoy = document.getElementById("eoy").value
