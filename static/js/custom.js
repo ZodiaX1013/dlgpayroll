@@ -289,13 +289,13 @@ function calculateSalary(){
   
   if(arrears == ""){
     arrears = parseInt(0)
-    alert("In If")
+    
   }
   else{
     arrears = parseInt(arrears)
-    alert("In Else")
+    
   }
-  alert(arrears)
+  
   var localRef = document.getElementById("lref").value
   if(localRef == ""){
     localRef = 0
@@ -303,7 +303,7 @@ function calculateSalary(){
   else{
     localRef = parseInt(localRef)
   }
-  alert("local ", localRef)
+  
   var tfixAllow  = document.getElementById("falw").value
   if(tfixAllow == ""){
     tfixAllow = 0
@@ -524,13 +524,16 @@ function calculateSalary(){
     enps = Math.round(parseInt(basic) * 0.03)
   }
 
-  if(edf < 70000000){
+  if(edf < 700000){
+    
     cpaye = Math.round(parseInt(netch) * 0.1)
   }
   else if(edf >=700000 && edf < 975000 ){
+    
     cpaye = Math.round(parseInt(netch) * 0.125)
   }
   else{
+    
     cpaye = Math.round(parseInt(netch) * 0.15)
   }
 
@@ -569,9 +572,11 @@ function calculateSalary(){
   var temp = parseInt(cgross) * 13
   var slevy1
   var slevy2
+  var ths = 3000000 / 13
+  var netchar = parseInt(cgross) - parseInt(iet) - parseInt(ths)
   if(temp > 3000000){
-    slevy1 = Math.round((parseInt(cgross) - parseInt(iet) - (3000000/13)) * 0.25)
-    slevy2 = Math.round(parseInt(cgross) * 0.1)
+    slevy1 = Math.round(parseInt(netchar) * 0.25)
+    slevy2 = Math.round(parseInt(grossTax) * 0.1)
     
     if(slevy1 > slevy2){
       slevy = slevy2
@@ -664,13 +669,13 @@ function calculateSalary(){
   document.getElementById("bsal2").value = basic
   document.getElementById("dbns3").value = DiscBonus
   // document.getElementById("cgrs").value = gtax
-  document.getElementById("cgrs").value = gross
+  document.getElementById("cgrs").value = grossTax
   document.getElementById("ot3").value = overtime
   document.getElementById("falw3").value = fixAllow
   document.getElementById("pgrs").value = pgross
   document.getElementById("oalw3").value = otherAllow
   document.getElementById("piet").value = piet
-  document.getElementById("iet").value = ciet  // check iet value
+  document.getElementById("iet").value = iet  // check iet value
   document.getElementById("tran3").value = ptransport
   document.getElementById("txdes3").value = tax
   document.getElementById("netch").value = netch
@@ -686,21 +691,21 @@ function calculateSalary(){
   document.getElementById("nps2").value = enps
   document.getElementById("nsf2").value = ensf
   document.getElementById("ivbt").value = levy
-  document.getElementById("gtax").value = cgross
+  document.getElementById("gtax").value = gross
   document.getElementById("prgf").value = eprgf
 
   document.getElementById("bsal3").value = basic
   document.getElementById("dbns4").value = DiscBonus
-  document.getElementById("gtax2").value = gtax
+  document.getElementById("gtax2").value = grossTax
   document.getElementById("ot4").value = overtime
   document.getElementById("falw4").value = fixAllow
-  document.getElementById("gtax3").value = cgross
+  document.getElementById("gtax3").value = gross
   document.getElementById("oalw4").value = otherAllow
   document.getElementById("piet2").value = piet
   document.getElementById("pgrs2").value = pgross
   document.getElementById("tran4").value = transport
   document.getElementById("txdes4").value = tax
-  document.getElementById("iet2").value = ciet
+  document.getElementById("iet2").value = iet
   document.getElementById("arr4").value = arrears
   document.getElementById("spbonus4").value = speProBns
   document.getElementById("ths").value = ths
