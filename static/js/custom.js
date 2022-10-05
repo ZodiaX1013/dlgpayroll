@@ -286,6 +286,12 @@ function calculateSalary(){
   // Changable Amount is travel allowance
 
   var arrears = document.getElementById("arr").value
+  if(arrears){
+    alert("Yes")
+  }
+  else{
+    print("No")
+  }
   var localRef = document.getElementById("lref").value
   var tfixAllow  = document.getElementById("falw").value
   var dfixAllow = document.getElementById("falw2").value
@@ -293,7 +299,8 @@ function calculateSalary(){
   var DiscBonus = document.getElementById("dbns").value
   var attBns = document.getElementById("atbns").value
   var transport1 = document.getElementById("tran").value
-  var transport2 = document.getElementById("tran3").value
+  var transport2 = document.getElementById("tran2").value
+  var transport = parseInt(transport1) + parseInt(transport2)
   var sick = document.getElementById("sref").value
   var speBns = document.getElementById("sbns").value
   var otherAllow = document.getElementById("oalw").value
@@ -306,7 +313,7 @@ function calculateSalary(){
   var tax = document.getElementById("amt1").value
   var ntax = document.getElementById("amt2").value
   
-  var transport = parseInt(transport1) + parseInt(transport2)
+  
   var overseas = parseInt(tax) + parseInt(ntax)
 
   var tbasic = document.getElementById("bsal").value
@@ -335,28 +342,33 @@ function calculateSalary(){
   var basic = parseInt(tbasic) - parseInt(abs)
 
 
-  var payable = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(transport) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(speBns) + parseInt(speProBns) + parseInt(fixAllow) + parseInt(DiscBonus) + parseInt(tax) + parseInt(ntax) + parseInt(attBns)
+  var payable = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(transport) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(speBns) + parseInt(speProBns) + parseInt(fixAllow) + parseInt(DiscBonus) + parseInt(overseas) + parseInt(attBns)
 
-  // if(overseas > 0){
-  //   ntax = Math.round(parseInt(basic) * 0.06)
-  //   tax = Math.round(parseInt(overseas) - parseInt(tax))
-  // }
-  // else{
-  //   ntax = 0
-  //   tax = 0
-  // }
-
-  var cgross
-  var ptransport = 0
-  if(transport > 20000){
-    cgross = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(transport) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(speBns) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car)
+  if(overseas > 0){
+    ntax = Math.round(parseInt(basic) * 0.06)
+    tax = Math.round(parseInt(overseas) - parseInt(tax))
   }
   else{
-    cgross = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(speBns) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car)
+    ntax = 0
+    tax = 0
   }
 
-  var gtax = parseInt(cgross) + parseInt(transport)
-  var gross = pgross + cgross
+  var cgross, grossTax
+  var ptransport = 0
+  var transTax
+  if(transport > 20000){
+    transTax = transport - 20000
+  }
+  else{
+    transTax = 0
+  }
+
+  cgross = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(transport) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car)
+  
+  grossTax = parseInt(basic) + parseInt(overtime) + parseInt(transTax) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car)
+
+  // var gtax = parseInt(cgross) + parseInt(transport)
+  var gross = pgross + grossTax
 
   var tciet = parseInt(edf) + parseInt(medicalRel) + parseInt(educationRel)
   var ciet
