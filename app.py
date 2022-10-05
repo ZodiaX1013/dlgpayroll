@@ -2885,14 +2885,19 @@ def process_salary():
 
                     print("prev Gross " , prevGross)
                     print("Curr Gross " , cgross)
-                    gross = prevGross + cgross
+                    gross = prevGross + grossTax
                     print("gross" , gross)
                     medf = round(int(edf) / 13)
                     ciet = round(( int(edf) + int(Medicalrel) + int(education)) / 13)
                     
                     iet = int(ciet) + int(piet)
+                    print("ciet" , ciet)
+                    print("piet", piet)
+                    print("iet", iet)
 
-                    netch = grossTax - iet
+                    netch = gross - iet
+
+                    print("netch" , netch)
                     if netch < 0:
                         netch = 0
                     else:
