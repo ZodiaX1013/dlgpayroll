@@ -2619,12 +2619,15 @@ def process_salary():
 
                     query1_1 = "SELECT MONTH(Lastwork) AS Month, YEAR(Lastwork) AS Year FROM employee WHERE EmployeeID= %s"
                     cursor.execute(query1_1, data)
-                    mon = cursor.fetchall()
+                    dt = cursor.fetchall()
                     print(mon)
                     # print(type(mon))
-                    mon = mon[0][0]
+                    mon = dt[0][0]
                     print(mon)
-                    print(id)
+                    year = dt[0][1]
+                    print(year)
+                    check_date = mon + year
+                    print(check_date)
 
                     # print("out If")
                     # print("ID ", id)
