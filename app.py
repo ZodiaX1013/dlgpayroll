@@ -2949,7 +2949,7 @@ def process_salary():
                     slevy = 0
                     tths = round(3000000/13)
                     ths = int(pths) + int(tths)
-                    netchar = int(grossTax) - int(iet) - int(ths)
+                    netchar = int(gross) - int(iet) - int(ths)
                     if netchar < 0 :
                         netchar = 0
                     else:
