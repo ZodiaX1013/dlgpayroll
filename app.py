@@ -3109,11 +3109,11 @@ def process_salary():
                     );
                     """
                     data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevy, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, gross, grossTax,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, plevy, slevypay, ab, month, year, UNQ]
-                    # cursor.execute(insert_query, data1)
+                    cursor.execute(insert_query, data1)
                     print("Process Query Executed")
 
                     data3 = [hire, "Demo" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, month ]
-                    # cursor.execute(query, data3)
+                    cursor.execute(query, data3)
                     print("Payslip Query Executed")
 
                     # print("Do Something Else")
