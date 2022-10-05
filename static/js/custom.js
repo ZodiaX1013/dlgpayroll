@@ -484,7 +484,7 @@ function calculateSalary(){
   var ptransport = 0
   var transTax
   if(transport > 20000){
-    transTax = transport - 20000
+    transTax = parseInt(transport) - 20000
   }
   else{
     transTax = 0
@@ -495,7 +495,7 @@ function calculateSalary(){
   grossTax = parseInt(basic) + parseInt(overtime) + parseInt(transTax) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car)
 
   // var gtax = parseInt(cgross) + parseInt(transport)
-  var gross = pgross + grossTax
+  var gross = parseInt(pgross) + parseInt(grossTax)
 
   var tciet = parseInt(edf) + parseInt(medicalRel) + parseInt(educationRel)
   var ciet
