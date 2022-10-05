@@ -2883,10 +2883,10 @@ def process_salary():
 
                         grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car
 
-                        print("prev Gross " + prevGross)
-                        print("Curr Gross " + cgross)
+                        print("prev Gross " , prevGross)
+                        print("Curr Gross " , cgross)
                         gross = prevGross + cgross
-                        print("gross" + gross)
+                        print("gross" , gross)
                         medf = round(int(edf) / 13)
                         ciet = round(( int(edf) + int(Medicalrel) + int(education)) / 13)
                         
