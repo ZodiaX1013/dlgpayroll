@@ -289,9 +289,11 @@ function calculateSalary(){
   
   if(arrears == ""){
     arrears = 0
+    alert("In If")
   }
   else{
     arrears = parseInt(arrears)
+    alert("In Else")
   }
   alert("arrears" ,arrears)
   var localRef = document.getElementById("lref").value
