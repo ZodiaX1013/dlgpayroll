@@ -378,24 +378,8 @@ function calculateSalary(){
     lateness = parseInt(lateness)
   }
 
-  var tax = document.getElementById("amt1").value
-  if(tax == ""){
-    tax = 0
-  }
-  else{
-    tax = parseInt(tax)
-  }
-
-  var ntax = document.getElementById("amt2").value
-  if(ntax == ""){
-    ntax = 0
-  }
-  else{
-    ntax = parseInt(ntax)
-  }
-  
   var transport = parseInt(transport1) + parseInt(transport2)
-  var overseas = parseInt(tax) + parseInt(ntax)
+  
   var otherAllow = parseInt(totherAllow) + parseInt(dotherAllow)
   var fixAllow = parseInt(tfixAllow) + parseInt(dfixAllow)
   var tbasic = document.getElementById("bsal").value
@@ -422,18 +406,25 @@ function calculateSalary(){
   var ppaye = document.getElementById("ppaye").value
 
   var basic = parseInt(tbasic) - parseInt(abs)
+  var overseas = document.getElementById("oseas").value
+  alert(overseas)
+  var tax
+  var ntax
 
-
-  var payable = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(transport) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(speBns) + parseInt(speProBns) + parseInt(fixAllow) + parseInt(DiscBonus) + parseInt(overseas) + parseInt(attBns)
-
-  if(overseas > 0){
+  if(parseInt(overseas) > 0){
+    alert("In If")
     ntax = Math.round(parseInt(basic) * 0.06)
     tax = Math.round(parseInt(overseas) - parseInt(ntax))
   }
   else{
+    alert("In Else")
     ntax = 0
     tax = 0
   }
+
+  var payable = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(transport) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(speBns) + parseInt(speProBns) + parseInt(fixAllow) + parseInt(DiscBonus) + parseInt(overseas) + parseInt(attBns)
+
+  
 
   var cgross, grossTax
   var ptransport = 0
