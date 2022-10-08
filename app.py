@@ -268,7 +268,7 @@ def employee():
         if eid:
             return render_template("dashboard.html", eid=eid)
         
-        
+# ==========================================================================================================        
 
     # Search Employee Page
     if request.method == "POST" and request.form['action'] == 'search':
@@ -528,7 +528,10 @@ def employee():
             print("MySQL connection is closed")
         return render_template("employee.html") 
 
+# ==========================================================================================================
+
     # Update To Database
+
     if request.method == "POST" and request.form['action']== 'update':
         eid = request.form["eid"]
         fname = request.form["fname"]
@@ -656,7 +659,7 @@ def employee():
             print("MySQL connection is closed")
         return render_template("employee.html")         
         
-
+# ==========================================================================================================
     # Save To Database
 
     if request.method == "POST" and request.form['action']== 'save':
@@ -666,7 +669,11 @@ def employee():
         lname = request.form["lname"]
         title = request.form["title"]
         dob = request.form["dob"]
-        print(dob)
+        if dob == "":
+            dob = "0001-01-01"
+        else:
+            dob = dob
+        # print(dob)
         clocked = request.form["optradio"]
         address = request.form["add"]
         city = request.form["city"]
@@ -688,6 +695,13 @@ def employee():
         report = ""
         nps = request.form["optradio2"]
         car = request.form["car"]
+        print(car)
+        if car == "":
+            print("In If")
+            car = "0"
+        else:
+            print("In Else")
+            car = car
         hire = request.form["hire"]
         if hire == "":
             hire = "0001-01-01"
@@ -695,23 +709,69 @@ def employee():
             hire = hire
         
         salary = request.form["sal"]
+        if salary == "":
+            salary = "0"
+        else:
+            salary == salary
+
         position = request.form["pos"]
         dep = request.form["dep"]
         sdep = request.form["sdep"]
         paye = request.form["psch"]
         per = request.form["per"]
+
         lleave = request.form["lleave"]
+        if lleave == "":
+            lleave = "0"
+        else:
+            lleave == lleave
+
         sleave = request.form["sleave"]
+        if sleave == "":
+            sleave = "0"
+        else:
+            sleave == sleave
+
         fallow = request.form["falw"]
+        if fallow == "":
+            fallow = "0"
+        else:
+            fallow == fallow
+
         tmode = request.form["tmode"]
         tallow = request.form["talw"]
+        if tallow == "":
+            tallow = "0"
+        else:
+            tallow == tallow
+
         expatriate = request.form.get("chk1")
         edf = request.form["edf"]
+        if edf == "":
+            edf = "0"
+        else:
+            edf == edf
+
         months = request.form["month"]  
         medf = request.form["medf"]
         house = request.form["hint"]
+        if house == "":
+            house = "0"
+        else:
+            house == house
+
         erel = request.form["erel"]
+        if erel == "":
+            erel = "0"
+        else:
+            erel == erel
+
         mrel = request.form["mrel"]
+        if mrel == "":
+            mrel = "0"
+        else:
+            mrel == mrel
+
         payment = request.form["optradio5"]
         medical = request.form["med"]
         working = request.form["optradio3"]
@@ -720,7 +780,16 @@ def employee():
         else:
             lwork = "0001-01-01"
         spbonus = request.form["spbonus"]
+        if spbonus == "":
+            spbonus = "0"
+        else:
+            spbonus == spbonus
+
         wdays = request.form["wday"]
+        if wdays == "":
+            wdays = "0"
+        else:
+            wdays == wdays
 
         try:
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
