@@ -1839,7 +1839,7 @@ def salary():
             cursor.close()
             connection.close()
             print("MySQL connection is closed")   
-    
+# ===================================================================================================================
     # Save To Database
     elif request.method == "POST" and request.form['action'] == 'save':
         
@@ -2013,9 +2013,32 @@ def salary():
                         WHERE 
                         UNQ = %s;"""
             data1 = [fixedAlw, otherDed, overtime, discBns, NSF, otherAlw2, tax, medical, transport, overseas, ntax, edf, arrears, attendance, eoy, loan, car, leaveRef, slevy, speBns, lateness, educationRel, SpeProBns, NPS, medicalRel, Payable, Deduction, Net, NetPaysheet, cgross, cgtax, pgross, iet, netch, cpaye, ppaye, paye, ecsg, ensf, elevy, prgf, pthes, thes, netchar, plevy, slevypay, absence, UNQ ]
-
             cursor.execute(query1, data1)
             print("Database Updated Successfully")
+
+            bonus = int(speBns) + int(SpeProBns) + int(otherAlw) + int(fixedAlw) + int(discBns) + int(attendance)
+
+            query2 = """ UPDATE payslip
+            SET
+            TravelAlw = %s,
+            Bonus = %s,
+            Gross = %s,
+            PAYE = %s,
+            NPF = %s,
+            NSF = %s,
+            Deduction = %s,
+            NetPay = %s,
+            Payable = %s,
+            NetPayAcc = %s,
+            eNPF = %s,
+            eNSF = %s,
+            eLevy = %s,
+            ePRGF = %s
+            WHERE
+            month = %s;"""
+
+            data2 = [transport, bonus, cgross, paye, NPS, NSF, Deduction, Net, Net, Net, ecsg, ensf, elevy, prgf, month ]
+
             return render_template("paysheet.html")
 
             # query12 = "SELECT UNQ FROM payable"

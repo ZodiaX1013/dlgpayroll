@@ -271,12 +271,6 @@ function calculateSalary(){
   }
 
   var dfixAllow = document.getElementById("falw2").value
-  if(dfixAllow == ""){
-    dfixAllow = 0
-  }
-  else{
-    dfixAllow = parseInt(dfixAllow)
-  }
 
   var DiscBonus = document.getElementById("dbns").value
   if(DiscBonus == ""){
@@ -326,13 +320,15 @@ function calculateSalary(){
     speBns = parseInt(speBns)
   }
 
-  var otherAllow = document.getElementById("oalw").value
-  if(otherAllow == ""){
-    otherAllow = 0
+  var totherAllow = document.getElementById("oalw").value
+  if(totherAllow == ""){
+    totherAllow = 0
   }
   else{
-    otherAllow = parseInt(otherAllow)
+    totherAllow = parseInt(totherAllow)
   }
+
+  var dotherAllow = document.getElementById("oalw2").value
 
   var otherDed = document.getElementById("oded").value
   if(otherDed == ""){
@@ -400,7 +396,7 @@ function calculateSalary(){
   
   var transport = parseInt(transport1) + parseInt(transport2)
   var overseas = parseInt(tax) + parseInt(ntax)
-  
+  var otherAllow = parseInt(totherAllow) + parseInt(dotherAllow)
   var fixAllow = parseInt(tfixAllow) + parseInt(dfixAllow)
   var tbasic = document.getElementById("bsal").value
   var overtime = parseInt(ot1) + parseInt(ot2) +parseInt(ot3)
