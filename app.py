@@ -1814,7 +1814,7 @@ def salary():
         ensf = request.form["nsf2"]
         elevy = request.form["ivbt"]
         prgf = request.form["prgf"]
-        pthes = request.form["pthes"]
+        pthes = request.form["ths2"]
         thes = request.form["ths"]
         netchar = request.form["netchar"]
         plevy = request.form["plevy"]
@@ -2690,7 +2690,7 @@ def process_salary():
                     if piet != 0:
                         piet = ''.join(map(str,piet))
 
-                    query5 = "SELECT PAYE FROM salary WHERE EmployeeID= %s AND Month = %s"
+                    query5 = "SELECT CurrentPAYE FROM salary WHERE EmployeeID= %s AND Month = %s"
                     cursor.execute(query5,data2)
                     ppaye = cursor.fetchall()
                     for i in range(len(ppaye)):
@@ -2855,7 +2855,7 @@ def process_salary():
                         pths = 0
                     else:
                         pths = int(pths)
-                    
+                    print(pths)
                     if plevy == "":
                         plevy = 0
                     else:
@@ -2949,6 +2949,7 @@ def process_salary():
                     slevy = 0
                     tths = round(3000000/13)
                     ths = int(pths) + int(tths)
+                    print(ths)
                     netchar = int(gross) - int(iet) - int(ths)
                     if netchar < 0 :
                         netchar = 0
@@ -3043,6 +3044,7 @@ def process_salary():
                     PrevThreshold,
                     Threshold,
                     netchar,
+                    CurrentSLevy,
                     PrevSLevy,
                     slevyPay,
                     Absences,
@@ -3105,10 +3107,11 @@ def process_salary():
                     %s,
                     %s,
                     %s,
+                    %s,
                     %s
                     );
                     """
-                    data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevy, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, plevy, slevypay, ab, month, year, UNQ]
+                    data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, month, year, UNQ]
                     cursor.execute(insert_query, data1)
                     print("Process Query Executed")
 

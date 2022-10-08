@@ -442,6 +442,7 @@ function calculateSalary(){
   
   var transport = parseInt(transport1) + parseInt(transport2)
   var overseas = parseInt(tax) + parseInt(ntax)
+  
   var fixAllow = parseInt(tfixAllow) + parseInt(dfixAllow)
   var tbasic = document.getElementById("bsal").value
   var overtime = parseInt(ot1) + parseInt(ot2) +parseInt(ot3)
@@ -473,7 +474,7 @@ function calculateSalary(){
 
   if(overseas > 0){
     ntax = Math.round(parseInt(basic) * 0.06)
-    tax = Math.round(parseInt(overseas) - parseInt(tax))
+    tax = Math.round(parseInt(overseas) - parseInt(ntax))
   }
   else{
     ntax = 0
@@ -572,17 +573,22 @@ function calculateSalary(){
   var temp = parseInt(cgross) * 13
   var slevy1
   var slevy2
-  var ths = 3000000 / 13
-  var netchar = parseInt(cgross) - parseInt(iet) - parseInt(ths)
+  
+  var pths = document.getElementById("ths2").value
+  var plevy = document.getElementById("plevy").value
+
+  var cths = 3000000 / 13
+  var ths = parseInt(cths) + parseInt(pths)
+  var netchar = parseInt(gross) - parseInt(iet) - parseInt(ths)
   if(temp > 3000000){
     slevy1 = Math.round(parseInt(netchar) * 0.25)
     slevy2 = Math.round(parseInt(grossTax) * 0.1)
     
     if(slevy1 > slevy2){
-      slevy = slevy2
+      slevy = Math.round(slevy2)
     }
     else{
-      slevy = slevy1
+      slevy = Math.round(slevy1)
     }
   }
   else{
@@ -612,15 +618,15 @@ function calculateSalary(){
     netchar = netchar
   }
 
-  var clevy1 = parseInt(netchar) * 0.25
-  var clevy2 = parseInt(gross) * 0.1
-  var clevy
-  if(clevy1 > clevy2){
-    clevy = Math.round(clevy2)
-  }
-  else{
-    clevy = Math.round(clevy1)
-  }
+  // var clevy1 = parseInt(netchar) * 0.25
+  // var clevy2 = parseInt(gross) * 0.1
+  // var clevy
+  // if(clevy1 > clevy2){
+  //   clevy = Math.round(clevy2)
+  // }
+  // else{
+  //   clevy = Math.round(clevy1)
+  // }
 
   var eprgf
   var teprgf
@@ -632,9 +638,8 @@ function calculateSalary(){
     eprgf = 0
   }
 
-  var pths = 0
-  var plevy = 0
-  var levypay = Math.round(clevy)
+  var levypay = parseInt(slevy) - parseInt(plevy)
+  
   document.getElementById("bsal").value = basic
   document.getElementById("falw2").value = fixAllow
   document.getElementById("oded2").value = otherDed
@@ -655,7 +660,7 @@ function calculateSalary(){
   document.getElementById("lref2").value = localRef
   document.getElementById("paye").value = paye
   // alert(slevy)
-  document.getElementById("levy").value = slevy
+  document.getElementById("levy").value = levypay
   document.getElementById("spbonus2").value = speBns
   document.getElementById("late").value = lateness
   document.getElementById("edu").value = educationRel
@@ -715,7 +720,7 @@ function calculateSalary(){
   document.getElementById("lref4").value = localRef
   document.getElementById("car2").value = car
   document.getElementById("netchar").value = netchar
-  document.getElementById("clevy").value = clevy
+  document.getElementById("clevy").value = slevy
   document.getElementById("plevy").value =plevy
   document.getElementById("levypay").value =levypay
   alert("Calculation Complete")
