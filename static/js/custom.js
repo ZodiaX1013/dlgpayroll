@@ -427,7 +427,7 @@ function calculateSalary(){
   
 
   var cgross, grossTax
-  var ptransport = 0
+  
   var transTax
   if(transport > 20000){
     transTax = parseInt(transport) - 20000
@@ -626,7 +626,7 @@ function calculateSalary(){
   document.getElementById("oalw3").value = otherAllow
   document.getElementById("piet").value = piet
   document.getElementById("iet").value = iet  // check iet value
-  document.getElementById("tran3").value = ptransport
+  document.getElementById("tran3").value = transport
   document.getElementById("txdes3").value = tax
   document.getElementById("netch").value = netch
   document.getElementById("arr3").value = arrears
