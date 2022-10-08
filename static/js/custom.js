@@ -407,17 +407,17 @@ function calculateSalary(){
 
   var basic = parseInt(tbasic) - parseInt(abs)
   var overseas = document.getElementById("oseas").value
-  alert(overseas)
+  
   var tax
   var ntax
 
   if(parseInt(overseas) > 0){
-    alert("In If")
+    
     ntax = Math.round(parseInt(basic) * 0.06)
     tax = Math.round(parseInt(overseas) - parseInt(ntax))
   }
   else{
-    alert("In Else")
+    
     ntax = 0
     tax = 0
   }
