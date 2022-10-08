@@ -429,32 +429,12 @@
             </div>
             <!-- [ breadcrumb ] end -->
             <!-- [ Main Content ] start -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-						<form action="{{url_for('paysheet')}}" method="post">
-                        <div class="card-header">
-                            <h5>Icons</h5>
-                        </div>
-                        <div class="card-body">
-                            <!-- <button type="button submit" name="action" value="excel" class="btn btn-primary" id="download"><i class="fa-solid fa-file-excel" style="margin-right: 0.5rem;"></i>Excel Download</button> -->
-                            <button type="button submit" name="action" value="pdf" class="btn btn-secondary"><i class="fa-solid fa-download" style="margin-right: 0.5rem;"></i>Show Paysheet</button>
-                            <!-- <button type="button" class="btn btn-success"><i class="feather mr-2 icon-check-circle"></i>Next</button>
-                            <button type="button" class="btn btn-info"><i class="feather mr-2 icon-check-circle"></i>Previous</button>
-                            <button type="button" class="btn btn-warning"><i class="feather mr-2 icon-alert-triangle"></i>Clear</button>
-                            <button type="button" class="btn btn-danger"><i class="feather mr-2 icon-slash"></i>Delete</button> -->
-                            <!-- <button type="button" class="btn btn-warning"><i class="feather mr-2 icon-alert-triangle"></i>Help</button>
-                            <button type="button" class="btn btn-warning"><i class="feather mr-2 icon-alert-triangle"></i>Exit</button> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- <form action=""> -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        
+                        <form action="{{url_for('paysheet')}}" method="post">
                         <div class="card-header">
                             <h5>Paysheet</h5>
                         </div>
@@ -489,6 +469,26 @@
                                 </div> -->
                             </div>
                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+						
+                        <div class="card-header">
+                            <h5>Icons</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- <button type="button submit" name="action" value="excel" class="btn btn-primary" id="download"><i class="fa-solid fa-file-excel" style="margin-right: 0.5rem;"></i>Excel Download</button> -->
+                            <button type="button submit" name="action" value="pdf" class="btn btn-secondary"><i class="fa-solid fa-download" style="margin-right: 0.5rem;"></i>Show Paysheet</button>
+                            <!-- <button type="button" class="btn btn-success"><i class="feather mr-2 icon-check-circle"></i>Next</button>
+                            <button type="button" class="btn btn-info"><i class="feather mr-2 icon-check-circle"></i>Previous</button>
+                            <button type="button" class="btn btn-warning"><i class="feather mr-2 icon-alert-triangle"></i>Clear</button>
+                            <button type="button" class="btn btn-danger"><i class="feather mr-2 icon-slash"></i>Delete</button> -->
+                            <!-- <button type="button" class="btn btn-warning"><i class="feather mr-2 icon-alert-triangle"></i>Help</button>
+                            <button type="button" class="btn btn-warning"><i class="feather mr-2 icon-alert-triangle"></i>Exit</button> -->
                         </div>
                     </div>
                 </div>
