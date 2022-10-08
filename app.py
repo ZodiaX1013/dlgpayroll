@@ -2981,9 +2981,9 @@ def process_salary():
                         # cpaye = round(netch * 0.1)
                         enps = round(basic * 0.03)
 
-                    if medf < 53846:
+                    if edf < 700000:
                         cpaye = round(netch* 0.1)
-                    elif medf >= 53846 and medf < 75000:
+                    elif edf >= 700000 and medf < 975000:
                         cpaye = round(netch* 0.125)
                     else:
                         cpaye = round(netch* 0.15)
