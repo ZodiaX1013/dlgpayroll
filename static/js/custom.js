@@ -469,12 +469,13 @@ function calculateSalary(){
     // cpaye = Math.round(parseInt(netch) * 0.1)
     enps = Math.round(parseInt(basic) * 0.03)
   }
-
-  if(edf < 700000){
+  var medf = Math.round(parseInt(edf) / 13)
+  var check = parseInt(basic) + parseInt(otherAllow) - parseInt(medf)
+  if(check < 53846){
     
     cpaye = Math.round(parseInt(netch) * 0.1)
   }
-  else if(edf >=700000 && edf < 975000 ){
+  else if(check >=53846 && check < 75000 ){
     
     cpaye = Math.round(parseInt(netch) * 0.125)
   }
