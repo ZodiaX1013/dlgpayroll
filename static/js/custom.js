@@ -19,55 +19,6 @@ function progressBar() {
   }
 }
 
-// ENd progressBar()
-
-// Segment View
-
-// "use strict";
-
-// const body = document.body;
-// const bgColorsBody = ["#ffb457", "#ff96bd", "#9999fb", "#ffe797", "#cffff1"];
-// const menu = body.querySelector(".menu");
-// const menuItems = menu.querySelectorAll(".menu__item");
-// const menuBorder = menu.querySelector(".menu__border");
-// let activeItem = menu.querySelector(".active");
-
-// function clickItem(item, index) {
-//   menu.style.removeProperty("--timeOut");
-
-//   if (activeItem == item) return;
-
-//   if (activeItem) {
-//     activeItem.classList.remove("active");
-//   }
-
-//   item.classList.add("active");
-//   body.style.backgroundColor = bgColorsBody[index];
-//   activeItem = item;
-//   offsetMenuBorder(activeItem, menuBorder);
-// }
-
-// function offsetMenuBorder(element, menuBorder) {
-//   const offsetActiveItem = element.getBoundingClientRect();
-//   const left =
-//     Math.floor(
-//       offsetActiveItem.left -
-//         menu.offsetLeft -
-//         (menuBorder.offsetWidth - offsetActiveItem.width) / 2
-//     ) + "px";
-// //   menuBorder.style.transform = `translate3d(${left}, 0 , 0)`;
-// }
-
-// offsetMenuBorder(activeItem, menuBorder);
-
-// menuItems.forEach((item, index) => {
-//   item.addEventListener("click", () => clickItem(item, index));
-// });
-
-// window.addEventListener("resize", () => {
-//   offsetMenuBorder(activeItem, menuBorder);
-//   menu.style.setProperty("--timeOut", "none");
-// });
 
 // Clear Function Of Form
 function clearForm() {
@@ -121,14 +72,21 @@ function calculate()
   // else{
   //   alert("Null Value")
   // }
-  var resources = document.getElementById('edf').value;
-  var minutes = document.getElementById('month').value; 
+  var edf = document.getElementById('edf').value;
+  var months = document.getElementById('month').value; 
   // alert(resources);
   // alert(minutes);
   // console.log(resources);
   // console.log(minutes);
   // document.getElementById('medf').value = parseFloat(resources) / parseFloat(minutes);
-  document.getElementById('medf').value =Math.round(parseInt(resources)/parseInt(minutes));
+  if( months == 0){
+    months = 1
+  }
+  else{
+    months = months
+  }
+
+  document.getElementById('medf').value =Math.round(parseInt(edf)/parseInt(months));
      
 }
 // function disable()
