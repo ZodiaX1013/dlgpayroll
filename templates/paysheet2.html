@@ -175,172 +175,65 @@
                 <div class="form-row">
                     <div class="card" id="exportContent">
                         <div class="card-header">
-                            
+                           
                             <center><h4>MAXCITY ASSET MANAGERS LTD</h4>
-                            <h5>Paysheet for the month of July 2022</h5>
+                            {% if month %}
+                            <h5>Paysheet for the month of {{month}} 2022</h5>
+                            {% else %}
+                            <h5>Paysheet for the month of ______ 2022</h5>
+                            {% endif %}
                             </center>
                             <div id="docx">
-                            <div class="card-body">
-                                <!-- <h6 class="mb-3"><b><u> Leave Register </u></b></h6> -->
-                                <!-- Leave Table -->
-                                <!-- <h4>Table Here</h4> -->
-                                <!-- <table class="table table-striped" id="excel" style="width: 100%;"> -->
-                                    <!-- <table style="width: 100%;"> -->
-                                <table id="excel">
-                                    <tr>
-                                        <!-- <th></th> -->
-                                        <th>Employee</th>
-                                        <th>Basic Salary</th>
-                                        <th>Arrears</th>
-                                        <th>OT Amount</th>
-                                        <th>Leave Ref</th>
-                                        <th>EOY Bonus</th>
-                                        <th>Travel Allowance</th>
-                                        <th>Overseas</th>
-                                        <th>Other Allowance</th>
-                                        <th>Fixed Allowance</th>
-                                        <th>Gross</th>
-                                        <th>Absences Amount</th>
-                                        <th>PAYE</th>
-                                        <th>CSG Emp</th>
-                                        <th>NSF Emp</th>
-                                        <th>Med Con</th>
-                                        <th>S.Levy</th>
-                                        <th>Lateness Amount</th>
-                                        <th>Other Deduction</th>
-                                        <th>Net Pay</th>
-                                    </tr>
-                                    <!-- <tr style="font-weight: bold ;">
-                                        <td> Project Department</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr> -->
-                                    {% for row in data %}
-                                    <tr>
-                                        {% for cell in row %}
-                                        <td>{{cell}}</td>
+                                <div class="card-body">
+                                    <form action="/paysheet" method="post">
+                                    <!-- <h6 class="mb-3"><b><u> Leave Register </u></b></h6> -->
+                                    <!-- Leave Table -->
+                                    <!-- <h4>Table Here</h4> -->
+                                    <!-- <table class="table table-striped" id="excel" style="width: 100%;"> -->
+                                        <!-- <table style="width: 100%;"> -->
+                                    <table id="excel">
+                                        <tr>
+                                            <!-- <th></th> -->
+                                            <th>Employee</th>
+                                            <th>Basic Salary</th>
+                                            <th>Arrears</th>
+                                            <th>OT Amount</th>
+                                            <th>Leave Ref</th>
+                                            <th>EOY Bonus</th>
+                                            <th>Travel Allowance</th>
+                                            <th>Overseas</th>
+                                            <th>Other Allowance</th>
+                                            <th>Fixed Allowance</th>
+                                            <th>Gross</th>
+                                            <th>Absences Amount</th>
+                                            <th>PAYE</th>
+                                            <th>CSG Emp</th>
+                                            <th>NSF Emp</th>
+                                            <th>Med Con</th>
+                                            <th>S.Levy</th>
+                                            <th>Lateness Amount</th>
+                                            <th>Other Deduction</th>
+                                            <th>Net Pay</th>
+                                        </tr>
+                                        
+                                        {% for row in data %}
+                                        <tr>
+                                            {% for cell in row %}
+                                            <td>{{cell}}</td>
+                                            {% endfor %}
+                                        </tr>
                                         {% endfor %}
-                                    </tr>
-                                    {% endfor %}
-                                    <!-- <tr>
-                                        <td>1</td>
-                                        <td>Heeroo Aveenash Kumar</td>
-                                        <td>103,692</td>
-                                        <td>0</td>
-                                        <td>0.00</td>
-                                        <td>0</td>
-                                        <td>1,500</td>
-                                        <td>105,192</td>
-                                        <td>10,585</td>
-                                        <td>3,111</td>
-                                        <td>213</td>
-                                        <td>0</td>
-                                        <td>0.00</td>
-                                        <td>91,283</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Samy Prisca Angeline</td>
-                                        <td>78,000</td>
-                                        <td>0</td>
-                                        <td>0.00</td>
-                                        <td>25,000</td>
-                                        <td>1,000</td>
-                                        <td>104,000</td>
-                                        <td>9,837</td>
-                                        <td>2,340</td>
-                                        <td>213</td>
-                                        <td>0</td>
-                                        <td>0.00</td>
-                                        <td>91,610</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Ramsamy Rannoojee Corinne</td>
-                                        <td>139,932</td>
-                                        <td>0</td>
-                                        <td>0.00</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>139,932</td>
-                                        <td>16,126</td>
-                                        <td>4,198</td>
-                                        <td>213</td>
-                                        <td>0</td>
-                                        <td>0.00</td>
-                                        <td>119,395</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Ah Ching Cheong Shaow</td>
-                                        <td>310,150</td>
-                                        <td>0</td>
-                                        <td>20,000.00</td>
-                                        <td>0</td>
-                                        <td>17,990</td>
-                                        <td>348,140</td>
-                                        <td>41,007</td>
-                                        <td>9,305</td>
-                                        <td>213</td>
-                                        <td>0</td>
-                                        <td>10,652.00</td>
-                                        <td>286,963</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Dindoyal Ian</td>
-                                        <td>75,750</td>
-                                        <td>0</td>
-                                        <td>0.00</td>
-                                        <td>0</td>
-                                        <td>21,000</td>
-                                        <td>96,750</td>
-                                        <td>10,763</td>
-                                        <td>2,273</td>
-                                        <td>213</td>
-                                        <td>0</td>
-                                        <td>0.00</td>
-                                        <td>83,501</td>
-                                    </tr>
-                                    <tr style="font-weight: bold ;">
-                                        <td></td>
-                                        <td>Sub Total</td>
-                                        <td>707,524</td>
-                                        <td>0</td>
-                                        <td>20,000</td>
-                                        <td>25,000</td>
-                                        <td>41,490</td>
-                                        <td>794,014</td>
-                                        <td>88,318</td>
-                                        <td>21,227</td>
-                                        <td>1,065</td>
-                                        <td>0</td>
-                                        <td>10,652</td>
-                                        <td>672,752</td>
-                                    </tr> -->
-                                    
-                                </table>
-                                <!-- End Leave Table -->
+                                        
+                                    </table>
+                                    <!-- End Leave Table -->
 
-                                <button class="btn btn-primary" id="download" style="margin-top: 25px;">Download As Excel</button>
-                                <!-- <button class="btn btn-secondary" onclick="Export2Word('exportContent');">Word Download</button> -->
+                                    <button class="btn btn-secondary" type="submit" name="action" value="back" id="back" style="margin-top: 25px;"><i class="fa-solid fa-left" style="margin-right: 0.5rem;">  </i> Back</button>
+                                    </form>         
+                                    <button class="btn btn-primary" name="action" id="download" value="download" style="margin-top: 25px;"><i class="fa-regular fa-file-spreadsheet" style="margin-right: 0.5rem;"></i>Download As Excel</button>
+                                
                                 <!-- <button class="btn btn-primary" id="export">Export</button> -->
+                                </div>
+                        
                             </div>
                         </div>
                     </div>

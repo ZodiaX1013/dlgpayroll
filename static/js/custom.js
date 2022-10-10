@@ -523,7 +523,7 @@ function calculateSalary(){
   var pths = document.getElementById("ths2").value
   var plevy = document.getElementById("plevy").value
 
-  var cths = 3000000 / 13
+  var cths = Math.round(3000000 / 13)
   var ths = parseInt(cths) + parseInt(pths)
   var netchar = parseInt(gross) - parseInt(iet) - parseInt(ths)
   if(temp > 3000000){
@@ -553,9 +553,6 @@ function calculateSalary(){
 
   var net = parseInt(payable) - parseInt(deduction)
   var pnet = parseInt(net) - parseInt(slevy)
-
-  var ths = Math.round(3000000/13)
-  var netchar = parseInt(gross) - parseInt(iet) - parseInt(ths)
 
   if(netchar <0){
     netchar = 0
