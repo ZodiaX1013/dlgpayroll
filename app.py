@@ -1999,11 +1999,11 @@ def salary():
             Emoluments = %s,
             PAYE = %s,
             SLevy = %s,
-            EmolumentsNet = %s,
+            EmolumentsNet = %s
             WHERE
             UNQ = %s;
             """
-            emoluments = int(payable) - int(ntax)
+            emoluments = int(Payable) - int(ntax)
             data3 = [emoluments, paye, slevypay, emoluments, UNQ]
             cursor.execute(query3, data3)
             print("UPDATE PAYE Query Successfully")
