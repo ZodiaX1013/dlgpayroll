@@ -2731,8 +2731,30 @@ def process_salary():
                     query11 = "SELECT LockSal From salary WHERE UNQ = %s"
                     cursor.execute(query11,data3)
                     lockSal = cursor.fetchall()
-                    for i in range(len(lockSal)):
-                        lockSal = ''.join(lockSal[i])
+
+                    print(lockSal)
+                    print(len(lockSal))
+
+                    if len(lockSal) > 0:
+                        print("In If")
+                        for i in range(len(lockSal)):
+                            print("In For ")
+                            plevy = ''.join(lockSal[i])
+                    else:
+                        print("In Else")
+                        lockSal = "No"
+
+                    # for i in range(len(lockSal)):
+                    #     if lockSal[0][0] != None:
+                    #         print("In If")
+                    #         lockSal = ''.join(lockSal[i])
+                    #     else:
+                    #         print("If")
+                    #         lockSal = "No"
+                    # if lockSal != 0:
+                    #     lockSal = ''.join(map(str,lockSal))
+
+                    print(lockSal)
 
                     if lockSal == "No":
                         print("In Lock Salary")
@@ -2855,7 +2877,7 @@ def process_salary():
                             transTax = trans - 20000
                         else:
                             transTax = 0
-                        
+
                         cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
 
                         grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car
@@ -3035,7 +3057,8 @@ def process_salary():
                         Absences,
                         Month,
                         Year,
-                        UNQ
+                        UNQ,
+                        LockSal
                         )
 
                         VALUES(
@@ -3093,10 +3116,11 @@ def process_salary():
                         %s,
                         %s,
                         %s,
+                        %s,
                         %s
                         );
                         """
-                        data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, month, year, UNQ]
+                        data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, month, year, UNQ, 'No']
                         cursor.execute(insert_query, data1)
                         print("Process Query Executed")
 
@@ -3104,11 +3128,11 @@ def process_salary():
                         cursor.execute(query, data3)
                         print("Payslip Query Executed")
                         msg = "Processing Complete"
-                        return render_template("process.html", msg = msg)
+                        # return render_template("process.html", msg = msg)
                         # print("Do Something Else")
                     else:
                         msg = "Salary Already Locked"
-                        return render_template("process.html", msg = msg)                
+                return render_template("process.html", msg = msg)                
         except Error as e:
                 print("Error While connecting to MySQL : ", e)
         finally:
