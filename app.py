@@ -1,7 +1,6 @@
-from asyncio import locks
+from concurrent.futures.process import _WorkItem
 import hashlib
 import os
-from tabnanny import check
 from flask import Flask, request, redirect, url_for, render_template, session, send_file
 from werkzeug.utils import secure_filename
 from PIL import Image
@@ -1990,20 +1989,25 @@ def salary():
             ePRGF = %s
             WHERE
             UNQ = %s;"""
-            print("Bonus" , bonus)
-            print("payable", Payable)
-            print("PAYE", paye)
-            print("NPF", NPS)
-            print("NSF", NSF)
-            print("Deduction", Deduction)
             
-            
-            print("netpay", netpay)
-
-            print("paye", paye)
             data2 = [transport, bonus, Payable, paye, NPS, NSF, slevy, ded, netpay, netpay, netpay, ecsg, ensf, elevy, prgf, UNQ ]
             cursor.execute(query2, data2)
             print("update salary complete")
+            
+            query3 = """ UPDATE payecsv
+            SET
+            Emoluments = %s,
+            PAYE = %s,
+            SLevy = %s,
+            EmolumentsNet = %s,
+            WHERE
+            UNQ = %s;
+            """
+            emoluments = int(payable) - int(ntax)
+            data3 = [emoluments, paye, slevypay, emoluments, UNQ]
+            cursor.execute(query3, data3)
+            print("UPDATE PAYE Query Successfully")
+
             return render_template("paysheet.html")
 
         except Error as e:
@@ -2744,17 +2748,19 @@ def process_salary():
                         print("In Else")
                         lockSal = "No"
 
-                    # for i in range(len(lockSal)):
-                    #     if lockSal[0][0] != None:
-                    #         print("In If")
-                    #         lockSal = ''.join(lockSal[i])
-                    #     else:
-                    #         print("If")
-                    #         lockSal = "No"
-                    # if lockSal != 0:
-                    #     lockSal = ''.join(map(str,lockSal))
+                    # query12 = "SELECT working FROM employee WHERE EmployeeID = %s"
+                    # cursor.execute(query12, data)
+                    # working = cursor.fetchall()
 
-                    print(lockSal)
+                    # if len(working) > 0:
+                    #     print("In If")
+                    #     for i in range(len(working)):
+                    #         print("In For ")
+                    #         working = ''.join(working[i])
+                    # else:
+                    #     print("In Else")
+                    #     working = "Yes"
+                    
 
                     if lockSal == "No":
                         print("In Lock Salary")
@@ -3128,6 +3134,37 @@ def process_salary():
                         cursor.execute(query, data3)
                         print("Payslip Query Executed")
                         msg = "Processing Complete"
+
+                        emolument = int(payable) - int(ntax)
+
+                        paye_query = """ INSERT INTO payecsv(
+                                    EmployeeID,
+                                    LastName,
+                                    FirstName,
+                                    Emoluments,
+                                    PAYE,
+                                    working,
+                                    SLevy,
+                                    EmolumentsNet,
+                                    month,
+                                    UNQ
+                                    )
+                                    VALUES(
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s
+                                    );"""
+                        data4 = [eid, lname, fname, emolument, paye, 'Yes', slevypay, emolument, month, UNQ]
+
+                        cursor.execute(paye_query, data4)
+                        print("PAYE Query Executed")
                         # return render_template("process.html", msg = msg)
                         # print("Do Something Else")
                     else:
@@ -3327,6 +3364,43 @@ def paysheet():
     #         print("MySQL connection is closed")
 
     return render_template("paysheet.html") 
+
+@app.route('/payecsv', methods=["GET", "POST"])
+def payecsv():
+    if request.method == "POST" and request.form['action'] == 'paye':
+        mon = request.form["mon"]
+        year = request.form["year"]
+        try:
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    port='25060',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
+            cursor = connection.cursor(buffered=True)
+
+            data1 = [mon]
+            # query1 = "SELECT * FROM paysheet"
+            # query1 = "SELECT EmployeeName, BasicSalary, Arrears, Overseas, TravelAllow, OtherAllow, Gross, PAYE, CSG, NSF, Medical, SLevy, Net FROM paysheet"
+            query1 = "SELECT EmployeeID, LastName, FirstName, Emoluments, PAYE, working, SLevy, EmolumentsNet FROM payecsv WHERE Month = %s "
+            cursor.execute(query1,data1)
+            data = cursor.fetchall()
+            print(data)
+            session["data"] = data
+            length = len(data)
+            print(length)
+            return render_template("payecsv2.html", data=data, length=length, month = mon, year= year)
+            # return redirect(url_for('download', data = data))
+        except Error as e:
+            print("Error While connecting to MySQL : ", e)
+        finally:
+            connection.commit()
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+    
+    return render_template("payecsv.html")
+
+
 
 @app.route('/download')
 def download():

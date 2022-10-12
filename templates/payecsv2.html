@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from technext.github.io/flat_able/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Aug 2022 05:38:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Care Edge</title>
+    <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 11]>
+    	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    	<![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
+    <!-- <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" > -->
+    <!-- <link rel="stylesheet" href="H:/VsCode/Payroll/static/css/style.css"> -->
+
+    <!-- vendor css -->
+    <link href="{{ url_for('static', filename='css/style.css', _external=True) }}" rel="stylesheet" >
+    <!-- <link rel="stylesheet" href="../static/css/style.css" , _external="true"> -->
+    <script src="https://kit.fontawesome.com/e6163d7cbc.js" crossorigin="anonymous"></script>
+    <script src="../static/js/table2excel.js"></script>
+    <style>
+        table {
+          border-collapse: collapse;
+        }
+
+        td,th {
+            border: 1px gray solid;
+            padding: 4px;
+            width: 5em;
+        }
+    </style>
+    
+
+</head>
+<body class="">
+	<!-- [ Header ] start -->
+	<!-- <header class="navbar pcoded-header navbar-expand-lg navbar-light header-dark" style="background-color: white;" >
+		<div class="m-header">
+			<a class="mobile-menu" id="mobile-collapse" href="{{url_for('dashboard')}}"><span></span></a>
+			<a href="{{url_for('dashboard')}}" class="b-brand">
+				 ========   change your logo hear   ============ 
+				
+                <img src="../static/images/logo.png" alt="" class="logo">
+				<img src="../static/images/logo-icon.png" alt="" class="logo-thumb">
+				<i class="fa-solid fa-house" style="margin-right: 0.5rem;"></i>HOME
+			</a>
+			<a href="{{url_for('dashboard')}}" class="mob-toggler">
+				<i class="feather icon-more-vertical"></i>
+			</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<div class="dropdown">
+						<a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown">
+							File
+						</a>
+						
+						<div class="dropdown-menu profile-notification ">
+							<ul class="pro-body">
+								<li><a href="employee" class="dropdown-item"><i class="fas fa-circle"></i> Employee</a></li>
+								<li><a href="qualification" class="dropdown-item"><i class="fas fa-circle"></i> Qualification</a></li>
+								<li><a href="loan" class="dropdown-item"><i class="fas fa-circle"></i> Loan Type</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<div class="dropdown">
+						<a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown">
+							Process
+						</a>
+						<div class="dropdown-menu profile-notification ">
+							<ul class="pro-body">
+								<li><a href="leave" class="dropdown-item"><i class="fas fa-circle"></i> Daily Leave Input </a></li>
+								<li><a href="process_salary" class="dropdown-item"><i class="fas fa-circle"></i> Process Salary </a></li>
+								<li><a href="salary" class="dropdown-item"><i class="fas fa-circle"></i> Modify Salary</a></li>
+								<li><a href="EOY" class="dropdown-item"><i class="fas fa-circle"></i> End Of Year Bonus</a></li>
+								<li><a href="lock_salary" class="dropdown-item"><i class="fas fa-circle"></i> Lock Salary</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<div class="dropdown">
+						<a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown">
+							Reports
+						</a>
+						<div class="dropdown-menu profile-notification ">
+							<ul class="pro-body">
+								<li><a href="payecsv" class="dropdown-item"><i class="fas fa-circle"></i> PAYE CSV </a></li>
+								<li><a href="cheque" class="dropdown-item"><i class="fas fa-circle"></i> Cheque and cash list</a></li>
+								<li><a href="payslip" class="dropdown-item"><i class="fas fa-circle"></i> Payslip</a></li>
+								<li><a href="paysheet" class="dropdown-item"><i class="fas fa-circle"></i> Paysheet</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<div class="dropdown" >
+						<a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown" aria-disabled="true">
+							Utility
+						</a>
+						<div class="dropdown-menu profile-notification ">
+							<ul class="pro-body">
+								<li><a href="user" class="dropdown-item"><i class="fas fa-circle"></i> User Account</a></li>
+								<li><a href="change_pass" class="dropdown-item"><i class="fas fa-circle"></i> Change Password</a></li>
+								<li><a href="audit" class="dropdown-item"><i class="fas fa-circle"></i> Audit Trial</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<div class="dropdown">
+						<a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown">
+							Window
+						</a>
+						<div class="dropdown-menu profile-notification ">
+							<ul class="pro-body">
+								<li><a href="#" class="dropdown-item"><i class="fas fa-circle"></i> Option 1</a></li>
+								<li><a href="#" class="dropdown-item"><i class="fas fa-circle"></i> Option 2</a></li>
+								<li><a href="#" class="dropdown-item"><i class="fas fa-circle"></i> Option 3</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="nav-item">
+					<div class="dropdown">
+						<a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown">
+							Help
+						</a>
+						<div class="dropdown-menu profile-notification ">
+							<ul class="pro-body">
+								<li><a href="#" class="dropdown-item"><i class="fas fa-circle"></i>option 1</a></li>
+								<li><a href="#" class="dropdown-item"><i class="fas fa-circle"></i>option 2</a></li>
+								<li><a href="#" class="dropdown-item"><i class="fas fa-circle"></i>option 3</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+</header> -->
+    <!-- [ Main Content ] start -->
+    <!-- <div class="pcoded-main-container"> -->
+    <div>
+        <div class="pcoded-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <!-- [ Main Content ] start -->
+            <!-- <form action=""> -->
+                <!-- <div class="col-xl-12"> 
+                    <div class="col-md-4">
+                        <button onclick="Export2Word('exportContent');">Word Download</button>
+                    </div>                
+                </div> -->
+                <div class="form-row">
+                    <div class="card" id="exportContent">
+                        <div class="card-header col-md-12">
+                           
+                            <center><h4>MAXCITY ASSET MANAGERS LTD</h4>
+                            {% if month %}
+                            <h5>PAYE Sheet for the month of {{month}} 2022</h5>
+                            {% else %}
+                            <h5>PAYE Sheet for the month of ______ 2022</h5>
+                            {% endif %}
+                            </center>
+                            <div id="docx">
+                                <div class="card-body">
+                                    <form action="/paysheet" method="post">
+                                    <!-- <h6 class="mb-3"><b><u> Leave Register </u></b></h6> -->
+                                    <!-- Leave Table -->
+                                    <!-- <h4>Table Here</h4> -->
+                                    <!-- <table class="table table-striped" id="excel" style="width: 100%;"> -->
+                                        <!-- <table style="width: 100%;"> -->
+                                    <table id="excel" style="width: 100%;">
+                                        <tr>
+                                            <th> MNS </th>
+                                            <th> PAYE </th>
+                                            <th> V1.0 </th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <th>Employer Registration Number</th>
+                                            <th>Employer Business Registration Number</th>
+                                            <th>Employer Name</th>
+                                            <th>Tax Period</th>
+                                            <th>Telephone Number</th>
+                                            <th>Mobile Number</th>
+                                            <th>Name of Declarant</th>
+                                            <th>Email Address</th>
+                                        </tr>
+                                        <tr>
+                                            <td>00415529</td>
+                                            <td>C07009275</td>
+                                            <td>MAXCITY ASSET MANAGERS LTD</td>
+                                            {% if month %}
+                                            <td>{{month}} - {{year}}</td>
+                                            {% else %}
+                                            <td>  </td>
+                                            {% endif %}
+                                            <td>2105000</td>
+                                            <td></td>
+                                            <td>Leung Lam Hing Johnny</td>
+                                            <td>Johnny.Leung@maxcity.mu</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Employee Id</th>
+                                            <th>Surname Of Employee</th>
+                                            <th>Other Names Of Employee</th>
+                                            <th>Emoluments excluding Travelling</th>
+                                            <th>PAYE for Income Tax (MUR)</th>
+                                            <th>Full Time Employment</th>
+                                            <th>PAYE For Solidarity Levy (MUR)</th>
+                                            <th>Emoluments excluding Exempt Emoluments and Statutory End-of-Year Bonus (MUR)</th>
+                                        </tr>
+                                        
+                                        {% for row in data %}
+                                        <tr>
+                                            {% for cell in row %}
+                                            <td>{{cell}}</td>
+                                            {% endfor %}
+                                        </tr>
+                                        {% endfor %}
+                                        
+                                    </table>
+                                    <!-- End Leave Table -->
+
+                                    <button class="btn btn-secondary" type="submit" name="action" value="back" id="back" style="margin-top: 25px;"><i class="fa-solid fa-left" style="margin-right: 0.5rem;">  </i> Back</button>
+                                    </form>         
+                                    <button class="btn btn-primary" name="action" id="download" value="download" style="margin-top: 25px;"><i class="fa-regular fa-file-spreadsheet" style="margin-right: 0.5rem;"></i>Download As Excel</button>
+                                
+                                <!-- <button class="btn btn-primary" id="export">Export</button> -->
+                                </div>
+                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- </form> -->
+            <!-- [ Main Content ] end -->
+        </div>
+    </div>
+        <!-- Required Js -->
+        <script src="../static/js/vendor-all.min.js"></script>
+        <script src="../static/js/plugins/bootstrap.min.js"></script>
+        <script src="../static/js/pcoded.min.js"></script>
+
+        <!-- Apex Chart -->
+        <script src="../static/js/plugins/apexcharts.min.js"></script>
+
+
+        <!-- custom-chart js -->
+        <script src="../static/js/pages/dashboard-main.js"></script>
+        <script src="../static/js/custom.js"></script>
+        <script>
+			document.getElementById('download').addEventListener('click' , function(){
+				var table2excel = new Table2Excel();
+  				table2excel.export(document.querySelectorAll("#excel"));
+			});
+		</script>
+</body>
+<!-- Mirrored from technext.github.io/flat_able/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Aug 2022 05:38:50 GMT -->
+</html>
