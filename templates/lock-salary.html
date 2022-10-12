@@ -433,6 +433,10 @@
             <!-- <form action=""> -->
                 <div class="col-md-12">
                     <div class="card">
+						{% if msg %}
+						<h4>{{msg}}</h4>
+						{% endif %}
+						<form action="/lock_salary" method="post">
                         <div class="card-header">
                             <h5>Lock Salary</h5>
                         </div>
@@ -440,9 +444,9 @@
                             <div class="form-row">
                                 <!-- table card-1 start -->
                                 <div class="form-group col-md-6">
-                                    <label for="inputState">Month</label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected>select</option>
+                                    <label for="month">Month</label>
+                                    <select id="month" name="month" class="form-control" required>
+                                        <option></option>
                                         <option>January</option>
                                         <option>February</option>
                                         <option>March</option>
@@ -459,11 +463,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label> Year </label>
-                                    <input type="text" name="year" id="year" class="form-control" placeholder="Enter Year" >
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label> Year </label>
-                                    <input type="month" name="year" id="year" class="form-control" placeholder="Enter Year" >
+                                    <input type="text" name="year" id="year" class="form-control" placeholder="Enter Year" required>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -471,24 +471,14 @@
                                     <!-- widget primary card start -->
                                     <div class="slide-progress-bar">
                                         <div class="progress-bar" style="width: 0%;" id="progress-bar"> 0% </div> <br>
-                                    <center> <button class="btn btn-success" onclick="progressBar()"><i class="fa-solid fa-play" style="margin-right: 0.5rem;"></i>Proceed</button> </center>
+                                    <center> <button class="btn btn-success" type="submit" onclick="return confirm('Are you sure?')" ><i class="fa-solid fa-play" style="margin-right: 0.5rem;"></i>Proceed</button> </center>
                                         <!--progress-bar-->
                                     </div>
                                     <!-- widget primary card end -->
                                 </div>
-                            </div>
-							<div class="col-md-6">
-								<form action="/lock_salary" method="post">
-									<div class="form-group col-md-12">
-										<label> Year </label>
-										<input type="month" name="year" id="year" class="form-control" placeholder="Enter Year" >
-									</div>
-									<div>
-										<button class="btn btn-primary submit"> SUBMIT </button>
-									</div>
-								</form>
-							</div>
+                            </div>							
                         </div>
+					</form>
                     </div>
                 </div>
 				
