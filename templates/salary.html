@@ -1494,12 +1494,12 @@
 											{% endif %}
 										</div>
 										<div class="form-group col-md-4">
-											{% if ths %}
-											<label>Threshold For SL</label>
-											<input type="text" name="ths" id="ths" value="{{ths}}" class="form-control" placeholder="Threshhold Value" readonly>
+											{% if pthes %}
+											<label style="color: red;"> Previous Threshold For SL</label>
+											<input type="text" name="ths2" id="ths2" value="{{pthes}}" class="form-control" placeholder="Previous Threshhold Value" readonly>
 											{% else %}
-											<label>Threshold For SL</label>
-											<input type="text" name="ths" id="ths" value="" class="form-control" placeholder="Threshhold Value" readonly>
+											<label style="color: red;"> Previous Threshold For SL</label>
+											<input type="text" name="ths2" id="ths2" value="" class="form-control" placeholder="Previous Threshhold Value" readonly>
 											{% endif %}
 										</div>
 									</div>
@@ -1523,12 +1523,12 @@
 											{% endif %}
 										</div>
 										<div class="form-group col-md-4">
-											{% if pthes %}
-											<label style="color: red;"> Previous Threshold For SL</label>
-											<input type="text" name="ths2" id="ths2" value="{{pthes}}" class="form-control" placeholder="Previous Threshhold Value" readonly>
+											{% if ths %}
+											<label>Total Threshold For SL</label>
+											<input type="text" name="ths" id="ths" value="{{ths}}" class="form-control" placeholder="Threshhold Value" readonly>
 											{% else %}
-											<label style="color: red;"> Previous Threshold For SL</label>
-											<input type="text" name="ths2" id="ths2" value="" class="form-control" placeholder="Previous Threshhold Value" readonly>
+											<label>Total Threshold For SL</label>
+											<input type="text" name="ths" id="ths" value="" class="form-control" placeholder="Threshhold Value" readonly>
 											{% endif %}
 										</div>
 									</div>

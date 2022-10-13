@@ -669,11 +669,12 @@ def employee():
         lname = request.form["lname"]
         title = request.form["title"]
         dob = request.form["dob"]
+        print("dob ", dob)
         if dob == "":
             dob = "0001-01-01"
         else:
             dob = dob
-        # print(dob)
+        print("dob ", dob)
         clocked = request.form["optradio"]
         address = request.form["add"]
         city = request.form["city"]
@@ -745,7 +746,9 @@ def employee():
         else:
             tallow == tallow
 
-        expatriate = request.form.get("chk1")
+        expatriate = request.form["optradiod4"]
+        print("expatriate " , expatriate)
+
         edf = request.form["edf"]
         if edf == "":
             edf = "0"
@@ -958,7 +961,7 @@ def employee():
             # data1 = [eid, fname, lname, title, dob, clocked, address, city, country, phone, mobile, fax, mail,filename, nic, tax, bank, bank_ac, code, report, nps, car, hire, salary, position, dep, sdep, paye, per, lleave, sleave, fallow, tmode, tallow, expatriate, edf, months, medf, house, erel, mrel, payment, medical, working, lwork, spbonus, wdays]
             data1 = [eid, fname, lname, title, dob, clocked, address, city, country, phone, mobile, fax, mail, filename, nic, tax, bank, bank_ac, code, report, nps, car, hire, salary, position, dep, sdep, paye, per, lleave, sleave, fallow, tmode, tallow, expatriate, edf, months, medf, house, erel, mrel, payment, medical, working, lwork, spbonus, wdays]
             print("Before Query")
-            cursor.execute(query2, data1)
+            # cursor.execute(query2, data1)
             print("Insert Query Successfully")
             msg = "New Employee Created Successfully"
             return render_template("employee.html" , msg=msg)
@@ -2003,7 +2006,7 @@ def salary():
             WHERE
             UNQ = %s;
             """
-            emoluments = int(Payable) - int(ntax)
+            emoluments = int(basic) + int(arrears) + int(overseas) + int(otherAlw) + int(car) + int(ot) + int(eoy) + int(leave) + int(fixedAlw) + int(discBns) + int(SpeProBns) + int(speBns) 
             data3 = [emoluments, paye, slevypay, emoluments, UNQ]
             cursor.execute(query3, data3)
             print("UPDATE PAYE Query Successfully")
@@ -3135,7 +3138,7 @@ def process_salary():
                         print("Payslip Query Executed")
                         msg = "Processing Complete"
 
-                        emolument = int(payable) - int(ntax)
+                        emolument = int(basic) + int(arrears) + int(overseas) + int(otherAllow) + int(car) + int(ot) + int(eoy) + int(leave) + int(fixAllow) + int(discBns) + int(SpeProBns) + int(speBns) 
 
                         paye_query = """ INSERT INTO payecsv(
                                     EmployeeID,
