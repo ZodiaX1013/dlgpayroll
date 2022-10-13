@@ -378,6 +378,9 @@ function calculateSalary(){
     lateness = parseInt(lateness)
   }
 
+  var taxable = document.getElementById("amt1").value
+  var ntaxable = document.getElementById("amt2").value
+
   var transport = parseInt(transport1) + parseInt(transport2)
   
   var otherAllow = parseInt(totherAllow) + parseInt(dotherAllow)
@@ -425,12 +428,15 @@ function calculateSalary(){
   var payable = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(transport) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(speBns) + parseInt(speProBns) + parseInt(fixAllow) + parseInt(DiscBonus) + parseInt(overseas) + parseInt(attBns)
 
   
+  
 
   var cgross, grossTax
   
   var transTax
+  var ntransTax
   if(transport > 20000){
     transTax = parseInt(transport) - 20000
+    ntransTax = parseInt(transport) - parseInt(transTax)
   }
   else{
     transTax = 0
@@ -580,6 +586,8 @@ function calculateSalary(){
   else{
     eprgf = 0
   }
+  tax = parseInt(tax) + parseInt(transTax) + parseInt(taxable)
+  ntax = parseInt(ntax) + parseInt(ntaxable) + parseInt(ntransTax)
 
   var levypay = parseInt(slevy) - parseInt(plevy)
   

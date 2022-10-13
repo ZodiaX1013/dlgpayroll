@@ -1405,118 +1405,6 @@ def salary():
                                                     port='25060',
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True) 
-
-            # query1 = "SELECT salary FROM employee WHERE EmployeeID = %s"
-            # data = [eid]
-            # cursor.execute(query1, data)
-            # sal = cursor.fetchall()
-            # for i in range(len(sal)):
-            #     salary = ''.join(sal[i])
-
-            # query2 = "SELECT Specialbonus FROM employee WHERE EmployeeID = %s"            
-            # cursor.execute(query2, data)
-            # bonus = cursor.fetchall()
-            # for i in range(len(bonus)):
-            #     bns = ''.join(bonus[i])
-
-            # query3 = "SELECT Carbenefit FROM employee WHERE EmployeeID = %s"
-            # cursor.execute(query3,data)
-            # car = cursor.fetchall()
-            # for i in range(len(car)):
-            #     cars = ''.join(car[i])
-
-            # query4 = "SELECT EDF FROM employee WHERE EmployeeID = %s"
-            # cursor.execute(query4, data)
-            # medf = cursor.fetchall()
-            # for i in range(len(medf)):
-            #     edf = ''.join(medf[i])
-
-            # query5 = "SELECT medical FROM employee WHERE EmployeeID = %s"
-            # cursor.execute(query5, data)
-            # med = cursor.fetchall()
-            # for i in range(len(med)):
-            #     med = ''.join(med[i])
-            
-            # query6 = "SELECT Travelallow FROM employee WHERE EmployeeID = %s"
-            # cursor.execute(query6, data)
-            # travel = cursor.fetchall()
-            # for i in range(len(travel)):
-            #     talw = ''.join(travel[i])
-
-            # query7 = "SELECT FirstName FROM employee WHERE EmployeeID = %s"
-            # cursor.execute(query7, data)
-            # fname = cursor.fetchall()
-            # for i in range(len(fname)):
-            #     first = ''.join(fname[i])
-
-            # query8 = "SELECT LastName FROM employee WHERE EmployeeID = %s"
-            # cursor.execute(query8, data)
-            # lname = cursor.fetchall()
-            # for i in range(len(lname)):
-            #     last = ''.join(lname[i])
-            
-            # query9 = "SELECT Educationrel FROM employee WHERE EmployeeID = %s"
-            # cursor.execute(query9, data)
-            # education = cursor.fetchall()
-            # for i in range(len(education)):
-            #     edu = ''.join(education[i])
-
-            # query10 = "SELECT Medicalrel FROM employee WHERE EmployeeID = %s"
-            # cursor.execute(query10, data)
-            # mrel = cursor.fetchall()
-            # for i in range(len(mrel)):
-            #     mrel = ''.join(mrel[i])
-
-            # today = datetime.date.today()
-            # first_day = today.replace(day=1)
-            # last_month = first_day - datetime.timedelta(days=1)
-            # lfirst_day = last_month.replace(day=1)
-            # llast_month = lfirst_day - datetime.timedelta(days=1)
-            # req_month = llast_month.strftime("%m")
-            # str_month = " "
-            # if req_month == '1'.zfill(2):
-            #     str_month = "January"
-            # elif req_month == '2'.zfill(2):
-            #     str_month = "February"
-            # elif req_month == '3'.zfill(2):
-            #     str_month = "March"
-            # elif req_month == '4'.zfill(2):
-            #     str_month = "April"
-            # elif req_month == '5'.zfill(2):
-            #     str_month = "May"
-            # elif req_month == '6'.zfill(2):
-            #     str_month = "June"
-            # elif req_month == '7'.zfill(2):
-            #     str_month = "July"
-            # elif req_month == '8'.zfill(2):
-            #     str_month = "August"
-            # elif req_month == '9'.zfill(2):
-            #     str_month = "September"
-            # elif req_month == '10'.zfill(2):
-            #     str_month = "October"
-            # elif req_month == '11'.zfill(2):
-            #     str_month = "November"
-            # elif req_month == '12'.zfill(2):
-            #     str_month = "December"
-
-            # data1 = [eid , str_month ]
-            # query11 = "SELECT PAYE FROM payable WHERE EmployeeID = %s AND Month = %s"
-            # cursor.execute(query11, data1)
-            # paye = cursor.fetchall()
-            # for i in range(len(paye)):
-            #     paye = ''.join(paye[i])
-            
-            # query12 = "SELECT gross FROM payable WHERE EmployeeID = %s AND Month = %s"
-            # cursor.execute(query12, data1)
-            # gross = cursor.fetchall()
-            # for i in range(len(gross)):
-            #     gross = ''.join(gross[i])
-            
-            # query13 = "SELECT IET FROM payable WHERE EmployeeID = %s AND Month = %s"
-            # cursor.execute(query13, data1)
-            # IET = cursor.fetchall()
-            # for i in range(len(IET)):
-            #     IET = ''.join(IET[i])
             
             data1 = [eid, month]
             data2 = [eid]
@@ -2996,7 +2884,7 @@ def process_salary():
                         print("slevypay", slevypay)
                         otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
                         
-
+                        tax = int(tax) + int(transTax)
                         # Payslip Calculation
 
                         paygross = int(basic) + int(trans) + int(bonus)
