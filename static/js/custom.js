@@ -423,7 +423,6 @@ function calculateSalary(){
   var educationRel = document.getElementById("edu").value
   var medicalRel = document.getElementById("mrel").value
 
-
   var pgross = document.getElementById("pgrs").value
   var piet = document.getElementById("piet").value
   var ppaye = document.getElementById("ppaye").value
@@ -458,9 +457,9 @@ function calculateSalary(){
   }
   tax = parseInt(tax) + parseInt(transTax) + parseInt(taxable)
 
-  alert("ntax " + ntax)
-  alert("ntaxable " + ntaxable)
-  alert("ntransTax " + ntransTax)
+  // alert("ntax " + ntax)
+  // alert("ntaxable " + ntaxable)
+  // alert("ntransTax " + ntransTax)
   ntax = parseInt(ntax) + parseInt(ntaxable) + parseInt(ntransTax)
 
   // alert("basic " + basic)
@@ -478,8 +477,8 @@ function calculateSalary(){
   // alert("tax " + tax)
   // alert("ntax " + ntax)
   
-  var payable = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow)  + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(speBns) + parseInt(speProBns) + parseInt(fixAllow) + parseInt(DiscBonus) + parseInt(overseas) + parseInt(attBns) + parseInt(tax) + parseInt(ntax)
-  alert(payable)
+  var payable = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow)  + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(speBns) + parseInt(speProBns) + parseInt(fixAllow) + parseInt(DiscBonus) + parseInt(attBns) + parseInt(tax) + parseInt(ntax)
+  
   cgross = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car) + parseInt(ntax)
   
   grossTax = parseInt(basic) + parseInt(overtime) + parseInt(tax) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow)  + parseInt(speProBns) + parseInt(attBns) + parseInt(car)
@@ -764,8 +763,8 @@ function Export2Word(element, filename = 'paysheet'){
 
 // Export To Doc With Image
 
-function ExportToDoc(filename = ''){
-  alert("2")
+function ExportToDoc2(filename = ''){
+  
   var HtmlHead = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
   var css = (
     '<style>' +
@@ -777,7 +776,7 @@ function ExportToDoc(filename = ''){
   var EndHtml = "</body></html>";
 
   //complete html
-  var html = HtmlHead +document.getElementById("exportContent").innerHTML+EndHtml;
+  var html = HtmlHead + document.getElementById("exportContent").innerHTML+EndHtml;
 
   //specify the type
   var blob = new Blob(['\ufeff', css + html], {
@@ -811,8 +810,8 @@ function ExportToDoc(filename = ''){
   document.body.removeChild(downloadLink);
 }
 
-function ExportToDoc2(filename = ''){
-  alert("1")
+function ExportToDoc(filename = ''){
+  
   var HtmlHead = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
 
   var EndHtml = "</body></html>";
@@ -852,15 +851,8 @@ function ExportToDoc2(filename = ''){
   document.body.removeChild(downloadLink);
 }
 
-
- /* HTML to Microsoft Word Export Demo 
-  * This code demonstrates how to export an html element to Microsoft Word
-  * with CSS styles to set page orientation and paper size.
-  * Tested with Word 2010, 2013 and FireFox, Chrome, Opera, IE10-11
-  * Fails in legacy browsers (IE<10) that lack window.Blob object
-  */
  window.export.onclick = function() {
-  alert("onclick")
+  
   if (!window.Blob) {
      alert('Your legacy browser does not support this action.');
      return;
@@ -880,9 +872,11 @@ function ExportToDoc2(filename = ''){
   );
   
   html = window.docx.innerHTML;
+  
   blob = new Blob(['\ufeff', css + html], {
     type: 'application/msword'
   });
+  
   url = URL.createObjectURL(blob);
   link = document.createElement('A');
   link.href = url;
