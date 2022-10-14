@@ -411,7 +411,8 @@
         <div class="col-xl-12"> 
             <div class="col-md-4">
                 <!-- <button class="btn btn-primary" onclick="Export2Word('exportContent');">Download As Word</button> -->
-                <button class="btn btn-primary" onclick="ExportToDoc();">Download As Word</button>
+                <!-- <button class="btn btn-primary" onclick="ExportToDoc();">Download As Word</button> -->
+                <button class="btn btn-primary" id="export">Download As Word</button>
             </div>   
             <!-- <form action="payslip" method="post">
                 <button type="submit"> Get Data </button>
@@ -442,140 +443,137 @@
                     </div>
                     <div class="card-body col-md-12">        
                         <div class="form-row">
-                            <table class="table table-striped col-md-12" id="excel" style="width: 100%;">
-                                
-                                <div class="form-group col-md-6">
-                                    
-                                        
-                                            <tr>
-                                                <th>Payslip For The Period</th>
-                                                {% if month %}
-                                                <th> {{month}}</th>
-                                                {% else %}
-                                                <th> </th>
-                                                {% endif %}
-                                            </tr>
-                                            <tr>
-                                                <td>Employee Joining Date</td>
-                                                <td> {{data[i][0]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Company</td>
-                                                <td> {{data[i][1]}} </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Employee Name</td>
-                                                <td>{{data[i][2]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Position</td>
-                                                <td>{{data[i][3]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>NIC Number / ID Number</td>
-                                                <td>{{data[i][4]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Emoluments</th>
-                                                <th></th>
-                                            </tr>
-                                            <tr>
-                                                <td>A. Basic Pay</td>
-                                                <td>{{data[i][5]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>B. Travel Allowance</td>
-                                                <td>{{data[i][6]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bonus</td>
-                                                <td>{{data[i][7]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>D. Gross Pay = (A + B + C)</th>
-                                                <th>{{data[i][8]}}</th>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Deductions</th>
-                                                <th></th>
-                                            </tr>
-                                            <tr>
-                                                <td>E. PAYE Tax withheld and deposited to MRA</td>
-                                                <td>{{data[i][9]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>F. NPF Employee Contribution</td>
-                                                <td>{{data[i][10]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>G. NSF Employee Contribution</td>
-                                                <td>{{data[i][11]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>H. Solidarity Levy</th>
-                                                <th>{{data[i][12]}}</th>
-                                            </tr>
-                                            <tr>
-                                                <th>I. Total Deductions (E + F + G + H)</th>
-                                                <th>{{data[i][13]}}</th>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th>J. Net Pay (H - I)</th>
-                                                <th>{{data[i][14]}}</th>
-                                            </tr>
-                                            <tr>
-                                                <td>K. Reimbursements</td>
-                                                <td>0</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Total amount paid (J + K)</td>
-                                                <td>{{data[i][15]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Net Pay Credited to Account</th>
-                                                <th>{{data[i][16]}}</th>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Employer Contributions</th>
-                                                <th></th>
-                                            </tr>
-                                            <tr>
-                                                <td>NPF</td>
-                                                <td>{{data[i][17]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>NSF</td>
-                                                <td>{{data[i][18]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Levy</td>
-                                                <td>{{data[i][19]}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>PRGF</td>
-                                                <td>{{data[i][20]}}</td>
-                                            </tr>
-                                        
-                                        
+                            <div id="docx" class="col-md-12">
+                                <div class="WordSection1">
+                                    <table class="table table-striped col-md-12" style="width: 100%;">
+                                    <!-- <table class="table table-striped col-md-12" style="width: 100%;"> -->
+                                        <tr>
+                                            <th>Payslip For The Period</th>
+                                            {% if month %}
+                                            <th> {{month}}</th>
+                                            {% else %}
+                                            <th> </th>
+                                            {% endif %}
+                                        </tr>
+                                        <tr>
+                                            <td>Employee Joining Date</td>
+                                            <td> {{data[i][0]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Company</td>
+                                            <td> {{data[i][1]}} </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employee Name</td>
+                                            <td>{{data[i][2]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Position</td>
+                                            <td>{{data[i][3]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>NIC Number / ID Number</td>
+                                            <td>{{data[i][4]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Emoluments</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td>A. Basic Pay</td>
+                                            <td>{{data[i][5]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>B. Travel Allowance</td>
+                                            <td>{{data[i][6]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bonus</td>
+                                            <td>{{data[i][7]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>D. Gross Pay = (A + B + C)</th>
+                                            <th>{{data[i][8]}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Deductions</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td>E. PAYE Tax withheld and deposited to MRA</td>
+                                            <td>{{data[i][9]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>F. NPF Employee Contribution</td>
+                                            <td>{{data[i][10]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>G. NSF Employee Contribution</td>
+                                            <td>{{data[i][11]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>H. Solidarity Levy</th>
+                                            <th>{{data[i][12]}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>I. Total Deductions (E + F + G + H)</th>
+                                            <th>{{data[i][13]}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th>J. Net Pay (H - I)</th>
+                                            <th>{{data[i][14]}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>K. Reimbursements</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total amount paid (J + K)</td>
+                                            <td>{{data[i][15]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Net Pay Credited to Account</th>
+                                            <th>{{data[i][16]}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Employer Contributions</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td>NPF</td>
+                                            <td>{{data[i][17]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>NSF</td>
+                                            <td>{{data[i][18]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Levy</td>
+                                            <td>{{data[i][19]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>PRGF</td>
+                                            <td>{{data[i][20]}}</td>
+                                        </tr>  
+                                    </table>
                                 </div>
-                                
-                            </table>
+                            </div>
                         </div>      
                     </div>
                 </div>

@@ -183,58 +183,58 @@
                                     <!-- <h4>Table Here</h4> -->
                                     <!-- <table class="table table-striped" id="excel" style="width: 100%;"> -->
                                         <!-- <table style="width: 100%;"> -->
-                                    <table id="excel">
-                                        <tr>
-                                            <th colspan="20" style="text-align: center;">
-                                                MAXCITY ASSET MANAGERS LTD
-                                                    
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="20" style="text-align: center;">
-                                                {% if month %}
-                                                    Paysheet for the month of {{month}} 2022
-                                                    {% else %}
-                                                    Paysheet for the month of ______ 2022
-                                                    {% endif %}
-                                            </th>
-                                        </tr>
-                                            
-                                        <tr>
-                                            <!-- <th></th> -->
-                                            <th>Employee</th>
-                                            <th>Basic Salary</th>
-                                            <th>Arrears</th>
-                                            <th>OT Amount</th>
-                                            <th>Leave Ref</th>
-                                            <th>EOY Bonus</th>
-                                            <th>Travel Allowance</th>
-                                            <th>Overseas</th>
-                                            <th>Other Allowance</th>
-                                            <th>Fixed Allowance</th>
-                                            <th>Gross</th>
-                                            <th>Absences Amount</th>
-                                            <th>PAYE</th>
-                                            <th>CSG Emp</th>
-                                            <th>NSF Emp</th>
-                                            <th>Med Con</th>
-                                            <th>S.Levy</th>
-                                            <th>Lateness Amount</th>
-                                            <th>Other Deduction</th>
-                                            <th>Net Pay</th>
-                                        </tr>
-                                        
-                                        {% for row in data %}
-                                        <tr>
-                                            {% for cell in row %}
-                                            <td>{{cell}}</td>
-                                            {% endfor %}
-                                        </tr>
-                                        {% endfor %}
-                                        
-                                    </table>
-                                    <!-- End Leave Table -->
-
+                                        <div id="excel"> 
+                                            <div id="WordSection1">
+                                                <table>
+                                                    <tr>
+                                                        <th colspan="20" style="text-align: center;">
+                                                            MAXCITY ASSET MANAGERS LTD
+                                                                
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="20" style="text-align: center;">
+                                                            {% if month %}
+                                                                Paysheet for the month of ____________ 2022
+                                                            {% else %}
+                                                                Paysheet for the month of ____________ 2022
+                                                            {% endif %}
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <th></th> -->
+                                                        <th>Employee</th>
+                                                        <th>Basic Salary</th>
+                                                        <th>Arrears</th>
+                                                        <th>OT Amount</th>
+                                                        <th>Leave Ref</th>
+                                                        <th>EOY Bonus</th>
+                                                        <th>Travel Allowance</th>
+                                                        <th>Overseas</th>
+                                                        <th>Other Allowance</th>
+                                                        <th>Fixed Allowance</th>
+                                                        <th>Gross</th>
+                                                        <th>Absences Amount</th>
+                                                        <th>PAYE</th>
+                                                        <th>CSG Emp</th>
+                                                        <th>NSF Emp</th>
+                                                        <th>Med Con</th>
+                                                        <th>S.Levy</th>
+                                                        <th>Lateness Amount</th>
+                                                        <th>Other Deduction</th>
+                                                        <th>Net Pay</th>
+                                                    </tr> 
+                                                    {% for row in data %}
+                                                    <tr>
+                                                        {% for cell in row %}
+                                                        <td>{{cell}}</td>
+                                                        {% endfor %}
+                                                    </tr>
+                                                    {% endfor %} 
+                                                </table>
+                                            <!-- End Leave Table -->
+                                            </div>
+                                        </div>
                                     <button class="btn btn-secondary" type="submit" name="action" value="back" id="back" style="margin-top: 25px;"><i class="fa-solid fa-left" style="margin-right: 0.5rem;">  </i> Back</button>
                                     </form>         
                                     <button class="btn btn-primary" name="action" id="download" value="download" style="margin-top: 25px;"><i class="fa-regular fa-file-spreadsheet" style="margin-right: 0.5rem;"></i>Download As Excel</button>

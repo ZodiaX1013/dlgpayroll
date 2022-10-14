@@ -765,6 +765,54 @@ function Export2Word(element, filename = 'paysheet'){
 // Export To Doc With Image
 
 function ExportToDoc(filename = ''){
+  alert("2")
+  var HtmlHead = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+  var css = (
+    '<style>' +
+    '@page WordSection1{size: 841.95pt 595.35pt;mso-page-orientation: landscape;}' +
+    'div.WordSection1 {page: WordSection1;}' +
+    'table{border-collapse:collapse;}td{border:1px gray solid;width:5em;padding:2px;}'+
+    '</style>'
+  );
+  var EndHtml = "</body></html>";
+
+  //complete html
+  var html = HtmlHead +document.getElementById("exportContent").innerHTML+EndHtml;
+
+  //specify the type
+  var blob = new Blob(['\ufeff', css + html], {
+      type: 'application/msword'
+  });
+  
+  // Specify link url
+  var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+  
+  // Specify file name
+  filename = filename?filename+'.doc':'document.doc';
+  
+  // Create download link element
+  var downloadLink = document.createElement("a");
+
+  document.body.appendChild(downloadLink);
+  
+  if(navigator.msSaveOrOpenBlob ){
+      navigator.msSaveOrOpenBlob(blob, filename);
+  }else{
+      // Create a link to the file
+      downloadLink.href = url;
+      
+      // Setting the file name
+      downloadLink.download = filename;
+      
+      //triggering the function
+      downloadLink.click();
+  }
+  
+  document.body.removeChild(downloadLink);
+}
+
+function ExportToDoc2(filename = ''){
+  alert("1")
   var HtmlHead = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
 
   var EndHtml = "</body></html>";
@@ -803,3 +851,46 @@ function ExportToDoc(filename = ''){
   
   document.body.removeChild(downloadLink);
 }
+
+
+ /* HTML to Microsoft Word Export Demo 
+  * This code demonstrates how to export an html element to Microsoft Word
+  * with CSS styles to set page orientation and paper size.
+  * Tested with Word 2010, 2013 and FireFox, Chrome, Opera, IE10-11
+  * Fails in legacy browsers (IE<10) that lack window.Blob object
+  */
+ window.export.onclick = function() {
+  alert("onclick")
+  if (!window.Blob) {
+     alert('Your legacy browser does not support this action.');
+     return;
+  }
+
+  var html, link, blob, url, css;
+  
+  // EU A4 use: size: 841.95pt 595.35pt;
+  // US Letter use: size:11.0in 8.5in;
+  
+  css = (
+    '<style>' +
+    '@page WordSection1{size: 841.95pt 595.35pt;mso-page-orientation: landscape;}' +
+    'div.WordSection1 {page: WordSection1;}' +
+    'table{border-collapse:collapse;}td{border:1px gray solid;width:5em;padding:2px;}'+
+    '</style>'
+  );
+  
+  html = window.docx.innerHTML;
+  blob = new Blob(['\ufeff', css + html], {
+    type: 'application/msword'
+  });
+  url = URL.createObjectURL(blob);
+  link = document.createElement('A');
+  link.href = url;
+  // Set default file name. 
+  // Word will append file extension - do not add an extension here.
+  link.download = 'Document';   
+  document.body.appendChild(link);
+  if (navigator.msSaveOrOpenBlob ) navigator.msSaveOrOpenBlob( blob, 'Document.doc'); // IE10-11
+      else link.click();  // other browsers
+  document.body.removeChild(link);
+};
