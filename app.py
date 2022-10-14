@@ -2827,6 +2827,7 @@ def paysheet():
     # For Pdf Generate
     if request.method == "POST" and request.form['action'] == 'pdf':
         month = request.form["mon"]
+        year = request.form["year"]
         try:
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
@@ -2836,16 +2837,24 @@ def paysheet():
             cursor = connection.cursor(buffered=True)
 
             data1 = [month]
+            data2 = [year]
             # query1 = "SELECT * FROM paysheet"
             # query1 = "SELECT EmployeeName, BasicSalary, Arrears, Overseas, TravelAllow, OtherAllow, Gross, PAYE, CSG, NSF, Medical, SLevy, Net FROM paysheet"
             query1 = "SELECT EmployeeName, BasicSalary, Arrears, Overtime, LeaveRef, EOY, Transport, Overseas, OtherAllow, FixedAllow, Payable, Absences, PAYE, NPS, NSFEmpee, Medical, SLevy, Lateness, OtherDeduction, NetPaysheet FROM salary WHERE Month = %s "
             cursor.execute(query1,data1)
             data = cursor.fetchall()
-            print(data)
+            
             session["data"] = data
             length = len(data)
-            print(length)
-            return render_template("paysheet2.html", data=data, length=length, month = month)
+            
+            for i in range(len(data1)):
+                month = ' '.join(data1[i])
+
+            for i in range(len(data2)):
+                year = ' '.join(data2[i])
+            
+            # return month
+            return render_template("paysheet2.html", data=data, length=length, month = month, year = year)
             # return redirect(url_for('download', data = data))
         except Error as e:
             print("Error While connecting to MySQL : ", e)
