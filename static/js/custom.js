@@ -379,7 +379,27 @@ function calculateSalary(){
   }
 
   var taxable = document.getElementById("amt1").value
+  if(taxable == ""){
+    taxable = 0
+  }
+  else{
+    taxable = parseInt(taxable)
+  }
   var ntaxable = document.getElementById("amt2").value
+  if(ntaxable == ""){
+    ntaxable = 0
+  }
+  else{
+    ntaxable = parseInt(ntaxable)
+  }
+
+  var overseas = document.getElementById("oseas").value
+  if(overseas == ""){
+    overseas = 0
+  }
+  else{
+    overseas = parseInt(overseas)
+  }
 
   var transport = parseInt(transport1) + parseInt(transport2)
   
@@ -409,8 +429,20 @@ function calculateSalary(){
   var ppaye = document.getElementById("ppaye").value
 
   var basic = parseInt(tbasic) - parseInt(abs)
-  var overseas = document.getElementById("oseas").value
   
+  var cgross, grossTax
+  
+  var transTax
+  var ntransTax
+
+  if(transport > 20000){
+    transTax = parseInt(transport) - 20000
+    ntransTax = parseInt(transport) - parseInt(transTax)
+  }
+  else{
+    transTax = 0
+    ntransTax = 0
+  }
   var tax
   var ntax
 
@@ -424,27 +456,33 @@ function calculateSalary(){
     ntax = 0
     tax = 0
   }
+  tax = parseInt(tax) + parseInt(transTax) + parseInt(taxable)
 
-  var payable = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(transport) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(speBns) + parseInt(speProBns) + parseInt(fixAllow) + parseInt(DiscBonus) + parseInt(overseas) + parseInt(attBns)
+  alert("ntax " + ntax)
+  alert("ntaxable " + ntaxable)
+  alert("ntransTax " + ntransTax)
+  ntax = parseInt(ntax) + parseInt(ntaxable) + parseInt(ntransTax)
 
+  // alert("basic " + basic)
+  // alert("overtime " + overtime)
+  // alert("otherAllow " + otherAllow)
+  // alert("arrears " + arrears)
+  // alert("eoy " + eoy)
+  // alert("localRef " + localRef)
+  // alert("speBns " + speBns)
+  // alert("speProBns " + speProBns)
+  // alert("fixAllow " + fixAllow)
+  // alert("DiscBonus " + DiscBonus)
+  // alert("overseas " + overseas)
+  // alert("attBns " + attBns)
+  // alert("tax " + tax)
+  // alert("ntax " + ntax)
   
+  var payable = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow)  + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(speBns) + parseInt(speProBns) + parseInt(fixAllow) + parseInt(DiscBonus) + parseInt(overseas) + parseInt(attBns) + parseInt(tax) + parseInt(ntax)
+  alert(payable)
+  cgross = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car) + parseInt(ntax)
   
-
-  var cgross, grossTax
-  
-  var transTax
-  var ntransTax
-  if(transport > 20000){
-    transTax = parseInt(transport) - 20000
-    ntransTax = parseInt(transport) - parseInt(transTax)
-  }
-  else{
-    transTax = 0
-  }
-
-  cgross = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(transport) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car)
-  
-  grossTax = parseInt(basic) + parseInt(overtime) + parseInt(transTax) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car)
+  grossTax = parseInt(basic) + parseInt(overtime) + parseInt(tax) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow)  + parseInt(speProBns) + parseInt(attBns) + parseInt(car)
 
   // var gtax = parseInt(cgross) + parseInt(transport)
   var gross = parseInt(pgross) + parseInt(grossTax)
@@ -534,7 +572,7 @@ function calculateSalary(){
   var netchar = parseInt(gross) - parseInt(iet) - parseInt(ths)
   if(temp > 3000000){
     slevy1 = Math.round(parseInt(netchar) * 0.25)
-    slevy2 = Math.round(parseInt(grossTax) * 0.1)
+    slevy2 = Math.round(parseInt(gross) * 0.1)
     
     if(slevy1 > slevy2){
       slevy = Math.round(slevy2)
@@ -586,8 +624,7 @@ function calculateSalary(){
   else{
     eprgf = 0
   }
-  tax = parseInt(tax) + parseInt(transTax) + parseInt(taxable)
-  ntax = parseInt(ntax) + parseInt(ntaxable) + parseInt(ntransTax)
+  
 
   var levypay = parseInt(slevy) - parseInt(plevy)
   

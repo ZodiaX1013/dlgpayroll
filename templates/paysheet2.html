@@ -175,14 +175,6 @@
                 <div class="form-row">
                     <div class="card" id="exportContent">
                         <div class="card-header">
-                           
-                            <center><h4>MAXCITY ASSET MANAGERS LTD</h4>
-                            {% if month %}
-                            <h5>Paysheet for the month of {{month}} 2022</h5>
-                            {% else %}
-                            <h5>Paysheet for the month of ______ 2022</h5>
-                            {% endif %}
-                            </center>
                             <div id="docx">
                                 <div class="card-body">
                                     <form action="/paysheet" method="post">
@@ -192,6 +184,22 @@
                                     <!-- <table class="table table-striped" id="excel" style="width: 100%;"> -->
                                         <!-- <table style="width: 100%;"> -->
                                     <table id="excel">
+                                        <tr>
+                                            <th colspan="20" style="text-align: center;">
+                                                MAXCITY ASSET MANAGERS LTD
+                                                    
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="20" style="text-align: center;">
+                                                {% if month %}
+                                                    Paysheet for the month of {{month}} 2022
+                                                    {% else %}
+                                                    Paysheet for the month of ______ 2022
+                                                    {% endif %}
+                                            </th>
+                                        </tr>
+                                            
                                         <tr>
                                             <!-- <th></th> -->
                                             <th>Employee</th>

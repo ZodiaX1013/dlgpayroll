@@ -303,7 +303,11 @@ def employee():
             query4 = "SELECT DOB From employee WHERE EmployeeID = %s"
             cursor.execute(query4, data)
             dob = cursor.fetchall()
-            dob = dob[0][0]
+            print(dob)
+            if dob == []:
+                dob = "0001-01-01"
+            else:
+                dob = dob[0][0]
 
             query5 = "SELECT address From employee WHERE EmployeeID = %s"
             cursor.execute(query5, data)
@@ -386,10 +390,10 @@ def employee():
             query18 = "SELECT hire From employee WHERE EmployeeID = %s"
             cursor.execute(query18, data)
             hire = cursor.fetchall()
-            print(hire)
-            hire = hire[0][0]
-            
-            print(hire)
+            if hire == []:
+                hire = "0001-01-01"
+            else:
+                hire = hire[0][0]
 
             query19 = "SELECT salary From employee WHERE EmployeeID = %s"
             cursor.execute(query19, data)
@@ -900,53 +904,6 @@ def employee():
                 %s
               );"""
             
-            # print(eid)
-            # print(fname)
-            # print(lname)
-            # print(title)
-            # print(dob)
-            # print(clocked)
-            # print(address)
-            # print(city)
-            # print(country)
-            # print(phone)
-            # print(mobile)
-            # print(fax)
-            # print(mail)
-            # print(nic)
-            # print(tax)
-            # print(bank)
-            # print(bank_ac)
-            # print(code)
-            # print(report)
-            # print(nps)
-            # print(car)
-            # print(hire)
-            # print(salary)
-            # print(position)
-            # print(dep)
-            # print(sdep)
-            # print(paye)
-            # print(per)
-            # print(lleave)
-            # print(sleave)
-            # print(fallow)
-            # print(tmode)
-            # print(tallow)
-            # print(expatriate)
-            # print(edf)
-            # print(months)
-            # print(medf)
-            # print(house)
-            # print(erel)
-            # print(mrel)
-            # print(payment)
-            # print(medical)
-            # print(working)
-            # print(lwork)
-            # print(spbonus)
-            # print(wdays)
-            # print()
             if(eimage != ""):
                 # image = eimage.convert('RGB')    
                 if eimage and allowed_file(eimage.filename):
@@ -961,7 +918,7 @@ def employee():
             # data1 = [eid, fname, lname, title, dob, clocked, address, city, country, phone, mobile, fax, mail,filename, nic, tax, bank, bank_ac, code, report, nps, car, hire, salary, position, dep, sdep, paye, per, lleave, sleave, fallow, tmode, tallow, expatriate, edf, months, medf, house, erel, mrel, payment, medical, working, lwork, spbonus, wdays]
             data1 = [eid, fname, lname, title, dob, clocked, address, city, country, phone, mobile, fax, mail, filename, nic, tax, bank, bank_ac, code, report, nps, car, hire, salary, position, dep, sdep, paye, per, lleave, sleave, fallow, tmode, tallow, expatriate, edf, months, medf, house, erel, mrel, payment, medical, working, lwork, spbonus, wdays]
             print("Before Query")
-            # cursor.execute(query2, data1)
+            cursor.execute(query2, data1)
             print("Insert Query Successfully")
             msg = "New Employee Created Successfully"
             return render_template("employee.html" , msg=msg)
@@ -1735,6 +1692,7 @@ def salary():
     elif request.method == "POST" and request.form['action'] == 'save':
         
         print("IN SAVE")
+        basic = request.form["bsal"]
         fixedAlw = request.form["falw2"]
         otherDed = request.form["oded2"]
         overtime = request.form["ot2"]
@@ -1806,6 +1764,7 @@ def salary():
             print("Before Query Execute")
             query1 = """UPDATE salary
                         SET 
+                        BasicSalary = %s,
                         FixedAllow = %s,
                         OtherDeduction = %s,
                         Overtime = %s,
@@ -1856,7 +1815,7 @@ def salary():
                         Absences = %s
                         WHERE 
                         UNQ = %s;"""
-            data1 = [fixedAlw, otherDed, overtime, discBns, NSF, otherAlw2, tax, medical, transport, overseas, ntax, edf, arrears, attendance, eoy, loan, car, leaveRef, slevy, speBns, lateness, educationRel, SpeProBns, NPS, medicalRel, Payable, Deduction, Net, NetPaysheet, cgross, cgtax, pgross, iet, netch, cpaye, ppaye, paye, ecsg, ensf, elevy, prgf, pthes, thes, netchar, clevy , plevy, slevypay, absence, UNQ ]
+            data1 = [basic ,fixedAlw, otherDed, overtime, discBns, NSF, otherAlw2, tax, medical, transport, overseas, ntax, edf, arrears, attendance, eoy, loan, car, leaveRef, slevy, speBns, lateness, educationRel, SpeProBns, NPS, medicalRel, Payable, Deduction, Net, NetPaysheet, cgross, cgtax, pgross, iet, netch, cpaye, ppaye, paye, ecsg, ensf, elevy, prgf, pthes, thes, netchar, clevy , plevy, slevypay, absence, UNQ ]
             cursor.execute(query1, data1)
             print("Database Updated Successfully")
 
@@ -1894,12 +1853,12 @@ def salary():
             WHERE
             UNQ = %s;
             """
-            emoluments = int(basic) + int(arrears) + int(overseas) + int(otherAlw) + int(car) + int(ot) + int(eoy) + int(leave) + int(fixedAlw) + int(discBns) + int(SpeProBns) + int(speBns) 
+            emoluments = int(basic) + int(arrears) + int(overseas) + int(otherAlw) + int(car) + int(overtime) + int(eoy) + int(leaveRef) + int(fixedAlw) + int(discBns) + int(SpeProBns) + int(speBns) 
             data3 = [emoluments, paye, slevypay, emoluments, UNQ]
             cursor.execute(query3, data3)
             print("UPDATE PAYE Query Successfully")
-
-            return render_template("paysheet.html")
+            msg = "Salary Modified Successfully"
+            return render_template("salary.html", msg=msg)
 
         except Error as e:
                 print("Error While connecting to MySQL : ", e)
@@ -2772,8 +2731,10 @@ def process_salary():
 
                         if trans > 20000:
                             transTax = trans - 20000
+                            ntransTax = trans - transTax
                         else:
                             transTax = 0
+                            ntransTax = 0
 
                         cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
 
@@ -2860,7 +2821,7 @@ def process_salary():
 
                         if int(temp) > 3000000:
                             slevy1 = round(netchar * 0.25)
-                            slevy2 = round(grossTax * 0.1)
+                            slevy2 = round(gross * 0.1)
                             print("slevy1", slevy1)
                             print("slevy2", slevy2)
                             if slevy1 > slevy2:
@@ -2885,6 +2846,7 @@ def process_salary():
                         otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
                         
                         tax = int(tax) + int(transTax)
+                        ntax = int(ntax) + int(ntransTax)
                         # Payslip Calculation
 
                         paygross = int(basic) + int(trans) + int(bonus)
@@ -3111,38 +3073,6 @@ def payslip():
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
-            # query1 = "SELECT * FROM paysheet"
-            # print("Before Query1")
-            # query1 = "SELECT FirstName, LastName, NICno, position, department FROM employee"
-
-            # query1 = "SELECT FirstName FROM employee"
-            # cursor.execute(query1)
-            # data1 = cursor.fetchall()
-            # print(data1)
-            # tdata1 = []
-            # fname = []
-            # for i in range(len(data1)):
-            #     print("i : " , i)
-            #     # print("j : ", j)
-            #     tdata1 = ''.join(data1[i])
-            #     print("Data :" + tdata1)
-            #     fname.append(tdata1)
-
-            # query2 = "SELECT LastName FROM employee"
-            # cursor.execute(query2)
-            # data2 = cursor.fetchall()
-            # print(data2)
-            # tdata2 = []
-            # lname = []
-            # for i in range(len(data2)):
-            #     print("i : " , i)
-            #     # print("j : ", j)
-            #     tdata2 = ''.join(data2[i])
-            #     print("Data :" + tdata2)
-            #     lname.append(tdata2)
-
-            # flname = [i + " " + j for i,j in zip(lname,fname)]
-            # print(flname)
             query = "SELECT JoinDate, Company, EmpName, Position, NIC, BasicSalary, TravelAlw, Bonus, Gross, PAYE, NPF, NSF, SLevy , Deduction, NetPay, Payable, NetPayAcc, eNPF, eNSF, eLevy, ePRGF FROM payslip WHERE month = %s "
             data1 =[month]
             cursor.execute(query,data1)
