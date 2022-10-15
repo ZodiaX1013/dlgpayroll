@@ -595,70 +595,127 @@
 						
 						
 						<div class="tab-content" id="pills-tabContent">
+					{% if length %}
+						{% for i in range(length) %}
 							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 								<p class="mb-0">
 
 									<!-- Normal Form -->
-
-									
-										<div class="form-row">
-											<div class="form-group col-md-3">
-													<label>Arrears</label>
-													<input type="text" name="arr" id="arr" class="form-control" placeholder="Enter Arrears">
-											</div>
-											<div class="form-group col-md-3">
-													<label>Local Refund</label>
-													<input type="text" name="lref" id="lref" class="form-control" placeholder="Enter Local Refund">
-											</div>
-											<div class="form-group col-md-3">
-													<label>Fixed Allowance</label>
-													<input type="text" name="falw" id="falw" class="form-control" placeholder="Enter Fixed Allowance">
-											</div>
-											<div class="form-group col-md-3">
+								
+									<div class="form-row">
+										<div class="form-group col-md-3">
+											{% if vdata[i][0] %}
+												<label>Arrears</label>
+												<input type="text" name="arr" id="arr" class="form-control" value="{{vdata[i][0]}}" placeholder="Enter Arrears">
+											{% else %}
+												<label>Arrears</label>
+												<input type="text" name="arr" id="arr" class="form-control" placeholder="Enter Arrears">
+											{% endif %}
+										</div>
+										<div class="form-group col-md-3">
+											{% if vdata[i][1] %}
+												<label>Local Refund</label>
+												<input type="text" name="lref" id="lref" class="form-control" value="{{vdata[i][1]}}" placeholder="Enter Local Refund">
+											{% else %}
+												<label>Local Refund</label>
+												<input type="text" name="lref" id="lref" class="form-control" placeholder="Enter Local Refund">
+											{% endif %}
+										</div>
+										<div class="form-group col-md-3">
+											{% if vdata[i][2] %}
+												<label>Fixed Allowance</label>
+												<input type="text" name="falw" id="falw" class="form-control" value="{{vdata[i][2]}}" placeholder="Enter Fixed Allowance">
+											{% else %}
+												<label>Fixed Allowance</label>
+												<input type="text" name="falw" id="falw" class="form-control" placeholder="Enter Fixed Allowance">
+											{% endif %}
+										</div>
+										<div class="form-group col-md-3">
+											{% if vdata[i][3] %}
+												<label>Disct Bonus</label>
+												<input type="text" name="dbns" id="dbns" class="form-control" value="{{vdata[i][3]}}" placeholder="Enter Disct Bonus">
+											{% else %}
 												<label>Disct Bonus</label>
 												<input type="text" name="dbns" id="dbns" class="form-control" placeholder="Enter Disct Bonus">
+											{% endif %}
 										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-3">
+											{% if vdata[i][4] %}	
+												<label>Attendance Bonus</label>
+												<input type="text" name="atbns" id="atbns" class="form-control" value="{{vdata[i][4]}}" placeholder="Enter Attendance Bonus">
+											{% else %}
+												<label>Attendance Bonus</label>
+												<input type="text" name="atbns" id="atbns" class="form-control" placeholder="Enter Attendance Bonus">
+											{% endif %}
 										</div>
-										<div class="form-row">
-											<div class="form-group col-md-3">
-													<label>Attendance Bonus</label>
-													<input type="text" name="atbns" id="atbns" class="form-control" placeholder="Enter Attendance Bonus">
-											</div>
-											<div class="form-group col-md-3">
-													<label>Transport</label>
-													<input type="text" name="tran" id="tran" class="form-control" placeholder="Enter Transport">
-											</div>
-											<div class="form-group col-md-3">
-													<label>Sick Refund</label>
-													<input type="text" name="sref" id="sref" class="form-control" placeholder="Enter Sick Refund">
-											</div>
-											<div class="form-group col-md-3">
-												<label>Special Bonus</label>
-												<input type="text" name="sbns" id="sbns" class="form-control" placeholder="Enter Special Bonus">
-											</div>
+										<div class="form-group col-md-3">
+											{% if vdata[i][5] %}
+												<label>Transport</label>
+												<input type="text" name="tran" id="tran" class="form-control" value="{{vdata[i][5]}}" placeholder="Enter Transport">
+											{% else %}
+												<label>Transport</label>
+												<input type="text" name="tran" id="tran" class="form-control" placeholder="Enter Transport">
+											{% endif %}
 										</div>
-										<div class="form-row">
-											<div class="form-group col-md-3">
-												<label>Other Allowance</label>
-												<input type="text" name="oalw" id="oalw" class="form-control" placeholder="Enter Other Allowance">
-											</div>
-											<div class="form-group col-md-3">
-												<label>Overseas</label>
-												<input type="text" name="oseas" id="oseas" class="form-control" placeholder="Enter Other Allowance">
-											</div>
-											<div class="form-group col-md-3">
-												<label style="color: red;">Other Deduction</label>
-												<input type="text" name="oded" id="oded" class="form-control" placeholder="Enter Other Deduction">
-											</div>
-											<div class="form-group col-md-3">
-												<label style="color: red;">Absences</label>
-												<input type="text" name="abs" id="abs" class="form-control" placeholder="Enter Absence Amount">
-											</div>
+										<div class="form-group col-md-3">
+											{% if vdata[i][6] %}
+												<label>Sick Refund</label>
+												<input type="text" name="sref" id="sref" class="form-control" value="{{vdata[i][6]}}" placeholder="Enter Sick Refund">
+											{% else %}
+												<label>Sick Refund</label>
+												<input type="text" name="sref" id="sref" class="form-control" placeholder="Enter Sick Refund">
+											{% endif %}
 										</div>
-									
-
-									<!-- END Normal Form -->
-
+										<div class="form-group col-md-3">
+											{% if vdata[i][7] %}
+											<label>Special Bonus</label>
+											<input type="text" name="sbns" id="sbns" class="form-control" value="{{vdata[i][7]}}" placeholder="Enter Special Bonus">
+											{% else %}
+											<label>Special Bonus</label>
+											<input type="text" name="sbns" id="sbns" class="form-control" placeholder="Enter Special Bonus">
+											{% endif %}
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-3">
+											{% if vdata[i][8] %}
+											<label>Other Allowance</label>
+											<input type="text" name="oalw" id="oalw" class="form-control" value="{{vdata[i][8]}}" placeholder="Enter Other Allowance">
+											{% else %}
+											<label>Other Allowance</label>
+											<input type="text" name="oalw" id="oalw" class="form-control" placeholder="Enter Other Allowance">
+											{% endif %}
+										</div>
+										<div class="form-group col-md-3">
+											{% if vdata[i][9] %}
+											<label>Overseas</label>
+											<input type="text" name="oseas" id="oseas" class="form-control" value="{{vdata[i][9]}}" placeholder="Enter Other Allowance">
+											{% else %}
+											<label>Overseas</label>
+											<input type="text" name="oseas" id="oseas" class="form-control" placeholder="Enter Other Allowance">
+											{% endif %}
+										</div>
+										<div class="form-group col-md-3">
+											{% if vdata[i][10] %}
+											<label style="color: red;">Other Deduction</label>
+											<input type="text" name="oded" id="oded" class="form-control" value="{{vdata[i][10]}}" placeholder="Enter Other Deduction">
+											{% else %}
+											<label style="color: red;">Other Deduction</label>
+											<input type="text" name="oded" id="oded" class="form-control" placeholder="Enter Other Deduction">
+											{% endif %}
+										</div>
+										<div class="form-group col-md-3">
+											{% if vdata[i][11] %}
+											<label style="color: red;">Absences</label>
+											<input type="text" name="abs" id="abs" class="form-control" value="{{vdata[i][11]}}" placeholder="Enter Absence Amount">
+											{% else %}
+											<label style="color: red;">Absences</label>
+											<input type="text" name="abs" id="abs" class="form-control" placeholder="Enter Absence Amount">
+											{% endif %}
+										</div>
+									</div>
 								</p>
 							</div>
 							<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -666,43 +723,82 @@
 
 									<!-- OT FORM -->
 
-									
 										<div class="form-row">		
 											<div class="form-group col-md-2">
+												{% if vdata[i][12] %}
+												<label > OT 1.5  - Hours</label>
+												<input type="text" class="form-control" name="hr1" id="hr1" value="{{vdata[i][12]}}" placeholder="Enter hour">
+												{% else %}
 												<label > OT 1.5  - Hours</label>
 												<input type="text" class="form-control" name="hr1" id="hr1" placeholder="Enter hour">
+												{% endif %}
 											</div>
 											<div class="form-group col-md-2">
+												{% if vdata[i][13] %}
+												<label > Amount</label>
+												<input type="text" class="form-control" name="am1" id="am1" value="{{vdata[i][13]}}" placeholder="Enter Amount">
+												{% else %}
 												<label > Amount</label>
 												<input type="text" class="form-control" name="am1" id="am1" placeholder="Enter Amount">
+												{% endif %}
 											</div>
 											<div class="form-group col-md-2">
+												{% if vdata[i][14] %}
+												<label > OT 2.0  - Hours</label>
+												<input type="text" class="form-control" name="hr2" id="hr2" value="{{vdata[i][14]}}" placeholder="Enter hour">
+												{% else %}
 												<label > OT 2.0  - Hours</label>
 												<input type="text" class="form-control" name="hr2" id="hr2" placeholder="Enter hour">
+												{% endif %}
 											</div>
 											<div class="form-group col-md-2">
+												{% if vdata[i][15] %}
+												<label > Amount</label>
+												<input type="text" class="form-control" name="am2" id="am2" value="{{vdata[i][15]}}" placeholder="Enter Amount">
+												{% else %}
 												<label > Amount</label>
 												<input type="text" class="form-control" name="am2" id="am2" placeholder="Enter Amount">
+												{% endif %}
 											</div>
 											<div class="form-group col-md-2">
+												{% if vdata[i][16] %}
+												<label > OT 3.0  - Hours</label>
+												<input type="text" class="form-control" name="hr3" id="hr3" value="{{vdata[i][16]}}" placeholder="Enter hour">
+												{% else %}
 												<label > OT 3.0  - Hours</label>
 												<input type="text" class="form-control" name="hr3" id="hr3" placeholder="Enter hour">
+												{% endif %}
 											</div>
 											<div class="form-group col-md-2">
+												{% if vdata[i][17] %}
+												<label > Amount</label>
+												<input type="text" class="form-control" name="am3" id="am3" value="{{vdata[i][17]}}" placeholder="Enter Amount">
+												{% else %}
 												<label > Amount</label>
 												<input type="text" class="form-control" name="am3" id="am3" placeholder="Enter Amount">
+												{% endif %}
 											</div>
 										</div>
 										<div class="form-row">
 											<div class="form-group col-md-4">
 											</div>
 											<div class="form-group col-md-2">
+												{% if vdata[i][18] %}
+												<label style="color: red;"> Lateness - Hours</label>
+												<input type="text" class="form-control" name="hr4" id="hr4" value="{{vdata[i][18]}}" placeholder="Enter Hour">
+												{% else %}
 												<label style="color: red;"> Lateness - Hours</label>
 												<input type="text" class="form-control" name="hr4" id="hr4" placeholder="Enter Hour">
+												{% endif %}
 											</div>
 											<div class="form-group col-md-2">
+												{% if vdata[i][19] %}
+												<label style="color: red;"> Amount </label>
+												<input type="text" class="form-control" name="am4" id="am4" value="{{vdata[i][19]}}" placeholder="Enter Amount">
+												{% else %}
 												<label style="color: red;"> Amount </label>
 												<input type="text" class="form-control" name="am4" id="am4" placeholder="Enter Amount">
+												{% endif %}
 											</div>
 												
 										</div>
@@ -710,42 +806,202 @@
 												
 											</div>
 									
-
 									<!-- END OT FORM -->
 									
 								</p>
-								
 							</div>
 							<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 								<p class="mb-0">
 
 									<!-- Special Form -->
 									
-									
-										<div class="form-row">
-											<div class="form-group col-md-4">
-												<label>Taxable Allowance Description</label>
-												<input type="text" name="txdes" id="txdes" class="form-control" placeholder="Taxable Description">
-											</div>
-											<div class="form-group col-md-2">
-												<label>Amount</label>
-												<input type="text" name="amt1" id="amt1" class="form-control" placeholder="Enter Amount">
-											</div>
-											<div class="form-group col-md-4">
-												<label>Non Taxable Allowance Description</label>
-												<input type="text" name="ntxdes" id="ntxdes" class="form-control" placeholder="Non-Taxable Description">
-											</div>
-											<div class="form-group col-md-2">
-												<label>Amount</label>
-												<input type="text" name="amt2" id="amt2" class="form-control" placeholder="Enter Amount">
-											</div>
+									<div class="form-row">
+										<div class="form-group col-md-4">
+											{% if vdata[i][20] %}
+											<label>Taxable Allowance Description</label>
+											<input type="text" name="txdes" id="txdes" class="form-control" value="{{vdata[i][20]}}" placeholder="Taxable Description">
+											{% else %}
+											<label>Taxable Allowance Description</label>
+											<input type="text" name="txdes" id="txdes" class="form-control" placeholder="Taxable Description">
+											{% endif %}
 										</div>
-									<!-- </form> -->
-
+										<div class="form-group col-md-2">
+											{% if vdata[i][21] %}
+											<label>Amount</label>
+											<input type="text" name="amt1" id="amt1" class="form-control" value="{{vdata[i][21]}}" placeholder="Enter Amount">
+											{% else %}
+											<label>Amount</label>
+											<input type="text" name="amt1" id="amt1" class="form-control" placeholder="Enter Amount">
+											{% endif %}	
+										</div>
+										<div class="form-group col-md-4">
+											{% if vdata[i][22] %}
+											<label>Non Taxable Allowance Description</label>
+											<input type="text" name="ntxdes" id="ntxdes" class="form-control" value="{{vdata[i][22]}}" placeholder="Non-Taxable Description">
+											{% else %}
+											<label>Non Taxable Allowance Description</label>
+											<input type="text" name="ntxdes" id="ntxdes" class="form-control" placeholder="Non-Taxable Description">
+											{% endif %}
+										</div>
+										<div class="form-group col-md-2">
+											{% if vdata[i][23] %}
+											<label>Amount</label>
+											<input type="text" name="amt2" id="amt2" class="form-control" value="{{vdata[i][23]}}" placeholder="Enter Amount">
+											{% else %}
+											<label>Amount</label>
+											<input type="text" name="amt2" id="amt2" class="form-control" placeholder="Enter Amount">
+											{% endif %}
+										</div>
+									</div>
 									<!-- End Special Form -->
-
+								</p>
 							</div>
-						</div>
+
+						{% endfor %}
+					{% else %}
+					<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+						<p class="mb-0">
+							<div class="form-row">
+								<div class="form-group col-md-3">
+										<label>Arrears</label>
+										<input type="text" name="arr" id="arr" class="form-control" placeholder="Enter Arrears">
+								</div>
+								<div class="form-group col-md-3">
+										<label>Local Refund</label>
+										<input type="text" name="lref" id="lref" class="form-control" placeholder="Enter Local Refund">
+								</div>
+								<div class="form-group col-md-3">
+										<label>Fixed Allowance</label>
+										<input type="text" name="falw" id="falw" class="form-control" placeholder="Enter Fixed Allowance">
+								</div>
+								<div class="form-group col-md-3">
+										<label>Disct Bonus</label>
+										<input type="text" name="dbns" id="dbns" class="form-control" placeholder="Enter Disct Bonus">
+							</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-3">
+										<label>Attendance Bonus</label>
+										<input type="text" name="atbns" id="atbns" class="form-control" placeholder="Enter Attendance Bonus">
+								</div>
+								<div class="form-group col-md-3">
+										<label>Transport</label>
+										<input type="text" name="tran" id="tran" class="form-control" placeholder="Enter Transport">
+								</div>
+								<div class="form-group col-md-3">
+										<label>Sick Refund</label>
+										<input type="text" name="sref" id="sref" class="form-control" placeholder="Enter Sick Refund">
+								</div>
+								<div class="form-group col-md-3">
+									<label>Special Bonus</label>
+									<input type="text" name="sbns" id="sbns" class="form-control" placeholder="Enter Special Bonus">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-3">										
+									<label>Other Allowance</label>
+									<input type="text" name="oalw" id="oalw" class="form-control" placeholder="Enter Other Allowance">
+								</div>
+								<div class="form-group col-md-3">
+									<label>Overseas</label>
+									<input type="text" name="oseas" id="oseas" class="form-control" placeholder="Enter Other Allowance">
+								</div>
+								<div class="form-group col-md-3">										
+									<label style="color: red;">Other Deduction</label>
+									<input type="text" name="oded" id="oded" class="form-control" placeholder="Enter Other Deduction">
+								</div>
+								<div class="form-group col-md-3">
+									<label style="color: red;">Absences</label>
+									<input type="text" name="abs" id="abs" class="form-control" placeholder="Enter Absence Amount">
+								</div>
+							</div>
+						</p>
+					</div>
+					<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+						<p class="mb-0">
+
+							<!-- OT FORM -->
+
+							
+								<div class="form-row">		
+									<div class="form-group col-md-2">
+										<label > OT 1.5  - Hours</label>
+										<input type="text" class="form-control" name="hr1" id="hr1" placeholder="Enter hour">
+									</div>
+									<div class="form-group col-md-2">
+										<label > Amount</label>
+										<input type="text" class="form-control" name="am1" id="am1" placeholder="Enter Amount">
+									</div>
+									<div class="form-group col-md-2">
+										<label > OT 2.0  - Hours</label>
+										<input type="text" class="form-control" name="hr2" id="hr2" placeholder="Enter hour">
+									</div>
+									<div class="form-group col-md-2">
+										<label > Amount</label>
+										<input type="text" class="form-control" name="am2" id="am2" placeholder="Enter Amount">
+									</div>
+									<div class="form-group col-md-2">
+										<label > OT 3.0  - Hours</label>
+										<input type="text" class="form-control" name="hr3" id="hr3" placeholder="Enter hour">
+									</div>
+									<div class="form-group col-md-2">
+										<label > Amount</label>
+										<input type="text" class="form-control" name="am3" id="am3" placeholder="Enter Amount">
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-group col-md-4">
+									</div>
+									<div class="form-group col-md-2">
+										<label style="color: red;"> Lateness - Hours</label>
+										<input type="text" class="form-control" name="hr4" id="hr4" placeholder="Enter Hour">
+									</div>
+									<div class="form-group col-md-2">
+										<label style="color: red;"> Amount </label>
+										<input type="text" class="form-control" name="am4" id="am4" placeholder="Enter Amount">
+									</div>
+										
+								</div>
+									<div class="form-group col-md-4">
+										
+									</div>
+							
+
+							<!-- END OT FORM -->
+							
+						</p>
+						
+					</div>
+					<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+						<p class="mb-0">
+
+							<!-- Special Form -->
+							
+							
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label>Taxable Allowance Description</label>
+									<input type="text" name="txdes" id="txdes" class="form-control" placeholder="Taxable Description">
+								</div>
+								<div class="form-group col-md-2">
+									<label>Amount</label>
+									<input type="text" name="amt1" id="amt1" class="form-control" placeholder="Enter Amount">
+								</div>
+								<div class="form-group col-md-4">
+									<label>Non Taxable Allowance Description</label>
+									<input type="text" name="ntxdes" id="ntxdes" class="form-control" placeholder="Non-Taxable Description">
+								</div>
+								<div class="form-group col-md-2">
+									<label>Amount</label>
+									<input type="text" name="amt2" id="amt2" class="form-control" placeholder="Enter Amount">
+								</div>
+							</div>
+							<!-- </form> -->
+						</p>
+					</div>
+							<!-- End Special Form -->					
+					{% endif %}
+
 						<ul class="nav nav-pills mb-3 justify-content-md-center" id="pills-tab" role="tablist">
 							<li class="nav-item">
 								<a class="nav-link active" id="pills-sal-tab" data-toggle="pill" href="#pills-sal" role="tab" aria-controls="pills-home" aria-selected="true"><i class="fa-solid fa-coins" style="margin-right: 0.5rem;"></i>Salary Payable</a>

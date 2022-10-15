@@ -1261,7 +1261,13 @@ def salary():
             for i in range(len(gtax)):
                 gtax = ''.join(gtax[i])
             
-            return render_template("salary.html", basic=basic, falw=falw, otherded=otherded, ot=ot, disc=disc, nsf=nsf, oalw=oalw, tax=tax, med=med, tran=tran, ntax=ntax, edf=edf, arr=arr, att=att, eoy=eoy, loan=loan, car=car, leave=leave, slevy=slevy, spebns=spebns, late=late, edurel=edurel, speprobns=speprobns, nps=nps, medrel=medrel, payable=payable, ded=ded, net=net, cgross=cgross, pgross=pgross, iet=iet, netch=netch, cpaye=cpaye, ppaye=ppaye, paye=paye, ecsg=ecsg, ensf=ensf, elevy=elevy, absence=absence, eid=eid, fname=fname, lname=lname, pos=pos, month=month, year=year, pnet=pnet, piet=piet, pthes=pthes, ths=ths, plevy=plevy, slevypay = slevypay, netchar=netchar, prgf = prgf, gtax=gtax)
+            print("Before Query Execute")
+            query54 = "SELECT Arrears, LocalRef, FixedAllowance, DiscBns, AttBns, Transport, SickRef, SpeBns, OtherAlw, Overseas, OtherDed, Absences, ot1, amt1, ot2, amt2, ot3, amt3, lateness, amt4, TaxDes, tax, NTaxDes, ntax FROM ModifyVariables WHERE EmployeeID = %s AND Month = %s"
+            cursor.execute(query54, data1)
+            variable_data = cursor.fetchall()
+            length = len(variable_data)
+
+            return render_template("salary.html", basic=basic, falw=falw, otherded=otherded, ot=ot, disc=disc, nsf=nsf, oalw=oalw, tax=tax, med=med, tran=tran, ntax=ntax, edf=edf, arr=arr, att=att, eoy=eoy, loan=loan, car=car, leave=leave, slevy=slevy, spebns=spebns, late=late, edurel=edurel, speprobns=speprobns, nps=nps, medrel=medrel, payable=payable, ded=ded, net=net, cgross=cgross, pgross=pgross, iet=iet, netch=netch, cpaye=cpaye, ppaye=ppaye, paye=paye, ecsg=ecsg, ensf=ensf, elevy=elevy, absence=absence, eid=eid, fname=fname, lname=lname, pos=pos, month=month, year=year, pnet=pnet, piet=piet, pthes=pthes, ths=ths, plevy=plevy, slevypay = slevypay, netchar=netchar, prgf = prgf, gtax=gtax, vdata = variable_data, length = length)
             # return render_template("salary.html", sal=salary, bonus=bns, car=cars, edf=edf, med = med, travel = talw, eid = eid, fname=first, lname = last, edu=edu, paye=paye, gross=gross, IET=IET, mrel=mrel)
         except Error as e:
                 print("Error While connecting to MySQL : ", e)
@@ -1275,6 +1281,152 @@ def salary():
     elif request.method == "POST" and request.form['action'] == 'save':
         
         print("IN SAVE")
+
+        # Data Of Manually Input Values
+        arrears1 = request.form["arr"]
+        if arrears1 == "":
+            arrears1 = 0
+        else:
+            arrears1 = arrears1
+        
+        localRef = request.form["lref"]
+        if localRef == "":
+            localRef = 0
+        else:
+            localRef = localRef
+
+        fixedAlw1 = request.form["falw"]
+        if fixedAlw1 == "":
+            fixedAlw1 = 0
+        else:
+            fixedAlw1 = fixedAlw1
+
+        discBns1 = request.form["dbns"]
+        if discBns1 == "":
+            discBns1 = 0
+        else:
+            discBns1 = discBns1
+
+        attendance1 = request.form["atbns"]
+        if attendance1 == "":
+            attendance1 = 0
+        else:
+            attendance1 = attendance1
+
+        transport1 = request.form["tran"]
+        if transport1 == "":
+            transport1 = 0
+        else:
+            transport1 = transport1
+
+        sickRef = request.form["sref"]
+        if sickRef == "":
+            sickRef = 0
+        else:
+            sickRef = sickRef
+
+        speBns1 = request.form["sbns"]
+        if speBns1 == "":
+            speBns1 = 0
+        else:
+            speBns1 = speBns1
+
+        otherAlw1 = request.form["oalw"]
+        if otherAlw1 == "":
+            otherAlw1 = 0
+        else:
+            otherAlw1 = otherAlw1
+
+        overseas1 = request.form["oseas"]
+        if overseas1 == "":
+            overseas1 = 0
+        else:
+            overseas1 = overseas1
+
+        otherDed1 = request.form["oded"]
+        if otherDed1 == "":
+            otherDed1 = 0
+        else:
+            otherDed1 = otherDed1
+
+        absence1 = request.form["abs"]
+        if absence1 == "":
+            absence1 = 0
+        else:
+            absence1 = absence1
+
+        ot1 = request.form["hr1"]
+        if ot1 == "":
+            ot1 = 0
+        else:
+            ot1 = ot1
+
+        amt1 = request.form["am1"]
+        if amt1 == "":
+            amt1 = 0
+        else:
+            amt1 = amt1
+        
+        ot2 = request.form["hr2"]
+        if ot2 == "":
+            ot2 = 0
+        else:
+            ot2 = ot2
+        
+        amt2 = request.form["am2"]
+        if amt2 == "":
+            amt2 = 0
+        else:
+            amt2 = amt2
+
+        ot3 = request.form["hr3"]
+        if ot3 == "":
+            ot3 = 0
+        else:
+            ot3 = ot3
+
+        amt3 = request.form["am3"]
+        if amt3 == "":
+            amt3 = 0
+        else:
+            amt3 = amt3
+
+        lateness = request.form["hr4"]
+        if lateness == "":
+            lateness = 0
+        else:
+            lateness = lateness
+
+        amt4 = request.form["am4"]
+        if amt4 == "":
+            amt4 = 0
+        else:
+            amt4 = amt4
+
+        taxDes = request.form["txdes"]
+        if taxDes == "":
+            taxDes = " "
+        else:
+            taxDes = taxDes
+
+        taxamt = request.form["amt1"]
+        if taxamt == "":
+            taxamt = 0
+        else:
+            taxamt = taxamt        
+        
+        ntaxDes = request.form["ntxdes"]
+        if ntaxDes == "":
+            ntaxDes = " "
+        else:
+            ntaxDes = ntaxDes
+        
+        ntaxamt = request.form["amt2"]
+        if ntaxamt == "":
+            ntaxamt = 0
+        else:
+            ntaxamt = ntaxamt
+
         basic = request.form["bsal"]
         fixedAlw = request.form["falw2"]
         otherDed = request.form["oded2"]
@@ -1463,6 +1615,106 @@ def salary():
                 data3 = [emoluments, paye, slevypay, emoluments, UNQ]
                 cursor.execute(query3, data3)
                 print("UPDATE PAYE Query Successfully")
+
+                query5 = "SELECT EmployeeID FROM ModifyVariables WHERE UNQ = %s "
+                data5 = [UNQ]
+                cursor.execute(query5,data5)
+                emp_id = cursor.fetchall()
+                
+                if emp_id == []:
+                    insert_query = """INSERT INTO ModifyVariables(
+                        EmployeeID,
+                        Arrears,
+                        LocalRef,
+                        FixedAllowance,
+                        DiscBns,
+                        AttBns,
+                        Transport,
+                        SickRef,
+                        SpeBns,
+                        OtherAlw,
+                        Overseas,
+                        OtherDed,
+                        Absences,
+                        ot1,
+                        amt1,
+                        ot2,
+                        amt2,
+                        ot3,
+                        amt3,
+                        lateness,
+                        amt4,
+                        TaxDes,
+                        tax,
+                        NTaxDes,
+                        ntax,
+                        Month,
+                        UNQ
+                        )
+                        VALUES(
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s,
+                        %s
+                        );"""
+                    data4 = [eid, arrears1, localRef, fixedAlw1, discBns1, attendance1, transport1, sickRef, speBns1, otherAlw1, overseas1, otherDed1, absence1, month, UNQ]
+                    cursor.execute(insert_query, data4)
+                else:
+                    update_query = """UPDATE ModifyVariables
+                    SET
+                    Arrears = %s,
+                    LocalRef = %s,
+                    FixedAllowance = %s,
+                    DiscBns = %s,
+                    AttBns = %s,
+                    Transport = %s,
+                    SickRef = %s,
+                    SpeBns = %s,
+                    OtherAlw = %s,
+                    Overseas = %s,
+                    OtherDed = %s,
+                    Absences = %s,
+                    ot1 = %s,
+                    amt1 = %s,
+                    ot2 = %s,
+                    amt2 = %s,
+                    ot3 = %s,
+                    amt3 = %s,
+                    lateness = %s,
+                    amt4 = %s,
+                    TaxDes = %s,
+                    tax = %s,
+                    NTaxDes = %s,
+                    ntax = %s
+                    WHERE
+                    UNQ = %s
+                    ;"""
+                    data4 = [arrears1, localRef, fixedAlw1, discBns1, attendance1, transport1, sickRef, speBns1, otherAlw1, overseas1, otherDed1, absence1, ot1, amt1, ot2, amt2, ot3, amt3, lateness, amt4, taxDes, taxamt, ntaxDes, ntaxamt, UNQ]
+                    cursor.execute(update_query, data4)
+
                 msg = "Salary Modified Successfully"
             else:
                 msg = "Salary Already Locked"
