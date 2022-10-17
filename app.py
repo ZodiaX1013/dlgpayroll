@@ -14,7 +14,7 @@ import calendar
 UPLOAD_FOLDER = 'static/images/'
 # WKHTMLTOPDF_PATH = "C:/Program Files/wkhtmltopdf/bin"
 # WKHTMLTOPDF_PATH = f'C:\Program Files\wkhtmltopdf\bin'
-WKHTMLTOPDF_PATH = f'./wkhtmltopdf.exe.lnk'
+WKHTMLTOPDF_PATH = f'./wkhtmltopdf.exe'
 
 
 app = Flask(__name__)
@@ -3286,7 +3286,7 @@ def download():
         'no-outline': None
     }
     config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
-    pdfkit.from_url('https://www.google.com/', 'out-test.pdf', configuration=config)
+    pdfkit.from_url('https://www.youtube.com/', 'out-test.pdf', configuration=config)
     # config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
 
     # pdf = pdfkit.from_string(rendered,'paysheet.pdf' , False, configuration=config)
