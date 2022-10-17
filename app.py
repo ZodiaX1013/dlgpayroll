@@ -3285,7 +3285,7 @@ def download():
         ],
         'no-outline': None
     }
-    config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
+    config = pdfkit.configuration(wkhtmltopdf='.\wkhtmltopdf.exe')
     pdfkit.from_url('https://www.youtube.com/', 'out-test.pdf', configuration=config)
     # config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
 
