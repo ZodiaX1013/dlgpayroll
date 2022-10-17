@@ -3285,7 +3285,7 @@ def download():
         ],
         'no-outline': None
     }
-    config = pdfkit.configuration(wkhtmltopdf='.\wkhtmltopdf.exe')
+    config = pdfkit.configuration(wkhtmltopdf='https://github.com/ZodiaX1013/dlgpayroll/blob/main/wkhtmltopdf.exe')
     pdfkit.from_url('https://www.youtube.com/', 'out-test.pdf', configuration=config)
     # config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
 
