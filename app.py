@@ -1,6 +1,6 @@
 import hashlib
 import os
-from flask import Flask, request, redirect, url_for, render_template, session, send_file
+from flask import Flask, make_response, request, redirect, url_for, render_template, session
 from werkzeug.utils import secure_filename
 from PIL import Image
 import os
@@ -12,7 +12,8 @@ import calendar
 # from flask_wkhtmltopdf import Wkhtmltopdf
 
 UPLOAD_FOLDER = 'static/images/'
-WKHTMLTOPDF_PATH = 'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf'
+# WKHTMLTOPDF_PATH = "C:/Program Files/wkhtmltopdf/bin"
+WKHTMLTOPDF_PATH = f'C:\Program Files\wkhtmltopdf\bin'
 
 
 app = Flask(__name__)
@@ -72,6 +73,7 @@ def login():
 
             if mail == user:
                 if hash == password:
+                    pdfkit.from_file('index.html', 'out.pdf')
                     return redirect(url_for('dashboard'))
                 else:
                     msg = "Wrong Password"
@@ -3213,13 +3215,63 @@ def payecsv():
     return render_template("payecsv.html")
 
 
+import pdfkit
+
+# @app.route("/download")
+# def route_download():
+    
+#     # Get the HTML output
+#     out = render_template("employee.html")
+    
+#     # PDF options
+#     options = {
+#         "orientation": "landscape",
+#         "page-size": "A4",
+#         "margin-top": "1.0cm",
+#         "margin-right": "1.0cm",
+#         "margin-bottom": "1.0cm",
+#         "margin-left": "1.0cm",
+#         "encoding": "UTF-8",
+#     }    
+    
+#     # Build PDF from HTML 
+#     pdf = pdfkit.from_string(out, False ,options=options)
+    
+#     # Download the PDF
+#     return Response(pdf, mimetype="application/pdf")
+
+ 
+# @app.route('/download')
+# def download():
+    
+#     if "data" in session:
+#         data = session["data"]
+#     rendered = render_template('paysheet2.html',filename='css/style.css', data=data)
+#     options = {
+#         'page-size': 'A3',
+#         'margin-top': '0.75in',
+#         'margin-right': '0.5in',
+#         'margin-bottom': '0.75in',
+#         'margin-left': '0.1in',
+#         'encoding': "UTF-8",
+#         'custom-header': [
+#             ('Accept-Encoding', 'gzip')
+#         ],
+#         'no-outline': None
+#     }
+    
+#     pdfkit.from_string(rendered,'paysheet.pdf',options=options,verbose=True)
+#     # return render_template('paysheet2.html',filename='css/style.css', data=data)
+#     p = "./paysheet.pdf"
+#     return send_file(p, as_attachment=True)
 
 @app.route('/download')
 def download():
     
     if "data" in session:
+        print("In IF")
         data = session["data"]
-    rendered = render_template('paysheet2.html',filename='css/style.css', data=data)
+    rendered = render_template('demo.html')
     options = {
         'page-size': 'A3',
         'margin-top': '0.75in',
@@ -3232,11 +3284,18 @@ def download():
         ],
         'no-outline': None
     }
+    config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
+    pdfkit.from_url('https://www.google.com/', 'out-test.pdf', configuration=config)
+    # config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
+
+    # pdf = pdfkit.from_string(rendered,'paysheet.pdf' , False, configuration=config)
+    # response = make_response(pdf)
+    # response.headers["Content-Type"] = "application/pdf"
+    # response.headers["Content-Disposition"] = "inline; filename=output.pdf"
     
-    pdfkit.from_string(rendered,'paysheet.pdf',options=options,verbose=True)
     # return render_template('paysheet2.html',filename='css/style.css', data=data)
-    p = "./paysheet.pdf"
-    return send_file(p, as_attachment=True)
+    # p = "./paysheet.pdf"
+    return "Ready"
 
     
 if __name__ == "__main__":
