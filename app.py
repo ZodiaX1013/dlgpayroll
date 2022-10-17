@@ -74,7 +74,6 @@ def login():
 
             if mail == user:
                 if hash == password:
-                    pdfkit.from_file('index.html', 'out.pdf')
                     return redirect(url_for('dashboard'))
                 else:
                     msg = "Wrong Password"
@@ -1683,7 +1682,7 @@ def salary():
                         %s,
                         %s
                         );"""
-                    data4 = [eid, arrears1, localRef, fixedAlw1, discBns1, attendance1, transport1, sickRef, speBns1, otherAlw1, overseas1, otherDed1, absence1, month, UNQ]
+                    data4 = [eid, arrears1, localRef, fixedAlw1, discBns1, attendance1, transport1, sickRef, speBns1, otherAlw1, overseas1, otherDed1, absence1,  ot1, amt1, ot2, amt2, ot3, amt3, lateness, amt4, taxDes, taxamt, ntaxDes, ntaxamt, month, UNQ]
                     cursor.execute(insert_query, data4)
                 else:
                     update_query = """UPDATE ModifyVariables
