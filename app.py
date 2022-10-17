@@ -13,7 +13,8 @@ import calendar
 
 UPLOAD_FOLDER = 'static/images/'
 # WKHTMLTOPDF_PATH = "C:/Program Files/wkhtmltopdf/bin"
-WKHTMLTOPDF_PATH = f'C:\Program Files\wkhtmltopdf\bin'
+# WKHTMLTOPDF_PATH = f'C:\Program Files\wkhtmltopdf\bin'
+WKHTMLTOPDF_PATH = f'./wkhtmltopdf.exe.lnk'
 
 
 app = Flask(__name__)
