@@ -1631,7 +1631,7 @@ def salary():
                 TotalRem = %s,
                 PRGF = %s,
                 WHERE
-                UNQ = %s;
+                UNQ = %s
                 ;"""
 
                 totalRem = int(basic) + int(bonus)
