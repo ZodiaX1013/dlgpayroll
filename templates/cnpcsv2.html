@@ -176,9 +176,10 @@
                 <div class="form-row">
                     <div class="card" id="exportContent">
                         <div class="card-header col-md-12">
+                            </center>
                             <div id="docx">
                                 <div class="card-body">
-                                    <form action="/payecsv" method="post">
+                                    <form action="/cnpcsv" method="post">
                                     <!-- <h6 class="mb-3"><b><u> Leave Register </u></b></h6> -->
                                     <!-- Leave Table -->
                                     <!-- <h4>Table Here</h4> -->
@@ -193,55 +194,40 @@
                                         <tr>
                                             <th colspan="20" style="text-align: center;">
                                                 {% if month %}
-                                                    PAYE Sheet for the month of -&nbsp; {{month}} -&nbsp; {{year}} 
+                                                    CNP Sheet for the month of -&nbsp; {{month}} -&nbsp; {{year}} 
                                                 {% else %}
-                                                    PAYE Sheet for the month of ____________ 
+                                                    CNP Sheet for the month of ____________ 
                                                 {% endif %}
                                             </th>
                                         </tr>
                                         <tr>
-                                            <th> MNS </th>
-                                            <th> PAYE </th>
-                                            <th> V1.0 </th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                        <tr>
-                                            <th>Employer Registration Number</th>
-                                            <th>Employer Business Registration Number</th>
-                                            <th>Employer Name</th>
-                                            <th>Tax Period</th>
-                                            <th>Telephone Number</th>
-                                            <th>Mobile Number</th>
-                                            <th>Name of Declarant</th>
-                                            <th>Email Address</th>
-                                        </tr>
-                                        <tr>
+                                            <td>CSG Info</td>
                                             <td>00415529</td>
-                                            <td>C07009275</td>
                                             <td>MAXCITY ASSET MANAGERS LTD</td>
                                             {% if month %}
                                             <td>{{month}} - {{year}}</td>
                                             {% else %}
                                             <td>  </td>
                                             {% endif %}
-                                            <td>2105000</td>
+                                            
+                                            {% if total %}
+                                            <td>{{total}}</td>
+                                            {% else %}
                                             <td></td>
-                                            <td>Leung Lam Hing Johnny</td>
+                                            {% endif %}
+
+                                            {% if cnp %}
+                                            <td>{{cnp}}</td>
+                                            {% else %}
+                                            <td></td>
+                                            {% endif %}
+                                            
+                                            
                                             <td>Johnny.Leung@maxcity.mu</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Employee Id</th>
-                                            <th>Surname Of Employee</th>
-                                            <th>Other Names Of Employee</th>
-                                            <th>Emoluments excluding Travelling</th>
-                                            <th>PAYE for Income Tax (MUR)</th>
-                                            <th>Full Time Employment</th>
-                                            <th>PAYE For Solidarity Levy (MUR)</th>
-                                            <th>Emoluments excluding Exempt Emoluments and Statutory End-of-Year Bonus (MUR)</th>
+                                            <td>2105000</td>
+                                            <td>52514512</td>
+                                            <td>Leung Lam Hing Johnny</td>                                            
+                                            <td>General Manager</td>                                            
                                         </tr>
                                         {% if data %}
                                         {% for row in data %}
@@ -252,7 +238,11 @@
                                         </tr>
                                         {% endfor %}
                                         {% else %}
+
                                         <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>

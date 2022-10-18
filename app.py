@@ -1637,6 +1637,14 @@ def salary():
                 totalRem = int(basic) + int(bonus)
                 data6 = [basic, bonus, 0, totalRem, prgf, UNQ]
                 cursor.execute(query6, data6)
+                query7 = """UPDATE cnpcsv
+                SET 
+                Basic = %s
+                WHERE
+                UNQ = %s
+                """
+                data7 = [basic, UNQ]
+                cursor.execute(query7,data7)
 
                 if emp_id == []:
                     insert_query = """INSERT INTO ModifyVariables(
@@ -1731,10 +1739,37 @@ def salary():
                     ;"""
                     data4 = [arrears1, localRef, fixedAlw1, discBns1, attendance1, transport1, sickRef, speBns1, otherAlw1, overseas1, otherDed1, absence1, ot1, amt1, ot2, amt2, ot3, amt3, lateness, amt4, taxDes, taxamt, ntaxDes, ntaxamt, UNQ]
                     cursor.execute(update_query, data4)
+                    
 
                 msg = "Salary Modified Successfully"
             else:
                 msg = "Salary Already Locked"
+
+            query15 = "SELECT Basic FROM cnpcsv WHERE month = %s"
+            data8 = [month]
+            cursor.execute(query15, data8)
+            basic_sal = cursor.fetchall()
+
+            temp1 = []
+            temp2 = []
+            for i in range(len(basic_sal)):
+                temp1 = ''.join(basic_sal[i])
+                temp2.append(temp1)
+            total = 0
+            for i in range(len(temp2)):
+                total = int(total) + int(temp2[i]) 
+
+            print("Total : ", total)
+            cnp = int(total) * 0.015
+            update_cnp = """UPDATE cnpcsv
+            SET 
+            totalRem = %s,
+            CNP = %s
+            WHERE
+            month = %s;"""
+            data9 = [total, cnp, month]
+
+            cursor.execute(update_cnp, data9)
             return render_template("salary.html", msg=msg)
         except Error as e:
                 print("Error While connecting to MySQL : ", e)
@@ -3095,10 +3130,71 @@ def process_salary():
                         
                         cursor.execute(prgf_query, data5)
 
+                        cnp_query = """INSERT INTO cnpcsv(
+                                EmployeeID,
+                                LastName,
+                                FirstName,
+                                Basic,
+                                Basic2,
+                                Season,
+                                Alphabet,
+                                Number,
+                                Working,
+                                Blank1,
+                                Blank2,
+                                month,
+                                UNQ
+                                )
+                                VALUES(
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s
+                                );"""
+                        data6 = [nic, lname, fname, basic, basic, "S2", "M", "1", working, " ", " ", month, UNQ]
+
+                        cursor.execute(cnp_query, data6)
+
+                        
                         msg = "Processing Complete"
                         # print("Do Something Else")
                     else:
                         msg = "Salary Already Locked"
+                query15 = "SELECT Basic FROM cnpcsv WHERE month = %s"
+                data7 = [month]
+                cursor.execute(query15, data7)
+                basic_sal = cursor.fetchall()
+
+                temp1 = []
+                temp2 = []
+                for i in range(len(basic_sal)):
+                    temp1 = ''.join(basic_sal[i])
+                    temp2.append(temp1)
+                total = 0
+                for i in range(len(temp2)):
+                    total = int(total) + int(temp2[i]) 
+
+                print("Total : ", total)
+                cnp = int(total) * 0.015
+                update_cnp = """UPDATE cnpcsv
+                SET 
+                totalRem = %s,
+                CNP = %s
+                WHERE
+                month = %s;"""
+                data7 = [total, cnp, month]
+
+                cursor.execute(update_cnp, data7)
+
                 return render_template("process.html", msg = msg)                
         except Error as e:
                 print("Error While connecting to MySQL : ", e)
@@ -3353,6 +3449,63 @@ def prgfcsv():
             connection.close()
             print("MySQL connection is closed")
     return render_template("prgfcsv.html")
+
+
+@app.route("/cnpcsv", methods=["GET", "POST"])
+def cnpcsv():
+    if request.method == "POST" and request.form['action'] == 'cnp':
+        mon = request.form["mon"]
+        year = request.form["year"]
+        data = [mon]
+        try:
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    port='25060',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
+            cursor = connection.cursor(buffered=True)
+
+            data2 = [year]
+            for i in range(len(data)):
+                month = ' '.join(data[i])
+
+            for i in range(len(data2)):
+                year = ' '.join(data2[i])
+
+            query = "SELECT EmployeeID, LastName, FirstName, Basic, Basic2, Season, Alphabet, Number, Working, Blank1, Blank2 FROM cnpcsv WHERE month = %s"
+
+            cursor.execute(query,data)
+            cnp = cursor.fetchall()
+
+            length = len(cnp)
+
+            query2 = "SELECT totalRem FROM cnpcsv WHERE month = %s"
+            cursor.execute(query2, data)
+            total = cursor.fetchall()
+
+            total = total[0][0]
+
+            query3 = "SELECT CNP FROM cnpcsv WHERE month = %s"
+            cursor.execute(query3, data)
+            cnp = cursor.fetchall()
+
+            cnp = cnp[0][0]
+
+            return render_template("cnpcsv2.html", length = length, data= cnp, month = month, year = year, total=total, cnp=cnp)        
+
+            
+        except Error as e:
+            print("Error While connecting to MySQL : ", e)
+        finally:
+            connection.commit()
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+    return render_template("cnpcsv.html")
+
+
+# select totalRem from cnpcsv ORDER BY id DESC LIMIT 1;
+
 
 # @app.route("/download")
 # def route_download():
