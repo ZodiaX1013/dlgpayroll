@@ -1634,7 +1634,7 @@ def salary():
                 UNQ = %s;
                 ;"""
 
-                totalRem = basic + bonus
+                totalRem = int(basic) + int(bonus)
                 data6 = [basic, bonus, 0, totalRem, prgf, UNQ]
                 cursor.execute(query6, data6)
 
