@@ -178,9 +178,9 @@
                            
                             <center><h4>MAXCITY ASSET MANAGERS LTD</h4>
                             {% if month %}
-                            <h5>PAYE Sheet for the month of {{month}} 2022</h5>
+                            <h5>PRGF Sheet for the month of {{month}} 2022</h5>
                             {% else %}
-                            <h5>PAYE Sheet for the month of ______ 2022</h5>
+                            <h5>PRGF Sheet for the month of ______ 2022</h5>
                             {% endif %}
                             </center>
                             <div id="docx">
@@ -229,12 +229,15 @@
                                         <tr>
                                             <th>Employee Id</th>
                                             <th>Surname Of Employee</th>
-                                            <th>Other Names Of Employee</th>
-                                            <th>Emoluments excluding Travelling</th>
-                                            <th>PAYE for Income Tax (MUR)</th>
+                                            <th>Pension Scheme</th>
                                             <th>Full Time Employment</th>
-                                            <th>PAYE For Solidarity Levy (MUR)</th>
-                                            <th>Emoluments excluding Exempt Emoluments and Statutory End-of-Year Bonus (MUR)</th>
+                                            <th>Start Date Of Employment</th>
+                                            <th>Monthly basic wage or salary (MUR)</th>
+                                            <th>Allowance (MUR)</th>
+                                            <th>Commission (MUR)</th>
+                                            <th>Total Remuneration on which PRGF contribution amount is calculated (MUR)</th>
+                                            <th>PRGF Contribution Amount (MUR)</th>
+                                            <th>Reason for no Remuneration</th>
                                         </tr>
                                         
                                         {% for row in data %}

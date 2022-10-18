@@ -1,7 +1,6 @@
 import hashlib
 import os
-from turtle import pen
-from flask import Flask, make_response, request, redirect, url_for, render_template, session
+from flask import Flask, request, redirect, url_for, render_template, session
 from werkzeug.utils import secure_filename
 from PIL import Image
 import os
@@ -3053,6 +3052,7 @@ def process_salary():
                                     Commission,
                                     TotalRem,
                                     PRGF,
+                                    reason,
                                     month,
                                     UNQ
                                     )
@@ -3070,12 +3070,13 @@ def process_salary():
                                     %s,
                                     %s,
                                     %s,
+                                    %s,
                                     %s
                                     );"""
                         if basic < 200000:
-                            data5 = [eid, lname, fname, "No", working, hire, basic, allowance, commission, totalRem, eprgf, month, UNQ]
+                            data5 = [eid, lname, fname, "No", working, hire, basic, allowance, commission, totalRem, eprgf, " " , month, UNQ]
                         else:
-                            data5 = [eid, lname, fname, "No", working, hire, basic, 0, 0, 0, 0, month, UNQ]
+                            data5 = [eid, lname, fname, "No", working, hire, basic, 0, 0, 0, 0, " " , month, UNQ]
                         
                         cursor.execute(prgf_query, data5)
                         
@@ -3291,8 +3292,37 @@ def payecsv():
     
     return render_template("payecsv.html")
 
+@app.route("/prgfcsv", methods=["GET", "POST"])
+def prgfcsv():
+    if request.method == "POST" and request.form['action'] == 'prgf':
+        mon = request.form["mon"]
+        year = request.form["year"]
+        data = [mon]
+        try:
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    port='25060',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
+            cursor = connection.cursor(buffered=True)
 
-import pdfkit
+            query = "SELECT EmployeeID, LastName, FirstName, Pension, Working, Hire, Basic, Allowance, Commission, TotalRem, PRGF, reason FROM prgfcsv WHERE month = %s"
+            cursor.execute(query,data)
+            prgf = cursor.fetchall()
+
+            length = len(prgf)
+
+            return render_template("prgfcsv2.html", length = length, data= prgf, month = mon, year = year)        
+
+            
+        except Error as e:
+            print("Error While connecting to MySQL : ", e)
+        finally:
+            connection.commit()
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+    return render_template("prgfcsv.html")
 
 # @app.route("/download")
 # def route_download():
