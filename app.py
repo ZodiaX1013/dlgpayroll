@@ -1629,7 +1629,7 @@ def salary():
                 Allowance = %s,
                 Commission = %s,
                 TotalRem = %s,
-                PRGF = %s,
+                PRGF = %s
                 WHERE
                 UNQ = %s
                 ;"""
@@ -2985,8 +2985,18 @@ def process_salary():
                         data3 = [hire, "Demo" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay , totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, month, UNQ ]
                         cursor.execute(query, data3)
                         print("Payslip Query Executed")
-                        msg = "Processing Complete"
+                        
 
+                        query14 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
+                        cursor.execute(query14, data)
+                        nic = cursor.fetchall()
+                        if nic[0][0] == "":
+                            nic = " "
+                        else:
+                            for i in range(len(nic)):
+                                nic = ''.join(nic[i])
+                        
+                            
                         emolument = int(basic) + int(arrears) + int(overseas) + int(otherAllow) + int(car) + int(ot) + int(eoy) + int(leave) + int(fixAllow) + int(discBns) + int(SpeProBns) + int(speBns) 
 
                         paye_query = """ INSERT INTO payecsv(
@@ -3013,7 +3023,7 @@ def process_salary():
                                         %s,
                                         %s
                                     );"""
-                        data4 = [eid, lname, fname, emolument, paye, 'Yes', slevypay, emolument, month, UNQ]
+                        data4 = [nic, lname, fname, emolument, paye, 'Yes', slevypay, emolument, month, UNQ]
 
                         cursor.execute(paye_query, data4)
                         print("PAYE Query Executed")
@@ -3035,6 +3045,12 @@ def process_salary():
                         for i in range(len(working)):
                             working = ''.join(working[i])
                         
+                        query14 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
+                        cursor.execute(query14, data)
+                        nic = cursor.fetchall()
+                        for i in range(len(nic)):
+                            nic = ''.join(nic[i])
+
                         allowance = int(otherAllow) + int(fixAllow) + int(speBns) + int(SpeProBns) + int(discBns) + int(attBns)
                         commission = 0
 
@@ -3073,13 +3089,14 @@ def process_salary():
                                     %s
                                     );"""
                         if basic < 200000:
-                            data5 = [eid, lname, fname, "No", working, hire, basic, allowance, commission, totalRem, eprgf, " " , month, UNQ]
+                            data5 = [nic, lname, fname, "No", working, hire, basic, allowance, commission, totalRem, eprgf, " " , month, UNQ]
                         else:
-                            data5 = [eid, lname, fname, "No", working, hire, basic, 0, 0, 0, 0, " " , month, UNQ]
+                            data5 = [nic, lname, fname, "No", working, hire, basic, 0, 0, 0, 0, " " , month, UNQ]
                         
                         cursor.execute(prgf_query, data5)
                         
-                        # return render_template("process.html", msg = msg)
+                        msg = "Processing Complete"
+                        return render_template("process.html", msg = msg)
                         # print("Do Something Else")
                     else:
                         msg = "Salary Already Locked"
