@@ -3070,7 +3070,6 @@ def process_salary():
                                     %s,
                                     %s,
                                     %s,
-                                    %s,
                                     %s
                                     );"""
                         if basic < 200000:
@@ -3271,6 +3270,14 @@ def payecsv():
             cursor = connection.cursor(buffered=True)
 
             data1 = [mon]
+        
+            data2 = [year]
+            for i in range(len(data1)):
+                month = ' '.join(data1[i])
+
+            for i in range(len(data2)):
+                year = ' '.join(data2[i])
+
             # query1 = "SELECT * FROM paysheet"
             # query1 = "SELECT EmployeeName, BasicSalary, Arrears, Overseas, TravelAllow, OtherAllow, Gross, PAYE, CSG, NSF, Medical, SLevy, Net FROM paysheet"
             query1 = "SELECT EmployeeID, LastName, FirstName, Emoluments, PAYE, working, SLevy, EmolumentsNet FROM payecsv WHERE Month = %s "
@@ -3280,7 +3287,7 @@ def payecsv():
             session["data"] = data
             length = len(data)
             print(length)
-            return render_template("payecsv2.html", data=data, length=length, month = mon, year= year)
+            return render_template("payecsv2.html", data=data, length=length, month = month, year= year)
             # return redirect(url_for('download', data = data))
         except Error as e:
             print("Error While connecting to MySQL : ", e)
@@ -3306,13 +3313,20 @@ def prgfcsv():
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
+            data2 = [year]
+            for i in range(len(data)):
+                month = ' '.join(data[i])
+
+            for i in range(len(data2)):
+                year = ' '.join(data2[i])
+
             query = "SELECT EmployeeID, LastName, FirstName, Pension, Working, Hire, Basic, Allowance, Commission, TotalRem, PRGF, reason FROM prgfcsv WHERE month = %s"
             cursor.execute(query,data)
             prgf = cursor.fetchall()
 
             length = len(prgf)
 
-            return render_template("prgfcsv2.html", length = length, data= prgf, month = mon, year = year)        
+            return render_template("prgfcsv2.html", length = length, data= prgf, month = month, year = year)        
 
             
         except Error as e:

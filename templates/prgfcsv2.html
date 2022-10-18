@@ -185,7 +185,7 @@
                             </center>
                             <div id="docx">
                                 <div class="card-body">
-                                    <form action="/paysheet" method="post">
+                                    <form action="/prgfcsv" method="post">
                                     <!-- <h6 class="mb-3"><b><u> Leave Register </u></b></h6> -->
                                     <!-- Leave Table -->
                                     <!-- <h4>Table Here</h4> -->
@@ -193,9 +193,27 @@
                                         <!-- <table style="width: 100%;"> -->
                                     <table id="excel" style="width: 100%;">
                                         <tr>
+                                            <th colspan="20" style="text-align: center;">
+                                                MAXCITY ASSET MANAGERS LTD
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="20" style="text-align: center;">
+                                                {% if month %}
+                                                    PRGF Sheet for the month of -&nbsp; {{month}} -&nbsp; {{year}} 
+                                                {% else %}
+                                                    PRGF Sheet for the month of ____________ 
+                                                {% endif %}
+                                            </th>
+                                        </tr>
+                                        <tr>
                                             <th> MNS </th>
                                             <th> PAYE </th>
                                             <th> V1.0 </th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -211,6 +229,10 @@
                                             <th>Mobile Number</th>
                                             <th>Name of Declarant</th>
                                             <th>Email Address</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
                                         </tr>
                                         <tr>
                                             <td>00415529</td>
@@ -225,10 +247,15 @@
                                             <td></td>
                                             <td>Leung Lam Hing Johnny</td>
                                             <td>Johnny.Leung@maxcity.mu</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <th>Employee Id</th>
                                             <th>Surname Of Employee</th>
+                                            <th>Other names Of Employee</th>
                                             <th>Pension Scheme</th>
                                             <th>Full Time Employment</th>
                                             <th>Start Date Of Employment</th>

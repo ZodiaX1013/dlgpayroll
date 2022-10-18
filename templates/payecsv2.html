@@ -175,14 +175,6 @@
                 <div class="form-row">
                     <div class="card" id="exportContent">
                         <div class="card-header col-md-12">
-                           
-                            <center><h4>MAXCITY ASSET MANAGERS LTD</h4>
-                            {% if month %}
-                            <h5>PAYE Sheet for the month of {{month}} 2022</h5>
-                            {% else %}
-                            <h5>PAYE Sheet for the month of ______ 2022</h5>
-                            {% endif %}
-                            </center>
                             <div id="docx">
                                 <div class="card-body">
                                     <form action="/paysheet" method="post">
@@ -192,6 +184,20 @@
                                     <!-- <table class="table table-striped" id="excel" style="width: 100%;"> -->
                                         <!-- <table style="width: 100%;"> -->
                                     <table id="excel" style="width: 100%;">
+                                        <tr>
+                                            <th colspan="20" style="text-align: center;">
+                                                MAXCITY ASSET MANAGERS LTD
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="20" style="text-align: center;">
+                                                {% if month %}
+                                                    PAYE Sheet for the month of -&nbsp; {{month}} -&nbsp; {{year}} 
+                                                {% else %}
+                                                    PAYE Sheet for the month of ____________ 
+                                                {% endif %}
+                                            </th>
+                                        </tr>
                                         <tr>
                                             <th> MNS </th>
                                             <th> PAYE </th>
