@@ -3185,6 +3185,7 @@ def process_salary():
 
                 print("Total : ", total)
                 cnp = int(total) * 0.015
+                cnp = round(cnp)
                 update_cnp = """UPDATE cnpcsv
                 SET 
                 totalRem = %s,
@@ -3475,9 +3476,9 @@ def cnpcsv():
             query = "SELECT EmployeeID, LastName, FirstName, Basic, Basic2, Season, Alphabet, Number, Working, Blank1, Blank2 FROM cnpcsv WHERE month = %s"
 
             cursor.execute(query,data)
-            cnp = cursor.fetchall()
+            cnp_data = cursor.fetchall()
 
-            length = len(cnp)
+            length = len(cnp_data)
 
             query2 = "SELECT totalRem FROM cnpcsv WHERE month = %s"
             cursor.execute(query2, data)
@@ -3491,7 +3492,7 @@ def cnpcsv():
 
             cnp = cnp[0][0]
 
-            return render_template("cnpcsv2.html", length = length, data= cnp, month = month, year = year, total=total, cnp=cnp)        
+            return render_template("cnpcsv2.html", length = length, data= cnp_data, month = month, year = year, total=total, cnp=cnp)        
 
             
         except Error as e:
