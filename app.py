@@ -1,5 +1,6 @@
 import hashlib
 import os
+from turtle import pen
 from flask import Flask, make_response, request, redirect, url_for, render_template, session
 from werkzeug.utils import secure_filename
 from PIL import Image
@@ -1623,6 +1624,21 @@ def salary():
                 cursor.execute(query5,data5)
                 emp_id = cursor.fetchall()
                 
+                query6 = """UPDATE prgfcsv
+                SET
+                Basic = %s,
+                Allowance = %s,
+                Commission = %s,
+                TotalRem = %s,
+                PRGF = %s,
+                WHERE
+                UNQ = %s;
+                ;"""
+
+                totalRem = basic + bonus
+                data6 = [basic, bonus, 0, totalRem, prgf, UNQ]
+                cursor.execute(query6, data6)
+
                 if emp_id == []:
                     insert_query = """INSERT INTO ModifyVariables(
                         EmployeeID,
@@ -2963,7 +2979,7 @@ def process_salary():
                         %s
                         );
                         """
-                        # data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, month, year, UNQ, 'No']
+                        data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, month, year, UNQ, 'No']
                         cursor.execute(insert_query2, data1)
                         print("Process Query Executed")
 
@@ -3002,6 +3018,67 @@ def process_salary():
 
                         cursor.execute(paye_query, data4)
                         print("PAYE Query Executed")
+
+                        query12 = "SELECT NPS FROM employee WHERE EmployeeID = %s"
+                        cursor.execute(query12, data)
+                        pension = cursor.fetchall()
+                        for i in range(len(pension)):
+                            pension = ''.join(pension[i])
+
+                        if pension == "Paid":
+                            pension = "Yes"
+                        else:
+                            pension = "No"
+
+                        query13 = "SELECT working FROM employee WHERE EmployeeID = %s"
+                        cursor.execute(query13, data)
+                        working = cursor.fetchall()
+                        for i in range(len(working)):
+                            working = ''.join(working[i])
+                        
+                        allowance = int(otherAllow) + int(fixAllow) + int(speBns) + int(SpeProBns) + int(discBns) + int(attBns)
+                        commission = 0
+
+                        totalRem = int(basic) + int(allowance)
+                        
+                        prgf_query = """INSERT INTO prgfcsv(
+                                    EmployeeID,
+                                    LastName,
+                                    FirstName,
+                                    Pension,
+                                    Working,
+                                    Hire,
+                                    Basic,
+                                    Allowance,
+                                    Commission,
+                                    TotalRem,
+                                    PRGF,
+                                    month,
+                                    UNQ
+                                    )
+                                    VALUES(
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s,
+                                    %s
+                                    );"""
+                        if basic < 200000:
+                            data5 = [eid, lname, fname, "No", working, hire, basic, allowance, commission, totalRem, eprgf, month, UNQ]
+                        else:
+                            data5 = [eid, lname, fname, "No", working, hire, basic, 0, 0, 0, 0, month, UNQ]
+                        
+                        cursor.execute(prgf_query, data5)
+                        
                         # return render_template("process.html", msg = msg)
                         # print("Do Something Else")
                     else:
