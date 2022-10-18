@@ -3094,9 +3094,8 @@ def process_salary():
                             data5 = [nic, lname, fname, "No", working, hire, basic, 0, 0, 0, 0, " " , month, UNQ]
                         
                         cursor.execute(prgf_query, data5)
-                        
+
                         msg = "Processing Complete"
-                        return render_template("process.html", msg = msg)
                         # print("Do Something Else")
                     else:
                         msg = "Salary Already Locked"
