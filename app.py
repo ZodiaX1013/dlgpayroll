@@ -3184,8 +3184,8 @@ def process_salary():
                     total = int(total) + int(temp2[i]) 
 
                 print("Total : ", total)
-                cnp = int(total) * 0.015
-                cnp = round(cnp)
+                cnp = round(int(total) * 0.015)
+                
                 update_cnp = """UPDATE cnpcsv
                 SET 
                 totalRem = %s,
