@@ -1483,7 +1483,7 @@ def salary():
         eid = request.form["eid"]
         UNQ = month + " " + fname
         NetPaysheet = request.form["pnet"]
-        overseas = int(tax) + int(ntax)
+        overseas = request.form["oseas"]
 
         otherAlw2 = int(otherAlw) + int(speBns) + int(SpeProBns)
 
@@ -3575,8 +3575,8 @@ def download():
         ],
         'no-outline': None
     }
-    config = pdfkit.configuration(wkhtmltopdf='https://github.com/ZodiaX1013/dlgpayroll/blob/main/wkhtmltopdf')
-    pdfkit.from_url('https://www.youtube.com/', 'out-test.pdf', configuration=config)
+    config = pdfkit.configuration(wkhtmltopdf='./dir/usr/local/bin')
+    pdfkit.from_url('https://www.youtube.com/', 'out-test1.pdf', configuration=config)
     # config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
 
     # pdf = pdfkit.from_string(rendered,'paysheet.pdf' , False, configuration=config)
