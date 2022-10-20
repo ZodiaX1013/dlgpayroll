@@ -9,8 +9,6 @@ from mysql.connector import *
 import random, string
 import pdfkit
 import calendar
-from weasyprint import HTML, CSS
-from weasyprint.text.fonts import FontConfiguration
 
 # from flask_wkhtmltopdf import Wkhtmltopdf
 
@@ -3910,38 +3908,43 @@ def cnpcsv():
 #     p = "./paysheet.pdf"
 #     return send_file(p, as_attachment=True)
 
-@app.route('/download')
+# @app.route('/download')
+# def download():
+    
+#     if "data" in session:
+#         print("In IF")
+#         data = session["data"]
+#     rendered = render_template('demo.html')
+#     options = {
+#         'page-size': 'A3',
+#         'margin-top': '0.75in',
+#         'margin-right': '0.5in',
+#         'margin-bottom': '0.75in',
+#         'margin-left': '0.1in',
+#         'encoding': "UTF-8",
+#         'custom-header': [
+#             ('Accept-Encoding', 'gzip')
+#         ],
+#         'no-outline': None
+#     }
+#     config = pdfkit.configuration(wkhtmltopdf='./dir/usr/local/bin/wkhtmltopdf')
+#     pdfkit.from_url('https://www.youtube.com/', 'out-test1.pdf', configuration=config)
+#     # config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
+
+#     # pdf = pdfkit.from_string(rendered,'paysheet.pdf' , False, configuration=config)
+#     # response = make_response(pdf)
+#     # response.headers["Content-Type"] = "application/pdf"
+#     # response.headers["Content-Disposition"] = "inline; filename=output.pdf"
+    
+#     # return render_template('paysheet2.html',filename='css/style.css', data=data)
+#     # p = "./paysheet.pdf"
+#     return "Ready"
+
+
+@app.route("/download")
 def download():
-    
-    if "data" in session:
-        print("In IF")
-        data = session["data"]
-    rendered = render_template('demo.html')
-    options = {
-        'page-size': 'A3',
-        'margin-top': '0.75in',
-        'margin-right': '0.5in',
-        'margin-bottom': '0.75in',
-        'margin-left': '0.1in',
-        'encoding': "UTF-8",
-        'custom-header': [
-            ('Accept-Encoding', 'gzip')
-        ],
-        'no-outline': None
-    }
-    config = pdfkit.configuration(wkhtmltopdf='./dir/usr/local/bin/wkhtmltopdf')
-    pdfkit.from_url('https://www.youtube.com/', 'out-test1.pdf', configuration=config)
-    # config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
-
-    # pdf = pdfkit.from_string(rendered,'paysheet.pdf' , False, configuration=config)
-    # response = make_response(pdf)
-    # response.headers["Content-Type"] = "application/pdf"
-    # response.headers["Content-Disposition"] = "inline; filename=output.pdf"
-    
-    # return render_template('paysheet2.html',filename='css/style.css', data=data)
-    # p = "./paysheet.pdf"
-    return "Ready"
-
+    pdfkit.from_url('http://micropyramid.com', 'micro.pdf')
+    return "Done"
     
 if __name__ == "__main__":
     app.run(debug=True)
