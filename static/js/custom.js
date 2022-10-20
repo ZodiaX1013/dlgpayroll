@@ -888,3 +888,7 @@ function ExportToDoc(filename = ''){
       else link.click();  // other browsers
   document.body.removeChild(link);
 };
+
+function LockSal(){
+  alert("Salary Already Locked")
+}
