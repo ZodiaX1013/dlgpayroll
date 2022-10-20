@@ -9,6 +9,9 @@ from mysql.connector import *
 import random, string
 import pdfkit
 import calendar
+from weasyprint import HTML, CSS
+from weasyprint.text.fonts import FontConfiguration
+
 # from flask_wkhtmltopdf import Wkhtmltopdf
 
 UPLOAD_FOLDER = 'static/images/'
