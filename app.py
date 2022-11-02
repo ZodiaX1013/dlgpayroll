@@ -3619,7 +3619,7 @@ def payslip():
 
 @app.route("/paysheet", methods=["GET" , "POST"])
 def paysheet():
-    # global connection
+    
     # For Pdf Generate
     if request.method == "POST" and request.form['action'] == 'pdf':
         month = request.form["mon"]
