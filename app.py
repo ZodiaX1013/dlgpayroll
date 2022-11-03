@@ -141,7 +141,8 @@ def login():
 
 @app.route("/expense", methods = ["POST" , "GET"])
 def expense():
-    
+    if request.method == "POST":
+        return render_template("expense2.html")
     return render_template("expense.html")
 
 
@@ -157,7 +158,7 @@ def module():
 
     if request.method == "POST" and request.form['action'] == 'expense':
         print("User Choose Expense Module - Goes To Expense And Revenue Page")
-        return render_template("expense.html")
+        return redirect(url_for('expense'))
     return render_template("module.html")
 
 @app.route("/reset", methods=["GET","POST"])
