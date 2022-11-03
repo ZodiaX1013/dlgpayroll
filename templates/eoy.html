@@ -25,8 +25,9 @@
     <!-- vendor css -->
     <link rel="stylesheet" href="../static/css/style.css">
     <script src="https://kit.fontawesome.com/e6163d7cbc.js" crossorigin="anonymous"></script>
-	<script src="../static/js/table2excel.js"></script>
     
+    
+
 </head>
 <body class="">
 	<!-- [ Pre-loader ] start -->
@@ -206,9 +207,8 @@
                                 </a>
                                 <div class="dropdown-menu profile-notification ">
                                     <ul class="pro-body">
-                                        <li><a href="payecsv" class="dropdown-item"><i class="fas fa-circle"></i> PAYE CSV </a></li>
-                                        <li><a href="prgfcsv" class="dropdown-item"><i class="fas fa-circle"></i> PRGF CSV</a></li>
-                                        <li><a href="cnpcsv" class="dropdown-item"><i class="fas fa-circle"></i> CNP CSV</a></li>
+                                        <!-- <li><a href="payecsv" class="dropdown-item"><i class="fas fa-circle"></i> PAYE CSV </a></li> -->
+                                        <li><a href="cheque" class="dropdown-item"><i class="fas fa-circle"></i> Cheque and cash list</a></li>
                                         <li><a href="payslip" class="dropdown-item"><i class="fas fa-circle"></i> Payslip</a></li>
                                         <li><a href="paysheet" class="dropdown-item"><i class="fas fa-circle"></i> Paysheet</a></li>
                                     </ul>
@@ -421,80 +421,71 @@
                                 <h5 class="m-b-10">Dashboard</h5>
                             </div>
                             <ul class="breadcrumb">
-                                <!-- <li class="breadcrumb-item"><a href="dashboard.html"><i class="feather icon-home"></i></a></li> --> 
+                                <!-- <li class="breadcrumb-item"><a href="dashboard.html"><i class="feather icon-home"></i></a></li> -->
                                 <!-- <li class="breadcrumb-item"><a href="#!">Dashboard</a></li> -->
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+            {% if msg %}
+               <h2> {{msg}} </h2>
+            {% endif %}
+            
             <!-- [ breadcrumb ] end -->
             <!-- [ Main Content ] start -->
-
             <!-- <form action=""> -->
-            <div class="row">
-                <div class="col-md-12">
+            <div class="col-md-12">
+                <form action="EOY" id="eoy" method="post">
                     <div class="card">
-                        <form action="{{url_for('payecsv')}}" method="post">
                         <div class="card-header">
-                            <h5>PAYE Sheet</h5>
+                            <h5>End Of Year Bonus</h5>
                         </div>
                         <div class="card-body">
                             <div class="form-row">
                                 <!-- table card-1 start -->
                                 <div class="form-group col-md-6">
-                                    <label for="inputState">Month</label>
-                                    <select id="inputState" class="form-control" name="mon" required>
-                                        <option></option>
-                                        <option value="January">January</option>
-                                        <option value="February">February</option>
-                                        <option value="March">March</option>
-                                        <option value="April">April</option>
-                                        <option value="May">May</option>
-                                        <option value="June">June</option>
-                                        <option value="July">July</option>
-                                        <option value="August">August</option>
-                                        <option value="September">September</option>
-                                        <option value="October">October</option>
-                                        <option value="November">November</option>
-                                        <option value="December">December</option>
+                                    <label for="inputState">Employee</label>
+                                    <select id="inputState" name="eid" class="form-control" required>
+                                        <option> </option>
+                                        {% if length %}
+                                        {% for i in range(length) %}
+                                            <option value="{{eid[i]}}">{{eid[i]}} - {{name[i]}}</option>
+                                        {% endfor %}    
+                                        {% endif %}
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label> Year </label>
-                                    <input type="text" name="year" id="year" class="form-control" placeholder="Enter Year" required>
+                                    <label> End Of Year Bonus </label>
+                                    <input type="text" name="eoy" id="eoy" class="form-control" placeholder="Enter End Of Year Bonus">
                                 </div>
-                                <!-- <div class="form-group col-md-12">
-                                    <label> Month & Year </label>
-                                    <input type="month" name="year" id="year" class="form-control" placeholder="Enter Year" >
-                                </div> -->
                             </div>
                             
+                            <!-- <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label> Name </label>
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name" >
+                                </div>
+                            </div> -->
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <!-- widget primary card start -->
+                                    <br>
+                                    <div class="slide-progress-bar col-md-9">                                        
+                                        <button type="submit" name="action" value="reprocess" class="btn btn-info" style="float: right; margin-right:16px; margin-bottom: 25px;" onclick="return confirm('Are You Sure You Want To Re Process The Bonus Of This Employee?')" ><i class="fa-solid fa-play" style="margin-right: 0.5rem;"></i>Re-Process</button>    
+                                        <button type="submit" name="action" value="process" class="btn btn-success" style="float: right; margin-right:16px; margin-bottom: 25px;"><i class="fa-solid fa-play" style="margin-right: 0.5rem;"></i>Proceed</button> 
+                                        <!--progress-bar-->
+                                    </div>
+                                    <!-- widget primary card end -->
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-						
-                        <div class="card-header">
-                            <h5>Icons</h5>
-                        </div>
-                        <div class="card-body">
-                            <!-- <button type="button submit" name="action" value="excel" class="btn btn-primary" id="download"><i class="fa-solid fa-file-excel" style="margin-right: 0.5rem;"></i>Excel Download</button> -->
-                            <button type="button submit" name="action" value="paye" class="btn btn-secondary"><i class="fa-solid fa-download" style="margin-right: 0.5rem;"></i>Show Paysheet</button>
-                            <!-- <button type="button" class="btn btn-success"><i class="feather mr-2 icon-check-circle"></i>Next</button>
-                            <button type="button" class="btn btn-info"><i class="feather mr-2 icon-check-circle"></i>Previous</button>
-                            <button type="button" class="btn btn-warning"><i class="feather mr-2 icon-alert-triangle"></i>Clear</button>
-                            <button type="button" class="btn btn-danger"><i class="feather mr-2 icon-slash"></i>Delete</button> -->
-                            <!-- <button type="button" class="btn btn-warning"><i class="feather mr-2 icon-alert-triangle"></i>Help</button>
-                            <button type="button" class="btn btn-warning"><i class="feather mr-2 icon-alert-triangle"></i>Exit</button> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </form>
+                    
+            <!-- </form> -->
             <!-- [ Main Content ] end -->
         </div>
     </div>
@@ -559,12 +550,6 @@
         <!-- custom-chart js -->
         <script src="../static/js/pages/dashboard-main.js"></script>
         <script src="../static/js/custom.js"></script>
-		<script>
-			document.getElementById('download').addEventListener('click' , function(){
-				var table2excel = new Table2Excel();
-  				table2excel.export(document.querySelectorAll("paysheet"));
-			});
-		</script>
 </body>
 <!-- Mirrored from technext.github.io/flat_able/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Aug 2022 05:38:50 GMT -->
 </html>

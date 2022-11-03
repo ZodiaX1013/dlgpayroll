@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from technext.github.io/flat_able/bc_tabs.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Aug 2022 05:38:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+	<title>Care Edge</title>
+	<!-- <title>Flat Able - Premium Admin Template by Phoenixcoded</title> -->
+	<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 11]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="">
+	<meta name="author" content="Phoenixcoded" />
+	<!-- Favicon icon -->
+	<link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
+
+	<!-- vendor css -->
+	<link rel="stylesheet" href="../static/css/style.css">
+	<script src="https://kit.fontawesome.com/e6163d7cbc.js" crossorigin="anonymous"></script>
+	<style>
+		.d-table-cell {
+			display:table-cell;
+		}
+
+		.tar {
+ 			text-align: right;
+		}
+	</style>
+	
+</head>
+<body>
+	<form action="/" method="post">
+	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-dark" style="background-color: white;" >
+        <div class="m-header">
+                <!-- ========   change your logo hear   ============ -->
+                <img src="../static/images/logo.png" alt="" class="logo" style="height: 50px; width: 150px;">
+        </div>
+		
+			<button class="btn btn-danger" style="position: absolute; right: 0; margin-right: 25px;"><i class="fa-thin fa-arrow-up-left-from-circle" style="margin-right: 0.5rem;"></i>  Logout</button>
+		
+
+	</header>
+</form>
+	<!-- [ Header ] end -->
+	
+	
+
+<!-- [ Main Content ] start -->
+<!-- <div class="pcoded-main-container"> -->
+<div class="">
+	<div class="pcoded-content">
+		
+		{% if msg %}
+			<h2> {{msg}} </h2>
+		{% endif %}
+		<!-- [ breadcrumb ] end -->
+		<!-- [ Main Content ] start -->
+		<div class="row">
+			<div class="col-md-12">
+				<!-- <div class="card"> -->
+				<form action="/expense" id="employee" method="post" enctype="multipart/form-data">
+					<!-- <button type="button submit" name="action" value="search" class="btn btn-secondary" style="float: right; margin-right:16px; margin-bottom: 25px;"><i class="fa-solid fa-magnifying-glass" style="margin-right: 0.5rem;"></i>Find</button>
+					
+					<button type="button" class="btn btn-warning" onclick="clearForm()" style="float: right; margin-right:16px; margin-bottom: 25px;"><i class="fa-solid fa-broom" style="margin-right: 0.5rem;"></i>Clear</button>
+					<button type="button submit" name="action" value="redirect" class="btn btn-info"  style="float: right; margin-right:16px; margin-bottom: 25px;"> Change Employee ID</button> -->
+			</div>
+
+			<div class="col-sm-12">
+				<!-- <h5 class="mb-3">Create / Edit Employee</h5> -->
+				<div class="card">
+					<div class="card-header">
+						<h5>Expense Manager</h5>
+					</div>
+					<div class="card-body"> 
+						
+						<!-- </form> -->
+						<ul class="nav nav-pills justify-content-md-center" id="pills-tab" role="tablist">	
+								
+							<li class="nav-item">
+								<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><i class="fa-solid fa-hand-holding-dollar" style="margin-right: 0.5rem;"></i>Utilities</a>
+							</li>
+				
+							<li class="nav-item">
+								<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"> <i class="fa-solid fa-clock" style="margin-right: 0.5rem;"></i>Sundry Expenses</a>
+							</li>
+				
+							<li class="nav-item">
+								<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="fa-brands fa-gitter" style="margin-right: 0.5rem;"></i>Business Promotion Expenses Mauritius</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" id="pills-legal-tab" data-toggle="pill" href="#pills-legal" role="tab" aria-controls="pills-legal" aria-selected="false"> <i class="fa-solid fa-clock" style="margin-right: 0.5rem;"></i>Legal & Proffessional Expenses</a>
+							</li>
+							
+						</ul>
+						<br>
+						<div class="tab-content" id="pills-tabContent">
+							<!-- Start Of Utilities -->
+							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+								<p class="mb-0">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Electricity</label>
+											<input type="text" name="electric" id="electric" class="form-control" value="" placeholder="Enter Electricity Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Internet Bills </label>
+											<input type="text" class="form-control" name="inter" id="inter" value="" placeholder="Internet Bill" >
+										</div>
+									</div>
+								</p>
+							</div>
+
+							<!-- End Of Utilities  -->
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+							<!-- Start Of Sundry Expenses -->
+
+							<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+								<p class="mb-0">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Office Cleaner</label>
+											<input type="text" name="ofc" id="ofc" class="form-control" value="" placeholder="Office Cleaner Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Zoom Registration charges </label>
+											<input type="text" class="form-control" name="zoom" id="zoom" value="" placeholder="Zoom Registration Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Suscription to Leexpress paper/Business Publication</label>
+											<input type="text" name="public" id="public" class="form-control" value="" placeholder="Publication Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Antivirus for laptops </label>
+											<input type="text" class="form-control" name="anti" id="anti" value="" placeholder="Antivirus Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Toners</label>
+											<input type="text" name="toner" id="toner" class="form-control" value="" placeholder="Toner Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Plant Maintenance </label>
+											<input type="text" class="form-control" name="plant" id="plant" value="" placeholder="Plant Maintenance" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Mauritius Post - Courier</label>
+											<input type="text" name="cour" id="cour" class="form-control" value="" placeholder="Post - Courier Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Office supplies & stationery  </label>
+											<input type="text" class="form-control" name="supply" id="supply" value="" placeholder="supply and stationery Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Business Cards</label>
+											<input type="text" name="bcard" id="bcard" class="form-control" value="" placeholder="Business Card Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Mask, Thermometer & santizer </label>
+											<input type="text" class="form-control" name="mask" id="mask" value="" placeholder="Mask, Thermometer & santizer Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Office cleaning expenses post COVID</label>
+											<input type="text" name="clean" id="clean" class="form-control" value="" placeholder="Office cleaning expenses" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Traning charges for employees </label>
+											<input type="text" class="form-control" name="train" id="train" value="" placeholder="Traning Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Annual office weekend with employees and their families</label>
+											<input type="text" name="annual" id="annual" class="form-control" value="" placeholder="Annual office weekend Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Kitchen work and side drawers for employees </label>
+											<input type="text" class="form-control" name="kitchen" id="kitchen" value="" placeholder="Kitchen and side drawers Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>MS Office</label>
+											<input type="text" name="msofc" id="msofc" class="form-control" value="" placeholder="MS Office Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Annual Health check up </label>
+											<input type="text" class="form-control" name="health" id="health" value="" placeholder="Health Check up Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Domain of CARE Ratings Africa</label>
+											<input type="text" name="domain" id="domain" class="form-control" value="" placeholder="Domain Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > AML/CFT Audit report (FSC) </label>
+											<input type="text" class="form-control" name="audit" id="audit" value="" placeholder="Audit Report Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>A/C Maintenance</label>
+											<input type="text" name="acmain" id="acmain" class="form-control" value="" placeholder="A/C Maintenance Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Charity to Rotary Club </label>
+											<input type="text" class="form-control" name="charity" id="charity" value="" placeholder="Charity Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>New Chair & Chair Maintenance</label>
+											<input type="text" name="chair" id="chair" class="form-control" value="" placeholder="Chair Expenses" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Vidhya - Greencross </label>
+											<input type="text" class="form-control" name="green" id="green" value="" placeholder="Vidhya Greencross Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Vidhya Travel Hotel Bill</label>
+											<input type="text" name="hotel" id="hotel" class="form-control" value="" placeholder="Travel Hotel Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Vidhya Travel Ticket </label>
+											<input type="text" class="form-control" name="travel" id="travel" value="" placeholder="Travel Ticket Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Vidhya Extra luggage</label>
+											<input type="text" name="lugg" id="lugg" class="form-control" value="" placeholder="Extra luggage Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Vidhya family Travel ticket </label>
+											<input type="text" class="form-control" name="family" id="family" value="" placeholder="Family Travel Ticket Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Laptop repair</label>
+											<input type="text" name="laptop" id="laptop" class="form-control" value="" placeholder="Laptop Repair Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Polycom cable </label>
+											<input type="text" class="form-control" name="polycom" id="polycom" value="" placeholder="Polycom Cable Expense" >
+										</div>
+									</div>
+								</p>
+							</div>
+							<!-- End Of Sundry Expense -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+							<!-- Start Of Business Promotion Expense -->
+							<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+								<p class="mb-0">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Industry Reports</label>
+											<input type="text" name="industry" id="industry" class="form-control" value="" placeholder="Industry Reports Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Director's stay in Hotel during May 4-7, 2022 </label>
+											<input type="text" class="form-control" name="stay" id="stay" value="" placeholder="Director's Stay Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Versopub (MIOD Event)</label>
+											<input type="text" name="miod" id="miod" class="form-control" value="" placeholder="MIOD Event Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Versopub (CRAF Event) </label>
+											<input type="text" class="form-control" name="craf" id="craf" value="" placeholder="CRAF Event Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Digital Kites (Printing Folders, Brochures, Business card, banner and signage)</label>
+											<input type="text" name="dkites" id="dkites" class="form-control" value="" placeholder="Digital Kites Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > MC for MIOD Event </label>
+											<input type="text" class="form-control" name="mcmiod" id="mcmiod" value="" placeholder="MC For MIOD Event Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Photographer for CRAF Event</label>
+											<input type="text" name="photo" id="photo" class="form-control" value="" placeholder="Photographer Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Pen engraving </label>
+											<input type="text" class="form-control" name="pen" id="pen" value="" placeholder="Pen Engraving Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Client Lunch</label>
+											<input type="text" name="lunch" id="lunch" class="form-control" value="" placeholder="Client Lunch Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Pen for MIOD and CRAF event </label>
+											<input type="text" class="form-control" name="penevent" id="penevent" value="" placeholder="Pen For Event Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>MC for CRAF Event</label>
+											<input type="text" name="mccraf" id="mccraf" class="form-control" value="" placeholder="MC For CRAF Event Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Hotel cost for the evening of the Event </label>
+											<input type="text" class="form-control" name="inter" id="inter" value="" placeholder="Hotel Expense For Evening Event" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>MIOD membership</label>
+											<input type="text" name="member" id="member" class="form-control" value="" placeholder="MIOD Expense" >
+										</div>
+									</div>
+								</p>
+							</div>
+							<!-- End Of Business Promotion Expense -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+							<!-- Start Of Legal & Professional Expense -->
+
+							<div class="tab-pane fade" id="pills-legal" role="tabpanel" aria-labelledby="pills-legal-tab">
+								<p class="mb-0">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Vidhya OP</label>
+											<input type="text" name="vidhya" id="vidhya" class="form-control" value="" placeholder="Vidhya OP Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Rating Committee Fees </label>
+											<input type="text" class="form-control" name="rating" id="rating" value="" placeholder="Rating Committee Expense" >
+										</div>
+									</div>
+								</p>
+							</div>
+							<!-- End Of Legal & Professional Expense -->
+						</div>
+						<br>
+					</div>
+				</div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+				<div class="card">
+					<div class="card-body">
+						<div >
+							<div>
+								<p class="mb-0">
+									<!-- Employment Form -->
+									<!-- <form action="/employee" id="emp4" method="post"> -->
+
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Salary</label>
+											<input type="text" name="sal" id="sal" class="form-control" value="" placeholder="Salary" >
+										</div>
+										<div class="form-group col-md-6">
+											<label > Rent </label>
+											<input type="text" class="form-control" name="rent" id="rent" placeholder="Rent" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Utilities (Electricity & Internet)</label>
+											<input type="text" name="utl" id="utl" class="form-control"  value="" placeholder="Enter Utilities" >
+										</div>
+										<div class="form-group col-md-6">
+											<label>Sundry Expenses</label>
+											<input type="text" name="sun" id="sun" class="form-control" value="" placeholder="Enter Sundry Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Marketing & Promotion (Referal Fees)</label>
+											<input type="text" name="market" id="market" class="form-control"  value="" placeholder="Marketing & Promotion" >
+										</div>
+										<div class="form-group col-md-6">
+											<label>Regulatory & other Fees</label>
+											<input type="text" name="reg" id="reg" class="form-control" value="" placeholder="Regulatory & Other Fees" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Audit Fees</label>
+											<input type="text" name="aud" id="aud" class="form-control"  value="" placeholder="Audit Fees" >
+										</div>
+										<div class="form-group col-md-6">
+											<label>Secretarial Fees</label>
+											<input type="text" name="secret" id="secret" class="form-control" value="" placeholder="Secretarial Fees" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Travelling expenses</label>
+											<input type="text" name="travelexp" id="travelexp" class="form-control"  value="" placeholder="Travelling Expenses" >
+										</div>
+										<div class="form-group col-md-6">
+											<label>Business promotion expenses - Mauritius</label>
+											<input type="text" name="mbusiness" id="mbusiness" class="form-control" value="" placeholder="Business Promotion Expense Mauritius" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Business promotion expenses - Kenya</label>
+											<input type="text" name="kbusiness" id="kbusiness" class="form-control"  value="" placeholder="Business promotion expenses - Kenya" >
+										</div>
+										<div class="form-group col-md-6">
+											<label>Communication expenses</label>
+											<input type="text" name="comm" id="comm" class="form-control" value="" placeholder="Communication Expense" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Insurance Premium</label>
+											<input type="text" name="insure" id="insure" class="form-control"  value="" placeholder="Insurance Premium" >
+										</div>
+										<div class="form-group col-md-6">
+											<label>Depreciation</label>
+											<input type="text" name="depr" id="depr" class="form-control" value="" placeholder="Depreciation" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Legal & Proffessional Fees</label>
+											<input type="text" name="lprof" id="lprof" class="form-control"  value="" placeholder="Legal & Professional Fees" >
+										</div>
+										<div class="form-group col-md-6">
+											<label>Bank Charges</label>
+											<input type="text" name="bank" id="bank" class="form-control" value="" placeholder="Bank Charges" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Staff Wellfare Expense (Ticket for travel of CEO & family)</label>
+											<input type="text" name="staff" id="staff" class="form-control"  value="" placeholder="Staff Wellfare Expense" >
+										</div>
+										<div class="form-group col-md-6">
+											<label>Head office related Expenses</label>
+											<input type="text" name="head" id="head" class="form-control" value="" placeholder="Head Office related Expenses" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Royalty payable to CARE Ratings India (@3% on total tunrover)</label>
+											<input type="text" name="royal" id="royal" class="form-control"  value="" placeholder="Royalty Payable" >
+										</div>
+										<div class="form-group col-md-6">
+											<label>Amortisation</label>
+											<input type="text" name="amor" id="amor" class="form-control" value="" placeholder="Amortisation" >
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Finance cost</label>
+											<input type="text" name="finance" id="finance" class="form-control"  value="" placeholder="Finance Cost" >
+										</div>
+									</div>
+								</p>	
+							</div>
+							<div class="form-row">
+								<div class="col-md-11">
+								</div>
+								<div class="col-md-1">
+									<!-- <button type="button submit" name="action" value="save" class="btn btn-primary"><i class="fa-solid fa-download" style="margin-right: 0.5rem;"></i>Save</button> -->
+									<button type="button submit" name="action" value="save" class="btn btn-primary" ><i class="fa-solid fa-download" style="margin-right: 0.5rem;"></i>Save</button>
+								</div>
+							</div>
+							<!-- <div class="col-md-10"></div>
+							<div class="col-md-2"><button type="button submit" class="btn btn-primary" ><i class="fa-solid fa-download" style="margin-right: 0.5rem;"></i>Save</button> -->
+							</div>						
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="col-sm-12">
+				<h5 class="mb-3">Vertical Pills</h5>
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-3 col-sm-12">
+								<ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+									<li><a class="nav-link text-left active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a></li>
+									<li><a class="nav-link text-left" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a></li>
+									<li><a class="nav-link text-left" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a></li>
+									<li><a class="nav-link text-left" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a></li>
+								</ul>
+							</div>
+							<div class="col-md-9 col-sm-12">
+								<div class="tab-content" id="v-pills-tabContent">
+									<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+										<p class="mb-0">Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit
+											est
+											eu aliqua
+											occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu
+											deserunt
+											excepteur ea incididunt minim occaecat.</p>
+									</div>
+									<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+										<p class="mb-0">Culpa dolor voluptate do laboris laboris irure reprehenderit id incididunt duis pariatur mollit aute magna pariatur consectetur. Eu veniam duis non ut dolor deserunt commodo et
+											minim in quis
+											laboris ipsum velit id veniam. Quis ut consectetur adipisicing officia excepteur non sit. Ut et elit aliquip labore Lorem enim eu. Ullamco mollit occaecat dolore ipsum id officia mollit qui
+											esse anim eiusmod do sint minim consectetur qui.</p>
+									</div>
+									<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+										<p class="mb-0">Fugiat id quis dolor culpa eiusmod anim velit excepteur proident dolor aute qui magna. Ad proident laboris ullamco esse anim Lorem Lorem veniam quis Lorem irure occaecat velit
+											nostrud magna
+											nulla. Velit et et proident Lorem do ea tempor officia dolor. Reprehenderit Lorem aliquip labore est magna commodo est ea veniam consectetur.</p>
+									</div>
+									<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+										<p class="mb-0">Eu dolore ea ullamco dolore Lorem id cupidatat excepteur reprehenderit consectetur elit id dolor proident in cupidatat officia. Voluptate excepteur commodo labore nisi cillum
+											duis
+											aliqua do.
+											Aliqua amet qui mollit consectetur nulla mollit velit aliqua veniam nisi id do Lorem deserunt amet. Culpa ullamco sit adipisicing labore officia magna elit nisi in aute tempor commodo
+											eiusmod.
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			[ tabs ] end -->
+		</form>
+		</div>
+		<!-- [ Main Content ] end -->
+	</div>
+</div>
+<!-- [ Main Content ] end -->
+    <!-- Warning Section start -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 11]>
+        <div class="ie-warning">
+            <h1>Warning!!</h1>
+            <p>You are using an outdated version of Internet Explorer, please upgrade
+               <br/>to any of the following web browsers to access this website.
+            </p>
+            <div class="iew-container">
+                <ul class="iew-download">
+                    <li>
+                        <a href="http://www.google.com/chrome/">
+                            <img src="assets/images/browser/chrome.png" alt="Chrome">
+                            <div>Chrome</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.mozilla.org/en-US/firefox/new/">
+                            <img src="assets/images/browser/firefox.png" alt="Firefox">
+                            <div>Firefox</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.opera.com">
+                            <img src="assets/images/browser/opera.png" alt="Opera">
+                            <div>Opera</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.apple.com/safari/">
+                            <img src="assets/images/browser/safari.png" alt="Safari">
+                            <div>Safari</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                            <img src="assets/images/browser/ie.png" alt="">
+                            <div>IE (11 & above)</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <p>Sorry for the inconvenience!</p>
+        </div>
+    <![endif]-->
+    <!-- Warning Section Ends -->
+
+    <!-- Required Js -->
+    <script src="../static/js/vendor-all.min.js"></script>
+    <script src="../static/js/plugins/bootstrap.min.js"></script>
+    <script src="../static/js/pcoded.min.js"></script>
+	<script src="../static/js/custom.js"></script>
+
+
+
+</body>
+
+<!-- Mirrored from technext.github.io/flat_able/bc_tabs.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Aug 2022 05:38:53 GMT -->
+</html>

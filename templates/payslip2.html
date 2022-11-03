@@ -3,7 +3,7 @@
 <!-- Mirrored from technext.github.io/flat_able/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Aug 2022 05:38:50 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
-    <title>Care Edge</title>
+    <title> MAXCITY </title>
     <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 11]>
@@ -23,6 +23,7 @@
     <!-- vendor css -->
     <link rel="stylesheet" href="../static/css/style.css">
     <script src="https://kit.fontawesome.com/e6163d7cbc.js" crossorigin="anonymous"></script>
+    <script src="../static/js/table2excel.js"></script>
     <!-- <style>
         table {
           border-collapse: collapse;
@@ -155,7 +156,7 @@
 	<!-- [ Header ] start -->
 	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-dark" style="background-color: white;" >
         <div class="m-header">
-            <a class="mobile-menu" id="mobile-collapse" href="{{url_for('dashboard')}}"><span></span></a>
+             
             <a href="{{url_for('dashboard')}}" class="b-brand">
                 <!-- ========   change your logo hear   ============ -->
                 <img src="../static/images/logo.png" alt="" class="logo" style="height: 50px; width: 150px;">
@@ -413,6 +414,7 @@
             <div class="col-md-4">
                 <!-- <button class="btn btn-primary" onclick="Export2Word('exportContent');">Download As Word</button> -->
                 <button class="btn btn-primary" onclick="ExportToDoc();">Download As Word</button>
+                <!-- <button class="btn btn-primary" name="action" id="download" value="download" style="margin-left: 25px;"><i class="fa-regular fa-file-spreadsheet" style="margin-right: 0.5rem;"></i>Download As Excel</button> -->
                 <!-- <button class="btn btn-primary" id="export">Download As Word</button> -->
             </div>   
             <!-- <form action="payslip" method="post">
@@ -426,7 +428,8 @@
         <!-- [ Main Content ] start -->
         <!-- <div class="row"> -->
             <!-- <h2>Employee List Here </h2> -->
-            
+            <form action="/payslip" method="post">
+                <button class="btn btn-secondary" type="submit" name="action" value="back" id="back" style="margin-top: 25px; margin-left: 25px; margin-bottom: 25px;"><i class="fa-solid fa-left" style="margin-right: 0.5rem;">  </i> Back</button>
             <div class="col-xl-12" id="exportContent">
                 {% for i in range(length) %}    
                 <div class="card">
@@ -437,16 +440,14 @@
                         <!-- <img src="https://i.ytimg.com/vi/NITUDvQUPBY/maxresdefault.jpg" alt="" class="logo" style="height: 50px;width: 150px;" > -->
                         <img src="https://plankton-app-gyl96.ondigitalocean.app/static/images/whitelogo.png" style="height: 50px;width: 150px;" >
                         <!-- <img src="https://plankton-app-gyl96.ondigitalocean.app/static/images/logo.png" style="height: 50px;width: 150px;" > -->
-                        <!-- <img src="https://res.cloudinary.com/dmsxwwfb5/image/upload/v1580916756/buy-me-min.png" style="height: 50px;width: 150px;"> -->
-                        <h2>Care Edge </h2>
-                        <h4>RATING AFRICA</h4>
-                        
+                        <!-- <img src="https://res.cloudinary.com/dmsxwwfb5/image/upload/v1580916756/buy-me-min.png" style="height: 50px;width: 150px;"> -->                        
                     </div>
                     <div class="card-body col-md-12">        
                         <div class="form-row">
                             <div id="docx" class="col-md-12">
                                 <div class="WordSection1">
-                                    <table class="table table-striped col-md-12" style="width: 100%;">
+                                    <table class="table table-striped col-md-12" style="border: 1px black solid" border="1" id="excel">
+                                        <th colspan="2">MAXCITY ASSET MANAGERS LTD </th>
                                     <!-- <table class="table table-striped col-md-12" style="width: 100%;"> -->
                                         <tr>
                                             <th>Payslip For The Period</th>
@@ -462,7 +463,7 @@
                                         </tr>
                                         <tr>
                                             <td>Company</td>
-                                            <td> {{data[i][1]}} </td>
+                                            <td> MAXCITY ASSET MANAGERS LTD </td>
                                         </tr>
                                         <tr>
                                             <td>Employee Name</td>
@@ -493,7 +494,7 @@
                                             <td>{{data[i][6]}}</td>
                                         </tr>
                                         <tr>
-                                            <td>Bonus</td>
+                                            <td>C. Bonus</td>
                                             <td>{{data[i][7]}}</td>
                                         </tr>
                                         <tr>
@@ -521,8 +522,8 @@
                                             <td>{{data[i][11]}}</td>
                                         </tr>
                                         <tr>
-                                            <th>H. Solidarity Levy</th>
-                                            <th>{{data[i][12]}}</th>
+                                            <td>H. Solidarity Levy</td>
+                                            <td>{{data[i][12]}}</td>
                                         </tr>
                                         <tr>
                                             <th>I. Total Deductions (E + F + G + H)</th>
@@ -533,7 +534,7 @@
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <th>J. Net Pay (H - I)</th>
+                                            <th>J. Net Pay (D - I)</th>
                                             <th>{{data[i][14]}}</th>
                                         </tr>
                                         <tr>
@@ -578,11 +579,9 @@
                         </div>      
                     </div>
                 </div>
-                <p style="page-break-after: always;"></p>
+                <br style="page-break-before: always">
                 {% endfor %}
-                <br>
-            <br>
-            <br>
+            </form>
             </div>
             
             
@@ -648,6 +647,12 @@
 <!-- custom-chart js -->
 <script src="../static/js/pages/dashboard-main.js"></script>
 <script src="../static/js/custom.js"></script>
+<script>
+    document.getElementById('download').addEventListener('click' , function(){
+        var table2excel = new Table2Excel();
+          table2excel.export(document.querySelectorAll("#excel"));
+    });
+</script>
 </body>
 
 
