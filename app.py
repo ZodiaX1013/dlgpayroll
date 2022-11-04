@@ -4488,16 +4488,22 @@ def eoy():
                 insert_eoy = """INSERT INTO EOY(
                             Employee,
                             BasicSalary,
+                            Arrears,
+                            Overtime,
                             LeaveRef,
                             EOY,
                             Transport,
                             Overseas,
                             OtherAllow,
+                            FixedAllow,
                             Payable,
+                            Absences
                             paye,
                             csg,
                             nsf,
+                            Medical,
                             slevy,
+                            Lateness
                             otherDed,
                             Net,
                             month,
@@ -4523,10 +4529,16 @@ def eoy():
                             %s,
                             %s,
                             %s,
+                            %s,
+                            %s,
+                            %s,
+                            %s,
+                            %s,
+                            %s,
                             %s
                             );
                             """
-                eoy_data = [flname, 0, leave, eoyBns, trans, overseas, otherAllow, payable, paye, nps, nsf, slevypay, otherDed, netpay, "EOY", UNQ, "yes", "no"]
+                eoy_data = [flname, 0, 0, 0, leave, eoyBns, trans, overseas, otherAllow, 0, payable, 0, paye, nps, nsf, 0, slevypay, 0, otherDed, netpay, "EOY", UNQ, "yes", "no"]
                 cursor.execute(insert_eoy,eoy_data)
                 print("EOY Query Successful")
 
@@ -5201,16 +5213,22 @@ def eoy():
                             SET
                             Employee = %s,
                             BasicSalary = %s,
+                            Arrears = %s,
+                            Overtime = %s,
                             LeaveRef = %s,
                             EOY = %s,
                             Transport = %s,
                             Overseas = %s,
                             OtherAllow = %s,
+                            FixedAllow = %s,
                             Payable = %s,
+                            Absences = %s,
                             paye = %s,
                             csg = %s,
                             nsf = %s,
+                            Medical = %s,
                             slevy = %s,
+                            Lateness = %s,
                             otherDed = %s,
                             Net = %s,
                             month = %s
@@ -5219,7 +5237,7 @@ def eoy():
                             """
 
                 print("EOY ", eoyBns)
-                eoy_data = [flname, 0, leave, eoyBns, trans, overseas, otherAllow, payable, paye, nps, nsf, slevypay, otherDed, netpay, "EOY", UNQ]
+                eoy_data = [flname, 0, 0, 0, leave, eoyBns, trans, overseas, otherAllow, 0, payable, 0, paye, nps, nsf, 0, slevypay, 0, otherDed, netpay, "EOY", UNQ]
                 cursor.execute(update_eoy,eoy_data)
                 print("UPDATE EOY Query Successful")
 
@@ -5541,7 +5559,7 @@ def paysheet():
             # query1 = "SELECT * FROM paysheet"
             # query1 = "SELECT EmployeeName, BasicSalary, Arrears, Overseas, TravelAllow, OtherAllow, Gross, PAYE, CSG, NSF, Medical, SLevy, Net FROM paysheet"
             if month == "EOY":
-                query1 = "SELECT Employee, BasicSalary, LeaveRef, EOY, Transport, Overseas, OtherAllow, Payable, paye, csg, nsf, slevy, otherDed, Net FROM EOY WHERE month = %s"  
+                query1 = "SELECT Employee, BasicSalary, Arrears, Overtime, LeaveRef, EOY, Transport, Overseas, OtherAllow, FixedAllow, Payable, Absences, paye, csg, nsf, Medical, slevy, Lateness, otherDed, Net FROM EOY WHERE month = %s"  
             else:  
                 query1 = "SELECT EmployeeName, BasicSalary, Arrears, Overtime, LeaveRef, EOY, Transport, Overseas, OtherAllow, FixedAllow, Payable, Absences, PAYE, NPS, NSFEmpee, Medical, SLevy, Lateness, OtherDeduction, NetPaysheet FROM salary WHERE Month = %s "
             cursor.execute(query1,data1)
