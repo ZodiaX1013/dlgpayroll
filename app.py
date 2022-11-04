@@ -5527,7 +5527,7 @@ def paysheet():
             if month == "EOY":
                 query1 = "SELECT Employee, BasicSalary, LeaveRef, EOY, Transport, Overseas, OtherAllow, Payable, paye, csg, nsf, slevy, otherDed, Net FROM EOY WHERE month = %s"  
             else:  
-                query1 = "SELECT EmployeeName, BasicSalary, LeaveRef, EOY, Transport, Overseas, OtherAllow, Payable, PAYE, NPS, NSFEmpee, SLevy, OtherDeduction, NetPaysheet FROM salary WHERE Month = %s "
+                query1 = "SELECT EmployeeName, BasicSalary, Arrears, Overtime, LeaveRef, EOY, Transport, Overseas, OtherAllow, FixedAllow, Payable, Absences, PAYE, NPS, NSFEmpee, Medical, SLevy, Lateness, OtherDeduction, NetPaysheet FROM salary WHERE Month = %s "
             cursor.execute(query1,data1)
             data = cursor.fetchall()
             
