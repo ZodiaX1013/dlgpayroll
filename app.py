@@ -146,6 +146,22 @@ def expense():
     return render_template("expense.html")
 
 
+@app.route("/revenue", methods = ["POST" , "GET"])
+def revenue():
+    if request.method == "POST":
+        return render_template("revenue2.html")
+    return render_template("revenue.html")
+
+
+@app.route("/rae", methods=["POST" , "GET"])
+def rae():
+    if request.method == "POST" and request.form['action'] == 'expense':
+        return render_template("expense.html")
+    if request.method == "POST" and request.form['action'] == 'revenue':
+        return render_template("revenue.html")
+    return render_template("module2.html")
+
+
 @app.route("/module", methods=["GET", "POST"])
 def module():
     if request.method == "POST" and request.form['action'] == 'payroll':
@@ -158,7 +174,7 @@ def module():
 
     if request.method == "POST" and request.form['action'] == 'rae':  #Revenue And Expense (RAE)
         print("User Choose Revenue & Expense Module - Goes To Expense And Revenue Page")
-        return redirect(url_for('expense'))
+        return redirect(url_for('rae'))
     return render_template("module.html")
 
 @app.route("/reset", methods=["GET","POST"])
