@@ -159,7 +159,7 @@
              
             <a href="{{url_for('dashboard')}}" class="b-brand">
                 <!-- ========   change your logo hear   ============ -->
-                <img src="../static/images/logo.png" alt="" class="logo" style="height: 50px; width: 150px;">
+                <img src="../static/images/newlogo.jpeg" alt="" class="logo" style="height: 50px; width: 150px;">
                 <!-- <img src="../static/images/logo-icon.png" alt="" class="logo-thumb"> --> -->
                 <!-- <i class="fa-solid fa-house" style="margin-right: 0.5rem;"></i>HOME -->
             </a>
@@ -220,6 +220,7 @@
                                         <li><a href="payecsv" class="dropdown-item"><i class="fas fa-circle"></i> PAYE CSV </a></li>
                                         <li><a href="prgfcsv" class="dropdown-item"><i class="fas fa-circle"></i> PRGF CSV</a></li>
                                         <li><a href="cnpcsv" class="dropdown-item"><i class="fas fa-circle"></i> CNP CSV</a></li>
+                                        <li><a href="contribution" class="dropdown-item"><i class="fas fa-circle"></i> Contribution CSV</a></li>
                                         <li><a href="payslip" class="dropdown-item"><i class="fas fa-circle"></i> Payslip</a></li>
                                         <li><a href="paysheet" class="dropdown-item"><i class="fas fa-circle"></i> Paysheet</a></li>
                                     </ul>
@@ -438,8 +439,8 @@
                         <br>
                         <!-- <span class="d-block m-t-5">use class <code>table-striped</code> inside table element</span> -->
                         <!-- <img src="https://i.ytimg.com/vi/NITUDvQUPBY/maxresdefault.jpg" alt="" class="logo" style="height: 50px;width: 150px;" > -->
-                        <img src="https://plankton-app-gyl96.ondigitalocean.app/static/images/whitelogo.png" style="height: 50px;width: 150px;" >
-                        <!-- <img src="https://plankton-app-gyl96.ondigitalocean.app/static/images/logo.png" style="height: 50px;width: 150px;" > -->
+                        <img src="https://plankton-app-gyl96.ondigitalocean.app/static/images/newlogo.jpeg" style="height: 50px;width: 150px;" >
+                        <!-- <img src="https://plankton-app-gyl96.ondigitalocean.app/static/images/newlogo.jpeg" style="height: 50px;width: 150px;" > -->
                         <!-- <img src="https://res.cloudinary.com/dmsxwwfb5/image/upload/v1580916756/buy-me-min.png" style="height: 50px;width: 150px;"> -->                        
                     </div>
                     <div class="card-body col-md-12">        
@@ -452,7 +453,7 @@
                                         <tr>
                                             <th>Payslip For The Period</th>
                                             {% if month %}
-                                            <th> {{month}}</th>
+                                            <th> {{month}} - {{data[i][21]}}</th>
                                             {% else %}
                                             <th> </th>
                                             {% endif %}

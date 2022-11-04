@@ -156,8 +156,8 @@ def module():
 
 # ===================================================================================================
 
-    if request.method == "POST" and request.form['action'] == 'expense':
-        print("User Choose Expense Module - Goes To Expense And Revenue Page")
+    if request.method == "POST" and request.form['action'] == 'rae':  #Revenue And Expense (RAE)
+        print("User Choose Revenue & Expense Module - Goes To Expense And Revenue Page")
         return redirect(url_for('expense'))
     return render_template("module.html")
 
@@ -3311,9 +3311,11 @@ def process_salary():
                                 eLevy,
                                 ePRGF,
                                 month,
+                                year,
                                 UNQ
                                 )
                                 VALUES(
+                                %s,
                                 %s,
                                 %s,
                                 %s,
@@ -3781,7 +3783,8 @@ def process_salary():
                         cursor.execute(insert_query2, data1)
                         print("Process Query Executed")
 
-                        data3 = [hire, "Demo" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay , totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, month, UNQ ]
+                        
+                        data3 = [hire, "Demo" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay , totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, month, year, UNQ ]
                         cursor.execute(query, data3)
                         print("Payslip Query Executed")
                         
@@ -3928,7 +3931,45 @@ def process_salary():
 
                         cursor.execute(cnp_query, data6)
 
-                        
+                        insert_contri = """INSERT INTO contribution(
+                                        EmployeeID,
+                                        LastName,
+                                        FirstName,
+                                        IDCard,
+                                        Salary,
+                                        blank1,
+                                        ecsg,
+                                        elevy,
+                                        ensf,
+                                        csg,
+                                        nsf,
+                                        blank2,
+                                        slevy,
+                                        month,
+                                        year,
+                                        UNQ
+                                        )
+                                        VALUES(
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s
+                                        );
+                                        """
+                        contri_data = [eid, lname, fname, nic, basic, " ", enps, levy, ensf, nps, nsf, " ", slevypay, month, year, UNQ]
+                        cursor.execute(insert_contri, contri_data)
                         msg = "Processing Complete"
                         # print("Do Something Else")
                     else:
@@ -3957,8 +3998,148 @@ def process_salary():
                 CNP = %s
                 WHERE
                 month = %s;"""
-                data7 = [total, cnp, month]
-                cursor.execute(update_cnp, data7)
+                data8 = [total, cnp, month]
+                cursor.execute(update_cnp, data8)
+# =================================================================================================================================
+
+                query16 = "SELECT Salary FROM contribution WHERE month = %s"
+                cursor.execute(query16, data7)
+                basic_con = cursor.fetchall()
+
+                bas1 = []
+                bas2 = []
+
+                for i in range(len(basic_con)):
+                    bas1 = ''.join(basic_con[i])
+                    bas2.append(bas1)
+                bas_total = 0
+
+                for i in range(len(bas2)):
+                    bas_total = int(bas_total) + int(bas2[i])
+
+# =================================================================================================================================
+
+                query17 = "SELECT ecsg FROM contribution WHERE month = %s"
+                cursor.execute(query17, data7)
+                ecsg_con = cursor.fetchall()
+
+                ecsg1 = []
+                ecsg2 = []
+
+                for i in range(len(ecsg_con)):
+                    ecsg1 = ''.join(ecsg_con[i])
+                    ecsg2.append(ecsg1)
+                ecsg_total = 0
+
+                for i in range(len(ecsg2)):
+                    ecsg_total = int(ecsg_total) + int(ecsg2[i])
+
+# =================================================================================================================================
+
+                query18 = "SELECT elevy FROM contribution WHERE month = %s"
+                cursor.execute(query18, data7)
+                elevy_con = cursor.fetchall()
+
+                elevy1 = []
+                elevy2 = []
+
+                for i in range(len(elevy_con)):
+                    elevy1 = ''.join(elevy_con[i])
+                    elevy2.append(elevy1)
+                elevy_total = 0
+
+                for i in range(len(elevy2)):
+                    elevy_total = int(elevy_total) + int(elevy2[i])
+
+# =================================================================================================================================
+
+                query19 = "SELECT ensf FROM contribution WHERE month = %s"
+                cursor.execute(query19, data7)
+                ensf_con = cursor.fetchall()
+
+                ensf1 = []
+                ensf2 = []
+
+                for i in range(len(ensf_con)):
+                    ensf1 = ''.join(ensf_con[i])
+                    ensf2.append(ensf1)
+                ensf_total = 0
+
+                for i in range(len(ensf2)):
+                    ensf_total = int(ensf_total) + int(ensf2[i])
+
+# =================================================================================================================================
+
+                query20 = "SELECT csg FROM contribution WHERE month = %s"
+                cursor.execute(query20, data7)
+                csg_con = cursor.fetchall()
+
+                csg1 = []
+                csg2 = []
+
+                for i in range(len(csg_con)):
+                    csg1 = ''.join(csg_con[i])
+                    csg2.append(csg1)
+                csg_total = 0
+
+                for i in range(len(csg2)):
+                    csg_total = int(csg_total) + int(csg2[i])
+
+# =================================================================================================================================
+
+                query21 = "SELECT nsf FROM contribution WHERE month = %s"
+                cursor.execute(query21, data7)
+                nsf_con = cursor.fetchall()
+
+                nsf1 = []
+                nsf2 = []
+
+                for i in range(len(nsf_con)):
+                    nsf1 = ''.join(nsf_con[i])
+                    nsf2.append(nsf1)
+                nsf_total = 0
+
+                for i in range(len(nsf2)):
+                    nsf_total = int(nsf_total) + int(nsf2[i])
+
+# =================================================================================================================================
+
+                query22 = "SELECT slevy FROM contribution WHERE month = %s"
+                cursor.execute(query22, data7)
+                slevy_con = cursor.fetchall()
+
+                slevy1 = []
+                slevy2 = []
+
+                for i in range(len(slevy_con)):
+                    slevy1 = ''.join(slevy_con[i])
+                    slevy2.append(slevy1)
+                slevy_total = 0
+
+                for i in range(len(slevy2)):
+                    slevy_total = int(slevy_total) + int(slevy2[i])
+
+# =================================================================================================================================
+
+                update_contri = """UPDATE contribution
+                SET
+                totalRem = %s,
+                totalecsg = %s,
+                totalelevy = %s,
+                totalensf = %s,
+                totalcsg = %s,
+                totalnsf = %s,
+                totalslevy = %s
+                WHERE 
+                month = %s;
+                """
+
+                update_contri_data = [bas_total, ecsg_total, elevy_total, ensf_total, csg_total, nsf_total, slevy_total, month]
+
+                cursor.execute(update_contri, update_contri_data)
+
+                print("Contribution Update Complete")
+
 
                 if msg == "Salary Already Proccessed" or msg == "Processing Complete":
                     return render_template("process.html", msg = msg)
@@ -4635,7 +4816,7 @@ def eoy():
                                 %s
                                 );
                                 """
-                data_payslip = [hire, "Care Edge RATINGS AFRICA" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay , totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, "EOY", UNQ ]
+                data_payslip = [hire, "MAXCITY ASSET MANAGERS LTD RATINGS AFRICA" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay , totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, "EOY", UNQ ]
                 cursor.execute(insert_payslip, data_payslip)
                 print("Insert Payslip Query Executed")
                 # msg = "Processing Complete"
@@ -5296,7 +5477,7 @@ def payslip():
                                                     password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
             cursor = connection.cursor(buffered=True)
 
-            query = "SELECT JoinDate, Company, EmpName, Position, NIC, BasicSalary, TravelAlw, Bonus, Gross, PAYE, NPF, NSF, SLevy , Deduction, NetPay, Payable, NetPayAcc, eNPF, eNSF, eLevy, ePRGF FROM payslip WHERE month = %s "
+            query = "SELECT JoinDate, Company, EmpName, Position, NIC, BasicSalary, TravelAlw, Bonus, Gross, PAYE, NPF, NSF, SLevy , Deduction, NetPay, Payable, NetPayAcc, eNPF, eNSF, eLevy, ePRGF, year FROM payslip WHERE month = %s "
             data1 =[month]
             cursor.execute(query,data1)
             data = cursor.fetchall()
@@ -5415,8 +5596,16 @@ def payecsv():
             cursor = connection.cursor(buffered=True)
 
             data1 = [mon]
-        
             data2 = [year]
+
+
+            for i in range(len(data1)):
+                month = ' '.join(data1[i])
+
+            for i in range(len(data2)):
+                year = ' '.join(data2[i])
+
+
             # query1 = "SELECT * FROM paysheet"
             # query1 = "SELECT EmployeeName, BasicSalary, Arrears, Overseas, TravelAllow, OtherAllow, Gross, PAYE, CSG, NSF, Medical, SLevy, Net FROM paysheet"
             query1 = "SELECT EmployeeID, LastName, FirstName, Emoluments, PAYE, working, SLevy, EmolumentsNet FROM payecsv WHERE Month = %s "
@@ -5426,7 +5615,7 @@ def payecsv():
             session["data"] = data
             length = len(data)
             print(length)
-            return render_template("payecsv2.html", data=data, length=length, month = mon, year= year)
+            return render_template("payecsv2.html", data=data, length=length, month = month, year= year)
             # return redirect(url_for('download', data = data))
         except Error as e:
             print("Error While connecting to MySQL : ", e)
@@ -5519,7 +5708,6 @@ def cnpcsv():
             cnp = cnp[0][0]
 
             return render_template("cnpcsv2.html", length = length, data= cnp_data, month = month, year = year, total=total, cnp=cnp)        
-
             
         except Error as e:
             print("Error While connecting to MySQL : ", e)
@@ -5531,56 +5719,88 @@ def cnpcsv():
     return render_template("cnpcsv.html")
 
 
-# select totalRem from cnpcsv ORDER BY id DESC LIMIT 1;
+@app.route('/contribution', methods=["POST", "GET"])
+def contribution():
+    if request.method == "POST" and request.form['action'] == 'contri':
+        mon = request.form["mon"]
+        year = request.form["year"]
+        data = [mon]
 
+        try:
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    port='25060',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
+            cursor = connection.cursor(buffered=True)
 
-# @app.route("/download")
-# def route_download():
-    
-#     # Get the HTML output
-#     out = render_template("employee.html")
-    
-#     # PDF options
-#     options = {
-#         "orientation": "landscape",
-#         "page-size": "A4",
-#         "margin-top": "1.0cm",
-#         "margin-right": "1.0cm",
-#         "margin-bottom": "1.0cm",
-#         "margin-left": "1.0cm",
-#         "encoding": "UTF-8",
-#     }    
-    
-#     # Build PDF from HTML 
-#     pdf = pdfkit.from_string(out, False ,options=options)
-    
-#     # Download the PDF
-#     return Response(pdf, mimetype="application/pdf")
+            data2 = [year]
+            for i in range(len(data)):
+                month = ' '.join(data[i])
 
- 
-# @app.route('/download')
-# def download():
-    
-#     if "data" in session:
-#         data = session["data"]
-#     rendered = render_template('paysheet2.html',filename='css/style.css', data=data)
-#     options = {
-#         'page-size': 'A3',
-#         'margin-top': '0.75in',
-#         'margin-right': '0.5in',
-#         'margin-bottom': '0.75in',
-#         'margin-left': '0.1in',
-#         'encoding': "UTF-8",
-#         'custom-header': [
-#             ('Accept-Encoding', 'gzip')
-#         ],
-#         'no-outline': None
-#     }
-    
-#     pdfkit.from_string(rendered,'paysheet.pdf',options=options,verbose=True)
-#     # return render_template('paysheet2.html',filename='css/style.css', data=data)
-#     p = "./paysheet.pdf"
-#     return send_file(p, as_attachment=True)
+            for i in range(len(data2)):
+                year = ' '.join(data2[i])
+
+            query = "SELECT EmployeeID, LastName, FirstName, IDCard, Salary, blank1, ecsg, elevy, ensf, csg, nsf, blank2, slevy FROM contribution WHERE month = %s"
+
+            cursor.execute(query,data)
+            contri_data = cursor.fetchall()
+
+            length = len(contri_data)
+
+            query2 = "SELECT totalRem FROM contribution WHERE month = %s"
+            cursor.execute(query2, data)
+            totalRem = cursor.fetchall()
+
+            totalRem = totalRem[0][0]
+
+            query3 = "SELECT totalecsg FROM contribution WHERE month = %s"
+            cursor.execute(query3, data)
+            totalecsg = cursor.fetchall()
+
+            totalecsg = totalecsg[0][0]
+
+            query4 = "SELECT totalelevy FROM contribution WHERE month = %s"
+            cursor.execute(query4, data)
+            totalelevy = cursor.fetchall()
+
+            totalelevy = totalelevy[0][0]
+
+            query5 = "SELECT totalensf FROM contribution WHERE month = %s"
+            cursor.execute(query5, data)
+            totalensf = cursor.fetchall()
+
+            totalensf = totalensf[0][0]
+
+            query6 = "SELECT totalcsg FROM contribution WHERE month = %s"
+            cursor.execute(query6, data)
+            totalcsg = cursor.fetchall()
+
+            totalcsg = totalcsg[0][0]
+
+            query7 = "SELECT totalnsf FROM contribution WHERE month = %s"
+            cursor.execute(query7, data)
+            totalnsf = cursor.fetchall()
+
+            totalnsf = totalnsf[0][0]
+
+            query8 = "SELECT totalslevy FROM contribution WHERE month = %s"
+            cursor.execute(query8, data)
+            totalslevy = cursor.fetchall()
+
+            totalslevy = totalslevy[0][0]
+
+            return render_template("contribution2.html", length = length, data= contri_data, month = month, year = year, totalRem = totalRem, totalecsg = totalecsg, totalelevy = totalelevy, totalensf = totalensf, totalcsg = totalcsg,totalnsf = totalnsf, totalslevy = totalslevy )
+
+        except Error as e:
+            print("Error While connecting to MySQL : ", e)
+        finally:
+            connection.commit()
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")        
+
+    return render_template("contribution.html")
 
 @app.route('/download')
 def download():

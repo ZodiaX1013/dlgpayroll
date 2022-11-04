@@ -436,9 +436,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <form action="{{url_for('payecsv')}}" method="post">
+                        <form action="{{url_for('contribution')}}" method="post">
                         <div class="card-header">
-                            <h5>PAYE Sheet</h5>
+                            <h5>Contribution Sheet</h5>
                         </div>
                         <div class="card-body">
                             <div class="form-row">
@@ -459,6 +459,7 @@
                                         <option value="October">October</option>
                                         <option value="November">November</option>
                                         <option value="December">December</option>
+                                        <!-- <option value="EOY"> End Of Year Bonus </option> -->
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -484,7 +485,7 @@
                         </div>
                         <div class="card-body">
                             <!-- <button type="button submit" name="action" value="excel" class="btn btn-primary" id="download"><i class="fa-solid fa-file-excel" style="margin-right: 0.5rem;"></i>Excel Download</button> -->
-                            <button type="button submit" name="action" value="paye" class="btn btn-secondary"><i class="fa-solid fa-download" style="margin-right: 0.5rem;"></i>Show PAYE sheet</button>
+                            <button type="button submit" name="action" value="contri" class="btn btn-secondary"><i class="fa-solid fa-download" style="margin-right: 0.5rem;"></i>Show Contribution Sheet</button>
                             <!-- <button type="button" class="btn btn-success"><i class="feather mr-2 icon-check-circle"></i>Next</button>
                             <button type="button" class="btn btn-info"><i class="feather mr-2 icon-check-circle"></i>Previous</button>
                             <button type="button" class="btn btn-warning"><i class="feather mr-2 icon-alert-triangle"></i>Clear</button>
