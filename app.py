@@ -609,7 +609,22 @@ def employee():
             for i in range(len(work)):
                 work = ''.join(work[i])
 
-            return render_template("employee2.html",eid=eid, fname=fname, lname=lname, title=title,dob=dob, add=add, city=city, country=country, phone=phone, mobile=mobile, fax=fax, mail=mail, nic=nic, tax=tax, bank=bank, bankac =bankac,code=code, car=car, hire=hire, salary=salary, position=position, dep=dep, sdep=sdep, payes=payes, payep=payep, lleave=lleave, sleave=sleave, falw=falw, travelmod = travelmod, talw=talw, edf=edf, mon=mon, medf=medf, house=house, erel=erel, mrel=mrel, pay=pay, med=med, spbns=spbns, work=work )
+            query40 = "SELECT Lastwork From employee WHERE EmployeeID = %s"
+            cursor.execute(query40, data)
+            last = cursor.fetchall()
+            print(last)
+            if last == []:
+                last = "0001-01-01"
+            else:
+                last = last[0][0]
+
+            query41 = "SELECT working From employee WHERE EmployeeID = %s"
+            cursor.execute(query41, data)
+            working = cursor.fetchall()
+            for i in range(len(working)):
+                working = ''.join(working[i])
+
+            return render_template("employee2.html",eid=eid, fname=fname, lname=lname, title=title,dob=dob, add=add, city=city, country=country, phone=phone, mobile=mobile, fax=fax, mail=mail, nic=nic, tax=tax, bank=bank, bankac =bankac,code=code, car=car, hire=hire, salary=salary, position=position, dep=dep, sdep=sdep, payes=payes, payep=payep, lleave=lleave, sleave=sleave, falw=falw, travelmod = travelmod, talw=talw, edf=edf, mon=mon, medf=medf, house=house, erel=erel, mrel=mrel, pay=pay, med=med, spbns=spbns, work=work , last=last, working = working)
 
         except Error as e:
                 print("Error While connecting to MySQL : ", e)
@@ -673,6 +688,7 @@ def employee():
         payment = request.form["optradio5"]
         medical = request.form["med"]
         working = request.form["optradio3"]
+        print(working)
         if working == "No":
             lwork = request.form["lwork"]
         else:
@@ -2339,65 +2355,64 @@ def process_salary():
             cursor = connection.cursor(buffered=True)
             if eid != "ALL":
                 print("In If")
-                month = request.form["mon"]
-        
-                year = request.form["year"]
+                
                 id = 0
                 month = month.lower()
                 data = [eid]
                 # print(month)
                 if month == "January" or month=="january":
                     print("In Jan")
-                    get_date='01-' + str(year)
+                    
                     id = 1
                 elif month == "February" or month=="february":
                     print("In Feb")
-                    get_date=str(2) + str(year)
+                    
                     id = 2
                 elif month == "March" or month=="march":
                     print("In Mar")
-                    get_date=str(3) + str(year)
+                    
                     id = 3
                 elif month == "April" or month=="april":
                     print("In Apr")
-                    get_date=str(4) + str(year)
+                    
                     id = 4
                 elif month == "May" or month=="may":
                     print("In May")
-                    get_date=str(5) + str(year)
+                    
                     id = 5
                 elif month == "June" or month=="june":
                     print("In Jun")
-                    get_date=str(6) + str(year)
+                    
                     id = 6
                 elif month == "July" or month=="july":
                     print("In Jul")
-                    get_date=str(7) + str(year)
+                    
                     id = 7
                 elif month == "August" or month=="august":
                     print("In Aug")
-                    get_date=str(8) + str(year)
+                    
                     id = 8
                 elif month == "September" or month=="september":
                     print("In Sep")
-                    get_date=str(9) + str(year)
+                    
                     id = 9
                 elif month == "October" or month=="october":
                     print("In Oct")
-                    get_date=str(10) + str(year)
+                    
                     id = 10
                 elif month == "November" or month=="november":
                     print("In Nov")
-                    get_date=str(11) + str(year)
+                    
                     id = 11
                 elif month == "December" or month=="december":
                     print("In Dec")
-                    get_date=str(12) + str(year)
+                    
                     id = 12
                 else:  
                     print("In Else")
                     msg = "Enter Month Correctly"
                     return render_template("process.html", msg = msg)
+                
                 mid = id-1
                 if mid == 0:
                     mid = 12
@@ -2432,932 +2447,195 @@ def process_salary():
                 data2 = [eid,month2]
                 # print(month2)
 
-                query1_1 = "SELECT MONTH(Lastwork) AS Month, YEAR(Lastwork) AS Year FROM employee WHERE EmployeeID= %s"
-                cursor.execute(query1_1, data)
-                dt = cursor.fetchall()
-                # print(dt)
-                # print(type(mon))
-                mon = dt[0][0]
-                # print(mon)
-                year = dt[0][1]
-                # print(year)
-                check_date = str(mon) + '-' + str(year)
-                # print(check_date)
+                query_month = "SELECT MONTH(Lastwork) AS Month FROM employee WHERE EmployeeID= %s"
+                cursor.execute(query_month, data)
+                emp_month = cursor.fetchall()
+                
+                last_mon = emp_month[0][0]
+                
 
-                # print("out If")
-                # print("ID ", id)
-                # print("mon ", mon)
-                if mon == 0:
-                    mon = id
+                query_year = "SELECT YEAR(Lastwork) AS Year FROM employee WHERE EmployeeID= %s"
+                cursor.execute(query_year, data)
+                emp_year = cursor.fetchall()
+
+                last_year = emp_year[0][0]
+
+                # if mon == 0:
+                #     mon = id
                 # if check_date == "11" or get_date > check_date :
                     # print("In If")
 
                     # query4 = "SELECT hire, position, NICno FROM employee WHERE EmployeeID = %s"
                     # cursor.execute(query4,data)
                     
+                msg = "Employee Not Working"
 
-                query1 = "SELECT FirstName FROM employee WHERE EmployeeID = %s"
-                cursor.execute(query1,data)
-                fname = cursor.fetchall()
-                for i in range(len(fname)):
-                    fname = ''.join(fname[i])
+                if int(last_year) >= int(year) or last_year == 1:
+                    print("Year Is Correct")
+                    if int(last_mon) >= int(id) or last_mon == 1:
+                        print("In Start Process")
+                        query1 = "SELECT FirstName FROM employee WHERE EmployeeID = %s"
+                        cursor.execute(query1,data)
+                        fname = cursor.fetchall()
+                        for i in range(len(fname)):
+                            fname = ''.join(fname[i])
 
-                query2 = "SELECT LastName FROM employee WHERE EmployeeID = %s"
-                cursor.execute(query2,data)
-                lname = cursor.fetchall()
-                for i in range(len(lname)):
-                    lname = ''.join(lname[i])
+                        query2 = "SELECT LastName FROM employee WHERE EmployeeID = %s"
+                        cursor.execute(query2,data)
+                        lname = cursor.fetchall()
+                        for i in range(len(lname)):
+                            lname = ''.join(lname[i])
 
-                query3 = "SELECT cGrossTax FROM salary WHERE EmployeeID= %s AND Month = %s"
-                cursor.execute(query3,data2)
-                prevGross = cursor.fetchall()
-                for i in range(len(prevGross)):
-                    if prevGross != None:
-                        prevGross = ''.join(prevGross[i])
-                    else:
-                        prevGross = 0
-                if prevGross != 0:
-                    prevGross = ''.join(map(str,prevGross))
-                    
+                        query3 = "SELECT cGrossTax FROM salary WHERE EmployeeID= %s AND Month = %s"
+                        cursor.execute(query3,data2)
+                        prevGross = cursor.fetchall()
+                        for i in range(len(prevGross)):
+                            if prevGross != None:
+                                prevGross = ''.join(prevGross[i])
+                            else:
+                                prevGross = 0
+                        if prevGross != 0:
+                            prevGross = ''.join(map(str,prevGross))
+                            
 
-                query4 = "SELECT IET FROM salary WHERE EmployeeID= %s AND Month = %s"
-                cursor.execute(query4,data2)
-                piet = cursor.fetchall()
-                for i in range(len(piet)):
-                    if piet != None:
-                        piet = ''.join(piet[i])
-                    else:
-                        piet = 0
-                if piet != 0:
-                    piet = ''.join(map(str,piet))
+                        query4 = "SELECT IET FROM salary WHERE EmployeeID= %s AND Month = %s"
+                        cursor.execute(query4,data2)
+                        piet = cursor.fetchall()
+                        for i in range(len(piet)):
+                            if piet != None:
+                                piet = ''.join(piet[i])
+                            else:
+                                piet = 0
+                        if piet != 0:
+                            piet = ''.join(map(str,piet))
 
-                query5 = "SELECT CurrentPAYE FROM salary WHERE EmployeeID= %s AND Month = %s"
-                cursor.execute(query5,data2)
-                ppaye = cursor.fetchall()
-                # print(ppaye)
-                for i in range(len(ppaye)):
-                    if ppaye != None:
-                        ppaye = ''.join(ppaye[i])
-                        print(ppaye)
-                    else:
-                        ppaye = 0
-                if ppaye != 0:
-                    ppaye = ''.join(map(str,ppaye))
+                        query5 = "SELECT CurrentPAYE FROM salary WHERE EmployeeID= %s AND Month = %s"
+                        cursor.execute(query5,data2)
+                        ppaye = cursor.fetchall()
+                        # print(ppaye)
+                        for i in range(len(ppaye)):
+                            if ppaye != None:
+                                ppaye = ''.join(ppaye[i])
+                                print(ppaye)
+                            else:
+                                ppaye = 0
+                        if ppaye != 0:
+                            ppaye = ''.join(map(str,ppaye))
 
-                query6 = "SELECT Threshold FROM salary WHERE EmployeeID= %s AND Month = %s"
-                cursor.execute(query6,data2)
-                pths = cursor.fetchall()
-                for i in range(len(pths)):
-                    if pths != None:
-                        pths = ''.join(pths[i])
-                    else:
-                        pths = 0
-                if pths != 0:
-                    pths = ''.join(map(str,pths))
+                        query6 = "SELECT Threshold FROM salary WHERE EmployeeID= %s AND Month = %s"
+                        cursor.execute(query6,data2)
+                        pths = cursor.fetchall()
+                        for i in range(len(pths)):
+                            if pths != None:
+                                pths = ''.join(pths[i])
+                            else:
+                                pths = 0
+                        if pths != 0:
+                            pths = ''.join(map(str,pths))
 
-                query7 = "SELECT CurrentSLevy FROM salary WHERE EmployeeID= %s AND Month = %s"
-                cursor.execute(query7,data2)
-                plevy = cursor.fetchall()
-                print("Before For Loop", plevy)
-                print(len(plevy))
+                        query7 = "SELECT CurrentSLevy FROM salary WHERE EmployeeID= %s AND Month = %s"
+                        cursor.execute(query7,data2)
+                        plevy = cursor.fetchall()
+                        print("Before For Loop", plevy)
+                        print(len(plevy))
 
-                if len(plevy) > 0:
-                    print("In If")
-                    for i in range(len(plevy)):
-                        print("In For ")
-                        plevy = ''.join(plevy[i])
-                else:
-                    print("In Else")
-                    plevy = 0    
+                        if len(plevy) > 0:
+                            print("In If")
+                            for i in range(len(plevy)):
+                                print("In For ")
+                                plevy = ''.join(plevy[i])
+                        else:
+                            print("In Else")
+                            plevy = 0    
 
 
-                # for i in range(len(plevy)):
-                #     print("In For")
-                #     if plevy != None:
-                #         print("In if1")
-                #         plevy = ''.join(plevy[i])
-                #     else:
-                #         print("In Else")
-                #         plevy = 0
-                
-                # if plevy != 0:
-                #     print("In if2")
-                #     plevy = ''.join(map(str,plevy))
-                
-                print("plevy", plevy)
+                        # for i in range(len(plevy)):
+                        #     print("In For")
+                        #     if plevy != None:
+                        #         print("In if1")
+                        #         plevy = ''.join(plevy[i])
+                        #     else:
+                        #         print("In Else")
+                        #         plevy = 0
+                        
+                        # if plevy != 0:
+                        #     print("In if2")
+                        #     plevy = ''.join(map(str,plevy))
+                        
+                        print("plevy", plevy)
 
-                query8 = "SELECT hire FROM employee WHERE EmployeeID = %s"
-                cursor.execute(query8,data)
-                hire = cursor.fetchall()
-                
-                hire = hire[0][0] 
-                hire = str(hire)
-                # print(hire)
-                # print(str(hire))
-                # print(type(str(hire)))
-                # if hire != None:
-                #     for i in range(len(hire)):
-                #         hire = ''.join(hire[i])
-                #     hire = ''.join(map(str,hire))
-                # else:
-                #     hire = 0                    
+                        query8 = "SELECT hire FROM employee WHERE EmployeeID = %s"
+                        cursor.execute(query8,data)
+                        hire = cursor.fetchall()
+                        
+                        hire = hire[0][0] 
+                        hire = str(hire)
+                        # print(hire)
+                        # print(str(hire))
+                        # print(type(str(hire)))
+                        # if hire != None:
+                        #     for i in range(len(hire)):
+                        #         hire = ''.join(hire[i])
+                        #     hire = ''.join(map(str,hire))
+                        # else:
+                        #     hire = 0                    
 
-                query9 = "SELECT position FROM employee WHERE EmployeeID = %s"
-                cursor.execute(query9,data)
-                pos = cursor.fetchall()
-                for i in range(len(pos)):
-                    if pos != None:
-                        pos = ''.join(pos[i])
-                    else:
-                        pos = " "
-                if pos != 0:
-                    pos = ''.join(map(str,pos))
-                # print(pos)
-                
-
-                query10 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
-                cursor.execute(query10,data)
-                nic = cursor.fetchall()
-                # print(nic)
-                for i in range(len(nic)):
-                    if nic[0][0] != None:
-                        nic = ''.join(nic[i])
-                    else:
-                        nic = " "
-                if nic != 0:
-                    nic = ''.join(map(str,nic))
-                
-                UNQ = month + " " + fname
-                data3 = [UNQ]
-                
-                # query11 = "SELECT LockSal From salary WHERE UNQ = %s"
-                # cursor.execute(query11,data3)
-                # lockSal = cursor.fetchall()
-
-                # print(lockSal)
-                # print(len(lockSal))
-
-                # if len(lockSal) > 0:
-                #     print("In If")
-                #     for i in range(len(lockSal)):
-                #         print("In For ")
-                #         lockSal = ''.join(lockSal[i])
-                # else:
-                #     print("In Else")
-                #     lockSal = "No"
-
-                # query12 = "SELECT working FROM employee WHERE EmployeeID = %s"
-                # cursor.execute(query12, data)
-                # working = cursor.fetchall()
-
-                # if len(working) > 0:
-                #     print("In If")
-                #     for i in range(len(working)):
-                #         print("In For ")
-                #         working = ''.join(working[i])
-                # else:
-                #     print("In Else")
-                #     working = "Yes"                
-                
-                flname = lname + " " + fname
-
-                # Values We Don't Get
-                ot = 0
-                otherAllow = 0
-                arrears = 0
-                eoy = 0
-                leave = 0
-                speBns = 0
-                discBns = 0
-                tax = 0
-                ntax = 0
-                attBns = 0
-                overseas = tax + ntax
-
-                loan = 0
-                lateness = 0
-                otherDed = 0
-                ab = 0
-
-                # Previous Data
-                # print(type(prevGross))
-                # print(prevGross)
-                if prevGross == "":
-                    prevGross = 0
-                else:
-                    prevGross = int(prevGross)
-
-                if piet == "":
-                    piet = 0
-                else:
-                    piet = int(piet)
-                
-                if ppaye == "":
-                    ppaye = 0
-                else:
-                    ppaye = int(ppaye)
-                
-                if pths == "":
-                    pths = 0
-                else:
-                    pths = int(pths)
-                # print(pths)
-                if plevy == "":
-                    plevy = 0
-                else:
-                    plevy = int(plevy)
-        
-                basic = int(tbasic) - int(ab)
-                # Calculations
-                payable = basic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
-                bonus = speBns + SpeProBns + otherAllow + fixAllow + discBns + attBns
-
-                # For Overseas Amount
-                if overseas > 0:
-                    ntax = round(int(basic) * 0.06)
-                    tax = round(int(overseas) - int(ntax))
-                else:
-                    ntax = 0
-                    tax = 0
-
-                if trans > 20000:
-                    transTax = trans - 20000
-                    ntransTax = trans - transTax
-                else:
-                    transTax = 0
-                    ntransTax = 0
-
-                cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
-
-                grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car
-
-                # print("prev Gross " , prevGross)
-                # print("Curr Gross " , cgross)
-                gross = prevGross + grossTax
-                # print("gross" , gross)
-                medf = round(int(edf) / 13)
-                ciet = round(( int(edf) + int(Medicalrel) + int(education)) / 13)
-                
-                iet = int(ciet) + int(piet)
-                # print("ciet" , ciet)
-                # print("piet", piet)
-                # print("iet", iet)
-
-                netch = gross - iet
-
-                # print("netch" , netch)
-                if netch < 0:
-                    netch = 0
-                else:
-                    netch = netch
-
-                if int(basic) > 50000:
-                    nps = round(basic * 0.03)
-                    # cpaye =  round(netch * 0.15)
-                    enps = round(basic * 0.06)
-                else:
-                    nps = round(basic * 0.015)
-                    # cpaye = round(netch * 0.1)
-                    enps = round(basic * 0.03)
-
-                check = int(basic) + int(otherAllow) - int(medf)
-                if check < 53846:
-                    cpaye = round(netch* 0.1)
-                elif check >= 53846 and check < 75000:
-                    cpaye = round(netch* 0.125)
-                else:
-                    cpaye = round(netch* 0.15)
-
-                if cpaye < 0:
-                    cpaye = 0
-                else:
-                    cpaye = int(cpaye)
-                
-                if ppaye < 0:
-                    ppaye =0
-                else:
-                    ppaye = int(ppaye)
-
-                # print("cpaye", cpaye)
-                # print("ppaye", ppaye)
-                paye = int(cpaye) - int(ppaye)
-                # print("paye", paye)
-                if paye < 0:
-                    paye =0
-                else:
-                    paye = int(paye)
-
-                nsf = int(basic * 0.01)
-
-                if nsf > 214:
-                    nsf = 214
-                else:
-                    nsf = int(nsf)
-
-                temp = int(cgross) * 13
-                slevy = 0
-                tths = round(3000000/13)
-                ths = int(pths) + int(tths)
-                # print(ths)
-                netchar = int(gross) - int(iet) - int(ths)
-                print("gross", gross)
-                print("iet", iet)
-                print("ths", ths)
-                if netchar < 0 :
-                    netchar = 0
-                else:
-                    netchar = netchar
-                print("netchar", netchar)
-                print("grossTax", grossTax)
-
-                if int(temp) > 3000000:
-                    slevy1 = round(netchar * 0.25)
-                    slevy2 = round(gross * 0.1)
-                    print("slevy1", slevy1)
-                    print("slevy2", slevy2)
-                    if slevy1 > slevy2:
-                        slevy = int(slevy2)
-                    else:
-                        slevy = int(slevy1)
-                else:
-                    slevy = 0
-                print("slevy", slevy)
-                ensf = round(basic * 0.025)
-                if ensf > 536:
-                    ensf = 536
-                else:
-                    ensf = round(ensf)
-                levy = round(int(basic) * 0.015)
-                deduction = int(loan) + int(paye) + int(lateness) + int(nps) + int(otherDed) + int(nsf) + int(medical)
-                net = int(payable) - int(deduction)
-                # print(slevy)
-                NetPaysheet = int(net) - int(slevy)
-                slevypay = slevy - plevy
-                print("slevypay", slevypay)
-                otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
-                
-                tax = int(tax) + int(transTax)
-                ntax = int(ntax) + int(ntransTax)
-                # Payslip Calculation
-
-                paygross = int(basic) + int(trans) + int(bonus)
-
-                totalDeduction = int(paye) + int(nps) + int(nsf)
-
-                netpay = paygross - totalDeduction
-                # eprgf = 0
-                if basic < 200000:
-                    eprgf = round((int(basic) + int(bonus)) * 0.035) # + commission
-                else:
-                    eprgf = 0
-
-                update_original = """UPDATE OriginalData
-                                SET
-                                EmployeeID = %s,
-                                EmployeeName = %s,
-                                BasicSalary = %s,
-                                FixedAllow = %s,
-                                OtherDeduction = %s,
-                                Overtime = %s,
-                                DiscBonus = %s,
-                                NSFEmpee = %s,
-                                OtherAllow = %s,
-                                TaxableAllow = %s,
-                                Medical = %s,
-                                Transport = %s,
-                                overseas = %s,
-                                NTaxableAllow = %s,
-                                EDF = %s,
-                                Arrears = %s,
-                                AttendanceBns = %s,
-                                EOY = %s,
-                                Loan = %s,
-                                CarBenefit = %s,
-                                LeaveRef = %s,
-                                SLevy = %s,
-                                SpecialBns = %s,
-                                Lateness = %s,
-                                EducationRel = %s,
-                                SpeProBns = %s,
-                                NPS = %s,
-                                MedicalRel = %s,
-                                Payable = %s,
-                                Deduction = %s,
-                                NetPay = %s,
-                                NetPaysheet = %s,
-                                CurrentGross = %s,
-                                cGrossTax = %s,
-                                PrevGross = %s,
-                                PrevIET = %s,
-                                IET = %s,
-                                NetCh = %s,
-                                CurrentPAYE = %s,
-                                PrevPAYE = %s,
-                                PAYE = %s,
-                                eCSG = %s,
-                                eNSF = %s,
-                                eLevy = %s,
-                                PRGF = %s,
-                                PrevThreshold = %s,
-                                Threshold = %s,
-                                netchar = %s,
-                                CurrentSLevy = %s,
-                                PrevSLevy = %s,
-                                slevyPay = %s,
-                                Absences = %s
-                                WHERE 
-                                UNQ = %s;
-                                """
-                data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, UNQ]
-                cursor.execute(update_original, data1)
-                print("Update Original Query Executed")
-
-                update_salary = """UPDATE salary
-                                SET
-                                EmployeeID = %s,
-                                EmployeeName = %s,
-                                BasicSalary = %s,
-                                FixedAllow = %s,
-                                OtherDeduction = %s,
-                                Overtime = %s,
-                                DiscBonus = %s,
-                                NSFEmpee = %s,
-                                OtherAllow = %s,
-                                TaxableAllow = %s,
-                                Medical = %s,
-                                Transport = %s,
-                                overseas = %s,
-                                NTaxableAllow = %s,
-                                EDF = %s,
-                                Arrears = %s,
-                                AttendanceBns = %s,
-                                EOY = %s,
-                                Loan = %s,
-                                CarBenefit = %s,
-                                LeaveRef = %s,
-                                SLevy = %s,
-                                SpecialBns = %s,
-                                Lateness = %s,
-                                EducationRel = %s,
-                                SpeProBns = %s,
-                                NPS = %s,
-                                MedicalRel = %s,
-                                Payable = %s,
-                                Deduction = %s,
-                                NetPay = %s,
-                                NetPaysheet = %s,
-                                CurrentGross = %s,
-                                cGrossTax = %s,
-                                PrevGross = %s,
-                                PrevIET = %s,
-                                IET = %s,
-                                NetCh = %s,
-                                CurrentPAYE = %s,
-                                PrevPAYE = %s,
-                                PAYE = %s,
-                                eCSG = %s,
-                                eNSF = %s,
-                                eLevy = %s,
-                                PRGF = %s,
-                                PrevThreshold = %s,
-                                Threshold = %s,
-                                netchar = %s,
-                                CurrentSLevy = %s,
-                                PrevSLevy = %s,
-                                slevyPay = %s,
-                                Absences = %s
-                                WHERE
-                                UNQ = %s
-                                """
-                
-                data2 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, UNQ]
-                cursor.execute(update_salary, data2)
-                print("Update Salary Query Executed")
-
-                update_payslip = """UPDATE payslip
-                        SET
-                        EmpName = %s,
-                        Position = %s,
-                        NIC = %s,
-                        BasicSalary = %s,
-                        TravelAlw = %s,
-                        Bonus = %s,
-                        Gross = %s,
-                        PAYE = %s,
-                        NPF = %s,
-                        NSF = %s,
-                        SLevy = %s,
-                        Deduction = %s,
-                        NetPay = %s,
-                        Payable = %s,
-                        NetPayAcc = %s,
-                        eNPF = %s,
-                        eNSF = %s,
-                        eLevy = %s,
-                        ePRGF = %s,
-                        month = %s
-                        WHERE
-                        UNQ = %s;
-                        """
-                data_payslip = [flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay, totalDeduction, netpay, netpay, netpay,  enps, ensf, levy, eprgf, month, UNQ]
-                cursor.execute(update_payslip, data_payslip)
-                print("Update Payslip Query Executed")
-                # msg = "Processing Complete"
-
-                emolument = int(basic) + int(arrears) + int(overseas) + int(otherAllow) + int(car) + int(ot) + int(eoy) + int(leave) + int(fixAllow) + int(discBns) + int(SpeProBns) + int(speBns) 
-
-                update_payecsv = """UPDATE payecsv
-                                SET
-                                EmployeeID = %s,
-                                LastName = %s,
-                                FirstName = %s,
-                                Emoluments = %s,
-                                PAYE = %s,
-                                SLevy = %s,
-                                EmolumentsNet = %s
-                                WHERE
-                                UNQ = %s;
-                                """
-
-                data4 = [eid, lname, fname, emolument, paye, slevypay, emolument, UNQ]
-                cursor.execute(update_payecsv, data4)
-                print("Update PAYE CSV Query Executed")
-
-                msg = "Re Processing Complete For " + flname + " "
-                print(msg)
-                return render_template("process.html", msg=msg)      
-
-# =================================================================================================================== #
-
-            elif eid == "ALL":                 
-                # print(month)
-                month = request.form["mon"]
-        
-                year = request.form["year"]
-                id = 0
-                month = month.lower()          
-                if month == "January" or month=="january":
-                    print("In Jan")
-                    get_date='01-' + str(year)
-                    id = 1
-                elif month == "February" or month=="february":
-                    print("In Feb")
-                    get_date=str(2) + str(year)
-                    id = 2
-                elif month == "March" or month=="march":
-                    print("In Mar")
-                    get_date=str(3) + str(year)
-                    id = 3
-                elif month == "April" or month=="april":
-                    print("In Apr")
-                    get_date=str(4) + str(year)
-                    id = 4
-                elif month == "May" or month=="may":
-                    print("In May")
-                    get_date=str(5) + str(year)
-                    id = 5
-                elif month == "June" or month=="june":
-                    print("In Jun")
-                    get_date=str(6) + str(year)
-                    id = 6
-                elif month == "July" or month=="july":
-                    print("In Jul")
-                    get_date=str(7) + str(year)
-                    id = 7
-                elif month == "August" or month=="august":
-                    print("In Aug")
-                    get_date=str(8) + str(year)
-                    id = 8
-                elif month == "September" or month=="september":
-                    print("In Sep")
-                    get_date=str(9) + str(year)
-                    id = 9
-                elif month == "October" or month=="october":
-                    print("In Oct")
-                    get_date=str(10) + str(year)
-                    id = 10
-                elif month == "November" or month=="november":
-                    print("In Nov")
-                    get_date=str(11) + str(year)
-                    id = 11
-                elif month == "December" or month=="december":
-                    print("In Dec")
-                    get_date=str(12) + str(year)
-                    id = 12
-                else:  
-                    print("In Else")
-                    msg = "Enter Month Correctly"
-                    return render_template("process.html", msg = msg)
-                mid = id-1
-                if mid == 0:
-                    mid = 12
-                
-                # print(calendar.month_name[id])
-                month2 = calendar.month_name[mid]
-                month2 = month2.lower()
-
-                # query3 = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, medical, Specialbonus FROM employee WHERE EmployeeID = %s "
-                # query3 = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, medical, Specialbonus, EmployeeID FROM employee"
-                query = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, medical, Specialbonus, EmployeeID FROM employee"
-                # cursor.execute(query3, data)
-                cursor.execute(query)
-                emp_data = cursor.fetchall()
-
-                # print(emp_data)
-
-                arrays = {}
-                for index,lst in enumerate(emp_data):
-                    arrays[str(index+1)] = lst
-                # print(arrays)
-                
-                for i in arrays:
-                    # print(i)
-                    emp_data2 = list(arrays[i])
-                    # emp_data2 = list(emp_data[0])
-
-                    car = int(emp_data2[0])
-                    # print(car)
-                    # print(type(car))
-                    
-                    tbasic = int(emp_data2[1])
-                    fixAllow = int(emp_data2[2])
-                    trans = int(emp_data2[3])
-                    edf = int(emp_data2[4])
-                    education = int(emp_data2[5])
-                    Medicalrel = int(emp_data2[6])
-                    # medical = int(emp_data2[7])
-                    medical = 0
-                    SpeProBns = int(emp_data2[8])
-                    eid = emp_data2[9]
-
-                    # lwork = emp_data2[10]
-                    # print(lwork)
-
-                    data = [eid]
-                    data2 = [eid,month2]
-                    # print(month2)
-
-                    query1_1 = "SELECT MONTH(Lastwork) AS Month, YEAR(Lastwork) AS Year FROM employee WHERE EmployeeID= %s"
-                    cursor.execute(query1_1, data)
-                    dt = cursor.fetchall()
-                    # print(dt)
-                    # print(type(mon))
-                    mon = dt[0][0]
-                    # print(mon)
-                    year = dt[0][1]
-                    # print(year)
-                    check_date = str(mon) + '-' + str(year)
-                    # print(check_date)
-
-                    # print("out If")
-                    # print("ID ", id)
-                    # print("mon ", mon)
-                    if mon == 0:
-                        mon = id
-                    # if check_date == "11" or get_date > check_date :
-                        # print("In If")
-
-                        # query4 = "SELECT hire, position, NICno FROM employee WHERE EmployeeID = %s"
-                        # cursor.execute(query4,data)
+                        query9 = "SELECT position FROM employee WHERE EmployeeID = %s"
+                        cursor.execute(query9,data)
+                        pos = cursor.fetchall()
+                        for i in range(len(pos)):
+                            if pos != None:
+                                pos = ''.join(pos[i])
+                            else:
+                                pos = " "
+                        if pos != 0:
+                            pos = ''.join(map(str,pos))
+                        # print(pos)
                         
 
-                    query1 = "SELECT FirstName FROM employee WHERE EmployeeID = %s"
-                    cursor.execute(query1,data)
-                    fname = cursor.fetchall()
-                    for i in range(len(fname)):
-                        fname = ''.join(fname[i])
-
-                    query2 = "SELECT LastName FROM employee WHERE EmployeeID = %s"
-                    cursor.execute(query2,data)
-                    lname = cursor.fetchall()
-                    for i in range(len(lname)):
-                        lname = ''.join(lname[i])
-
-                    query3 = "SELECT cGrossTax FROM salary WHERE EmployeeID= %s AND Month = %s"
-                    cursor.execute(query3,data2)
-                    prevGross = cursor.fetchall()
-                    for i in range(len(prevGross)):
-                        if prevGross != None:
-                            prevGross = ''.join(prevGross[i])
-                        else:
-                            prevGross = 0
-                    if prevGross != 0:
-                        prevGross = ''.join(map(str,prevGross))
+                        query10 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
+                        cursor.execute(query10,data)
+                        nic = cursor.fetchall()
+                        # print(nic)
+                        for i in range(len(nic)):
+                            if nic[0][0] != None:
+                                nic = ''.join(nic[i])
+                            else:
+                                nic = " "
+                        if nic != 0:
+                            nic = ''.join(map(str,nic))
                         
-
-                    query4 = "SELECT IET FROM salary WHERE EmployeeID= %s AND Month = %s"
-                    cursor.execute(query4,data2)
-                    piet = cursor.fetchall()
-                    for i in range(len(piet)):
-                        if piet != None:
-                            piet = ''.join(piet[i])
-                        else:
-                            piet = 0
-                    if piet != 0:
-                        piet = ''.join(map(str,piet))
-
-                    query5 = "SELECT CurrentPAYE FROM salary WHERE EmployeeID= %s AND Month = %s"
-                    cursor.execute(query5,data2)
-                    ppaye = cursor.fetchall()
-                    # print(ppaye)
-                    for i in range(len(ppaye)):
-                        if ppaye != None:
-                            ppaye = ''.join(ppaye[i])
-                            print(ppaye)
-                        else:
-                            ppaye = 0
-                    if ppaye != 0:
-                        ppaye = ''.join(map(str,ppaye))
-
-                    query6 = "SELECT Threshold FROM salary WHERE EmployeeID= %s AND Month = %s"
-                    cursor.execute(query6,data2)
-                    pths = cursor.fetchall()
-                    for i in range(len(pths)):
-                        if pths != None:
-                            pths = ''.join(pths[i])
-                        else:
-                            pths = 0
-                    if pths != 0:
-                        pths = ''.join(map(str,pths))
-
-                    query7 = "SELECT CurrentSLevy FROM salary WHERE EmployeeID= %s AND Month = %s"
-                    cursor.execute(query7,data2)
-                    plevy = cursor.fetchall()
-                    print("Before For Loop", plevy)
-                    print(len(plevy))
-
-                    if len(plevy) > 0:
-                        print("In If")
-                        for i in range(len(plevy)):
-                            print("In For ")
-                            plevy = ''.join(plevy[i])
-                    else:
-                        print("In Else")
-                        plevy = 0    
-
-
-                    # for i in range(len(plevy)):
-                    #     print("In For")
-                    #     if plevy != None:
-                    #         print("In if1")
-                    #         plevy = ''.join(plevy[i])
-                    #     else:
-                    #         print("In Else")
-                    #         plevy = 0
-                    
-                    # if plevy != 0:
-                    #     print("In if2")
-                    #     plevy = ''.join(map(str,plevy))
-                    
-                    print("plevy", plevy)
-
-                    query8 = "SELECT hire FROM employee WHERE EmployeeID = %s"
-                    cursor.execute(query8,data)
-                    hire = cursor.fetchall()
-                    
-                    hire = hire[0][0] 
-                    hire = str(hire)
-                    # print(hire)
-                    # print(str(hire))
-                    # print(type(str(hire)))
-                    # if hire != None:
-                    #     for i in range(len(hire)):
-                    #         hire = ''.join(hire[i])
-                    #     hire = ''.join(map(str,hire))
-                    # else:
-                    #     hire = 0                    
-
-                    query9 = "SELECT position FROM employee WHERE EmployeeID = %s"
-                    cursor.execute(query9,data)
-                    pos = cursor.fetchall()
-                    for i in range(len(pos)):
-                        if pos != None:
-                            pos = ''.join(pos[i])
-                        else:
-                            pos = " "
-                    if pos != 0:
-                        pos = ''.join(map(str,pos))
-                    # print(pos)
-                    
-
-                    query10 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
-                    cursor.execute(query10,data)
-                    nic = cursor.fetchall()
-                    # print(nic)
-                    for i in range(len(nic)):
-                        if nic[0][0] != None:
-                            nic = ''.join(nic[i])
-                        else:
-                            nic = " "
-                    if nic != 0:
-                        nic = ''.join(map(str,nic))
-                    
-                    UNQ = month + " " + fname
-                    data3 = [UNQ]
-                    
-                    # query11 = "SELECT LockSal From salary WHERE UNQ = %s"
-                    # cursor.execute(query11,data3)
-                    # lockSal = cursor.fetchall()
-
-                    # print(lockSal)
-                    # print(len(lockSal))
-
-                    # if len(lockSal) > 0:
-                    #     print("In If")
-                    #     for i in range(len(lockSal)):
-                    #         print("In For ")
-                    #         lockSal = ''.join(lockSal[i])
-                    # else:
-                    #     print("In Else")
-                    #     lockSal = "No"
-
-                    query11 = "SELECT ProcSal From salary WHERE UNQ = %s"
-                    cursor.execute(query11,data3)
-                    ProcSal = cursor.fetchall()
-
-                    print(ProcSal)
-                    print(len(ProcSal))
-
-                    if len(ProcSal) > 0:
-                        print("In If")
-                        for i in range(len(ProcSal)):
-                            print("In For ")
-                            ProcSal = ''.join(ProcSal[i])
-                    else:
-                        print("In Else")
-                        ProcSal = "No"
-
-                    # query12 = "SELECT working FROM employee WHERE EmployeeID = %s"
-                    # cursor.execute(query12, data)
-                    # working = cursor.fetchall()
-
-                    # if len(working) > 0:
-                    #     print("In If")
-                    #     for i in range(len(working)):
-                    #         print("In For ")
-                    #         working = ''.join(working[i])
-                    # else:
-                    #     print("In Else")
-                    #     working = "Yes"
-                    
-
-                    if ProcSal == "No":
-                        print("In Process Salary")
-
-                        query = """INSERT INTO payslip(
-                                JoinDate,
-                                Company,
-                                EmpName,
-                                Position,
-                                NIC,
-                                BasicSalary,
-                                TravelAlw,
-                                Bonus,
-                                Gross,
-                                PAYE,
-                                NPF,
-                                NSF,
-                                SLevy,
-                                Deduction,
-                                NetPay,
-                                Payable,
-                                NetPayAcc,
-                                eNPF,
-                                eNSF,
-                                eLevy,
-                                ePRGF,
-                                month,
-                                year,
-                                UNQ
-                                )
-                                VALUES(
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s
-                                );
-                                """
+                        UNQ = month + " " + fname
+                        data3 = [UNQ]
                         
+                        # query11 = "SELECT LockSal From salary WHERE UNQ = %s"
+                        # cursor.execute(query11,data3)
+                        # lockSal = cursor.fetchall()
+
+                        # print(lockSal)
+                        # print(len(lockSal))
+
+                        # if len(lockSal) > 0:
+                        #     print("In If")
+                        #     for i in range(len(lockSal)):
+                        #         print("In For ")
+                        #         lockSal = ''.join(lockSal[i])
+                        # else:
+                        #     print("In Else")
+                        #     lockSal = "No"
+
+                        # query12 = "SELECT working FROM employee WHERE EmployeeID = %s"
+                        # cursor.execute(query12, data)
+                        # working = cursor.fetchall()
+
+                        # if len(working) > 0:
+                        #     print("In If")
+                        #     for i in range(len(working)):
+                        #         print("In For ")
+                        #         working = ''.join(working[i])
+                        # else:
+                        #     print("In Else")
+                        #     working = "Yes"                
                         
                         flname = lname + " " + fname
 
@@ -3551,445 +2829,238 @@ def process_salary():
                         else:
                             eprgf = 0
 
-                        insert_query = """
-                        INSERT INTO OriginalData(
-                        EmployeeID,
-                        EmployeeName,
-                        BasicSalary,
-                        FixedAllow,
-                        OtherDeduction,
-                        Overtime,
-                        DiscBonus,
-                        NSFEmpee,
-                        OtherAllow,
-                        TaxableAllow,
-                        Medical,
-                        Transport,
-                        overseas,
-                        NTaxableAllow,
-                        EDF,
-                        Arrears,
-                        AttendanceBns,
-                        EOY,
-                        Loan,
-                        CarBenefit,
-                        LeaveRef,
-                        SLevy,
-                        SpecialBns,
-                        Lateness,
-                        EducationRel,                    
-                        SpeProBns,
-                        NPS,
-                        MedicalRel,
-                        Payable,
-                        Deduction,
-                        NetPay,
-                        NetPaysheet,
-                        CurrentGross,
-                        cGrossTax,
-                        PrevGross,
-                        PrevIET,
-                        IET,
-                        NetCh,
-                        CurrentPAYE,
-                        PrevPAYE,
-                        PAYE,
-                        eCSG,
-                        eNSF,
-                        eLevy,
-                        PRGF,
-                        PrevThreshold,
-                        Threshold,
-                        netchar,
-                        CurrentSLevy,
-                        PrevSLevy,
-                        slevyPay,
-                        Absences,
-                        Month,
-                        Year,
-                        UNQ,
-                        LockSal
-                        )
+                        update_original = """UPDATE OriginalData
+                                        SET
+                                        EmployeeID = %s,
+                                        EmployeeName = %s,
+                                        BasicSalary = %s,
+                                        FixedAllow = %s,
+                                        OtherDeduction = %s,
+                                        Overtime = %s,
+                                        DiscBonus = %s,
+                                        NSFEmpee = %s,
+                                        OtherAllow = %s,
+                                        TaxableAllow = %s,
+                                        Medical = %s,
+                                        Transport = %s,
+                                        overseas = %s,
+                                        NTaxableAllow = %s,
+                                        EDF = %s,
+                                        Arrears = %s,
+                                        AttendanceBns = %s,
+                                        EOY = %s,
+                                        Loan = %s,
+                                        CarBenefit = %s,
+                                        LeaveRef = %s,
+                                        SLevy = %s,
+                                        SpecialBns = %s,
+                                        Lateness = %s,
+                                        EducationRel = %s,
+                                        SpeProBns = %s,
+                                        NPS = %s,
+                                        MedicalRel = %s,
+                                        Payable = %s,
+                                        Deduction = %s,
+                                        NetPay = %s,
+                                        NetPaysheet = %s,
+                                        CurrentGross = %s,
+                                        cGrossTax = %s,
+                                        PrevGross = %s,
+                                        PrevIET = %s,
+                                        IET = %s,
+                                        NetCh = %s,
+                                        CurrentPAYE = %s,
+                                        PrevPAYE = %s,
+                                        PAYE = %s,
+                                        eCSG = %s,
+                                        eNSF = %s,
+                                        eLevy = %s,
+                                        PRGF = %s,
+                                        PrevThreshold = %s,
+                                        Threshold = %s,
+                                        netchar = %s,
+                                        CurrentSLevy = %s,
+                                        PrevSLevy = %s,
+                                        slevyPay = %s,
+                                        Absences = %s
+                                        WHERE 
+                                        UNQ = %s;
+                                        """
+                        data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, UNQ]
+                        cursor.execute(update_original, data1)
+                        print("Update Original Query Executed")
 
-                        VALUES(
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s
-                        );
-                        """
-                        data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, month, year, UNQ, 'No']
-                        cursor.execute(insert_query, data1)
-                        print("Process Query Executed")
-
-                        insert_query2 = """
-                        INSERT INTO salary(
-                        EmployeeID,
-                        EmployeeName,
-                        BasicSalary,
-                        FixedAllow,
-                        OtherDeduction,
-                        Overtime,
-                        DiscBonus,
-                        NSFEmpee,
-                        OtherAllow,
-                        TaxableAllow,
-                        Medical,
-                        Transport,
-                        overseas,
-                        NTaxableAllow,
-                        EDF,
-                        Arrears,
-                        AttendanceBns,
-                        EOY,
-                        Loan,
-                        CarBenefit,
-                        LeaveRef,
-                        SLevy,
-                        SpecialBns,
-                        Lateness,
-                        EducationRel,                    
-                        SpeProBns,
-                        NPS,
-                        MedicalRel,
-                        Payable,
-                        Deduction,
-                        NetPay,
-                        NetPaysheet,
-                        CurrentGross,
-                        cGrossTax,
-                        PrevGross,
-                        PrevIET,
-                        IET,
-                        NetCh,
-                        CurrentPAYE,
-                        PrevPAYE,
-                        PAYE,
-                        eCSG,
-                        eNSF,
-                        eLevy,
-                        PRGF,
-                        PrevThreshold,
-                        Threshold,
-                        netchar,
-                        CurrentSLevy,
-                        PrevSLevy,
-                        slevyPay,
-                        Absences,
-                        Month,
-                        Year,
-                        UNQ,
-                        LockSal,
-                        ProcSal
-                        )
-
-                        VALUES(
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s,
-                        %s
-                        );
-                        """
-                        data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, month, year, UNQ, 'No', 'Yes']
-                        cursor.execute(insert_query2, data1)
-                        print("Process Query Executed")
-
+                        update_salary = """UPDATE salary
+                                        SET
+                                        EmployeeID = %s,
+                                        EmployeeName = %s,
+                                        BasicSalary = %s,
+                                        FixedAllow = %s,
+                                        OtherDeduction = %s,
+                                        Overtime = %s,
+                                        DiscBonus = %s,
+                                        NSFEmpee = %s,
+                                        OtherAllow = %s,
+                                        TaxableAllow = %s,
+                                        Medical = %s,
+                                        Transport = %s,
+                                        overseas = %s,
+                                        NTaxableAllow = %s,
+                                        EDF = %s,
+                                        Arrears = %s,
+                                        AttendanceBns = %s,
+                                        EOY = %s,
+                                        Loan = %s,
+                                        CarBenefit = %s,
+                                        LeaveRef = %s,
+                                        SLevy = %s,
+                                        SpecialBns = %s,
+                                        Lateness = %s,
+                                        EducationRel = %s,
+                                        SpeProBns = %s,
+                                        NPS = %s,
+                                        MedicalRel = %s,
+                                        Payable = %s,
+                                        Deduction = %s,
+                                        NetPay = %s,
+                                        NetPaysheet = %s,
+                                        CurrentGross = %s,
+                                        cGrossTax = %s,
+                                        PrevGross = %s,
+                                        PrevIET = %s,
+                                        IET = %s,
+                                        NetCh = %s,
+                                        CurrentPAYE = %s,
+                                        PrevPAYE = %s,
+                                        PAYE = %s,
+                                        eCSG = %s,
+                                        eNSF = %s,
+                                        eLevy = %s,
+                                        PRGF = %s,
+                                        PrevThreshold = %s,
+                                        Threshold = %s,
+                                        netchar = %s,
+                                        CurrentSLevy = %s,
+                                        PrevSLevy = %s,
+                                        slevyPay = %s,
+                                        Absences = %s
+                                        WHERE
+                                        UNQ = %s
+                                        """
                         
-                        data3 = [hire, "Demo" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay , totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, month, year, UNQ ]
-                        cursor.execute(query, data3)
-                        print("Payslip Query Executed")
-                        
+                        data2 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, UNQ]
+                        cursor.execute(update_salary, data2)
+                        print("Update Salary Query Executed")
 
-                        query14 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
-                        cursor.execute(query14, data)
-                        nic = cursor.fetchall()
-                        if nic[0][0] == "":
-                            nic = " "
-                        else:
-                            for i in range(len(nic)):
-                                nic = ''.join(nic[i])
-                        
-                            
+                        update_payslip = """UPDATE payslip
+                                SET
+                                EmpName = %s,
+                                Position = %s,
+                                NIC = %s,
+                                BasicSalary = %s,
+                                TravelAlw = %s,
+                                Bonus = %s,
+                                Gross = %s,
+                                PAYE = %s,
+                                NPF = %s,
+                                NSF = %s,
+                                SLevy = %s,
+                                Deduction = %s,
+                                NetPay = %s,
+                                Payable = %s,
+                                NetPayAcc = %s,
+                                eNPF = %s,
+                                eNSF = %s,
+                                eLevy = %s,
+                                ePRGF = %s,
+                                month = %s
+                                WHERE
+                                UNQ = %s;
+                                """
+                        data_payslip = [flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay, totalDeduction, netpay, netpay, netpay,  enps, ensf, levy, eprgf, month, UNQ]
+                        cursor.execute(update_payslip, data_payslip)
+                        print("Update Payslip Query Executed")
+                        # msg = "Processing Complete"
+
                         emolument = int(basic) + int(arrears) + int(overseas) + int(otherAllow) + int(car) + int(ot) + int(eoy) + int(leave) + int(fixAllow) + int(discBns) + int(SpeProBns) + int(speBns) 
 
-                        paye_query = """ INSERT INTO payecsv(
-                                    EmployeeID,
-                                    LastName,
-                                    FirstName,
-                                    Emoluments,
-                                    PAYE,
-                                    working,
-                                    SLevy,
-                                    EmolumentsNet,
-                                    month,
-                                    UNQ
-                                    )
-                                    VALUES(
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s
-                                    );"""
-                        data4 = [nic, lname, fname, emolument, paye, 'Yes', slevypay, emolument, month, UNQ]
+                        update_payecsv = """UPDATE payecsv
+                                        SET
+                                        EmployeeID = %s,
+                                        LastName = %s,
+                                        FirstName = %s,
+                                        Emoluments = %s,
+                                        PAYE = %s,
+                                        SLevy = %s,
+                                        EmolumentsNet = %s
+                                        WHERE
+                                        UNQ = %s;
+                                        """
 
-                        cursor.execute(paye_query, data4)
-                        print("PAYE Query Executed")
-
-                        query12 = "SELECT NPS FROM employee WHERE EmployeeID = %s"
-                        cursor.execute(query12, data)
-                        pension = cursor.fetchall()
-                        for i in range(len(pension)):
-                            pension = ''.join(pension[i])
-
-                        if pension == "Paid":
-                            pension = "Yes"
-                        else:
-                            pension = "No"
-
-                        query13 = "SELECT working FROM employee WHERE EmployeeID = %s"
-                        cursor.execute(query13, data)
-                        working = cursor.fetchall()
-                        for i in range(len(working)):
-                            working = ''.join(working[i])
-                        
-                        query14 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
-                        cursor.execute(query14, data)
-                        nic = cursor.fetchall()
-                        for i in range(len(nic)):
-                            nic = ''.join(nic[i])
+                        data4 = [eid, lname, fname, emolument, paye, slevypay, emolument, UNQ]
+                        cursor.execute(update_payecsv, data4)
+                        print("Update PAYE CSV Query Executed")
 
                         allowance = int(otherAllow) + int(fixAllow) + int(speBns) + int(SpeProBns) + int(discBns) + int(attBns)
                         commission = 0
 
                         totalRem = int(basic) + int(allowance)
-                        
-                        prgf_query = """INSERT INTO prgfcsv(
-                                    EmployeeID,
-                                    LastName,
-                                    FirstName,
-                                    Pension,
-                                    Working,
-                                    Hire,
-                                    Basic,
-                                    Allowance,
-                                    Commission,
-                                    TotalRem,
-                                    PRGF,
-                                    reason,
-                                    month,
-                                    UNQ
-                                    )
-                                    VALUES(
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s
-                                    );"""
-                        if basic < 200000:
-                            data5 = [nic, lname, fname, "No", working, hire, basic, allowance, commission, totalRem, eprgf, " " , month, UNQ]
-                        else:
-                            data5 = [nic, lname, fname, "No", working, hire, basic, 0, 0, 0, 0, " " , month, UNQ]
-                        
-                        cursor.execute(prgf_query, data5)
 
-                        cnp_query = """INSERT INTO cnpcsv(
-                                EmployeeID,
-                                LastName,
-                                FirstName,
-                                Basic,
-                                Basic2,
-                                Season,
-                                Alphabet,
-                                Number,
-                                Working,
-                                Blank1,
-                                Blank2,
-                                month,
-                                UNQ
-                                )
-                                VALUES(
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s,
-                                    %s
-                                );"""
-                        data6 = [nic, lname, fname, basic, basic, "S2", "M", "1", working, " ", " ", month, UNQ]
+                        update_prgf = """UPDATE prgfcsv
+                                    SET
+                                    EmployeeID = %s,
+                                    LastName = %s,
+                                    FirstName = %s,
+                                    Basic = %s,
+                                    Allowance = %s,
+                                    Commission = %s,
+                                    TotalRem = %s,
+                                    PRGF = %s
+                                    WHERE
+                                    UNQ = %s;
+                                    """
+                        prgf_data = [eid, lname, fname, basic, allowance, commission, totalRem, eprgf, UNQ]
 
-                        cursor.execute(cnp_query, data6)
+                        cursor.execute(update_prgf, prgf_data)
+                        print("Update PRGF Complete")
 
-                        insert_contri = """INSERT INTO contribution(
-                                        EmployeeID,
-                                        LastName,
-                                        FirstName,
-                                        IDCard,
-                                        Salary,
-                                        blank1,
-                                        ecsg,
-                                        elevy,
-                                        ensf,
-                                        csg,
-                                        nsf,
-                                        blank2,
-                                        slevy,
-                                        month,
-                                        year,
-                                        UNQ
-                                        )
-                                        VALUES(
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s
-                                        );
+                        update_cnp = """UPDATE cnpcsv
+                                    SET
+                                    EmployeeID = %s,
+                                    LastName = %s,
+                                    FirstName = %s,
+                                    Basic = %s,
+                                    Basic2 = %s
+                                    WHERE
+                                    UNQ = %s;
+                                    """
+                        cnp_data = [eid, lname, fname, basic, basic, UNQ]
+                        cursor.execute(update_cnp, cnp_data)
+
+                        print("Update CNP Complete")
+
+                        update_contri = """UPDATE contribution
+                                        SET
+                                        EmployeeID = %s,
+                                        LastName = %s,
+                                        FirstName = %s,
+                                        Salary = %s,
+                                        ecsg = %s,
+                                        elevy = %s,
+                                        ensf = %s,
+                                        csg = %s,
+                                        nsf = %s,
+                                        slevy = %s
+                                        WHERE
+                                        UNQ = %s;
                                         """
-                        contri_data = [eid, lname, fname, nic, basic, " ", enps, levy, ensf, nps, nsf, " ", slevypay, month, year, UNQ]
-                        cursor.execute(insert_contri, contri_data)
-                        msg = "Processing Complete"
-                        # print("Do Something Else")
-                    else:
-                        msg = "Salary Already Processed"
+                        contri_data = [eid, lname, fname, basic, enps, levy, ensf, nps, nsf, slevypay, UNQ]
+                        cursor.execute(update_contri, contri_data)
+                        print("Update Contribution Complete")
+
+                        msg = "Re Processing Complete For " + flname + " "
+                        print(msg)
+                
                 query15 = "SELECT Basic FROM cnpcsv WHERE month = %s"
                 data7 = [month]
                 cursor.execute(query15, data7)
@@ -4157,18 +3228,1192 @@ def process_salary():
                 print("Contribution Update Complete")
 
 
-                if msg == "Salary Already Proccessed" or msg == "Processing Complete":
+                return render_template("process.html", msg=msg)      
+
+# =================================================================================================================== #
+
+            elif eid == "ALL":                 
+                # print(month)
+                month = request.form["mon"]
+        
+                year = request.form["year"]
+                id = 0
+                month = month.lower()          
+                if month == "January" or month=="january":
+                    print("In Jan")
+                    get_date='01-' + str(year)
+                    id = 1
+                elif month == "February" or month=="february":
+                    print("In Feb")
+                    get_date=str(2) + str(year)
+                    id = 2
+                elif month == "March" or month=="march":
+                    print("In Mar")
+                    get_date=str(3) + str(year)
+                    id = 3
+                elif month == "April" or month=="april":
+                    print("In Apr")
+                    get_date=str(4) + str(year)
+                    id = 4
+                elif month == "May" or month=="may":
+                    print("In May")
+                    get_date=str(5) + str(year)
+                    id = 5
+                elif month == "June" or month=="june":
+                    print("In Jun")
+                    get_date=str(6) + str(year)
+                    id = 6
+                elif month == "July" or month=="july":
+                    print("In Jul")
+                    get_date=str(7) + str(year)
+                    id = 7
+                elif month == "August" or month=="august":
+                    print("In Aug")
+                    get_date=str(8) + str(year)
+                    id = 8
+                elif month == "September" or month=="september":
+                    print("In Sep")
+                    get_date=str(9) + str(year)
+                    id = 9
+                elif month == "October" or month=="october":
+                    print("In Oct")
+                    get_date=str(10) + str(year)
+                    id = 10
+                elif month == "November" or month=="november":
+                    print("In Nov")
+                    get_date=str(11) + str(year)
+                    id = 11
+                elif month == "December" or month=="december":
+                    print("In Dec")
+                    get_date=str(12) + str(year)
+                    id = 12
+                else:  
+                    print("In Else")
+                    msg = "Enter Month Correctly"
                     return render_template("process.html", msg = msg)
-                else:
-                    msg = "No Employee Available For Process"
-                    return render_template("process.html", msg = msg)                                
+                mid = id-1
+                if mid == 0:
+                    mid = 12
+                
+                # print(calendar.month_name[id])
+                month2 = calendar.month_name[mid]
+                month2 = month2.lower()
+
+                # query3 = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, medical, Specialbonus FROM employee WHERE EmployeeID = %s "
+                # query3 = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, medical, Specialbonus, EmployeeID FROM employee"
+                query = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, medical, Specialbonus, EmployeeID FROM employee"
+                # cursor.execute(query3, data)
+                cursor.execute(query)
+                emp_data = cursor.fetchall()
+
+                # print(emp_data)
+
+                arrays = {}
+                for index,lst in enumerate(emp_data):
+                    arrays[str(index+1)] = lst
+                # print(arrays)
+                
+                for i in arrays:
+                    # print(i)
+                    emp_data2 = list(arrays[i])
+                    # emp_data2 = list(emp_data[0])
+
+                    car = int(emp_data2[0])
+                    # print(car)
+                    # print(type(car))
+                    
+                    tbasic = int(emp_data2[1])
+                    fixAllow = int(emp_data2[2])
+                    trans = int(emp_data2[3])
+                    edf = int(emp_data2[4])
+                    education = int(emp_data2[5])
+                    Medicalrel = int(emp_data2[6])
+                    # medical = int(emp_data2[7])
+                    medical = 0
+                    SpeProBns = int(emp_data2[8])
+                    eid = emp_data2[9]
+
+                    # lwork = emp_data2[10]
+                    # print(lwork)
+
+                    data = [eid]
+                    data2 = [eid,month2]
+                    # print(month2)
+
+                    query_month = "SELECT MONTH(Lastwork) AS Month FROM employee WHERE EmployeeID= %s"
+                    cursor.execute(query_month, data)
+                    emp_month = cursor.fetchall()
+                    
+                    last_mon = emp_month[0][0]
+                    
+
+                    query_year = "SELECT YEAR(Lastwork) AS Year FROM employee WHERE EmployeeID= %s"
+                    cursor.execute(query_year, data)
+                    emp_year = cursor.fetchall()
+
+                    last_year = emp_year[0][0]
+
+                    # if mon == 0:
+                    #     mon = id    
+
+                    print("last Year ", last_year)
+                    print("year ", year)
+                    print("last month ", last_mon)
+                    print("month ", id)
+                    
+                    if int(last_year) >= int(year) or last_year == 1:
+                        print("Year Is Correct")
+                        if int(last_mon) >= int(id) or last_mon == 1:
+                            print("In Start Process")
+                            query1 = "SELECT FirstName FROM employee WHERE EmployeeID = %s"
+                            cursor.execute(query1,data)
+                            fname = cursor.fetchall()
+                            for i in range(len(fname)):
+                                fname = ''.join(fname[i])
+
+                            query2 = "SELECT LastName FROM employee WHERE EmployeeID = %s"
+                            cursor.execute(query2,data)
+                            lname = cursor.fetchall()
+                            for i in range(len(lname)):
+                                lname = ''.join(lname[i])
+
+                            query3 = "SELECT cGrossTax FROM salary WHERE EmployeeID= %s AND Month = %s"
+                            cursor.execute(query3,data2)
+                            prevGross = cursor.fetchall()
+                            for i in range(len(prevGross)):
+                                if prevGross != None:
+                                    prevGross = ''.join(prevGross[i])
+                                else:
+                                    prevGross = 0
+                            if prevGross != 0:
+                                prevGross = ''.join(map(str,prevGross))
+                                
+
+                            query4 = "SELECT IET FROM salary WHERE EmployeeID= %s AND Month = %s"
+                            cursor.execute(query4,data2)
+                            piet = cursor.fetchall()
+                            for i in range(len(piet)):
+                                if piet != None:
+                                    piet = ''.join(piet[i])
+                                else:
+                                    piet = 0
+                            if piet != 0:
+                                piet = ''.join(map(str,piet))
+
+                            query5 = "SELECT CurrentPAYE FROM salary WHERE EmployeeID= %s AND Month = %s"
+                            cursor.execute(query5,data2)
+                            ppaye = cursor.fetchall()
+                            # print(ppaye)
+                            for i in range(len(ppaye)):
+                                if ppaye != None:
+                                    ppaye = ''.join(ppaye[i])
+                                    print(ppaye)
+                                else:
+                                    ppaye = 0
+                            if ppaye != 0:
+                                ppaye = ''.join(map(str,ppaye))
+
+                            query6 = "SELECT Threshold FROM salary WHERE EmployeeID= %s AND Month = %s"
+                            cursor.execute(query6,data2)
+                            pths = cursor.fetchall()
+                            for i in range(len(pths)):
+                                if pths != None:
+                                    pths = ''.join(pths[i])
+                                else:
+                                    pths = 0
+                            if pths != 0:
+                                pths = ''.join(map(str,pths))
+
+                            query7 = "SELECT CurrentSLevy FROM salary WHERE EmployeeID= %s AND Month = %s"
+                            cursor.execute(query7,data2)
+                            plevy = cursor.fetchall()
+                            print("Before For Loop", plevy)
+                            print(len(plevy))
+
+                            if len(plevy) > 0:
+                                print("In If")
+                                for i in range(len(plevy)):
+                                    print("In For ")
+                                    plevy = ''.join(plevy[i])
+                            else:
+                                print("In Else")
+                                plevy = 0    
+
+
+                            # for i in range(len(plevy)):
+                            #     print("In For")
+                            #     if plevy != None:
+                            #         print("In if1")
+                            #         plevy = ''.join(plevy[i])
+                            #     else:
+                            #         print("In Else")
+                            #         plevy = 0
+                            
+                            # if plevy != 0:
+                            #     print("In if2")
+                            #     plevy = ''.join(map(str,plevy))
+                            
+                            print("plevy", plevy)
+
+                            query8 = "SELECT hire FROM employee WHERE EmployeeID = %s"
+                            cursor.execute(query8,data)
+                            hire = cursor.fetchall()
+                            
+                            hire = hire[0][0] 
+                            hire = str(hire)
+                            # print(hire)
+                            # print(str(hire))
+                            # print(type(str(hire)))
+                            # if hire != None:
+                            #     for i in range(len(hire)):
+                            #         hire = ''.join(hire[i])
+                            #     hire = ''.join(map(str,hire))
+                            # else:
+                            #     hire = 0                    
+
+                            query9 = "SELECT position FROM employee WHERE EmployeeID = %s"
+                            cursor.execute(query9,data)
+                            pos = cursor.fetchall()
+                            for i in range(len(pos)):
+                                if pos != None:
+                                    pos = ''.join(pos[i])
+                                else:
+                                    pos = " "
+                            if pos != 0:
+                                pos = ''.join(map(str,pos))
+                            # print(pos)
+                            
+
+                            query10 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
+                            cursor.execute(query10,data)
+                            nic = cursor.fetchall()
+                            # print(nic)
+                            for i in range(len(nic)):
+                                if nic[0][0] != None:
+                                    nic = ''.join(nic[i])
+                                else:
+                                    nic = " "
+                            if nic != 0:
+                                nic = ''.join(map(str,nic))
+                            
+                            UNQ = month + " " + fname
+                            data3 = [UNQ]
+                            
+                            # query11 = "SELECT LockSal From salary WHERE UNQ = %s"
+                            # cursor.execute(query11,data3)
+                            # lockSal = cursor.fetchall()
+
+                            # print(lockSal)
+                            # print(len(lockSal))
+
+                            # if len(lockSal) > 0:
+                            #     print("In If")
+                            #     for i in range(len(lockSal)):
+                            #         print("In For ")
+                            #         lockSal = ''.join(lockSal[i])
+                            # else:
+                            #     print("In Else")
+                            #     lockSal = "No"
+
+                            query11 = "SELECT ProcSal From salary WHERE UNQ = %s"
+                            cursor.execute(query11,data3)
+                            ProcSal = cursor.fetchall()
+
+                            print(ProcSal)
+                            print(len(ProcSal))
+
+                            if len(ProcSal) > 0:
+                                print("In If")
+                                for i in range(len(ProcSal)):
+                                    print("In For ")
+                                    ProcSal = ''.join(ProcSal[i])
+                            else:
+                                print("In Else")
+                                ProcSal = "No"
+
+                            # query12 = "SELECT working FROM employee WHERE EmployeeID = %s"
+                            # cursor.execute(query12, data)
+                            # working = cursor.fetchall()
+
+                            # if len(working) > 0:
+                            #     print("In If")
+                            #     for i in range(len(working)):
+                            #         print("In For ")
+                            #         working = ''.join(working[i])
+                            # else:
+                            #     print("In Else")
+                            #     working = "Yes"
+                            
+
+                            if ProcSal == "No":
+                                print("In Process Salary")
+
+                                query = """INSERT INTO payslip(
+                                        JoinDate,
+                                        Company,
+                                        EmpName,
+                                        Position,
+                                        NIC,
+                                        BasicSalary,
+                                        TravelAlw,
+                                        Bonus,
+                                        Gross,
+                                        PAYE,
+                                        NPF,
+                                        NSF,
+                                        SLevy,
+                                        Deduction,
+                                        NetPay,
+                                        Payable,
+                                        NetPayAcc,
+                                        eNPF,
+                                        eNSF,
+                                        eLevy,
+                                        ePRGF,
+                                        month,
+                                        year,
+                                        UNQ
+                                        )
+                                        VALUES(
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s
+                                        );
+                                        """
+                                
+                                
+                                flname = lname + " " + fname
+
+                                # Values We Don't Get
+                                ot = 0
+                                otherAllow = 0
+                                arrears = 0
+                                eoy = 0
+                                leave = 0
+                                speBns = 0
+                                discBns = 0
+                                tax = 0
+                                ntax = 0
+                                attBns = 0
+                                overseas = tax + ntax
+
+                                loan = 0
+                                lateness = 0
+                                otherDed = 0
+                                ab = 0
+
+                                # Previous Data
+                                # print(type(prevGross))
+                                # print(prevGross)
+                                if prevGross == "":
+                                    prevGross = 0
+                                else:
+                                    prevGross = int(prevGross)
+
+                                if piet == "":
+                                    piet = 0
+                                else:
+                                    piet = int(piet)
+                                
+                                if ppaye == "":
+                                    ppaye = 0
+                                else:
+                                    ppaye = int(ppaye)
+                                
+                                if pths == "":
+                                    pths = 0
+                                else:
+                                    pths = int(pths)
+                                # print(pths)
+                                if plevy == "":
+                                    plevy = 0
+                                else:
+                                    plevy = int(plevy)
+                        
+                                basic = int(tbasic) - int(ab)
+                                # Calculations
+                                payable = basic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
+                                bonus = speBns + SpeProBns + otherAllow + fixAllow + discBns + attBns
+
+                                # For Overseas Amount
+                                if overseas > 0:
+                                    ntax = round(int(basic) * 0.06)
+                                    tax = round(int(overseas) - int(ntax))
+                                else:
+                                    ntax = 0
+                                    tax = 0
+
+                                if trans > 20000:
+                                    transTax = trans - 20000
+                                    ntransTax = trans - transTax
+                                else:
+                                    transTax = 0
+                                    ntransTax = 0
+
+                                cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
+
+                                grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car
+
+                                # print("prev Gross " , prevGross)
+                                # print("Curr Gross " , cgross)
+                                gross = prevGross + grossTax
+                                # print("gross" , gross)
+                                medf = round(int(edf) / 13)
+                                ciet = round(( int(edf) + int(Medicalrel) + int(education)) / 13)
+                                
+                                iet = int(ciet) + int(piet)
+                                # print("ciet" , ciet)
+                                # print("piet", piet)
+                                # print("iet", iet)
+
+                                netch = gross - iet
+
+                                # print("netch" , netch)
+                                if netch < 0:
+                                    netch = 0
+                                else:
+                                    netch = netch
+
+                                if int(basic) > 50000:
+                                    nps = round(basic * 0.03)
+                                    # cpaye =  round(netch * 0.15)
+                                    enps = round(basic * 0.06)
+                                else:
+                                    nps = round(basic * 0.015)
+                                    # cpaye = round(netch * 0.1)
+                                    enps = round(basic * 0.03)
+
+                                check = int(basic) + int(otherAllow) - int(medf)
+                                if check < 53846:
+                                    cpaye = round(netch* 0.1)
+                                elif check >= 53846 and check < 75000:
+                                    cpaye = round(netch* 0.125)
+                                else:
+                                    cpaye = round(netch* 0.15)
+
+                                if cpaye < 0:
+                                    cpaye = 0
+                                else:
+                                    cpaye = int(cpaye)
+                                
+                                if ppaye < 0:
+                                    ppaye =0
+                                else:
+                                    ppaye = int(ppaye)
+
+                                # print("cpaye", cpaye)
+                                # print("ppaye", ppaye)
+                                paye = int(cpaye) - int(ppaye)
+                                # print("paye", paye)
+                                if paye < 0:
+                                    paye =0
+                                else:
+                                    paye = int(paye)
+
+                                nsf = int(basic * 0.01)
+
+                                if nsf > 214:
+                                    nsf = 214
+                                else:
+                                    nsf = int(nsf)
+
+                                temp = int(cgross) * 13
+                                slevy = 0
+                                tths = round(3000000/13)
+                                ths = int(pths) + int(tths)
+                                # print(ths)
+                                netchar = int(gross) - int(iet) - int(ths)
+                                print("gross", gross)
+                                print("iet", iet)
+                                print("ths", ths)
+                                if netchar < 0 :
+                                    netchar = 0
+                                else:
+                                    netchar = netchar
+                                print("netchar", netchar)
+                                print("grossTax", grossTax)
+
+                                if int(temp) > 3000000:
+                                    slevy1 = round(netchar * 0.25)
+                                    slevy2 = round(gross * 0.1)
+                                    print("slevy1", slevy1)
+                                    print("slevy2", slevy2)
+                                    if slevy1 > slevy2:
+                                        slevy = int(slevy2)
+                                    else:
+                                        slevy = int(slevy1)
+                                else:
+                                    slevy = 0
+                                print("slevy", slevy)
+                                ensf = round(basic * 0.025)
+                                if ensf > 536:
+                                    ensf = 536
+                                else:
+                                    ensf = round(ensf)
+                                levy = round(int(basic) * 0.015)
+                                deduction = int(loan) + int(paye) + int(lateness) + int(nps) + int(otherDed) + int(nsf) + int(medical)
+                                net = int(payable) - int(deduction)
+                                # print(slevy)
+                                NetPaysheet = int(net) - int(slevy)
+                                slevypay = slevy - plevy
+                                print("slevypay", slevypay)
+                                otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
+                                
+                                tax = int(tax) + int(transTax)
+                                ntax = int(ntax) + int(ntransTax)
+                                # Payslip Calculation
+
+                                paygross = int(basic) + int(trans) + int(bonus)
+
+                                totalDeduction = int(paye) + int(nps) + int(nsf)
+
+                                netpay = paygross - totalDeduction
+                                # eprgf = 0
+                                if basic < 200000:
+                                    eprgf = round((int(basic) + int(bonus)) * 0.035) # + commission
+                                else:
+                                    eprgf = 0
+
+                                insert_query = """
+                                INSERT INTO OriginalData(
+                                EmployeeID,
+                                EmployeeName,
+                                BasicSalary,
+                                FixedAllow,
+                                OtherDeduction,
+                                Overtime,
+                                DiscBonus,
+                                NSFEmpee,
+                                OtherAllow,
+                                TaxableAllow,
+                                Medical,
+                                Transport,
+                                overseas,
+                                NTaxableAllow,
+                                EDF,
+                                Arrears,
+                                AttendanceBns,
+                                EOY,
+                                Loan,
+                                CarBenefit,
+                                LeaveRef,
+                                SLevy,
+                                SpecialBns,
+                                Lateness,
+                                EducationRel,                    
+                                SpeProBns,
+                                NPS,
+                                MedicalRel,
+                                Payable,
+                                Deduction,
+                                NetPay,
+                                NetPaysheet,
+                                CurrentGross,
+                                cGrossTax,
+                                PrevGross,
+                                PrevIET,
+                                IET,
+                                NetCh,
+                                CurrentPAYE,
+                                PrevPAYE,
+                                PAYE,
+                                eCSG,
+                                eNSF,
+                                eLevy,
+                                PRGF,
+                                PrevThreshold,
+                                Threshold,
+                                netchar,
+                                CurrentSLevy,
+                                PrevSLevy,
+                                slevyPay,
+                                Absences,
+                                Month,
+                                Year,
+                                UNQ,
+                                LockSal
+                                )
+
+                                VALUES(
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s
+                                );
+                                """
+                                data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, month, year, UNQ, 'No']
+                                cursor.execute(insert_query, data1)
+                                print("Process Query Executed")
+
+                                insert_query2 = """
+                                INSERT INTO salary(
+                                EmployeeID,
+                                EmployeeName,
+                                BasicSalary,
+                                FixedAllow,
+                                OtherDeduction,
+                                Overtime,
+                                DiscBonus,
+                                NSFEmpee,
+                                OtherAllow,
+                                TaxableAllow,
+                                Medical,
+                                Transport,
+                                overseas,
+                                NTaxableAllow,
+                                EDF,
+                                Arrears,
+                                AttendanceBns,
+                                EOY,
+                                Loan,
+                                CarBenefit,
+                                LeaveRef,
+                                SLevy,
+                                SpecialBns,
+                                Lateness,
+                                EducationRel,                    
+                                SpeProBns,
+                                NPS,
+                                MedicalRel,
+                                Payable,
+                                Deduction,
+                                NetPay,
+                                NetPaysheet,
+                                CurrentGross,
+                                cGrossTax,
+                                PrevGross,
+                                PrevIET,
+                                IET,
+                                NetCh,
+                                CurrentPAYE,
+                                PrevPAYE,
+                                PAYE,
+                                eCSG,
+                                eNSF,
+                                eLevy,
+                                PRGF,
+                                PrevThreshold,
+                                Threshold,
+                                netchar,
+                                CurrentSLevy,
+                                PrevSLevy,
+                                slevyPay,
+                                Absences,
+                                Month,
+                                Year,
+                                UNQ,
+                                LockSal,
+                                ProcSal
+                                )
+
+                                VALUES(
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s
+                                );
+                                """
+                                data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, month, year, UNQ, 'No', 'Yes']
+                                cursor.execute(insert_query2, data1)
+                                print("Process Query Executed")
+
+                                
+                                data3 = [hire, "Demo" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay , totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, month, year, UNQ ]
+                                cursor.execute(query, data3)
+                                print("Payslip Query Executed")
+                                
+
+                                query14 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
+                                cursor.execute(query14, data)
+                                nic = cursor.fetchall()
+                                if nic[0][0] == "":
+                                    nic = " "
+                                else:
+                                    for i in range(len(nic)):
+                                        nic = ''.join(nic[i])
+                                
+                                    
+                                emolument = int(basic) + int(arrears) + int(overseas) + int(otherAllow) + int(car) + int(ot) + int(eoy) + int(leave) + int(fixAllow) + int(discBns) + int(SpeProBns) + int(speBns) 
+
+                                paye_query = """ INSERT INTO payecsv(
+                                            EmployeeID,
+                                            LastName,
+                                            FirstName,
+                                            Emoluments,
+                                            PAYE,
+                                            working,
+                                            SLevy,
+                                            EmolumentsNet,
+                                            month,
+                                            UNQ
+                                            )
+                                            VALUES(
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s
+                                            );"""
+                                data4 = [nic, lname, fname, emolument, paye, 'Yes', slevypay, emolument, month, UNQ]
+
+                                cursor.execute(paye_query, data4)
+                                print("PAYE Query Executed")
+
+                                query12 = "SELECT NPS FROM employee WHERE EmployeeID = %s"
+                                cursor.execute(query12, data)
+                                pension = cursor.fetchall()
+                                for i in range(len(pension)):
+                                    pension = ''.join(pension[i])
+
+                                if pension == "Paid":
+                                    pension = "Yes"
+                                else:
+                                    pension = "No"
+
+                                query13 = "SELECT working FROM employee WHERE EmployeeID = %s"
+                                cursor.execute(query13, data)
+                                working = cursor.fetchall()
+                                for i in range(len(working)):
+                                    working = ''.join(working[i])
+                                
+                                query14 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
+                                cursor.execute(query14, data)
+                                nic = cursor.fetchall()
+                                for i in range(len(nic)):
+                                    nic = ''.join(nic[i])
+
+                                allowance = int(otherAllow) + int(fixAllow) + int(speBns) + int(SpeProBns) + int(discBns) + int(attBns)
+                                commission = 0
+
+                                totalRem = int(basic) + int(allowance)
+                                
+                                prgf_query = """INSERT INTO prgfcsv(
+                                            EmployeeID,
+                                            LastName,
+                                            FirstName,
+                                            Pension,
+                                            Working,
+                                            Hire,
+                                            Basic,
+                                            Allowance,
+                                            Commission,
+                                            TotalRem,
+                                            PRGF,
+                                            reason,
+                                            month,
+                                            UNQ
+                                            )
+                                            VALUES(
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s
+                                            );"""
+                                if basic < 200000:
+                                    data5 = [nic, lname, fname, "No", working, hire, basic, allowance, commission, totalRem, eprgf, " " , month, UNQ]
+                                else:
+                                    data5 = [nic, lname, fname, "No", working, hire, basic, 0, 0, 0, 0, " " , month, UNQ]
+                                
+                                cursor.execute(prgf_query, data5)
+
+                                cnp_query = """INSERT INTO cnpcsv(
+                                        EmployeeID,
+                                        LastName,
+                                        FirstName,
+                                        Basic,
+                                        Basic2,
+                                        Season,
+                                        Alphabet,
+                                        Number,
+                                        Working,
+                                        Blank1,
+                                        Blank2,
+                                        month,
+                                        UNQ
+                                        )
+                                        VALUES(
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s
+                                        );"""
+                                data6 = [nic, lname, fname, basic, basic, "S2", "M", "1", working, " ", " ", month, UNQ]
+
+                                cursor.execute(cnp_query, data6)
+
+                                insert_contri = """INSERT INTO contribution(
+                                                EmployeeID,
+                                                LastName,
+                                                FirstName,
+                                                IDCard,
+                                                Salary,
+                                                blank1,
+                                                ecsg,
+                                                elevy,
+                                                ensf,
+                                                csg,
+                                                nsf,
+                                                blank2,
+                                                slevy,
+                                                month,
+                                                year,
+                                                UNQ
+                                                )
+                                                VALUES(
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s
+                                                );
+                                                """
+                                contri_data = [eid, lname, fname, nic, basic, " ", enps, levy, ensf, nps, nsf, " ", slevypay, month, year, UNQ]
+                                cursor.execute(insert_contri, contri_data)
+                                msg = "Processing Complete"
+                                # print("Do Something Else")
+                            else:
+                                msg = "Salary Already Processed"
+                        query15 = "SELECT Basic FROM cnpcsv WHERE month = %s"
+                        data7 = [month]
+                        cursor.execute(query15, data7)
+                        basic_sal = cursor.fetchall()
+
+                        temp1 = []
+                        temp2 = []
+                        for i in range(len(basic_sal)):
+                            temp1 = ''.join(basic_sal[i])
+                            temp2.append(temp1)
+                        total = 0
+                        for i in range(len(temp2)):
+                            total = int(total) + int(temp2[i]) 
+
+                        print("Total : ", total)
+                        cnp = round(int(total) * 0.015)
+                        print("CNP : ", cnp)
+                        
+                        update_cnp = """UPDATE cnpcsv
+                        SET 
+                        totalRem = %s,
+                        CNP = %s
+                        WHERE
+                        month = %s;"""
+                        data8 = [total, cnp, month]
+                        cursor.execute(update_cnp, data8)
+        # =================================================================================================================================
+
+                        query16 = "SELECT Salary FROM contribution WHERE month = %s"
+                        cursor.execute(query16, data7)
+                        basic_con = cursor.fetchall()
+
+                        bas1 = []
+                        bas2 = []
+
+                        for i in range(len(basic_con)):
+                            bas1 = ''.join(basic_con[i])
+                            bas2.append(bas1)
+                        bas_total = 0
+
+                        for i in range(len(bas2)):
+                            bas_total = int(bas_total) + int(bas2[i])
+
+        # =================================================================================================================================
+
+                        query17 = "SELECT ecsg FROM contribution WHERE month = %s"
+                        cursor.execute(query17, data7)
+                        ecsg_con = cursor.fetchall()
+
+                        ecsg1 = []
+                        ecsg2 = []
+
+                        for i in range(len(ecsg_con)):
+                            ecsg1 = ''.join(ecsg_con[i])
+                            ecsg2.append(ecsg1)
+                        ecsg_total = 0
+
+                        for i in range(len(ecsg2)):
+                            ecsg_total = int(ecsg_total) + int(ecsg2[i])
+
+        # =================================================================================================================================
+
+                        query18 = "SELECT elevy FROM contribution WHERE month = %s"
+                        cursor.execute(query18, data7)
+                        elevy_con = cursor.fetchall()
+
+                        elevy1 = []
+                        elevy2 = []
+
+                        for i in range(len(elevy_con)):
+                            elevy1 = ''.join(elevy_con[i])
+                            elevy2.append(elevy1)
+                        elevy_total = 0
+
+                        for i in range(len(elevy2)):
+                            elevy_total = int(elevy_total) + int(elevy2[i])
+
+        # =================================================================================================================================
+
+                        query19 = "SELECT ensf FROM contribution WHERE month = %s"
+                        cursor.execute(query19, data7)
+                        ensf_con = cursor.fetchall()
+
+                        ensf1 = []
+                        ensf2 = []
+
+                        for i in range(len(ensf_con)):
+                            ensf1 = ''.join(ensf_con[i])
+                            ensf2.append(ensf1)
+                        ensf_total = 0
+
+                        for i in range(len(ensf2)):
+                            ensf_total = int(ensf_total) + int(ensf2[i])
+
+        # =================================================================================================================================
+
+                        query20 = "SELECT csg FROM contribution WHERE month = %s"
+                        cursor.execute(query20, data7)
+                        csg_con = cursor.fetchall()
+
+                        csg1 = []
+                        csg2 = []
+
+                        for i in range(len(csg_con)):
+                            csg1 = ''.join(csg_con[i])
+                            csg2.append(csg1)
+                        csg_total = 0
+
+                        for i in range(len(csg2)):
+                            csg_total = int(csg_total) + int(csg2[i])
+
+        # =================================================================================================================================
+
+                        query21 = "SELECT nsf FROM contribution WHERE month = %s"
+                        cursor.execute(query21, data7)
+                        nsf_con = cursor.fetchall()
+
+                        nsf1 = []
+                        nsf2 = []
+
+                        for i in range(len(nsf_con)):
+                            nsf1 = ''.join(nsf_con[i])
+                            nsf2.append(nsf1)
+                        nsf_total = 0
+
+                        for i in range(len(nsf2)):
+                            nsf_total = int(nsf_total) + int(nsf2[i])
+
+        # =================================================================================================================================
+
+                        query22 = "SELECT slevy FROM contribution WHERE month = %s"
+                        cursor.execute(query22, data7)
+                        slevy_con = cursor.fetchall()
+
+                        slevy1 = []
+                        slevy2 = []
+
+                        for i in range(len(slevy_con)):
+                            slevy1 = ''.join(slevy_con[i])
+                            slevy2.append(slevy1)
+                        slevy_total = 0
+
+                        for i in range(len(slevy2)):
+                            slevy_total = int(slevy_total) + int(slevy2[i])
+
+        # =================================================================================================================================
+
+                        update_contri = """UPDATE contribution
+                        SET
+                        totalRem = %s,
+                        totalecsg = %s,
+                        totalelevy = %s,
+                        totalensf = %s,
+                        totalcsg = %s,
+                        totalnsf = %s,
+                        totalslevy = %s
+                        WHERE 
+                        month = %s;
+                        """
+
+                        update_contri_data = [bas_total, ecsg_total, elevy_total, ensf_total, csg_total, nsf_total, slevy_total, month]
+
+                        cursor.execute(update_contri, update_contri_data)
+
+                        print("Contribution Update Complete")
+
+
+                        if msg == "Processing Complete":
+                            msg = "Processing Complete"
+                            # return render_template("process.html", msg = msg)
+                        else:
+                            msg = "No Employee Available For Process"
+                return render_template("process.html", msg = msg)                                
         except Error as e:
                 print("Error While connecting to MySQL : ", e)
         finally:
             connection.commit()
             cursor.close()
             connection.close()
-            print("MySQL connection is closed")    
+            print("MySQL connection is closed")
     return render_template("process.html")
 
 @app.route("/EOY", methods=["GET", "POST"])
