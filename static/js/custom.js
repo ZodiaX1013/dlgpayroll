@@ -901,33 +901,61 @@ function calculatehr1(){
 
   var perday = Math.round(parseInt(basic) / 26)
   var perhour = Math.round(parseInt(perday) / 8)
-  var total = parseInt(perhour) * 1
+
+  var rate = parseInt(perhour) * parseInt(hour)
+  var total = parseInt(rate) * 1
+
+  document.getElementById('am1').value = parseInt(total)
 
 }
 
 function calculatehr2(){
-  var hour = document.getElementById('hr1').value;
+  var hour = document.getElementById('hr2').value;
   var basic = document.getElementById('bsal').value
 
   var perday = Math.round(parseInt(basic) / 26)
   var perhour = Math.round(parseInt(perday) / 8)
-  var total = parseInt(perhour) * 1.5
+  
+  var rate = parseInt(perhour) * parseInt(hour)
+  var total = Math.round(parseInt(rate) * 1.5)
+
+  document.getElementById('am2').value = parseInt(total)
 }
 
 function calculatehr3(){
-  var hour = document.getElementById('hr1').value;
+  var hour = document.getElementById('hr3').value;
   var basic = document.getElementById('bsal').value
 
   var perday = Math.round(parseInt(basic) / 26)
   var perhour = Math.round(parseInt(perday) / 8)
-  var total = parseInt(perhour) * 2
+
+  var rate = parseInt(perhour) * parseInt(hour)
+  var total = parseInt(rate) * 2
+
+  document.getElementById('am3').value = parseInt(total)
 }
 
 function calculatehr4(){
-  var day = document.getElementById('hr1').value;
+  var hour = document.getElementById('hr4').value;
+  var basic = document.getElementById('bsal').value
+
+  var perday = Math.round(parseInt(basic) / 26)
+  var perhour = Math.round(parseInt(perday) / 8)
+  
+  var rate = parseInt(perhour) * parseInt(hour)
+
+  var total = parseInt(rate) * 1
+
+  document.getElementById('am4').value = parseInt(total)
+}
+
+function calculatehr5(){
+  var day = document.getElementById('hr5').value;
   var basic = document.getElementById('bsal').value
 
   var perday = Math.round(parseInt(basic) / 26)
   // var perhour = Math.round(parseInt(perday) / 8)
   var total = parseInt(perday) * parseInt(day)
+
+  document.getElementById('abs').value = parseInt(total)
 }

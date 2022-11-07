@@ -1043,6 +1043,7 @@ def salary():
         eid = request.form["eid"]
         month = request.form["mon"]
         year = request.form["year"]
+        print("In If")
         try:
             connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
                                                     database='defaultdb',
@@ -1061,7 +1062,7 @@ def salary():
                 lockSal = ''.join(lockSal[i])
 
             if lockSal == "No":
-
+                print("In If 2")
                 query1 = "SELECT BasicSalary From OriginalData WHERE EmployeeID = %s AND Month = %s"
                 cursor.execute(query1, data1)
                 basic = cursor.fetchall()

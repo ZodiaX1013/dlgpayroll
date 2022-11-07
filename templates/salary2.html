@@ -630,7 +630,7 @@
 										</div>
 										<div class="form-group col-md-3">
 											{% if vdata[i][3] %}
-												<label>Disct Bonus</label>
+												<label>Disc Bonus</label>
 												<input type="text" name="dbns" id="dbns" class="form-control" value="{{vdata[i][3]}}" placeholder="Enter Disct Bonus">
 											{% else %}
 												<label>Disct Bonus</label>
@@ -704,15 +704,6 @@
 											<input type="text" name="oded" id="oded" class="form-control" placeholder="Enter Other Deduction">
 											{% endif %}
 										</div>
-										<div class="form-group col-md-3">
-											{% if vdata[i][11] %}
-											<label style="color: red;">Absences</label>
-											<input type="text" name="abs" id="abs" class="form-control" value="{{vdata[i][11]}}" placeholder="Enter Absence Amount">
-											{% else %}
-											<label style="color: red;">Absences</label>
-											<input type="text" name="abs" id="abs" class="form-control" placeholder="Enter Absence Amount">
-											{% endif %}
-										</div>
 									</div>
 								</p>
 							</div>
@@ -724,11 +715,11 @@
 										<div class="form-row">		
 											<div class="form-group col-md-2">
 												{% if vdata[i][12] %}
-												<label > OT 1.5  - Hours</label>
+												<label > OT 1  - Hours</label>
 												<input type="text" class="form-control" name="hr1" id="hr1" value="{{vdata[i][12]}}" placeholder="Enter hour">
 												{% else %}
-												<label > OT 1.5  - Hours</label>
-												<input type="text" class="form-control" name="hr1" id="hr1" placeholder="Enter hour">
+												<label > OT 1  - Hours</label> 
+												<input type="text" class="form-control" name="hr1" id="hr1" placeholder="Enter hour" onblur="calculatehr1()">
 												{% endif %}
 											</div>
 											<div class="form-group col-md-2">
@@ -742,11 +733,11 @@
 											</div>
 											<div class="form-group col-md-2">
 												{% if vdata[i][14] %}
-												<label > OT 2.0  - Hours</label>
+												<label > OT 1.5  - Hours</label>
 												<input type="text" class="form-control" name="hr2" id="hr2" value="{{vdata[i][14]}}" placeholder="Enter hour">
 												{% else %}
-												<label > OT 2.0  - Hours</label>
-												<input type="text" class="form-control" name="hr2" id="hr2" placeholder="Enter hour">
+												<label > OT 1.5  - Hours</label>
+												<input type="text" class="form-control" name="hr2" id="hr2" placeholder="Enter hour" onblur="calculatehr2()">
 												{% endif %}
 											</div>
 											<div class="form-group col-md-2">
@@ -760,11 +751,11 @@
 											</div>
 											<div class="form-group col-md-2">
 												{% if vdata[i][16] %}
-												<label > OT 3.0  - Hours</label>
+												<label > OT 2.0  - Hours</label>
 												<input type="text" class="form-control" name="hr3" id="hr3" value="{{vdata[i][16]}}" placeholder="Enter hour">
 												{% else %}
-												<label > OT 3.0  - Hours</label>
-												<input type="text" class="form-control" name="hr3" id="hr3" placeholder="Enter hour">
+												<label > OT 2.0  - Hours</label>
+												<input type="text" class="form-control" name="hr3" id="hr3" placeholder="Enter hour" onblur="calculatehr3()">
 												{% endif %}
 											</div>
 											<div class="form-group col-md-2">
@@ -778,7 +769,7 @@
 											</div>
 										</div>
 										<div class="form-row">
-											<div class="form-group col-md-4">
+											<div class="form-group col-md-2">
 											</div>
 											<div class="form-group col-md-2">
 												{% if vdata[i][18] %}
@@ -786,7 +777,7 @@
 												<input type="text" class="form-control" name="hr4" id="hr4" value="{{vdata[i][18]}}" placeholder="Enter Hour">
 												{% else %}
 												<label style="color: red;"> Lateness - Hours</label>
-												<input type="text" class="form-control" name="hr4" id="hr4" placeholder="Enter Hour">
+												<input type="text" class="form-control" name="hr4" id="hr4" placeholder="Enter Hour" onblur="calculatehr4()">
 												{% endif %}
 											</div>
 											<div class="form-group col-md-2">
@@ -798,9 +789,16 @@
 												<input type="text" class="form-control" name="am4" id="am4" placeholder="Enter Amount">
 												{% endif %}
 											</div>
-												
+											<div class="form-group col-md-2">
+												<label style="color: red;">Absences - Hours</label>
+												<input type="text" name="hr5" id="hr5" class="form-control" placeholder="Enter Absence Days" onblur="calculatehr5()">
+											</div>
+											<div class="form-group col-md-2">
+												<label style="color: red;">Absences Amount</label>
+												<input type="text" name="abs" id="abs" class="form-control" placeholder="Enter Absence Amount">
+											</div>	
 										</div>
-											<div class="form-group col-md-4">
+											<div class="form-group col-md-2">
 												
 											</div>
 									
@@ -908,10 +906,6 @@
 									<label style="color: red;">Other Deduction</label>
 									<input type="text" name="oded" id="oded" class="form-control" placeholder="Enter Other Deduction">
 								</div>
-								<div class="form-group col-md-3">
-									<label style="color: red;">Absences</label>
-									<input type="text" name="abs" id="abs" class="form-control" placeholder="Enter Absence Amount">
-								</div>
 							</div>
 						</p>
 					</div>
@@ -923,24 +917,24 @@
 							
 								<div class="form-row">		
 									<div class="form-group col-md-2">
-										<label > OT 1.5  - Hours</label>
-										<input type="text" class="form-control" name="hr1" id="hr1" placeholder="Enter hour">
+										<label > OT 1  - Hours</label>
+										<input type="text" class="form-control" name="hr1" id="hr1" placeholder="Enter hour" onblur="calculatehr1()">
 									</div>
 									<div class="form-group col-md-2">
 										<label > Amount</label>
 										<input type="text" class="form-control" name="am1" id="am1" placeholder="Enter Amount">
 									</div>
 									<div class="form-group col-md-2">
-										<label > OT 2.0  - Hours</label>
-										<input type="text" class="form-control" name="hr2" id="hr2" placeholder="Enter hour">
+										<label > OT 1.5  - Hours</label>
+										<input type="text" class="form-control" name="hr2" id="hr2" placeholder="Enter hour" onblur="calculatehr2()">
 									</div>
 									<div class="form-group col-md-2">
 										<label > Amount</label>
 										<input type="text" class="form-control" name="am2" id="am2" placeholder="Enter Amount">
 									</div>
 									<div class="form-group col-md-2">
-										<label > OT 3.0  - Hours</label>
-										<input type="text" class="form-control" name="hr3" id="hr3" placeholder="Enter hour">
+										<label > OT 2.0  - Hours</label>
+										<input type="text" class="form-control" name="hr3" id="hr3" placeholder="Enter hour" onblur="calculatehr3()">
 									</div>
 									<div class="form-group col-md-2">
 										<label > Amount</label>
@@ -948,17 +942,24 @@
 									</div>
 								</div>
 								<div class="form-row">
-									<div class="form-group col-md-4">
+									<div class="form-group col-md-2">
 									</div>
 									<div class="form-group col-md-2">
 										<label style="color: red;"> Lateness - Hours</label>
-										<input type="text" class="form-control" name="hr4" id="hr4" placeholder="Enter Hour">
+										<input type="text" class="form-control" name="hr4" id="hr4" placeholder="Enter Hour" onblur="calculatehr4()">
 									</div>
 									<div class="form-group col-md-2">
 										<label style="color: red;"> Amount </label>
 										<input type="text" class="form-control" name="am4" id="am4" placeholder="Enter Amount">
 									</div>
-										
+									<div class="form-group col-md-2">
+										<label style="color: red;">Absences - Hours</label>
+										<input type="text" name="hr5" id="hr5" class="form-control" placeholder="Enter Absence Days" onblur="calculatehr5()">
+									</div>
+									<div class="form-group col-md-2">
+										<label style="color: red;">Absences Amount</label>
+										<input type="text" name="abs" id="abs" class="form-control" placeholder="Enter Absence Amount">
+									</div>
 								</div>
 									<div class="form-group col-md-4">
 										
