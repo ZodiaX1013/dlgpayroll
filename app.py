@@ -2470,15 +2470,20 @@ def process_salary():
                     
                 msg = "Employee Not Working"
 
+                query1 = "SELECT FirstName FROM employee WHERE EmployeeID = %s"
+                cursor.execute(query1,data)
+                fname = cursor.fetchall()
+                for i in range(len(fname)):
+                    fname = ''.join(fname[i])
+
+                UNQ = month + " " + fname
+                data3 = [UNQ]
+
                 if int(last_year) >= int(year) or last_year == 1:
                     print("Year Is Correct")
                     if int(last_mon) >= int(id) or last_mon == 1:
                         print("In Start Process")
-                        query1 = "SELECT FirstName FROM employee WHERE EmployeeID = %s"
-                        cursor.execute(query1,data)
-                        fname = cursor.fetchall()
-                        for i in range(len(fname)):
-                            fname = ''.join(fname[i])
+                        
 
                         query2 = "SELECT LastName FROM employee WHERE EmployeeID = %s"
                         cursor.execute(query2,data)
@@ -2829,238 +2834,792 @@ def process_salary():
                         else:
                             eprgf = 0
 
-                        update_original = """UPDATE OriginalData
-                                        SET
-                                        EmployeeID = %s,
-                                        EmployeeName = %s,
-                                        BasicSalary = %s,
-                                        FixedAllow = %s,
-                                        OtherDeduction = %s,
-                                        Overtime = %s,
-                                        DiscBonus = %s,
-                                        NSFEmpee = %s,
-                                        OtherAllow = %s,
-                                        TaxableAllow = %s,
-                                        Medical = %s,
-                                        Transport = %s,
-                                        overseas = %s,
-                                        NTaxableAllow = %s,
-                                        EDF = %s,
-                                        Arrears = %s,
-                                        AttendanceBns = %s,
-                                        EOY = %s,
-                                        Loan = %s,
-                                        CarBenefit = %s,
-                                        LeaveRef = %s,
-                                        SLevy = %s,
-                                        SpecialBns = %s,
-                                        Lateness = %s,
-                                        EducationRel = %s,
-                                        SpeProBns = %s,
-                                        NPS = %s,
-                                        MedicalRel = %s,
-                                        Payable = %s,
-                                        Deduction = %s,
-                                        NetPay = %s,
-                                        NetPaysheet = %s,
-                                        CurrentGross = %s,
-                                        cGrossTax = %s,
-                                        PrevGross = %s,
-                                        PrevIET = %s,
-                                        IET = %s,
-                                        NetCh = %s,
-                                        CurrentPAYE = %s,
-                                        PrevPAYE = %s,
-                                        PAYE = %s,
-                                        eCSG = %s,
-                                        eNSF = %s,
-                                        eLevy = %s,
-                                        PRGF = %s,
-                                        PrevThreshold = %s,
-                                        Threshold = %s,
-                                        netchar = %s,
-                                        CurrentSLevy = %s,
-                                        PrevSLevy = %s,
-                                        slevyPay = %s,
-                                        Absences = %s
-                                        WHERE 
-                                        UNQ = %s;
-                                        """
-                        data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, UNQ]
-                        cursor.execute(update_original, data1)
-                        print("Update Original Query Executed")
+                        get_original  = "SELECT EmployeeID FROM OriginalData WHERE UNQ = %s"
+                        cursor.execute(get_original, data3)
+                        original_id = cursor.fetchall()
 
-                        update_salary = """UPDATE salary
-                                        SET
-                                        EmployeeID = %s,
-                                        EmployeeName = %s,
-                                        BasicSalary = %s,
-                                        FixedAllow = %s,
-                                        OtherDeduction = %s,
-                                        Overtime = %s,
-                                        DiscBonus = %s,
-                                        NSFEmpee = %s,
-                                        OtherAllow = %s,
-                                        TaxableAllow = %s,
-                                        Medical = %s,
-                                        Transport = %s,
-                                        overseas = %s,
-                                        NTaxableAllow = %s,
-                                        EDF = %s,
-                                        Arrears = %s,
-                                        AttendanceBns = %s,
-                                        EOY = %s,
-                                        Loan = %s,
-                                        CarBenefit = %s,
-                                        LeaveRef = %s,
-                                        SLevy = %s,
-                                        SpecialBns = %s,
-                                        Lateness = %s,
-                                        EducationRel = %s,
-                                        SpeProBns = %s,
-                                        NPS = %s,
-                                        MedicalRel = %s,
-                                        Payable = %s,
-                                        Deduction = %s,
-                                        NetPay = %s,
-                                        NetPaysheet = %s,
-                                        CurrentGross = %s,
-                                        cGrossTax = %s,
-                                        PrevGross = %s,
-                                        PrevIET = %s,
-                                        IET = %s,
-                                        NetCh = %s,
-                                        CurrentPAYE = %s,
-                                        PrevPAYE = %s,
-                                        PAYE = %s,
-                                        eCSG = %s,
-                                        eNSF = %s,
-                                        eLevy = %s,
-                                        PRGF = %s,
-                                        PrevThreshold = %s,
-                                        Threshold = %s,
-                                        netchar = %s,
-                                        CurrentSLevy = %s,
-                                        PrevSLevy = %s,
-                                        slevyPay = %s,
-                                        Absences = %s
-                                        WHERE
-                                        UNQ = %s
-                                        """
-                        
-                        data2 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, UNQ]
-                        cursor.execute(update_salary, data2)
-                        print("Update Salary Query Executed")
+                        if original_id == []:
+                            insert_query = """
+                                INSERT INTO OriginalData(
+                                EmployeeID,
+                                EmployeeName,
+                                BasicSalary,
+                                FixedAllow,
+                                OtherDeduction,
+                                Overtime,
+                                DiscBonus,
+                                NSFEmpee,
+                                OtherAllow,
+                                TaxableAllow,
+                                Medical,
+                                Transport,
+                                overseas,
+                                NTaxableAllow,
+                                EDF,
+                                Arrears,
+                                AttendanceBns,
+                                EOY,
+                                Loan,
+                                CarBenefit,
+                                LeaveRef,
+                                SLevy,
+                                SpecialBns,
+                                Lateness,
+                                EducationRel,                    
+                                SpeProBns,
+                                NPS,
+                                MedicalRel,
+                                Payable,
+                                Deduction,
+                                NetPay,
+                                NetPaysheet,
+                                CurrentGross,
+                                cGrossTax,
+                                PrevGross,
+                                PrevIET,
+                                IET,
+                                NetCh,
+                                CurrentPAYE,
+                                PrevPAYE,
+                                PAYE,
+                                eCSG,
+                                eNSF,
+                                eLevy,
+                                PRGF,
+                                PrevThreshold,
+                                Threshold,
+                                netchar,
+                                CurrentSLevy,
+                                PrevSLevy,
+                                slevyPay,
+                                Absences,
+                                Month,
+                                Year,
+                                UNQ,
+                                LockSal
+                                )
 
-                        update_payslip = """UPDATE payslip
-                                SET
-                                EmpName = %s,
-                                Position = %s,
-                                NIC = %s,
-                                BasicSalary = %s,
-                                TravelAlw = %s,
-                                Bonus = %s,
-                                Gross = %s,
-                                PAYE = %s,
-                                NPF = %s,
-                                NSF = %s,
-                                SLevy = %s,
-                                Deduction = %s,
-                                NetPay = %s,
-                                Payable = %s,
-                                NetPayAcc = %s,
-                                eNPF = %s,
-                                eNSF = %s,
-                                eLevy = %s,
-                                ePRGF = %s,
-                                month = %s
-                                WHERE
-                                UNQ = %s;
+                                VALUES(
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s
+                                );
                                 """
-                        data_payslip = [flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay, totalDeduction, netpay, netpay, netpay,  enps, ensf, levy, eprgf, month, UNQ]
-                        cursor.execute(update_payslip, data_payslip)
-                        print("Update Payslip Query Executed")
+                            data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, month, year, UNQ, 'No']
+                            cursor.execute(insert_query, data1)
+                            print("Original Data Insert Query Executed")
+                        else:
+                            update_original = """UPDATE OriginalData
+                                            SET
+                                            EmployeeID = %s,
+                                            EmployeeName = %s,
+                                            BasicSalary = %s,
+                                            FixedAllow = %s,
+                                            OtherDeduction = %s,
+                                            Overtime = %s,
+                                            DiscBonus = %s,
+                                            NSFEmpee = %s,
+                                            OtherAllow = %s,
+                                            TaxableAllow = %s,
+                                            Medical = %s,
+                                            Transport = %s,
+                                            overseas = %s,
+                                            NTaxableAllow = %s,
+                                            EDF = %s,
+                                            Arrears = %s,
+                                            AttendanceBns = %s,
+                                            EOY = %s,
+                                            Loan = %s,
+                                            CarBenefit = %s,
+                                            LeaveRef = %s,
+                                            SLevy = %s,
+                                            SpecialBns = %s,
+                                            Lateness = %s,
+                                            EducationRel = %s,
+                                            SpeProBns = %s,
+                                            NPS = %s,
+                                            MedicalRel = %s,
+                                            Payable = %s,
+                                            Deduction = %s,
+                                            NetPay = %s,
+                                            NetPaysheet = %s,
+                                            CurrentGross = %s,
+                                            cGrossTax = %s,
+                                            PrevGross = %s,
+                                            PrevIET = %s,
+                                            IET = %s,
+                                            NetCh = %s,
+                                            CurrentPAYE = %s,
+                                            PrevPAYE = %s,
+                                            PAYE = %s,
+                                            eCSG = %s,
+                                            eNSF = %s,
+                                            eLevy = %s,
+                                            PRGF = %s,
+                                            PrevThreshold = %s,
+                                            Threshold = %s,
+                                            netchar = %s,
+                                            CurrentSLevy = %s,
+                                            PrevSLevy = %s,
+                                            slevyPay = %s,
+                                            Absences = %s
+                                            WHERE 
+                                            UNQ = %s;
+                                            """
+                            data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, UNQ]
+                            cursor.execute(update_original, data1)
+                            print("Update Original Query Executed")
+
+                        get_salary  = "SELECT EmployeeID FROM salary WHERE UNQ = %s"
+                        cursor.execute(get_salary, data3)
+                        salary_id = cursor.fetchall()
+
+                        if salary_id == []:
+                            insert_query2 = """
+                                INSERT INTO salary(
+                                EmployeeID,
+                                EmployeeName,
+                                BasicSalary,
+                                FixedAllow,
+                                OtherDeduction,
+                                Overtime,
+                                DiscBonus,
+                                NSFEmpee,
+                                OtherAllow,
+                                TaxableAllow,
+                                Medical,
+                                Transport,
+                                overseas,
+                                NTaxableAllow,
+                                EDF,
+                                Arrears,
+                                AttendanceBns,
+                                EOY,
+                                Loan,
+                                CarBenefit,
+                                LeaveRef,
+                                SLevy,
+                                SpecialBns,
+                                Lateness,
+                                EducationRel,                    
+                                SpeProBns,
+                                NPS,
+                                MedicalRel,
+                                Payable,
+                                Deduction,
+                                NetPay,
+                                NetPaysheet,
+                                CurrentGross,
+                                cGrossTax,
+                                PrevGross,
+                                PrevIET,
+                                IET,
+                                NetCh,
+                                CurrentPAYE,
+                                PrevPAYE,
+                                PAYE,
+                                eCSG,
+                                eNSF,
+                                eLevy,
+                                PRGF,
+                                PrevThreshold,
+                                Threshold,
+                                netchar,
+                                CurrentSLevy,
+                                PrevSLevy,
+                                slevyPay,
+                                Absences,
+                                Month,
+                                Year,
+                                UNQ,
+                                LockSal,
+                                ProcSal
+                                )
+
+                                VALUES(
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s
+                                );
+                                """
+                            data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, month, year, UNQ, 'No', 'Yes']
+                            cursor.execute(insert_query2, data1)
+                            print("Salary Insert Query Executed")
+                        else:
+                            update_salary = """UPDATE salary
+                                            SET
+                                            EmployeeID = %s,
+                                            EmployeeName = %s,
+                                            BasicSalary = %s,
+                                            FixedAllow = %s,
+                                            OtherDeduction = %s,
+                                            Overtime = %s,
+                                            DiscBonus = %s,
+                                            NSFEmpee = %s,
+                                            OtherAllow = %s,
+                                            TaxableAllow = %s,
+                                            Medical = %s,
+                                            Transport = %s,
+                                            overseas = %s,
+                                            NTaxableAllow = %s,
+                                            EDF = %s,
+                                            Arrears = %s,
+                                            AttendanceBns = %s,
+                                            EOY = %s,
+                                            Loan = %s,
+                                            CarBenefit = %s,
+                                            LeaveRef = %s,
+                                            SLevy = %s,
+                                            SpecialBns = %s,
+                                            Lateness = %s,
+                                            EducationRel = %s,
+                                            SpeProBns = %s,
+                                            NPS = %s,
+                                            MedicalRel = %s,
+                                            Payable = %s,
+                                            Deduction = %s,
+                                            NetPay = %s,
+                                            NetPaysheet = %s,
+                                            CurrentGross = %s,
+                                            cGrossTax = %s,
+                                            PrevGross = %s,
+                                            PrevIET = %s,
+                                            IET = %s,
+                                            NetCh = %s,
+                                            CurrentPAYE = %s,
+                                            PrevPAYE = %s,
+                                            PAYE = %s,
+                                            eCSG = %s,
+                                            eNSF = %s,
+                                            eLevy = %s,
+                                            PRGF = %s,
+                                            PrevThreshold = %s,
+                                            Threshold = %s,
+                                            netchar = %s,
+                                            CurrentSLevy = %s,
+                                            PrevSLevy = %s,
+                                            slevyPay = %s,
+                                            Absences = %s
+                                            WHERE
+                                            UNQ = %s
+                                            """
+                            
+                            data2 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, UNQ]
+                            cursor.execute(update_salary, data2)
+                            print("Update Salary Query Executed")
+
+                        get_payslip  = "SELECT EmpName FROM payslip WHERE UNQ = %s"
+                        cursor.execute(get_payslip, data3)
+                        payslip_id = cursor.fetchall()
+
+                        if payslip_id == []:
+                            query = """INSERT INTO payslip(
+                                        JoinDate,
+                                        Company,
+                                        EmpName,
+                                        Position,
+                                        NIC,
+                                        BasicSalary,
+                                        TravelAlw,
+                                        Bonus,
+                                        Gross,
+                                        PAYE,
+                                        NPF,
+                                        NSF,
+                                        SLevy,
+                                        Deduction,
+                                        NetPay,
+                                        Payable,
+                                        NetPayAcc,
+                                        eNPF,
+                                        eNSF,
+                                        eLevy,
+                                        ePRGF,
+                                        month,
+                                        year,
+                                        UNQ
+                                        )
+                                        VALUES(
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s
+                                        );
+                                        """
+                                
+                            payslip_data = [hire, "Demo" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay , totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, month, year, UNQ ]
+                            cursor.execute(query, payslip_data)
+                            print("Payslip Insert Query Executed")
+                        else:
+                            update_payslip = """UPDATE payslip
+                                    SET
+                                    EmpName = %s,
+                                    Position = %s,
+                                    NIC = %s,
+                                    BasicSalary = %s,
+                                    TravelAlw = %s,
+                                    Bonus = %s,
+                                    Gross = %s,
+                                    PAYE = %s,
+                                    NPF = %s,
+                                    NSF = %s,
+                                    SLevy = %s,
+                                    Deduction = %s,
+                                    NetPay = %s,
+                                    Payable = %s,
+                                    NetPayAcc = %s,
+                                    eNPF = %s,
+                                    eNSF = %s,
+                                    eLevy = %s,
+                                    ePRGF = %s,
+                                    month = %s
+                                    WHERE
+                                    UNQ = %s;
+                                    """
+                            data_payslip = [flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay, totalDeduction, netpay, netpay, netpay,  enps, ensf, levy, eprgf, month, UNQ]
+                            cursor.execute(update_payslip, data_payslip)
+                            print("Update Payslip Query Executed")
                         # msg = "Processing Complete"
+
+                        query14 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
+                        cursor.execute(query14, data)
+                        nic = cursor.fetchall()
+                        if nic[0][0] == "":
+                            nic = " "
+                        else:
+                            for i in range(len(nic)):
+                                nic = ''.join(nic[i])
 
                         emolument = int(basic) + int(arrears) + int(overseas) + int(otherAllow) + int(car) + int(ot) + int(eoy) + int(leave) + int(fixAllow) + int(discBns) + int(SpeProBns) + int(speBns) 
 
-                        update_payecsv = """UPDATE payecsv
-                                        SET
-                                        EmployeeID = %s,
-                                        LastName = %s,
-                                        FirstName = %s,
-                                        Emoluments = %s,
-                                        PAYE = %s,
-                                        SLevy = %s,
-                                        EmolumentsNet = %s
-                                        WHERE
-                                        UNQ = %s;
-                                        """
+                        get_payecsv  = "SELECT EmployeeID FROM payecsv WHERE UNQ = %s"
+                        cursor.execute(get_payecsv, data3)
+                        payecsv_id = cursor.fetchall()
 
-                        data4 = [eid, lname, fname, emolument, paye, slevypay, emolument, UNQ]
-                        cursor.execute(update_payecsv, data4)
-                        print("Update PAYE CSV Query Executed")
+                        if payecsv_id == []:
+                            print("Insert")
+                            paye_query = """ INSERT INTO payecsv(
+                                            EmployeeID,
+                                            LastName,
+                                            FirstName,
+                                            Emoluments,
+                                            PAYE,
+                                            working,
+                                            SLevy,
+                                            EmolumentsNet,
+                                            month,
+                                            UNQ
+                                            )
+                                            VALUES(
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s
+                                            );"""
+                            data4 = [nic, lname, fname, emolument, paye, 'Yes', slevypay, emolument, month, UNQ]
+
+                            cursor.execute(paye_query, data4)
+                            print("PAYE Query Executed")
+                        else:
+                            print("Update")
+                            update_payecsv = """UPDATE payecsv
+                                            SET
+                                            EmployeeID = %s,
+                                            LastName = %s,
+                                            FirstName = %s,
+                                            Emoluments = %s,
+                                            PAYE = %s,
+                                            SLevy = %s,
+                                            EmolumentsNet = %s
+                                            WHERE
+                                            UNQ = %s;
+                                            """
+
+                            data4 = [nic, lname, fname, emolument, paye, slevypay, emolument, UNQ]
+                            cursor.execute(update_payecsv, data4)
+                            print("Update PAYE CSV Query Executed")
+
+                        query12 = "SELECT NPS FROM employee WHERE EmployeeID = %s"
+                        cursor.execute(query12, data)
+                        pension = cursor.fetchall()
+                        for i in range(len(pension)):
+                            pension = ''.join(pension[i])
+
+                        if pension == "Paid":
+                            pension = "Yes"
+                        else:
+                            pension = "No"
+
+                        query13 = "SELECT working FROM employee WHERE EmployeeID = %s"
+                        cursor.execute(query13, data)
+                        working = cursor.fetchall()
+                        for i in range(len(working)):
+                            working = ''.join(working[i])
+                        
+                        print("working ", working)
 
                         allowance = int(otherAllow) + int(fixAllow) + int(speBns) + int(SpeProBns) + int(discBns) + int(attBns)
                         commission = 0
 
                         totalRem = int(basic) + int(allowance)
 
-                        update_prgf = """UPDATE prgfcsv
-                                    SET
-                                    EmployeeID = %s,
-                                    LastName = %s,
-                                    FirstName = %s,
-                                    Basic = %s,
-                                    Allowance = %s,
-                                    Commission = %s,
-                                    TotalRem = %s,
-                                    PRGF = %s
-                                    WHERE
-                                    UNQ = %s;
-                                    """
-                        prgf_data = [eid, lname, fname, basic, allowance, commission, totalRem, eprgf, UNQ]
+                        get_prgfcsv  = "SELECT EmployeeID FROM prgfcsv WHERE UNQ = %s"
+                        cursor.execute(get_prgfcsv, data3)
+                        prgfcsv_id = cursor.fetchall()
 
-                        cursor.execute(update_prgf, prgf_data)
-                        print("Update PRGF Complete")
-
-                        update_cnp = """UPDATE cnpcsv
-                                    SET
-                                    EmployeeID = %s,
-                                    LastName = %s,
-                                    FirstName = %s,
-                                    Basic = %s,
-                                    Basic2 = %s
-                                    WHERE
-                                    UNQ = %s;
-                                    """
-                        cnp_data = [eid, lname, fname, basic, basic, UNQ]
-                        cursor.execute(update_cnp, cnp_data)
-
-                        print("Update CNP Complete")
-
-                        update_contri = """UPDATE contribution
+                        if prgfcsv_id == []:
+                            prgf_query = """INSERT INTO prgfcsv(
+                                            EmployeeID,
+                                            LastName,
+                                            FirstName,
+                                            Pension,
+                                            Working,
+                                            Hire,
+                                            Basic,
+                                            Allowance,
+                                            Commission,
+                                            TotalRem,
+                                            PRGF,
+                                            reason,
+                                            month,
+                                            UNQ
+                                            )
+                                            VALUES(
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s
+                                            );"""
+                            if basic < 200000:
+                                data5 = [nic, lname, fname, "No", working, hire, basic, allowance, commission, totalRem, eprgf, " " , month, UNQ]
+                            else:
+                                data5 = [nic, lname, fname, "No", working, hire, basic, 0, 0, 0, 0, " " , month, UNQ]
+                            
+                            cursor.execute(prgf_query, data5)
+                            print("PRGF Insert Query Executed")
+                        
+                        else:
+                            update_prgf = """UPDATE prgfcsv
                                         SET
                                         EmployeeID = %s,
                                         LastName = %s,
                                         FirstName = %s,
-                                        Salary = %s,
-                                        ecsg = %s,
-                                        elevy = %s,
-                                        ensf = %s,
-                                        csg = %s,
-                                        nsf = %s,
-                                        slevy = %s
+                                        Basic = %s,
+                                        Allowance = %s,
+                                        Commission = %s,
+                                        TotalRem = %s,
+                                        PRGF = %s
                                         WHERE
                                         UNQ = %s;
                                         """
-                        contri_data = [eid, lname, fname, basic, enps, levy, ensf, nps, nsf, slevypay, UNQ]
-                        cursor.execute(update_contri, contri_data)
-                        print("Update Contribution Complete")
+                            prgf_data = [eid, lname, fname, basic, allowance, commission, totalRem, eprgf, UNQ]
+
+                            cursor.execute(update_prgf, prgf_data)
+                            print("Update PRGF Complete")
+
+                        get_cnpcsv  = "SELECT EmployeeID FROM prgfcsv WHERE UNQ = %s"
+                        cursor.execute(get_cnpcsv, data3)
+                        cnpcsv_id = cursor.fetchall()
+
+                        if cnpcsv_id == []:
+                            cnp_query = """INSERT INTO cnpcsv(
+                                        EmployeeID,
+                                        LastName,
+                                        FirstName,
+                                        Basic,
+                                        Basic2,
+                                        Season,
+                                        Alphabet,
+                                        Number,
+                                        Working,
+                                        Blank1,
+                                        Blank2,
+                                        month,
+                                        UNQ
+                                        )
+                                        VALUES(
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s,
+                                            %s
+                                        );"""
+                            data6 = [nic, lname, fname, basic, basic, "S2", "M", "1", working, " ", " ", month, UNQ]
+
+                            cursor.execute(cnp_query, data6)
+                            print("CNP Insert Query Executed")
+
+                        else:
+                            update_cnp = """UPDATE cnpcsv
+                                        SET
+                                        EmployeeID = %s,
+                                        LastName = %s,
+                                        FirstName = %s,
+                                        Basic = %s,
+                                        Basic2 = %s
+                                        WHERE
+                                        UNQ = %s;
+                                        """
+                            cnp_data = [eid, lname, fname, basic, basic, UNQ]
+                            cursor.execute(update_cnp, cnp_data)
+
+                            print("Update CNP Complete")
+
+                        get_contribution  = "SELECT EmployeeID FROM contribution WHERE UNQ = %s"
+                        cursor.execute(get_contribution, data3)
+                        contri_id = cursor.fetchall()
+
+                        if contri_id == []:
+                            insert_contri = """INSERT INTO contribution(
+                                                EmployeeID,
+                                                LastName,
+                                                FirstName,
+                                                IDCard,
+                                                Salary,
+                                                blank1,
+                                                ecsg,
+                                                elevy,
+                                                ensf,
+                                                csg,
+                                                nsf,
+                                                blank2,
+                                                slevy,
+                                                month,
+                                                year,
+                                                UNQ
+                                                )
+                                                VALUES(
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s
+                                                );
+                                                """
+                            contri_data = [eid, lname, fname, nic, basic, " ", enps, levy, ensf, nps, nsf, " ", slevypay, month, year, UNQ]
+                            cursor.execute(insert_contri, contri_data)
+                            print("Contribution Insert Query Executed")
+
+                        else:
+                            update_contri = """UPDATE contribution
+                                            SET
+                                            EmployeeID = %s,
+                                            LastName = %s,
+                                            FirstName = %s,
+                                            Salary = %s,
+                                            ecsg = %s,
+                                            elevy = %s,
+                                            ensf = %s,
+                                            csg = %s,
+                                            nsf = %s,
+                                            slevy = %s
+                                            WHERE
+                                            UNQ = %s;
+                                            """
+                            contri_data = [eid, lname, fname, basic, enps, levy, ensf, nps, nsf, slevypay, UNQ]
+                            cursor.execute(update_contri, contri_data)
+                            print("Update Contribution Complete")
 
                         msg = "Re Processing Complete For " + flname + " "
                         print(msg)
                 
+                if msg == "Employee Not Working":
+                    get_empid = "SELECT EmployeeID FROM salary WHERE UNQ = %s"
+                    cursor.execute(get_empid, data3)
+                    emp_id = cursor.fetchall()
+
+                    if emp_id != []:
+                        print("In Delete Employee")
+                        delete_original = "DELETE FROM OriginalData WHERE UNQ = %s"
+                        cursor.execute(delete_original,data3)
+                        print("Delete From Original Data")
+
+                        delete_salary = "DELETE FROM salary WHERE UNQ= %s"
+                        cursor.execute(delete_salary,data3)
+                        print("Delete From Salary Data")
+                        
+                        delete_payslip = "DELETE FROM payslip WHERE UNQ = %s"
+                        cursor.execute(delete_payslip,data3)
+                        print("Delete From Payslip Data")
+                        
+                        delete_paye = "DELETE FROM payecsv WHERE UNQ = %s"
+                        cursor.execute(delete_paye,data3)
+                        print("Delete From Payecsv Data")
+                        
+                        delete_prgf = "DELETE FROM prgfcsv WHERE UNQ = %s "
+                        cursor.execute(delete_prgf,data3)
+                        print("Delete From PRGF Data")
+                        
+                        delete_cnp = "DELETE FROM cnpcsv WHERE UNQ = %s"
+                        cursor.execute(delete_cnp,data3)
+                        print("Delete From CNP Data")
+                        
+                        delete_contri = "DELETE FROM contribution WHERE UNQ = %s"
+                        cursor.execute(delete_contri,data3)
+                        print("Delete From Contribution Data")
+
                 query15 = "SELECT Basic FROM cnpcsv WHERE month = %s"
                 data7 = [month]
                 cursor.execute(query15, data7)
@@ -3916,7 +4475,7 @@ def process_salary():
                                 """
                                 data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, month, year, UNQ, 'No']
                                 cursor.execute(insert_query, data1)
-                                print("Process Query Executed")
+                                print("OriginalData Query Executed")
 
                                 insert_query2 = """
                                 INSERT INTO salary(
@@ -4041,7 +4600,7 @@ def process_salary():
                                 """
                                 data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, month, year, UNQ, 'No', 'Yes']
                                 cursor.execute(insert_query2, data1)
-                                print("Process Query Executed")
+                                print("Salary Query Executed")
 
                                 
                                 data3 = [hire, "Demo" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay , totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, month, year, UNQ ]
@@ -6020,7 +6579,7 @@ def contribution():
             for i in range(len(data2)):
                 year = ' '.join(data2[i])
 
-            query = "SELECT EmployeeID, LastName, FirstName, IDCard, Salary, blank1, ecsg, elevy, ensf, csg, nsf, blank2, slevy FROM contribution WHERE month = %s"
+            query = "SELECT EmployeeID, LastName, FirstName, IDCard, Salary, blank1, ecsg, elevy, ensf, prgf, csg, nsf FROM contribution WHERE month = %s"
 
             cursor.execute(query,data)
             contri_data = cursor.fetchall()
@@ -6069,7 +6628,13 @@ def contribution():
 
             totalslevy = totalslevy[0][0]
 
-            return render_template("contribution2.html", length = length, data= contri_data, month = month, year = year, totalRem = totalRem, totalecsg = totalecsg, totalelevy = totalelevy, totalensf = totalensf, totalcsg = totalcsg,totalnsf = totalnsf, totalslevy = totalslevy )
+            query9 = "SELECT totalprgf FROM contribution WHERE month = %s"
+            cursor.execute(query9, data)
+            totalprgf = cursor.fetchall()
+
+            totalprgf = totalprgf[0][0]
+
+            return render_template("contribution2.html", length = length, data= contri_data, month = month, year = year, totalRem = totalRem, totalecsg = totalecsg, totalelevy = totalelevy, totalensf = totalensf, totalcsg = totalcsg,totalnsf = totalnsf, totalslevy = totalslevy, totalprgf = totalprgf )
 
         except Error as e:
             print("Error While connecting to MySQL : ", e)
