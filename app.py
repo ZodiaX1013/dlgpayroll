@@ -5080,12 +5080,13 @@ def eoy():
             eid = request.form["eid"]
             month = "EOY"
             
-            eoyBns = request.form["eoy"]
+            # eoyBns = request.form["eoy"]
+            
             data = [eid]
             # print(month)
             
             print(eid)
-            print(eoyBns)
+            # print(eoyBns)
 
             id = 12
             mid = id-1
@@ -5142,7 +5143,101 @@ def eoy():
             else:
                 print("In Else")
                 proc = "No"    
+
+# ================================================================================================================================================================================            
+
+            query4 = "SELECT BasicSalary From salary WHERE EmployeeID = %s"
+            cursor.execute(query4,data)
+            basic_all = cursor.fetchall()
+            basic1 = []
+            basic2 = []
+
+            for i in range(len(basic_all)):
+                basic1 = ''.join(basic_all[i])
+                basic2.append(basic1)
+
+            basic_total = 0
+            for i in range(len(basic2)):
+                basic_total = int(basic_total) + int(basic2[i])
+
+# ================================================================================================================================================================================            
+
+            query5 = "SELECT Overtime From salary WHERE EmployeeID = %s"
+            cursor.execute(query5,data)
+            overtime_all = cursor.fetchall()
+            overtime1 = []
+            overtime2 = []
+
+            for i in range(len(overtime_all)):
+                overtime1 = ''.join(overtime_all[i])
+                overtime2.append(overtime1)
+
+            overtime_total = 0
+            for i in range(len(overtime2)):
+                overtime_total = int(overtime_total) + int(overtime2[i])
+
+# ================================================================================================================================================================================            
+
+            query6 = "SELECT LeaveRef From salary WHERE EmployeeID = %s"
+            cursor.execute(query6,data)
+            leave_all = cursor.fetchall()
+            leave1 = []
+            leave2 = []
+
+            for i in range(len(leave_all)):
+                leave1 = ''.join(leave_all[i])
+                leave2.append(leave1)
+
+            leave_total = 0
+            for i in range(len(leave2)):
+                leave_total = int(leave_total) + int(leave2[i])
+
+# ================================================================================================================================================================================            
+
+            query7 = "SELECT OtherAllow From salary WHERE EmployeeID = %s"
+            cursor.execute(query7,data)
+            other_all = cursor.fetchall()
+            other1 = []
+            other2 = []
+
+            for i in range(len(other_all)):
+                other1 = ''.join(other_all[i])
+                other2.append(other1)
+
+            other_total = 0
+            for i in range(len(other2)):
+                other_total = int(other_total) + int(other2[i])
+
+# ================================================================================================================================================================================            
+
+            query12 = "SELECT Absences From salary WHERE EmployeeID = %s"
+            cursor.execute(query12,data)
+            ab_all = cursor.fetchall()
+            ab1 = []
+            ab2 = []
+
+            for i in range(len(ab_all)):
+                ab1 = ''.join(ab_all[i])
+                ab2.append(ab1)
+
+            ab_total = 0
+            for i in range(len(ab2)):
+                ab_total = int(ab_total) + int(ab2[i])
+
+# ================================================================================================================================================================================            
+
+            # - (Basic + O/TIME + Local Leave Refund + Other Allowance - Absence ) / 12
+            eoyBns = round((basic_total + overtime_total + leave_total + other_total - ab_total) / 12)
+            print(basic_total)
+            print(overtime_total)
+            print(leave_total)
+            print(other_total)
+            print(ab_total)
+            print(eoyBns)
             
+
+# ================================================================================================================================================================================            
+
             query8 = "SELECT hire FROM employee WHERE EmployeeID = %s"
             cursor.execute(query8,data)
             hire = cursor.fetchall()
@@ -5172,6 +5267,12 @@ def eoy():
                     nic = " "
             if nic != 0:
                 nic = ''.join(map(str,nic))
+
+            query11 = "SELECT LastName FROM employee WHERE EmployeeID = %s"
+            cursor.execute(query11,data)
+            ebasic = cursor.fetchall()
+            for i in range(len(ebasic)):
+                ebasic = ''.join(ebasic[i])
 
             if proc == "No":
 
@@ -5207,6 +5308,9 @@ def eoy():
                 ab = 0
 
                 # basic = int(tbasic) - int(ab)
+                
+                
+                
                 basic = int(eoyBns)
                 # Calculations
                 payable = basic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
@@ -5340,13 +5444,13 @@ def eoy():
                             OtherAllow,
                             FixedAllow,
                             Payable,
-                            Absences
+                            Absences,
                             paye,
                             csg,
                             nsf,
                             Medical,
                             slevy,
-                            Lateness
+                            Lateness,
                             otherDed,
                             Net,
                             month,
@@ -5800,12 +5904,9 @@ def eoy():
             eid = request.form["eid"]
             month = "EOY"
             
-            eoyBns = request.form["eoy"]
+            
             data = [eid]
             # print(month)
-            
-            print("eid ", eid)
-            print("eoyBns ", eoyBns)
 
             id = 12
             mid = id-1
@@ -5855,6 +5956,98 @@ def eoy():
             proc = cursor.fetchall()
             print("proc ", proc)
 
+# ================================================================================================================================================================================            
+
+            query4 = "SELECT BasicSalary From salary WHERE EmployeeID = %s"
+            cursor.execute(query4,data)
+            basic_all = cursor.fetchall()
+            basic1 = []
+            basic2 = []
+
+            for i in range(len(basic_all)):
+                basic1 = ''.join(basic_all[i])
+                basic2.append(basic1)
+
+            basic_total = 0
+            for i in range(len(basic2)):
+                basic_total = int(basic_total) + int(basic2[i])
+
+# ================================================================================================================================================================================            
+
+            query5 = "SELECT Overtime From salary WHERE EmployeeID = %s"
+            cursor.execute(query5,data)
+            overtime_all = cursor.fetchall()
+            overtime1 = []
+            overtime2 = []
+
+            for i in range(len(overtime_all)):
+                overtime1 = ''.join(overtime_all[i])
+                overtime2.append(overtime1)
+
+            overtime_total = 0
+            for i in range(len(overtime2)):
+                overtime_total = int(overtime_total) + int(overtime2[i])
+
+# ================================================================================================================================================================================            
+
+            query6 = "SELECT LeaveRef From salary WHERE EmployeeID = %s"
+            cursor.execute(query6,data)
+            leave_all = cursor.fetchall()
+            leave1 = []
+            leave2 = []
+
+            for i in range(len(leave_all)):
+                leave1 = ''.join(leave_all[i])
+                leave2.append(leave1)
+
+            leave_total = 0
+            for i in range(len(leave2)):
+                leave_total = int(leave_total) + int(leave2[i])
+
+# ================================================================================================================================================================================            
+
+            query7 = "SELECT OtherAllow From salary WHERE EmployeeID = %s"
+            cursor.execute(query7,data)
+            other_all = cursor.fetchall()
+            other1 = []
+            other2 = []
+
+            for i in range(len(other_all)):
+                other1 = ''.join(other_all[i])
+                other2.append(other1)
+
+            other_total = 0
+            for i in range(len(other2)):
+                other_total = int(other_total) + int(other2[i])
+
+# ================================================================================================================================================================================            
+
+            query12 = "SELECT Absences From salary WHERE EmployeeID = %s"
+            cursor.execute(query12,data)
+            ab_all = cursor.fetchall()
+            ab1 = []
+            ab2 = []
+
+            for i in range(len(ab_all)):
+                ab1 = ''.join(ab_all[i])
+                ab2.append(ab1)
+
+            ab_total = 0
+            for i in range(len(ab2)):
+                ab_total = int(ab_total) + int(ab2[i])
+
+# ================================================================================================================================================================================            
+
+            # - (Basic + O/TIME + Local Leave Refund + Other Allowance - Absence ) / 12
+            eoyBns = round((basic_total + overtime_total + leave_total + other_total - ab_total) / 12)
+            print(basic_total)
+            print(overtime_total)
+            print(leave_total)
+            print(other_total)
+            print(ab_total)
+            print(eoyBns)
+            
+# ================================================================================================================================================================================            
             # if len(proc) > 0:
             #     print("In If")
             #     for i in range(len(proc)):
