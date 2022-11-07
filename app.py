@@ -5075,6 +5075,7 @@ def eoy():
             print(flname_all)
 
             length = len(flname_all)
+
 # ===========================================================================================================================================================
 
             eid = request.form["eid"]
@@ -6046,7 +6047,7 @@ def eoy():
             print(other_total)
             print(ab_total)
             print(eoyBns)
-            
+
 # ================================================================================================================================================================================            
             # if len(proc) > 0:
             #     print("In If")
@@ -6533,6 +6534,57 @@ def eoy():
             print("MySQL connection is closed")
         return render_template("eoy.html", eid = emp_id2, name = flname, length = length)
 
+@app.route("/summary", methods = ["POST" , "GET"])
+def summary():
+    if request.method == "POST" and request.form["action"] == "summary":
+
+        try:
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    port='25060',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
+            cursor = connection.cursor(buffered=True)
+
+            get_emp = "SELECT EmployeeID FROM employee"
+            cursor.execute(get_emp)
+            emp_data = cursor.fetchall()
+
+            emp1 = []
+            emp2 = []
+
+            for i in range(len(emp_data)):
+                emp1 = ''.join(emp_data[i])
+                emp2.append(emp1)
+
+            all_data = []
+
+            for i in range(len(emp2)):
+                query = "SELECT Month, Year, BasicSalary, Arrears, Overtime, LeaveRef, EOY, Transport, Overseas, OtherAllow, FixedAllow, Payable, Absences, PAYE, NPS, NSFEmpee, Medical, SLevy, Lateness, OtherDeduction, NetPaysheet FROM salary WHERE EmployeeID = %s "
+                data = [emp2[i]]
+                cursor.execute(query,data)
+                pay_data = cursor.fetchall()
+
+                # print(pay_data)
+                for i in range(len(pay_data)):
+                    all_data.append(list(pay_data[i]))
+
+            print("All Data : ", all_data)
+
+
+            length = len(emp_data)
+            return "Success"
+
+        except Error as e:
+            print("Error While connecting to MySQL : ", e)
+        finally:
+            connection.commit()
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+        return render_template("summary2.html")
+    return render_template("summary.html")
 
 @app.route("/payslip", methods=["GET" , "POST"])
 def payslip():
