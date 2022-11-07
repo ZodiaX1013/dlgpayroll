@@ -892,3 +892,42 @@ function ExportToDoc(filename = ''){
 function LockSal(){
   alert("Salary Already Locked")
 }
+
+// Functions For Overtime Calculator
+
+function calculatehr1(){
+  var hour = document.getElementById('hr1').value;
+  var basic = document.getElementById('bsal').value
+
+  var perday = Math.round(parseInt(basic) / 26)
+  var perhour = Math.round(parseInt(perday) / 8)
+  var total = parseInt(perhour) * 1
+
+}
+
+function calculatehr2(){
+  var hour = document.getElementById('hr1').value;
+  var basic = document.getElementById('bsal').value
+
+  var perday = Math.round(parseInt(basic) / 26)
+  var perhour = Math.round(parseInt(perday) / 8)
+  var total = parseInt(perhour) * 1.5
+}
+
+function calculatehr3(){
+  var hour = document.getElementById('hr1').value;
+  var basic = document.getElementById('bsal').value
+
+  var perday = Math.round(parseInt(basic) / 26)
+  var perhour = Math.round(parseInt(perday) / 8)
+  var total = parseInt(perhour) * 2
+}
+
+function calculatehr4(){
+  var day = document.getElementById('hr1').value;
+  var basic = document.getElementById('bsal').value
+
+  var perday = Math.round(parseInt(basic) / 26)
+  // var perhour = Math.round(parseInt(perday) / 8)
+  var total = parseInt(perday) * parseInt(day)
+}

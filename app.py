@@ -1062,7 +1062,6 @@ def salary():
 
             if lockSal == "No":
 
-
                 query1 = "SELECT BasicSalary From OriginalData WHERE EmployeeID = %s AND Month = %s"
                 cursor.execute(query1, data1)
                 basic = cursor.fetchall()
@@ -3516,7 +3515,7 @@ def process_salary():
 
                             print("Update CNP Complete")
 
-                        get_contribution  = "SELECT EmployeeID FROM contribution WHERE UNQ = %s"
+                        get_contribution  = "SELECT prgf FROM contribution WHERE UNQ = %s"
                         cursor.execute(get_contribution, data3)
                         contri_id = cursor.fetchall()
 
@@ -3531,6 +3530,7 @@ def process_salary():
                                                 ecsg,
                                                 elevy,
                                                 ensf,
+                                                prgf,
                                                 csg,
                                                 nsf,
                                                 blank2,
@@ -3555,10 +3555,11 @@ def process_salary():
                                                 %s,
                                                 %s,
                                                 %s,
+                                                %s,
                                                 %s
                                                 );
                                                 """
-                            contri_data = [eid, lname, fname, nic, basic, " ", enps, levy, ensf, nps, nsf, " ", slevypay, month, year, UNQ]
+                            contri_data = [eid, lname, fname, nic, basic, " ", enps, levy, ensf, eprgf, nps, nsf, " ", slevypay, month, year, UNQ]
                             cursor.execute(insert_contri, contri_data)
                             print("Contribution Insert Query Executed")
 
@@ -3572,13 +3573,14 @@ def process_salary():
                                             ecsg = %s,
                                             elevy = %s,
                                             ensf = %s,
+                                            prgf = %s,
                                             csg = %s,
                                             nsf = %s,
                                             slevy = %s
                                             WHERE
                                             UNQ = %s;
                                             """
-                            contri_data = [eid, lname, fname, basic, enps, levy, ensf, nps, nsf, slevypay, UNQ]
+                            contri_data = [eid, lname, fname, basic, enps, levy, ensf, eprgf, nps, nsf, slevypay, UNQ]
                             cursor.execute(update_contri, contri_data)
                             print("Update Contribution Complete")
 
@@ -3767,12 +3769,30 @@ def process_salary():
 
 # =================================================================================================================================
 
+                query23 = "SELECT prgf FROM contribution WHERE month = %s"
+                cursor.execute(query23, data7)
+                prgf_con = cursor.fetchall()
+
+                prgf1 = []
+                prgf2 = []
+
+                for i in range(len(prgf_con)):
+                    prgf1 = ''.join(prgf_con[i])
+                    prgf2.append(prgf1)
+                prgf_total = 0
+
+                for i in range(len(prgf2)):
+                    prgf_total = int(prgf_total) + int(prgf2[i])
+
+# =================================================================================================================================
+
                 update_contri = """UPDATE contribution
                 SET
                 totalRem = %s,
                 totalecsg = %s,
                 totalelevy = %s,
                 totalensf = %s,
+                totalprgf = %s,
                 totalcsg = %s,
                 totalnsf = %s,
                 totalslevy = %s
@@ -3780,7 +3800,7 @@ def process_salary():
                 month = %s;
                 """
 
-                update_contri_data = [bas_total, ecsg_total, elevy_total, ensf_total, csg_total, nsf_total, slevy_total, month]
+                update_contri_data = [bas_total, ecsg_total, elevy_total, ensf_total, prgf_total, csg_total, nsf_total, slevy_total, month]
 
                 cursor.execute(update_contri, update_contri_data)
 
@@ -4760,6 +4780,7 @@ def process_salary():
                                                 ecsg,
                                                 elevy,
                                                 ensf,
+                                                prgf,
                                                 csg,
                                                 nsf,
                                                 blank2,
@@ -4787,7 +4808,7 @@ def process_salary():
                                                 %s
                                                 );
                                                 """
-                                contri_data = [eid, lname, fname, nic, basic, " ", enps, levy, ensf, nps, nsf, " ", slevypay, month, year, UNQ]
+                                contri_data = [eid, lname, fname, nic, basic, " ", enps, levy, ensf, eprgf, nps, nsf, " ", slevypay, month, year, UNQ]
                                 cursor.execute(insert_contri, contri_data)
                                 msg = "Processing Complete"
                                 # print("Do Something Else")
@@ -4937,6 +4958,22 @@ def process_salary():
 
                         for i in range(len(slevy2)):
                             slevy_total = int(slevy_total) + int(slevy2[i])
+# =================================================================================================================================
+
+                        query23 = "SELECT prgf FROM contribution WHERE month = %s"
+                        cursor.execute(query23, data7)
+                        prgf_con = cursor.fetchall()
+
+                        prgf1 = []
+                        prgf2 = []
+
+                        for i in range(len(prgf_con)):
+                            prgf1 = ''.join(prgf_con[i])
+                            prgf2.append(prgf1)
+                        prgf_total = 0
+
+                        for i in range(len(prgf2)):
+                            prgf_total = int(prgf_total) + int(prgf2[i])
 
         # =================================================================================================================================
 
@@ -4946,6 +4983,7 @@ def process_salary():
                         totalecsg = %s,
                         totalelevy = %s,
                         totalensf = %s,
+                        totalprgf = %s,
                         totalcsg = %s,
                         totalnsf = %s,
                         totalslevy = %s
@@ -4953,7 +4991,7 @@ def process_salary():
                         month = %s;
                         """
 
-                        update_contri_data = [bas_total, ecsg_total, elevy_total, ensf_total, csg_total, nsf_total, slevy_total, month]
+                        update_contri_data = [bas_total, ecsg_total, elevy_total, ensf_total, prgf_total, csg_total, nsf_total, slevy_total, month]
 
                         cursor.execute(update_contri, update_contri_data)
 
