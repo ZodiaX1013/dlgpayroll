@@ -5668,9 +5668,9 @@ def eoy():
                             %s
                             );
                             """
-                    # data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, "December", year, UNQ, 'No']
-                    # cursor.execute(insert_original, data1)
-                    # print("Insert Original Query Executed")
+                    data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, "December", year, UNQ, 'No']
+                    cursor.execute(insert_original, data1)
+                    print("Insert Original Query Executed")
 
                     insert_salary = """
                             INSERT INTO salary(
@@ -5796,7 +5796,7 @@ def eoy():
                     todays_date = date.today()
                     year = todays_date.year
                     data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, "EOY", year, UNQ, 'No', 'Yes']
-                    # cursor.execute(insert_salary, data1)
+                    cursor.execute(insert_salary, data1)
                     print("Update Salary Query Executed")
 
                     insert_payslip = """INSERT INTO payslip(
@@ -5882,7 +5882,7 @@ def eoy():
                                             %s
                                         );"""
                     data4 = [eid, lname, fname, emolument, paye, 'Yes', slevypay, emolument, month, UNQ]
-                    # cursor.execute(insert_payecsv, data4)
+                    cursor.execute(insert_payecsv, data4)
                     print("Insert PAYE CSV Query Executed")
 
                     msg = "End Of Year Bonus Processing Complete For " + flname + " "
@@ -6214,9 +6214,9 @@ def eoy():
                         %s
                         );
                         """
-                # data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, "December", year, UNQ, 'No']
-                # cursor.execute(insert_original, data1)
-                # print("Insert Original Query Executed")
+                data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoy, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, "December", year, UNQ, 'No']
+                cursor.execute(insert_original, data1)
+                print("Insert Original Query Executed")
 
                 insert_salary = """
                         INSERT INTO salary(
@@ -6342,7 +6342,7 @@ def eoy():
                 todays_date = date.today()
                 year = todays_date.year
                 data1 = [eid, flname, basic , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoyBns2, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, "EOY", year, UNQ, 'No', 'Yes']
-                # cursor.execute(insert_salary, data1)
+                cursor.execute(insert_salary, data1)
                 print("Update Salary Query Executed")
 
                 insert_payslip = """INSERT INTO payslip(
@@ -6397,7 +6397,7 @@ def eoy():
                                 );
                                 """
                 data_payslip = [hire, "MAXCITY ASSET MANAGERS LTD RATINGS AFRICA" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay , totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, "EOY", UNQ ]
-                # cursor.execute(insert_payslip, data_payslip)
+                cursor.execute(insert_payslip, data_payslip)
                 print("Insert Payslip Query Executed")
                 # msg = "Processing Complete"
                 
@@ -6428,7 +6428,7 @@ def eoy():
                                         %s
                                     );"""
                 data4 = [eid, lname, fname, emolument, paye, 'Yes', slevypay, emolument, month, UNQ]
-                # cursor.execute(insert_payecsv, data4)
+                cursor.execute(insert_payecsv, data4)
                 print("Insert PAYE CSV Query Executed")
                 msg = "End Of Year Bonus (Prorata basic) Process Complete For " + flname + " "
             else:
@@ -6985,8 +6985,8 @@ def eoy():
                                         UNQ = %s;
                                         """
                     data1 = [eid, flname, 0 , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoyBns2, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, UNQ]
-                    # cursor.execute(update_original, data1)
-                    # print("Update Original Query Executed")
+                    cursor.execute(update_original, data1)
+                    print("Update Original Query Executed")
 
                     update_salary = """UPDATE salary
                                         SET
@@ -7047,7 +7047,7 @@ def eoy():
                                         """
                         
                     data2 = [eid, flname, 0 , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoyBns2, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, UNQ]
-                    # cursor.execute(update_salary, data2)
+                    cursor.execute(update_salary, data2)
                     print("Update Salary Query Executed")
 
                     update_payslip = """UPDATE payslip
@@ -7076,7 +7076,7 @@ def eoy():
                                 UNQ = %s;
                                 """
                     data_payslip = [flname, pos, nic, 0, trans, bonus, paygross, paye, nps, nsf, slevypay, totalDeduction, netpay, netpay, netpay,  enps, ensf, levy, eprgf, "EOY", UNQ]
-                    # cursor.execute(update_payslip, data_payslip)
+                    cursor.execute(update_payslip, data_payslip)
                     print("Update Payslip Query Executed")
                     # msg = "Processing Complete"
                     
@@ -7096,7 +7096,7 @@ def eoy():
                                         """
 
                     data4 = [eid, lname, fname, emolument, paye, slevypay, emolument, UNQ]
-                    # cursor.execute(update_payecsv, data4)
+                    cursor.execute(update_payecsv, data4)
                     print("Update PAYE CSV Query Executed")
 
                     msg = "End Of Year Bonus Re-Processing Complete For " + flname + " "
@@ -7339,8 +7339,8 @@ def eoy():
                                     UNQ = %s;
                                     """
                 data1 = [eid, flname, 0 , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoyBns2, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, UNQ]
-                # cursor.execute(update_original, data1)
-                # print("Update Original Query Executed")
+                cursor.execute(update_original, data1)
+                print("Update Original Query Executed")
 
                 update_salary = """UPDATE salary
                                     SET
@@ -7401,7 +7401,7 @@ def eoy():
                                     """
                     
                 data2 = [eid, flname, 0 , fixAllow, otherDed, ot, discBns, nsf, otherAllow2, tax, medical, trans, overseas, ntax, edf, arrears, attBns, eoyBns2, loan, car, leave, slevypay, speBns, lateness, education, SpeProBns, nps, Medicalrel, payable, deduction, net, NetPaysheet, cgross, gross,  prevGross, piet, iet, netch, cpaye, ppaye, paye, enps ,ensf, levy, eprgf, pths, ths, netchar, slevy ,plevy, slevypay, ab, UNQ]
-                # cursor.execute(update_salary, data2)
+                cursor.execute(update_salary, data2)
                 print("Update Salary Query Executed")
 
                 update_payslip = """UPDATE payslip
@@ -7430,7 +7430,7 @@ def eoy():
                             UNQ = %s;
                             """
                 data_payslip = [flname, pos, nic, 0, trans, bonus, paygross, paye, nps, nsf, slevypay, totalDeduction, netpay, netpay, netpay,  enps, ensf, levy, eprgf, "EOY", UNQ]
-                # cursor.execute(update_payslip, data_payslip)
+                cursor.execute(update_payslip, data_payslip)
                 print("Update Payslip Query Executed")
                 # msg = "Processing Complete"
                 
@@ -7450,7 +7450,7 @@ def eoy():
                                     """
 
                 data4 = [eid, lname, fname, emolument, paye, slevypay, emolument, UNQ]
-                # cursor.execute(update_payecsv, data4)
+                cursor.execute(update_payecsv, data4)
                 print("Update PAYE CSV Query Executed")
 
                 msg = "End Of Year Bonus Re-Processing Complete For " + flname + " "
