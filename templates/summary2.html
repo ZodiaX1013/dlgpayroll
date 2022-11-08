@@ -114,6 +114,7 @@
                                         <li><a href="contribution" class="dropdown-item"><i class="fas fa-circle"></i> Contribution CSV</a></li>
                                         <li><a href="payslip" class="dropdown-item"><i class="fas fa-circle"></i> Payslip</a></li>
                                         <li><a href="paysheet" class="dropdown-item"><i class="fas fa-circle"></i> Paysheet</a></li>
+										<li><a href="summary" class="dropdown-item"><i class="fas fa-circle"></i> Pay Summary</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -172,22 +173,20 @@
                                         <!-- <table style="width: 100%;"> -->
                                                 <table id="excel">
                                                     <tr>
-                                                        <th colspan="20" style="text-align: center;">
+                                                        <th colspan="22" style="text-align: center;">
                                                             MAXCITY ASSET MANAGERS LTD
                                                         </th>
                                                     </tr>
                                                     <tr>
-                                                        <th colspan="20" style="text-align: center;">
-                                                            {% if month %}
-                                                                Paysheet for the month of -&nbsp; {{month}} -&nbsp; {{year}} 
-                                                            {% else %}
-                                                                Paysheet for the month of ____________ 
-                                                            {% endif %}
+                                                        <th colspan="22" style="text-align: center;">
+                                                            Pay Summary
                                                         </th>
                                                     </tr>
                                                     <tr>
                                                         <!-- <th></th> -->
-                                                        <th>Employee</th>
+                                                        <th>Month</th>
+                                                        <th></th>
+                                                        <th>Year</th>
                                                         <th>Basic Salary</th>
                                                         <th>Arrears</th>
                                                         <th>OT Amount</th>
@@ -208,13 +207,60 @@
                                                         <th>Other Deduction</th>
                                                         <th>Net Pay</th>
                                                     </tr> 
-                                                    {% for row in data %}
+                                                    {% for i in range(length2) %}                                                        
                                                     <tr>
-                                                        {% for cell in row %}
-                                                        <td>{{cell}}</td>
-                                                        {% endfor %}
+                                                        <td>{{data[i][0]}}</td>
+                                                        <td>{{data[i][1]}}</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
                                                     </tr>
-                                                    {% endfor %} 
+                                                        {% for j in range(length) %}
+                                                    <tr>
+                                                        <td>{{data2[i][j][0]}}</td>
+                                                        <td></td>
+                                                        <td>{{data2[i][j][1]}}</td>
+                                                        <td>{{data2[i][j][2]}}</td>
+                                                        <td>{{data2[i][j][3]}}</td>
+                                                        <td>{{data2[i][j][4]}}</td>
+                                                        <td>{{data2[i][j][5]}}</td>
+                                                        <td>{{data2[i][j][6]}}</td>
+                                                        <td>{{data2[i][j][7]}}</td>
+                                                        <td>{{data2[i][j][8]}}</td>
+                                                        <td>{{data2[i][j][9]}}</td>
+                                                        <td>{{data2[i][j][10]}}</td>
+                                                        <td>{{data2[i][j][11]}}</td>
+                                                        <td>{{data2[i][j][12]}}</td>
+                                                        <td>{{data2[i][j][13]}}</td>
+                                                        <td>{{data2[i][j][14]}}</td>
+                                                        <td>{{data2[i][j][15]}}</td>
+                                                        <td>{{data2[i][j][16]}}</td>
+                                                        <td>{{data2[i][j][17]}}</td>
+                                                        <td>{{data2[i][j][18]}}</td>
+                                                        <td>{{data2[i][j][19]}}</td>
+                                                        <td>{{data2[i][j][20]}}</td>                                                        
+                                                        
+                                                    </tr>
+                                                        {% endfor %}
+                                                    {% endfor %}     
+                                                    
                                                 </table>
                                             <!-- End Leave Table -->
                                     <button class="btn btn-secondary" type="submit" name="action" value="back" id="back" style="margin-top: 25px;"><i class="fa-solid fa-left" style="margin-right: 0.5rem;">  </i> Back</button>
