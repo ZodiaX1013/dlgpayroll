@@ -3927,7 +3927,6 @@ def process_salary():
                     emp_month = cursor.fetchall()
                     
                     last_mon = emp_month[0][0]
-                    
 
                     query_year = "SELECT YEAR(Lastwork) AS Year FROM employee WHERE EmployeeID= %s"
                     cursor.execute(query_year, data)
@@ -4819,8 +4818,6 @@ def process_salary():
                                 print("Contribution Insert Query Executed")
                                 msg = "Processing Complete"
                                 # print("Do Something Else")
-                            else:
-                                msg = "Salary Already Processed"
                         query15 = "SELECT Basic FROM cnpcsv WHERE month = %s"
                         data7 = [month]
                         cursor.execute(query15, data7)
@@ -7565,6 +7562,27 @@ def summary():
 
             all_data = []
             data2 = []
+
+            basic_total = []
+            arrears_total = []
+            overtime_total = []
+            leave_total = []
+            eoy_total = []
+            trans_total = []
+            overseas_total = []
+            oalw_total = []
+            falw_total = []
+            pay_total = []
+            ab_total = []
+            paye_total = []
+            csg_total = []
+            nsf_total = []
+            medical_total = []
+            slevy_total = []
+            late_total = []
+            oded_total = []
+            net_total = []
+            
             # print(len(emp2))
             for i in range(len(emp2)):
                 query = "SELECT Month, Year, BasicSalary, Arrears, Overtime, LeaveRef, EOY, Transport, Overseas, OtherAllow, FixedAllow, Payable, Absences, PAYE, NPS, NSFEmpee, Medical, SLevy, Lateness, OtherDeduction, NetPaysheet FROM salary WHERE EmployeeID = %s "
@@ -7573,16 +7591,354 @@ def summary():
                 cursor.execute(query,data)
                 pay_data = cursor.fetchall()
                 # print(len(pay_data))
-                data2.append(pay_data)
-                for j in range(len(pay_data)):
-                    
-                    all_data.append(pay_data[j])
+
+# ==========================================================================================================================================================================
+
+                get_basic = "SELECT BasicSalary FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_basic,data)
+                basic_all = cursor.fetchall()
+
+                basic_all2 = []
+                for i in range(len(basic_all)):
+                    basic_all2.append(basic_all[i][0])
+
+                basic_sum = 0
+                for i in range(len(basic_all2)):
+                    basic_sum = basic_sum + int(basic_all2[i])
+
+                # basic_tsum = [basic_sum]                
+                basic_total.append(basic_sum)
                 
-                # all_data.append(emp2[i])
-                # for i in range(len(pay_data)):
-                # all_data.append(list(pay_data))
-            # print(all_data)
-            # print("All Data : ", all_data)
+# ==========================================================================================================================================================================
+
+                get_arr = "SELECT Arrears FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_arr,data)
+                arr_all = cursor.fetchall()
+
+                arr_all2 = []
+                for i in range(len(arr_all)):
+                    arr_all2.append(arr_all[i][0])
+
+                arr_sum = 0
+                for i in range(len(arr_all2)):
+                    arr_sum = arr_sum + int(arr_all2[i])
+
+                # arr_tsum = [arr_sum]
+                arrears_total.append(arr_sum)
+
+# ==========================================================================================================================================================================
+
+                get_ot = "SELECT Overtime FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_ot,data)
+                ot_all = cursor.fetchall()
+
+                ot_all2 = []
+                for i in range(len(ot_all)):
+                    ot_all2.append(ot_all[i][0])
+
+                ot_sum = 0
+                for i in range(len(ot_all2)):
+                    ot_sum = ot_sum + int(ot_all2[i])
+
+                # ot_tsum = [ot_sum]
+                overtime_total.append(ot_sum)
+
+# ==========================================================================================================================================================================
+
+                get_leave = "SELECT LeaveRef FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_leave,data)
+                leave_all = cursor.fetchall()
+
+                leave_all2 = []
+                for i in range(len(leave_all)):
+                    leave_all2.append(leave_all[i][0])
+
+                leave_sum = 0
+                for i in range(len(leave_all2)):
+                    leave_sum = leave_sum + int(leave_all2[i])
+
+                # leave_tsum = [leave_sum]
+                leave_total.append(leave_sum)
+
+# ==========================================================================================================================================================================
+
+                get_eoy = "SELECT EOY FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_eoy,data)
+                eoy_all = cursor.fetchall()
+
+                eoy_all2 = []
+                for i in range(len(eoy_all)):
+                    eoy_all2.append(eoy_all[i][0])
+
+                eoy_sum = 0
+                for i in range(len(eoy_all2)):
+                    eoy_sum = eoy_sum + int(eoy_all2[i])
+
+                # eoy_tsum = [eoy_sum]
+                eoy_total.append(eoy_sum)
+
+# ==========================================================================================================================================================================
+
+                get_trans = "SELECT Transport FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_trans,data)
+                trans_all = cursor.fetchall()
+
+                trans_all2 = []
+                for i in range(len(trans_all)):
+                    trans_all2.append(trans_all[i][0])
+
+                trans_sum = 0
+                for i in range(len(trans_all2)):
+                    trans_sum = trans_sum + int(trans_all2[i])
+
+                # trans_tsum = [trans_sum]
+                trans_total.append(trans_sum)
+
+# ==========================================================================================================================================================================
+
+                get_overseas = "SELECT Overseas FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_overseas,data)
+                overseas_all = cursor.fetchall()
+
+                overseas_all2 = []
+                for i in range(len(overseas_all)):
+                    overseas_all2.append(overseas_all[i][0])
+
+                overseas_sum = 0
+                for i in range(len(overseas_all2)):
+                    overseas_sum = overseas_sum + int(overseas_all2[i])
+
+                # overseas_tsum = [overseas_sum]
+                overseas_total.append(overseas_sum)
+
+# ==========================================================================================================================================================================
+
+                get_oalw = "SELECT OtherAllow FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_oalw,data)
+                oalw_all = cursor.fetchall()
+
+                oalw_all2 = []
+                for i in range(len(oalw_all)):
+                    oalw_all2.append(oalw_all[i][0])
+
+                oalw_sum = 0
+                for i in range(len(oalw_all2)):
+                    oalw_sum = oalw_sum + int(oalw_all2[i])
+
+                # oalw_tsum = [oalw_sum]
+                oalw_total.append(oalw_sum)
+
+# ==========================================================================================================================================================================
+
+                get_falw = "SELECT FixedAllow FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_falw,data)
+                falw_all = cursor.fetchall()
+
+                falw_all2 = []
+                for i in range(len(falw_all)):
+                    falw_all2.append(falw_all[i][0])
+
+                falw_sum = 0
+                for i in range(len(falw_all2)):
+                    falw_sum = falw_sum + int(falw_all2[i])
+
+                # falw_tsum = [falw_sum]
+                falw_total.append(falw_sum)
+
+# ==========================================================================================================================================================================
+
+                get_pay = "SELECT Payable FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_pay,data)
+                pay_all = cursor.fetchall()
+
+                pay_all2 = []
+                for i in range(len(pay_all)):
+                    pay_all2.append(pay_all[i][0])
+
+                pay_sum = 0
+                for i in range(len(pay_all2)):
+                    pay_sum = pay_sum + int(pay_all2[i])
+
+                # pay_tsum = [pay_sum]
+                pay_total.append(pay_sum)
+
+# ==========================================================================================================================================================================
+
+                get_ab = "SELECT Absences FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_ab,data)
+                ab_all = cursor.fetchall()
+
+                ab_all2 = []
+                for i in range(len(ab_all)):
+                    ab_all2.append(ab_all[i][0])
+
+                ab_sum = 0
+                for i in range(len(ab_all2)):
+                    ab_sum = ab_sum + int(ab_all2[i])
+
+                # ab_tsum = [ab_sum]
+                ab_total.append(ab_sum)
+
+# ==========================================================================================================================================================================
+
+                get_paye = "SELECT PAYE FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_paye,data)
+                paye_all = cursor.fetchall()
+
+                paye_all2 = []
+                for i in range(len(paye_all)):
+                    paye_all2.append(paye_all[i][0])
+
+                paye_sum = 0
+                for i in range(len(paye_all2)):
+                    paye_sum = paye_sum + int(paye_all2[i])
+
+                # paye_tsum = [paye_sum]
+                paye_total.append(paye_sum)
+
+# ==========================================================================================================================================================================
+
+                get_csg = "SELECT NPS FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_csg,data)
+                csg_all = cursor.fetchall()
+
+                csg_all2 = []
+                for i in range(len(csg_all)):
+                    csg_all2.append(csg_all[i][0])
+
+                csg_sum = 0
+                for i in range(len(csg_all2)):
+                    csg_sum = csg_sum + int(csg_all2[i])
+
+                # csg_tsum = [csg_sum]
+                csg_total.append(csg_sum)
+
+# ==========================================================================================================================================================================
+
+                get_nsf = "SELECT NSFEmpee FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_nsf,data)
+                nsf_all = cursor.fetchall()
+
+                nsf_all2 = []
+                for i in range(len(nsf_all)):
+                    nsf_all2.append(nsf_all[i][0])
+
+                nsf_sum = 0
+                for i in range(len(nsf_all2)):
+                    nsf_sum = nsf_sum + int(nsf_all2[i])
+
+                # nsf_tsum = [nsf_sum]
+                nsf_total.append(nsf_sum)                                                                                                                
+
+# ==========================================================================================================================================================================
+
+                get_medical = "SELECT Medical FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_medical,data)
+                medical_all = cursor.fetchall()
+
+                medical_all2 = []
+                for i in range(len(medical_all)):
+                    medical_all2.append(medical_all[i][0])
+
+                medical_sum = 0
+                for i in range(len(medical_all2)):
+                    medical_sum = medical_sum + int(medical_all2[i])
+
+                # medical_tsum = [medical_sum]
+                medical_total.append(medical_sum)                
+
+# ==========================================================================================================================================================================
+
+                get_slevy = "SELECT SLevy FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_slevy,data)
+                slevy_all = cursor.fetchall()
+
+                slevy_all2 = []
+                for i in range(len(slevy_all)):
+                    slevy_all2.append(slevy_all[i][0])
+
+                slevy_sum = 0
+                for i in range(len(slevy_all2)):
+                    slevy_sum = slevy_sum + int(slevy_all2[i])
+
+                # slevy_tsum = [slevy_sum]
+                slevy_total.append(slevy_sum)
+
+# ==========================================================================================================================================================================
+
+                get_late = "SELECT Lateness FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_late,data)
+                late_all = cursor.fetchall()
+
+                late_all2 = []
+                for i in range(len(late_all)):
+                    late_all2.append(late_all[i][0])
+
+                late_sum = 0
+                for i in range(len(late_all2)):
+                    late_sum = late_sum + int(late_all2[i])
+
+                # late_tsum = [late_sum]
+                late_total.append(late_sum)
+
+# ==========================================================================================================================================================================
+
+                get_oded = "SELECT OtherDeduction FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_oded,data)
+                oded_all = cursor.fetchall()
+
+                oded_all2 = []
+                for i in range(len(oded_all)):
+                    oded_all2.append(oded_all[i][0])
+
+                oded_sum = 0
+                for i in range(len(oded_all2)):
+                    oded_sum = oded_sum + int(oded_all2[i])
+
+                # oded_tsum = [oded_sum]
+                oded_total.append(oded_sum)
+
+# ==========================================================================================================================================================================
+
+                get_net = "SELECT NetPaysheet FROM salary WHERE EmployeeID = %s "
+                cursor.execute(get_net,data)
+                net_all = cursor.fetchall()
+
+                net_all2 = []
+                for i in range(len(net_all)):
+                    net_all2.append(net_all[i][0])
+
+                net_sum = 0
+                for i in range(len(net_all2)):
+                    net_sum = net_sum + int(net_all2[i])
+
+                # net_tsum = [net_sum]
+                net_total.append(net_sum)                                                                
+
+# ==========================================================================================================================================================================
+
+
+                data2.append(pay_data)
+
+            # print(basic_total)
+            # print(arrears_total)
+            # print(overtime_total)
+            # print(leave_total)
+            # print(eoy_total)
+            # print(trans_total)
+            # print(overseas_total)
+            # print(oalw_total)
+            # print(falw_total)
+            # print(pay_total)
+            # print(ab_total)
+            # print(paye_total)
+            # print(csg_total)
+            # print(nsf_total)
+            # print(medical_total)
+            # print(slevy_total)
+            # print(late_total)
+            # print(oded_total)
+            # print(net_total)
 
             length2 = len(emp2)
             # print(length2)
@@ -7591,34 +7947,12 @@ def summary():
 
             length3 = len(all_data)
 
-
-            print(all_data[0][2])
-
-            print(all_data[1][2])
-
-            print(all_data[2][2])
-
-            print(all_data[3][2])
-
-            print(all_data[4][2])
-
-            print(all_data[5][2])
-
-            print(all_data[6][2])
-
-            print(all_data[7][2])
-
-            print(all_data[8][2])
-
-            print(all_data[9][2])
-
             # print("ALL Data ", all_data)
-            print(data2)
+            # print(data2)
             # return "success"
-            return render_template("summary2.html", length = length, data = emp2, data2 = data2, length2 = length2, length3=length3)
-
+            return render_template("summary2.html", length = length, data = emp2, data2 = data2, length2 = length2 ,basic = basic_total, arr = arrears_total, ot = overtime_total, leave = leave_total, eoy = eoy_total, trans = trans_total, overseas = overseas_total, oalw = oalw_total, falw = falw_total, pay = pay_total, ab = ab_total, paye = paye_total, csg = csg_total, nsf = nsf_total, medical = medical_total, slevy = slevy_total, late = late_total, oded = oded_total, net = net_total )
         except Error as e:
-            print("Error While connecting to MySQL : ", e)
+            print("Error While connecting to MySQL : ", e )
         finally:
             connection.commit()
             cursor.close()
@@ -7626,7 +7960,7 @@ def summary():
             print("MySQL connection is closed")
     return render_template("summary.html")
 
-@app.route("/payslip", methods=["GET" , "POST"])
+@app.route("/payslip", methods = ["GET", "POST"])            
 def payslip():
     # global connection
     if request.method == "POST" and request.form['action'] == 'word':
