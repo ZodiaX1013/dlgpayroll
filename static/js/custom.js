@@ -941,3 +941,255 @@ function calculatehr5(){
 
   document.getElementById('abs').value = parseInt(total)
 }
+
+function utilities(){
+  var electricity = document.getElementById("electric").value
+  if(electricity == ""){
+    electricity = parseInt(0)
+  }
+
+  var internet = document.getElementById("inter").value
+  if(internet == ""){
+    internet = parseInt(0)
+  }
+
+  var total = parseInt(electricity) + parseInt(internet)
+
+  document.getElementById("utl").value = total
+}
+
+function sundry(){
+
+  var cleaner = document.getElementById("ofc").value
+  if(cleaner == ""){
+    cleaner = parseInt(0)
+  }
+
+  var zoom = document.getElementById("zoom").value
+  if(zoom == ""){
+    zoom = parseInt(0)
+  }
+
+  var publication = document.getElementById("public").value
+  if(publication == ""){
+    publication = parseInt(0)
+  }
+
+  var antivirus = document.getElementById("anti").value
+  if(antivirus == ""){
+    antivirus = parseInt(0)
+  }
+
+  var toner = document.getElementById("toner").value
+  if(toner == ""){
+    toner = parseInt(0)
+  }
+
+  var plant = document.getElementById("plant").value
+  if(plant == ""){
+    plant = parseInt(0)
+  }
+
+  var courier = document.getElementById("cour").value
+  if(courier == ""){
+    courier = parseInt(0)
+  }
+
+  var supply = document.getElementById("supply").value
+  if(supply == ""){
+    supply = parseInt(0)
+  }
+
+  var cards = document.getElementById("bcard").value
+  if(cards == ""){
+    cards = parseInt(0)
+  }
+
+  var mask = document.getElementById("mask").value
+  if(mask == ""){
+    mask = parseInt(0)
+  }
+
+  var clean = document.getElementById("clean").value
+  if(clean == ""){
+    clean = parseInt(0)
+  }
+
+  var training = document.getElementById("train").value
+  if(training == ""){
+    training = parseInt(0)
+  }
+
+  var annual = document.getElementById("annual").value
+  if(annual == ""){
+    annual = parseInt(0)
+  }
+
+  var kitchen = document.getElementById("kitchen").value
+  if(kitchen == ""){
+    kitchen = parseInt(0)
+  }
+
+  var msofc = document.getElementById("msofc").value
+  if(msofc == ""){
+    msofc = parseInt(0)
+  }
+
+  var health = document.getElementById("health").value
+  if(health == ""){
+    health = parseInt(0)
+  }
+
+  var domain = document.getElementById("domain").value
+  if(domain == ""){
+    domain = parseInt(0)
+  }
+
+  var audit = document.getElementById("audit").value
+  if(audit == ""){
+    audit = parseInt(0)
+  }
+
+  var acmain = document.getElementById("acmain").value
+  if(acmain == ""){
+    acmain = parseInt(0)
+  }
+
+  var charity = document.getElementById("charity").value
+  if(charity == ""){
+    charity = parseInt(0)
+  }
+
+  var chair = document.getElementById("chair").value
+  if(chair == ""){
+    chair = parseInt(0)
+  }
+
+  var green = document.getElementById("green").value
+  if(green == ""){
+    green = parseInt(0)
+  }
+
+  var hotel = document.getElementById("hotel").value
+  if(hotel == ""){
+    hotel = parseInt(0)
+  }
+
+  var travel = document.getElementById("travel").value
+  if(travel == ""){
+    travel = parseInt(0)
+  }
+
+  var luggage = document.getElementById("lugg").value
+  if(luggage == ""){
+    luggage = parseInt(0)
+  }
+
+  var family = document.getElementById("family").value
+  if(family == ""){
+    family = parseInt(0)
+  }
+
+  var laptop = document.getElementById("laptop").value
+  if(laptop == ""){
+    laptop = parseInt(0)
+  }
+
+  var polycom = document.getElementById("polycom").value
+  if(polycom == ""){
+    polycom = parseInt(0)
+  }
+
+  var total = parseInt(cleaner) + parseInt(zoom) + parseInt(publication) + parseInt(antivirus) + parseInt(toner) + parseInt(plant) + parseInt(courier) + parseInt(supply) + parseInt(cards) + parseInt(mask) + parseInt(clean) + parseInt(training) + parseInt(annual) + parseInt(kitchen) + parseInt(msofc) + parseInt(health) + parseInt(domain) + parseInt(audit) + parseInt(acmain) + parseInt(charity) + parseInt(chair) + parseInt(green) + parseInt(hotel) + parseInt(travel) + parseInt(luggage) + parseInt(family) + parseInt(laptop) + parseInt(polycom)
+
+  document.getElementById("sun").value = total
+}
+
+function businessM(){
+  var industry = document.getElementById("industry").value
+  if(industry == ""){
+    industry = parseInt(0)
+  }
+
+  var stay = document.getElementById("stay").value
+  if(stay == ""){
+    stay = parseInt(0)
+  }
+
+  var miod = document.getElementById("miod").value
+  if(miod == ""){
+    miod = parseInt(0)
+  }
+
+  var craf = document.getElementById("craf").value
+  if(craf == ""){
+    craf = parseInt(0)
+  }
+
+  var dkites = document.getElementById("dkites").value
+  if(dkites == ""){
+    dkites = parseInt(0)
+  }
+
+  var mcmiod = document.getElementById("mcmiod").value
+  if(mcmiod == ""){
+    mcmiod = parseInt(0)
+  }
+
+  var photo = document.getElementById("photo").value
+  if(photo == ""){
+    photo = parseInt(0)
+  }
+
+  var pen = document.getElementById("pen").value
+  if(pen == ""){
+    pen = parseInt(0)
+  }
+
+  var lunch = document.getElementById("lunch").value
+  if(lunch == ""){
+    lunch = parseInt(0)
+  }
+
+  var penevent = document.getElementById("penevent").value
+  if(penevent == ""){
+    penevent = parseInt(0)
+  }
+
+  var mccraft = document.getElementById("mccraf").value
+  if(mccraft == ""){
+    mccraft = parseInt(0)
+  }
+
+  var inter = document.getElementById("inter").value
+  if(inter == ""){
+    inter = parseInt(0)
+  }
+
+  var member = document.getElementById("member").value
+  if(member == ""){
+    member = parseInt(0)
+  }
+
+  var total = parseInt(industry) + parseInt(stay) + parseInt(miod) + parseInt(craf) + parseInt(dkites) + parseInt(mcmiod) + parseInt(photo) + parseInt(pen) + parseInt(lunch) + parseInt(penevent) + parseInt(mccraft) + parseInt(inter) + parseInt(member)
+
+  document.getElementById("mbusiness").value = parseInt(total)
+}
+
+// Legal And Professional Expenses
+
+function legal(){
+  var vidhya = document.getElementById("vidhya").value
+  if(vidhya == ""){
+    vidhya = parseInt(0)
+  }
+
+  var rating = document.getElementById("rating").value
+  if(rating == ""){
+    rating = parseInt(0)
+  }
+
+  var total = parseInt(vidhya) + parseInt(rating)
+
+  document.getElementById("lprof").value = parseInt(total)
+}

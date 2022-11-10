@@ -145,7 +145,8 @@
 	</nav> -->
 	<!-- [ navigation menu ] end -->
 	<!-- [ Header ] start -->
-	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-dark" style="background-color: white;" >
+	<form action="/", method="post">
+<header class="navbar pcoded-header navbar-expand-lg navbar-light header-dark" style="background-color: white;" >
         <div class="m-header">
              
             <a href="{{url_for('dashboard')}}" class="b-brand">
@@ -228,7 +229,7 @@
                                     <ul class="pro-body">
                                         <li><a href="#" class="dropdown-item"><i class="fas fa-circle"></i> User Account</a></li>
                                         <li><a href="reset" class="dropdown-item"><i class="fas fa-circle"></i> Change Password</a></li>
-                                        <li><a href="login" class="dropdown-item"><i class="fas fa-circle"></i> Logout</a></li>
+                                        <!-- <li><a href="login" class="dropdown-item"><i class="fas fa-circle"></i> Logout</a></li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -410,7 +411,9 @@
 		</div>
 		
 	
+<button class="btn btn-danger" style="position: absolute; right: 0; margin-right: 25px;"><i class="fa-thin fa-arrow-up-left-from-circle" style="margin-right: 0.5rem;"></i>  Logout</button>
 </header>
+</form>
 	<!-- [ Header ] end -->
     <!-- [ Main Content ] start -->
     <!-- <div class="pcoded-main-container"> -->

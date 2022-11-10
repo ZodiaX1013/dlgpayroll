@@ -5142,6 +5142,7 @@ def eoy():
 
             eid = request.form["eid"]
             month = "EOY"
+            year = date.today().year
             
             # eoyBns = request.form["eoy"]
             
@@ -6560,7 +6561,7 @@ def eoy():
 
             eid = request.form["eid"]
             month = "EOY"
-            
+            year = date.today().year
             
             data = [eid]
             # print(month)
