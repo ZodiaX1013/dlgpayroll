@@ -767,6 +767,58 @@ def employee():
             print("MySQL connection is closed")
         return render_template("employee.html")         
         
+# Redirect
+
+    if request.method == "POST" and request.form['action']== 'redirect':
+        eid = request.form["eid"]
+        return render_template("change_id.html", eid=eid)
+
+# Change Username
+    if request.method == "POST" and request.form['action']== 'change':
+        eid1 = request.form["eid1"]
+        eid2 = request.form["eid2"]
+        try:
+            connection = mysql.connector.connect(host='demo-do-user-12574852-0.b.db.ondigitalocean.com',
+                                                    database='defaultdb',
+                                                    user='doadmin',
+                                                    port='25060',
+                                                    password='AVNS_PcXvrtUuNMOXoepk9DT') # @ZodiaX1013
+            cursor = connection.cursor(buffered=True)
+
+            query1 = "SELECT EmployeeID FROM employee WHERE EmployeeID=%s"
+            data1 = [eid1]
+            cursor.execute(query1, data1)
+
+            eid = cursor.fetchall()
+            for i in range(len(eid)):
+                eid = ''.join(eid[i])
+            
+            if eid == eid1:
+                update_query = """UPDATE employee
+                            SET
+                            EmployeeID = %s
+                            WHERE
+                            EmployeeID = %s;
+                            """
+                data = [eid2, eid1]
+                cursor.execute(update_query, data)
+                print("Data Updated Successfully")
+                msg = "Data Updated Successfully"
+                return render_template("employee.html", msg=msg)
+            else:
+                msg = "Employee ID Not Available"
+                return render_template("change_id.html", msg=msg)
+            
+        except Error as e:
+            print("Error While connecting to MySQL : ", e)
+        finally:
+            connection.commit()
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+        
+        return render_template("change_id.html")
+
 # ==========================================================================================================
     # Save To Database
 
@@ -4065,7 +4117,7 @@ def process_salary():
                             if pos != 0:
                                 pos = ''.join(map(str,pos))
                             # print(pos)
-                            
+
 
                             query10 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
                             cursor.execute(query10,data)
@@ -4846,6 +4898,8 @@ def process_salary():
                         month = %s;"""
                         data8 = [total, cnp, month]
                         cursor.execute(update_cnp, data8)
+
+                        print("CNP Update Query Executed")
         # =================================================================================================================================
 
                         query16 = "SELECT Salary FROM contribution WHERE month = %s"
@@ -7960,6 +8014,8 @@ def summary():
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
+    elif request.method == "POST" and request.form["action"] == "back":
+        return render_template("summary.html")
     return render_template("summary.html")
 
 @app.route("/payslip", methods = ["GET", "POST"])            

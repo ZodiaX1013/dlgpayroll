@@ -851,53 +851,19 @@ function ExportToDoc(filename = ''){
   document.body.removeChild(downloadLink);
 }
 
- window.export.onclick = function() {
-  
-  if (!window.Blob) {
-     alert('Your legacy browser does not support this action.');
-     return;
-  }
-
-  var html, link, blob, url, css;
-  
-  // EU A4 use: size: 841.95pt 595.35pt;
-  // US Letter use: size:11.0in 8.5in;
-  
-  css = (
-    '<style>' +
-    '@page WordSection1{size: 841.95pt 595.35pt;mso-page-orientation: landscape;}' +
-    'div.WordSection1 {page: WordSection1;}' +
-    'table{border-collapse:collapse;}td{border:1px gray solid;width:5em;padding:2px;}'+
-    '</style>'
-  );
-  
-  html = window.docx.innerHTML;
-  
-  blob = new Blob(['\ufeff', css + html], {
-    type: 'application/msword'
-  });
-  
-  url = URL.createObjectURL(blob);
-  link = document.createElement('A');
-  link.href = url;
-  // Set default file name. 
-  // Word will append file extension - do not add an extension here.
-  link.download = 'Document';   
-  document.body.appendChild(link);
-  if (navigator.msSaveOrOpenBlob ) navigator.msSaveOrOpenBlob( blob, 'Document.doc'); // IE10-11
-      else link.click();  // other browsers
-  document.body.removeChild(link);
-};
-
+ 
 function LockSal(){
   alert("Salary Already Locked")
 }
 
 // Functions For Overtime Calculator
 
-function calculatehr1(){
+function calculatehr1(){  
   var hour = document.getElementById('hr1').value;
-  var basic = document.getElementById('bsal').value
+  if(hour == ""){
+    hour = parseInt(0)
+  }
+  var basic = document.getElementById('bsal').value;
 
   var perday = Math.round(parseInt(basic) / 26)
   var perhour = Math.round(parseInt(perday) / 8)
@@ -911,6 +877,10 @@ function calculatehr1(){
 
 function calculatehr2(){
   var hour = document.getElementById('hr2').value;
+  if(hour == ""){
+    hour = parseInt(0)
+  }
+
   var basic = document.getElementById('bsal').value
 
   var perday = Math.round(parseInt(basic) / 26)
@@ -924,6 +894,10 @@ function calculatehr2(){
 
 function calculatehr3(){
   var hour = document.getElementById('hr3').value;
+  if(hour == ""){
+    hour = parseInt(0)
+  }
+
   var basic = document.getElementById('bsal').value
 
   var perday = Math.round(parseInt(basic) / 26)
@@ -937,6 +911,10 @@ function calculatehr3(){
 
 function calculatehr4(){
   var hour = document.getElementById('hr4').value;
+  if(hour == ""){
+    hour = parseInt(0)
+  }
+
   var basic = document.getElementById('bsal').value
 
   var perday = Math.round(parseInt(basic) / 26)
@@ -951,6 +929,10 @@ function calculatehr4(){
 
 function calculatehr5(){
   var day = document.getElementById('hr5').value;
+  if(day == ""){
+    day = parseInt(0)
+  }
+
   var basic = document.getElementById('bsal').value
 
   var perday = Math.round(parseInt(basic) / 26)
