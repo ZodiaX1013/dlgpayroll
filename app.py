@@ -3941,6 +3941,8 @@ def process_salary():
                     print("year ", year)
                     print("last month ", last_mon)
                     print("month ", id)
+
+                    msg = ""
                     
                     if int(last_year) >= int(year) or last_year == 1:
                         print("Year Is Correct")
