@@ -4,7 +4,7 @@
 <!-- Mirrored from technext.github.io/flat_able/bc_tabs.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Aug 2022 05:38:53 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
-	<title>Demo</title>
+	<title>Care Edge</title>
 	<!-- <title>Flat Able - Premium Admin Template by Phoenixcoded</title> -->
 	<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,20 +37,43 @@
 	
 </head>
 <body>
-	<form action="/" method="post">
-	<form action="/", method="post">
-<header class="navbar pcoded-header navbar-expand-lg navbar-light header-dark" style="background-color: white;" >
+	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-dark" style="background-color: white;" >
         <div class="m-header">
                 <!-- ========   change your logo hear   ============ -->
-                <img src="../static/images/newlogo.jpeg" alt="" class="logo" style="height: 50px; width: 150px;">
+                <img src="../static/images/logo.png" alt="" class="logo" style="height: 50px; width: 150px;">
         </div>
+		<div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <div class="dropdown">
+						<li class="nav-item">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown">
+                                   <b style="color: black;"> Reports </b>
+                                </a>
+                                <div class="dropdown-menu profile-notification ">
+                                    <form action="/expense" method="post">
+                                        <ul class="pro-body">
+                                            <li><button type="submit" name="action" value="summary" class="dropdown-item"> Summary </a></li>
+											<li><button type="submit" name="action" value="input" class="dropdown-item"> Input </a></li>
+                                        </ul>
+                                    </form>
+                                    <form action="/rae">
+                                </div>
+                            </div>
+                        </li>
+					</div>
+				</li>
+			</ul>
+		</div>
 		
-			<button class="btn btn-danger" style="position: absolute; right: 0; margin-right: 25px;"><i class="fa-thin fa-arrow-up-left-from-circle" style="margin-right: 0.5rem;"></i>  Logout</button>
+			<!-- <button class="btn btn-danger" style="position: absolute; right: 0; margin-right: 25px;"><i class="fa-thin fa-arrow-up-left-from-circle" style="margin-right: 0.5rem;"></i>  Logout</button> -->
 		
 
-	<button class="btn btn-danger" style="position: absolute; right: 0; margin-right: 25px;"><i class="fa-thin fa-arrow-up-left-from-circle" style="margin-right: 0.5rem;"></i>  Logout</button>
-</header>
-</form>
+	<button class="btn btn-secondary" style="position: absolute; right: 0; margin-right: 25px;"><i class="fa-thin fa-arrow-up-left-from-circle" style="margin-right: 0.5rem;"></i> Back To Main </button>
+	</header>
+	<!-- [ Header ] end -->
+	</form>
 </form>
 	<!-- [ Header ] end -->
 	
@@ -60,7 +83,21 @@
 <!-- <div class="pcoded-main-container"> -->
 <div class="">
 	<div class="pcoded-content">
-		
+		<div class="page-header">
+			<div class="page-block">
+				<div class="row align-items-center">
+					<div class="col-md-12">
+						<div class="page-header-title">
+							<a href="expense"><h5 class="m-b-10">Home</h5></a>
+						</div>
+						<ul class="breadcrumb">
+							<!-- <li class="breadcrumb-item"><a href="dashboard.html"><i class="feather icon-home"></i></a></li> --> 
+							<!-- <li class="breadcrumb-item"><a href="#!">Dashboard</a></li> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 		{% if msg %}
 			<h2> {{msg}} </h2>
 		{% endif %}
@@ -110,14 +147,16 @@
 							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 								<p class="mb-0">
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3"></div>
+										<div class="form-group col-md-3">
 											<label>Electricity</label>
-											<input type="text" name="electric" id="electric" class="form-control" value="" placeholder="Enter Electricity Expense" >
+											<input type="text" name="electric" id="electric" class="form-control" value="" placeholder="Enter Electricity Expense" onblur="utilities()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Internet Bills </label>
-											<input type="text" class="form-control" name="inter" id="inter" value="" placeholder="Internet Bill" >
+											<input type="text" class="form-control" name="inter" id="inter" value="" placeholder="Internet Bill"  onblur="utilities()">
 										</div>
+										<div class="form-group col-md-3"></div>
 									</div>
 								</p>
 							</div>
@@ -129,143 +168,129 @@
 							<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 								<p class="mb-0">
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Office Cleaner</label>
-											<input type="text" name="ofc" id="ofc" class="form-control" value="" placeholder="Office Cleaner Expense" >
+											<input type="text" name="ofc" id="ofc" class="form-control" value="" placeholder="Office Cleaner Expense" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Zoom Registration charges </label>
-											<input type="text" class="form-control" name="zoom" id="zoom" value="" placeholder="Zoom Registration Expense" >
+											<input type="text" class="form-control" name="zoom" id="zoom" value="" placeholder="Zoom Registration Expense" onblur="sundry()" >
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Suscription to Leexpress paper/Business Publication</label>
-											<input type="text" name="public" id="public" class="form-control" value="" placeholder="Publication Expense" >
+											<input type="text" name="public" id="public" class="form-control" value="" placeholder="Publication Expense" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Antivirus for laptops </label>
-											<input type="text" class="form-control" name="anti" id="anti" value="" placeholder="Antivirus Expense" >
+											<input type="text" class="form-control" name="anti" id="anti" value="" placeholder="Antivirus Expense" onblur="sundry()" >
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Toners</label>
-											<input type="text" name="toner" id="toner" class="form-control" value="" placeholder="Toner Expense" >
+											<input type="text" name="toner" id="toner" class="form-control" value="" placeholder="Toner Expense" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Plant Maintenance </label>
-											<input type="text" class="form-control" name="plant" id="plant" value="" placeholder="Plant Maintenance" >
+											<input type="text" class="form-control" name="plant" id="plant" value="" placeholder="Plant Maintenance" onblur="sundry()" >
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Mauritius Post - Courier</label>
-											<input type="text" name="cour" id="cour" class="form-control" value="" placeholder="Post - Courier Expense" >
+											<input type="text" name="cour" id="cour" class="form-control" value="" placeholder="Post - Courier Expense" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Office supplies & stationery  </label>
-											<input type="text" class="form-control" name="supply" id="supply" value="" placeholder="supply and stationery Expense" >
+											<input type="text" class="form-control" name="supply" id="supply" value="" placeholder="supply and stationery Expense" onblur="sundry()" >
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Business Cards</label>
-											<input type="text" name="bcard" id="bcard" class="form-control" value="" placeholder="Business Card Expense" >
+											<input type="text" name="bcard" id="bcard" class="form-control" value="" placeholder="Business Card Expense" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Mask, Thermometer & santizer </label>
-											<input type="text" class="form-control" name="mask" id="mask" value="" placeholder="Mask, Thermometer & santizer Expense" >
+											<input type="text" class="form-control" name="mask" id="mask" value="" placeholder="Mask, Thermometer & santizer Expense" onblur="sundry()" >
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Office cleaning expenses post COVID</label>
-											<input type="text" name="clean" id="clean" class="form-control" value="" placeholder="Office cleaning expenses" >
+											<input type="text" name="clean" id="clean" class="form-control" value="" placeholder="Office cleaning expenses" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Traning charges for employees </label>
-											<input type="text" class="form-control" name="train" id="train" value="" placeholder="Traning Expense" >
+											<input type="text" class="form-control" name="train" id="train" value="" placeholder="Traning Expense" onblur="sundry()" >
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Annual office weekend with employees and their families</label>
-											<input type="text" name="annual" id="annual" class="form-control" value="" placeholder="Annual office weekend Expense" >
+											<input type="text" name="annual" id="annual" class="form-control" value="" placeholder="Annual office weekend Expense" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Kitchen work and side drawers for employees </label>
-											<input type="text" class="form-control" name="kitchen" id="kitchen" value="" placeholder="Kitchen and side drawers Expense" >
+											<input type="text" class="form-control" name="kitchen" id="kitchen" value="" placeholder="Kitchen and side drawers Expense" onblur="sundry()" >
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>MS Office</label>
-											<input type="text" name="msofc" id="msofc" class="form-control" value="" placeholder="MS Office Expense" >
+											<input type="text" name="msofc" id="msofc" class="form-control" value="" placeholder="MS Office Expense" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Annual Health check up </label>
-											<input type="text" class="form-control" name="health" id="health" value="" placeholder="Health Check up Expense" >
+											<input type="text" class="form-control" name="health" id="health" value="" placeholder="Health Check up Expense" onblur="sundry()" >
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Domain of CARE Ratings Africa</label>
-											<input type="text" name="domain" id="domain" class="form-control" value="" placeholder="Domain Expense" >
+											<input type="text" name="domain" id="domain" class="form-control" value="" placeholder="Domain Expense" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > AML/CFT Audit report (FSC) </label>
-											<input type="text" class="form-control" name="audit" id="audit" value="" placeholder="Audit Report Expense" >
+											<input type="text" class="form-control" name="audit" id="audit" value="" placeholder="Audit Report Expense" onblur="sundry()" >
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>A/C Maintenance</label>
-											<input type="text" name="acmain" id="acmain" class="form-control" value="" placeholder="A/C Maintenance Expense" >
+											<input type="text" name="acmain" id="acmain" class="form-control" value="" placeholder="A/C Maintenance Expense" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Charity to Rotary Club </label>
-											<input type="text" class="form-control" name="charity" id="charity" value="" placeholder="Charity Expense" >
+											<input type="text" class="form-control" name="charity" id="charity" value="" placeholder="Charity Expense" onblur="sundry()" >
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>New Chair & Chair Maintenance</label>
-											<input type="text" name="chair" id="chair" class="form-control" value="" placeholder="Chair Expenses" >
+											<input type="text" name="chair" id="chair" class="form-control" value="" placeholder="Chair Expenses" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Vidhya - Greencross </label>
-											<input type="text" class="form-control" name="green" id="green" value="" placeholder="Vidhya Greencross Expense" >
+											<input type="text" class="form-control" name="green" id="green" value="" placeholder="Vidhya Greencross Expense" onblur="sundry()" >
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Vidhya Travel Hotel Bill</label>
-											<input type="text" name="hotel" id="hotel" class="form-control" value="" placeholder="Travel Hotel Expense" >
+											<input type="text" name="hotel" id="hotel" class="form-control" value="" placeholder="Travel Hotel Expense" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Vidhya Travel Ticket </label>
-											<input type="text" class="form-control" name="travel" id="travel" value="" placeholder="Travel Ticket Expense" >
+											<input type="text" class="form-control" name="travel" id="travel" value="" placeholder="Travel Ticket Expense" onblur="sundry()" >
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Vidhya Extra luggage</label>
-											<input type="text" name="lugg" id="lugg" class="form-control" value="" placeholder="Extra luggage Expense" >
+											<input type="text" name="lugg" id="lugg" class="form-control" value="" placeholder="Extra luggage Expense" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Vidhya family Travel ticket </label>
-											<input type="text" class="form-control" name="family" id="family" value="" placeholder="Family Travel Ticket Expense" >
+											<input type="text" class="form-control" name="family" id="family" value="" placeholder="Family Travel Ticket Expense" onblur="sundry()" >
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Laptop repair</label>
-											<input type="text" name="laptop" id="laptop" class="form-control" value="" placeholder="Laptop Repair Expense" >
+											<input type="text" name="laptop" id="laptop" class="form-control" value="" placeholder="Laptop Repair Expense" onblur="sundry()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Polycom cable </label>
-											<input type="text" class="form-control" name="polycom" id="polycom" value="" placeholder="Polycom Cable Expense" >
+											<input type="text" class="form-control" name="polycom" id="polycom" value="" placeholder="Polycom Cable Expense" onblur="sundry()" >
 										</div>
 									</div>
 								</p>
@@ -276,70 +301,66 @@
 							<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 								<p class="mb-0">
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Industry Reports</label>
-											<input type="text" name="industry" id="industry" class="form-control" value="" placeholder="Industry Reports Expense" >
+											<input type="text" name="industry" id="industry" class="form-control" value="" placeholder="Industry Reports Expense" onblur="businessM()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Director's stay in Hotel during May 4-7, 2022 </label>
-											<input type="text" class="form-control" name="stay" id="stay" value="" placeholder="Director's Stay Expense" >
+											<input type="text" class="form-control" name="stay" id="stay" value="" placeholder="Director's Stay Expense" onblur="businessM()" >
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Versopub (MIOD Event)</label>
-											<input type="text" name="miod" id="miod" class="form-control" value="" placeholder="MIOD Event Expense" >
+											<input type="text" name="miod" id="miod" class="form-control" value="" placeholder="MIOD Event Expense" onblur="businessM()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Versopub (CRAF Event) </label>
-											<input type="text" class="form-control" name="craf" id="craf" value="" placeholder="CRAF Event Expense" >
+											<input type="text" class="form-control" name="craf" id="craf" value="" placeholder="CRAF Event Expense" onblur="businessM()" >
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Digital Kites (Printing Folders, Brochures, Business card, banner and signage)</label>
-											<input type="text" name="dkites" id="dkites" class="form-control" value="" placeholder="Digital Kites Expense" >
+											<input type="text" name="dkites" id="dkites" class="form-control" value="" placeholder="Digital Kites Expense" onblur="businessM()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > MC for MIOD Event </label>
-											<input type="text" class="form-control" name="mcmiod" id="mcmiod" value="" placeholder="MC For MIOD Event Expense" >
+											<input type="text" class="form-control" name="mcmiod" id="mcmiod" value="" placeholder="MC For MIOD Event Expense" onblur="businessM()" >
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Photographer for CRAF Event</label>
-											<input type="text" name="photo" id="photo" class="form-control" value="" placeholder="Photographer Expense" >
+											<input type="text" name="photo" id="photo" class="form-control" value="" placeholder="Photographer Expense" onblur="businessM()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Pen engraving </label>
-											<input type="text" class="form-control" name="pen" id="pen" value="" placeholder="Pen Engraving Expense" >
+											<input type="text" class="form-control" name="pen" id="pen" value="" placeholder="Pen Engraving Expense" onblur="businessM()" >
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Client Lunch</label>
-											<input type="text" name="lunch" id="lunch" class="form-control" value="" placeholder="Client Lunch Expense" >
+											<input type="text" name="lunch" id="lunch" class="form-control" value="" placeholder="Client Lunch Expense" onblur="businessM()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Pen for MIOD and CRAF event </label>
-											<input type="text" class="form-control" name="penevent" id="penevent" value="" placeholder="Pen For Event Expense" >
-										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+											<input type="text" class="form-control" name="penevent" id="penevent" value="" placeholder="Pen For Event Expense" onblur="businessM()" >
+										</div>									
+										<div class="form-group col-md-3">
 											<label>MC for CRAF Event</label>
-											<input type="text" name="mccraf" id="mccraf" class="form-control" value="" placeholder="MC For CRAF Event Expense" >
+											<input type="text" name="mccraf" id="mccraf" class="form-control" value="" placeholder="MC For CRAF Event Expense" onblur="businessM()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Hotel cost for the evening of the Event </label>
-											<input type="text" class="form-control" name="inter" id="inter" value="" placeholder="Hotel Expense For Evening Event" >
+											<input type="text" class="form-control" name="inter" id="inter" value="" placeholder="Hotel Expense For Evening Event" onblur="businessM()" >
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-4"></div>
+										<div class="form-group col-md-4">
 											<label>MIOD membership</label>
-											<input type="text" name="member" id="member" class="form-control" value="" placeholder="MIOD Expense" >
+											<input type="text" name="member" id="member" class="form-control" value="" placeholder="MIOD Expense" onblur="businessM()" >
 										</div>
+										<div class="form-group col-md-4"></div>
 									</div>
 								</p>
 							</div>
@@ -350,14 +371,16 @@
 							<div class="tab-pane fade" id="pills-legal" role="tabpanel" aria-labelledby="pills-legal-tab">
 								<p class="mb-0">
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3"></div>
+										<div class="form-group col-md-3">
 											<label>Vidhya OP</label>
-											<input type="text" name="vidhya" id="vidhya" class="form-control" value="" placeholder="Vidhya OP Expense" >
+											<input type="text" name="vidhya" id="vidhya" class="form-control" value="" placeholder="Vidhya OP Expense" onblur="legal()" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label > Rating Committee Fees </label>
-											<input type="text" class="form-control" name="rating" id="rating" value="" placeholder="Rating Committee Expense" >
+											<input type="text" class="form-control" name="rating" id="rating" value="" placeholder="Rating Committee Expense" onblur="legal()">
 										</div>
+										<div class="form-group col-md-3"></div>
 									</div>
 								</p>
 							</div>
@@ -374,112 +397,139 @@
 								<p class="mb-0">
 									<!-- Employment Form -->
 									<!-- <form action="/employee" id="emp4" method="post"> -->
-
 									<div class="form-row">
+										<!-- table card-1 start -->
 										<div class="form-group col-md-6">
-											<label>Salary</label>
-											<input type="text" name="sal" id="sal" class="form-control" value="" placeholder="Salary" >
+											<label for="inputState">Month</label>
+											<select id="inputState" class="form-control" name="mon" required>
+												<option></option>
+												<option value="January">January</option>
+												<option value="February">February</option>
+												<option value="March">March</option>
+												<option value="April">April</option>
+												<option value="May">May</option>
+												<option value="June">June</option>
+												<option value="July">July</option>
+												<option value="August">August</option>
+												<option value="September">September</option>
+												<option value="October">October</option>
+												<option value="November">November</option>
+												<option value="December">December</option>
+												<option value="EOY"> End Of Year Bonus </option>
+											</select>
 										</div>
 										<div class="form-group col-md-6">
+											<label> Year </label>
+											<input type="text" name="year" id="year" class="form-control" placeholder="Enter Year" required>
+										</div>
+										<!-- <div class="form-group col-md-12">
+											<label> Month & Year </label>
+											<input type="month" name="year" id="year" class="form-control" placeholder="Enter Year" >
+										</div> -->
+									</div>
+
+									<div class="form-row">
+										
+										<div class="form-group col-md-3">
+											<label>Salary</label>
+											<input type="text" name="sal" id="sal" class="form-control" value="" placeholder="Salary" readonly >
+										</div>
+										<div class="form-group col-md-3">
 											<label > Rent </label>
 											<input type="text" class="form-control" name="rent" id="rent" placeholder="Rent" >
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Utilities (Electricity & Internet)</label>
-											<input type="text" name="utl" id="utl" class="form-control"  value="" placeholder="Enter Utilities" >
+											<input type="text" name="utl" id="utl" class="form-control"  value="" placeholder="Enter Utilities" readonly >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Sundry Expenses</label>
-											<input type="text" name="sun" id="sun" class="form-control" value="" placeholder="Enter Sundry Expense" >
+											<input type="text" name="sun" id="sun" class="form-control" value="" placeholder="Enter Sundry Expense" readonly>
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Marketing & Promotion (Referal Fees)</label>
 											<input type="text" name="market" id="market" class="form-control"  value="" placeholder="Marketing & Promotion" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Regulatory & other Fees</label>
 											<input type="text" name="reg" id="reg" class="form-control" value="" placeholder="Regulatory & Other Fees" >
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Audit Fees</label>
 											<input type="text" name="aud" id="aud" class="form-control"  value="" placeholder="Audit Fees" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Secretarial Fees</label>
 											<input type="text" name="secret" id="secret" class="form-control" value="" placeholder="Secretarial Fees" >
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Travelling expenses</label>
 											<input type="text" name="travelexp" id="travelexp" class="form-control"  value="" placeholder="Travelling Expenses" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Business promotion expenses - Mauritius</label>
-											<input type="text" name="mbusiness" id="mbusiness" class="form-control" value="" placeholder="Business Promotion Expense Mauritius" >
+											<input type="text" name="mbusiness" id="mbusiness" class="form-control" value="" placeholder="Business Promotion Expense Mauritius" readonly > 
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Business promotion expenses - Kenya</label>
 											<input type="text" name="kbusiness" id="kbusiness" class="form-control"  value="" placeholder="Business promotion expenses - Kenya" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Communication expenses</label>
 											<input type="text" name="comm" id="comm" class="form-control" value="" placeholder="Communication Expense" >
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Insurance Premium</label>
 											<input type="text" name="insure" id="insure" class="form-control"  value="" placeholder="Insurance Premium" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Depreciation</label>
 											<input type="text" name="depr" id="depr" class="form-control" value="" placeholder="Depreciation" >
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Legal & Proffessional Fees</label>
-											<input type="text" name="lprof" id="lprof" class="form-control"  value="" placeholder="Legal & Professional Fees" >
+											<input type="text" name="lprof" id="lprof" class="form-control"  value="" placeholder="Legal & Professional Fees" readonly >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Bank Charges</label>
 											<input type="text" name="bank" id="bank" class="form-control" value="" placeholder="Bank Charges" >
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Staff Wellfare Expense (Ticket for travel of CEO & family)</label>
 											<input type="text" name="staff" id="staff" class="form-control"  value="" placeholder="Staff Wellfare Expense" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Head office related Expenses</label>
 											<input type="text" name="head" id="head" class="form-control" value="" placeholder="Head Office related Expenses" >
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Royalty payable to CARE Ratings India (@3% on total tunrover)</label>
 											<input type="text" name="royal" id="royal" class="form-control"  value="" placeholder="Royalty Payable" >
 										</div>
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3">
 											<label>Amortisation</label>
 											<input type="text" name="amor" id="amor" class="form-control" value="" placeholder="Amortisation" >
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-6">
+										<div class="form-group col-md-3"></div>	
+										<div class="form-group col-md-3">
 											<label>Finance cost</label>
 											<input type="text" name="finance" id="finance" class="form-control"  value="" placeholder="Finance Cost" >
 										</div>
+										<div class="form-group col-md-3">
+											<label>Other Expense</label>
+											<input type="text" name="otherexp" id="otherexp" class="form-control"  value="" placeholder="Other Expenses" >
+										</div>
+										<div class="form-group col-md-3"></div>
 									</div>
 								</p>	
 							</div>
@@ -488,7 +538,7 @@
 								</div>
 								<div class="col-md-1">
 									<!-- <button type="button submit" name="action" value="save" class="btn btn-primary"><i class="fa-solid fa-download" style="margin-right: 0.5rem;"></i>Save</button> -->
-									<button type="button submit" name="action" value="save" class="btn btn-primary" ><i class="fa-solid fa-download" style="margin-right: 0.5rem;"></i>Save</button>
+									<button type="button submit" name="action" value="save" class="btn btn-primary" disabled><i class="fa-solid fa-download" style="margin-right: 0.5rem;"></i>Save</button>
 								</div>
 							</div>
 							<!-- <div class="col-md-10"></div>

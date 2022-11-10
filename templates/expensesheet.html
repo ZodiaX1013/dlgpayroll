@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from technext.github.io/flat_able/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Aug 2022 05:38:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Care Edge</title>
+    <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 11]>
+    	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    	<![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
+    <!-- <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" > -->
+    <!-- <link rel="stylesheet" href="H:/VsCode/Payroll/static/css/style.css"> -->
+
+    <!-- vendor css -->
+    <link href="{{ url_for('static', filename='css/style.css', _external=True) }}" rel="stylesheet" >
+    <!-- <link rel="stylesheet" href="../static/css/style.css" , _external="true"> -->
+    <script src="https://kit.fontawesome.com/e6163d7cbc.js" crossorigin="anonymous"></script>
+    <script src="../static/js/table2excel.js"></script>
+    <style>
+        table {
+          border-collapse: collapse;
+        }
+
+        td,th {
+            border: 1px gray solid;
+            padding: 4px;
+            width: 5em;
+        }
+    </style>
+    
+
+</head>
+<body class="">
+	<!-- [ Header ] start -->
+	
+        <header class="navbar pcoded-header navbar-expand-lg navbar-light header-dark" style="background-color: white;" >
+            <div class="m-header">
+                <a class="mobile-menu" id="mobile-collapse" href="{{url_for('dashboard')}}"><span></span></a>
+                <a href="{{url_for('dashboard')}}" class="b-brand">
+                    <!-- ========   change your logo hear   ============ -->
+                    <img src="../static/images/logo.png" alt="" class="logo" style="height: 50px; width: 150px;">
+                    <!-- <img src="../static/images/logo-icon.png" alt="" class="logo-thumb"> --> -->
+                    <!-- <i class="fa-solid fa-house" style="margin-right: 0.5rem;"></i>HOME -->
+                </a>
+                <!-- <a href="{{url_for('dashboard')}}" class="mob-toggler">
+                    <i class="feather icon-more-vertical"></i>
+                </a> -->
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown" >
+                                <b style="color: black;"> Reports </b>
+                             </a>
+                             <div class="dropdown-menu profile-notification ">
+                                 <form action="/expense" method="post">
+                                     <ul class="pro-body">
+                                        <li><button type="submit" name="action" value="summary" class="dropdown-item"> Summary </a></li>
+                                        <li><button type="submit" name="action" value="input" class="dropdown-item"> Input </a></li>
+                                     </ul>
+                                 </form>
+                                 <form action="/rae">
+                             </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        <button class="btn btn-secondary" style="position: absolute; right: 0; margin-right: 25px;"><i class="fa-thin fa-arrow-up-left-from-circle" style="margin-right: 0.5rem;"></i> Back </button>
+        </header>
+        <!-- [ Header ] end -->
+        </form>
+    <!-- [ Main Content ] start -->
+    <!-- <div class="pcoded-main-container"> -->
+    <div>
+        <div class="pcoded-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <a href="expense"><h5 class="m-b-10">Home</h5></a>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <!-- [ Main Content ] start -->
+            <!-- <form action=""> -->
+                <!-- <div class="col-xl-12"> 
+                    <div class="col-md-4">
+                        <button onclick="Export2Word('exportContent');">Word Download</button>
+                    </div>                
+                </div> -->
+                <div class="form-row">
+                    <div class="card" id="exportContent">
+                        <div class="card-header">
+                            <div id="docx">
+                                <div class="card-body">
+                                    <!-- <form action="/paysheet" method="post"> -->
+                                    <!-- <h6 class="mb-3"><b><u> Leave Register </u></b></h6> -->
+                                    <!-- Leave Table -->
+                                    <!-- <h4>Table Here</h4> -->
+                                    <!-- <table class="table table-striped" id="excel" style="width: 100%;"> -->
+                                        <!-- <table style="width: 100%;"> -->
+                                            {% for i in range(length) %}
+                                                <table class="table table-striped col-md-12" style="border: 1px black solid" border="1" id="excel">
+                                                    <tr>
+                                                        <th colspan="20" style="text-align: center;">
+                                                            CARE EDGE RATINGS AFRICA
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="20" style="text-align: center;">
+                                                            Expense Manager
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <!-- <th></th> -->
+                                                        <th rowspan="2"> Period </th>
+                                                        <th>July</th>
+                                                        <th>August</th>
+                                                        <th>September</th>
+                                                        <th>October</th>
+                                                        <th>November</th>
+                                                        <th>December</th>
+                                                        <th>January</th>
+                                                        <th>February</th>
+                                                        <th>March</th>
+                                                        <th>April</th>
+                                                        <th>May</th>
+                                                        <th>June</th>
+                                                    </tr> 
+                                                    <tr>
+                                                        
+                                                        <th>MUR</th>
+                                                        <th>MUR</th>
+                                                        <th>MUR</th>
+                                                        <th>MUR</th>
+                                                        <th>MUR</th>
+                                                        <th>MUR</th>
+                                                        <th>MUR</th>
+                                                        <th>MUR</th>
+                                                        <th>MUR</th>
+                                                        <th>MUR</th>
+                                                        <th>MUR</th>
+                                                        <th>MUR</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Salary</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Rent</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Utilities (electricity & Internet)</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sundry expenses (other expenses)</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Marketing & Promotion (Referal Fees)</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Regulatory & other Fees</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Audit Fees</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Secretarial Fees</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Travelling expenses</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Business promotion expenses - Mauritius </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Business promotion expenses - Africa</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Communication expenses</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Insurance Premium</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Depreciation</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Legal & Proffessional Fees</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bank Charges</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Staff Wellfare Expense (Ticket for travel of CEO & family)</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Head office related Expenses</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Royalty payable to CARE Ratings India (@3% on total tunrover)</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Amortisation</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Finance cost</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Payment to CART for execution of Evaco ESG Mandate</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Total</th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </table>
+                                            <!-- End Leave Table -->
+                                            {% endfor %}
+                                    
+                                    <!-- </form> -->
+                                    <button class="btn btn-primary" name="action" id="download" value="download" style="margin-top: 25px;"><i class="fa-regular fa-file-spreadsheet" style="margin-right: 0.5rem;"></i>Download As Excel</button>
+                                
+                                <!-- <button class="btn btn-primary" id="export">Export</button> -->
+                                </div>
+                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- </form> -->
+            <!-- [ Main Content ] end -->
+        </div>
+    </div>
+        <!-- Required Js -->
+        <script src="../static/js/vendor-all.min.js"></script>
+        <script src="../static/js/plugins/bootstrap.min.js"></script>
+        <script src="../static/js/pcoded.min.js"></script>
+
+        <!-- Apex Chart -->
+        <script src="../static/js/plugins/apexcharts.min.js"></script>
+
+
+        <!-- custom-chart js -->
+        <script src="../static/js/pages/dashboard-main.js"></script>
+        <script src="../static/js/custom.js"></script>
+        <script>
+			document.getElementById('download').addEventListener('click' , function(){
+				var table2excel = new Table2Excel();
+  				table2excel.export(document.querySelectorAll("#excel"));
+			});
+		</script>
+</body>
+<!-- Mirrored from technext.github.io/flat_able/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Aug 2022 05:38:50 GMT -->
+</html>

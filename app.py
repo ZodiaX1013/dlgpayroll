@@ -141,24 +141,39 @@ def login():
 
 @app.route("/expense", methods = ["POST" , "GET"])
 def expense():
-    if request.method == "POST":
+    if request.method == "POST" and request.form["action"] == "esheet" :
+        print("In Expense Sheet")
         return render_template("expense2.html")
-    return render_template("expense.html")
+    elif request.method == "POST" and request.form["action"] == "summary":
+        print("In Summary")
+        return render_template("expensesheet.html")
+    elif request.method == "POST" and request.form["action"] == "input":
+        print("In Input")
+        return render_template("expense2.html")
+    return render_template("expensesheet.html")
 
 
 @app.route("/revenue", methods = ["POST" , "GET"])
 def revenue():
-    if request.method == "POST":
+    if request.method == "POST" and request.form["action"] == "rsheet" :
         return render_template("revenue2.html")
-    return render_template("revenue.html")
+    elif request.method == "POST" and request.form["action"] == "summary":
+        return render_template("revenuesheet.html")
+    elif request.method == "POST" and request.form["action"] == "input":
+        return render_template("revenue2.html")
+    return render_template("revenuesheet.html")
 
 
 @app.route("/rae", methods=["POST" , "GET"])
 def rae():
+    print("In RAE")
     if request.method == "POST" and request.form['action'] == 'expense':
-        return render_template("expense.html")
+        return redirect(url_for('expense'))
     if request.method == "POST" and request.form['action'] == 'revenue':
-        return render_template("revenue.html")
+        return redirect(url_for('revenue'))
+    if request.method == "POST" and request.form['action'] == 'main':
+        return render_template("module.html")
+    
     return render_template("module2.html")
 
 
@@ -175,7 +190,12 @@ def module():
     if request.method == "POST" and request.form['action'] == 'rae':  #Revenue And Expense (RAE)
         print("User Choose Revenue & Expense Module - Goes To Expense And Revenue Page")
         return redirect(url_for('rae'))
+
+    if request.method == "POST" and request.form['action'] == 'home':
+        print("In Logout")
+        return render_template("login.html")
     return render_template("module.html")
+
 
 @app.route("/reset", methods=["GET","POST"])
 def reset():
