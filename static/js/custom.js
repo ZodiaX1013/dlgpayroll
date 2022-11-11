@@ -711,6 +711,7 @@ function calculateSalary(){
   document.getElementById("plevy").value =plevy
   document.getElementById("levypay").value =levypay
   alert("Calculation Complete")
+  document.getElementById("save").disabled = false;
 }
 
 // Function For Export To Word File
@@ -758,7 +759,6 @@ function Export2Word(element, filename = 'paysheet'){
   
   document.body.removeChild(downloadLink);
 }
-
 
 
 // Export To Doc With Image
@@ -863,7 +863,12 @@ function calculatehr1(){
   if(hour == ""){
     hour = parseInt(0)
   }
+
+  alert(hour)
   var basic = document.getElementById('bsal').value;
+  if(basic == ""){
+    basic = parseInt(0)
+  }
 
   var perday = Math.round(parseInt(basic) / 26)
   var perhour = Math.round(parseInt(perday) / 8)
@@ -882,6 +887,9 @@ function calculatehr2(){
   }
 
   var basic = document.getElementById('bsal').value
+  if(basic == ""){
+    basic = parseInt(0)
+  }
 
   var perday = Math.round(parseInt(basic) / 26)
   var perhour = Math.round(parseInt(perday) / 8)
@@ -899,6 +907,9 @@ function calculatehr3(){
   }
 
   var basic = document.getElementById('bsal').value
+  if(basic == ""){
+    basic = parseInt(0)
+  }
 
   var perday = Math.round(parseInt(basic) / 26)
   var perhour = Math.round(parseInt(perday) / 8)
@@ -916,6 +927,9 @@ function calculatehr4(){
   }
 
   var basic = document.getElementById('bsal').value
+  if(basic == ""){
+    basic = parseInt(0)
+  }
 
   var perday = Math.round(parseInt(basic) / 26)
   var perhour = Math.round(parseInt(perday) / 8)
@@ -934,7 +948,10 @@ function calculatehr5(){
   }
 
   var basic = document.getElementById('bsal').value
-
+  if(basic == ""){
+    basic = parseInt(0)
+  }
+  
   var perday = Math.round(parseInt(basic) / 26)
   // var perhour = Math.round(parseInt(perday) / 8)
   var total = parseInt(perday) * parseInt(day)

@@ -1449,7 +1449,7 @@ def salary():
                     gtax = ''.join(gtax[i])
                 
                 print("Before Query Execute")
-                query54 = "SELECT Arrears, LocalRef, FixedAllowance, DiscBns, AttBns, Transport, SickRef, SpeBns, OtherAlw, Overseas, OtherDed, Absences, ot1, amt1, ot2, amt2, ot3, amt3, lateness, amt4, TaxDes, tax, NTaxDes, ntax FROM ModifyVariables WHERE EmployeeID = %s AND Month = %s"
+                query54 = "SELECT Arrears, LocalRef, FixedAllowance, DiscBns, AttBns, Transport, SickRef, SpeBns, OtherAlw, Overseas, OtherDed, Absences, ot1, amt1, ot2, amt2, ot3, amt3, lateness, amt4, TaxDes, tax, NTaxDes, ntax, absenceDays, amt5 FROM ModifyVariables WHERE EmployeeID = %s AND Month = %s"
                 cursor.execute(query54, data1)
                 variable_data = cursor.fetchall()
                 length = len(variable_data)
@@ -1938,62 +1938,215 @@ def salary():
         else:
             ntaxamt = ntaxamt
 
+# ============================================================================================================================================================
+
         basic = request.form["bsal"]
+        if basic == "":
+            basic = 0
+
         fixedAlw = request.form["falw2"]
+        if fixedAlw == "":
+            fixedAlw = 0
+
         otherDed = request.form["oded2"]
+        if otherDed == "":
+            otherDed = 0
+
         overtime = request.form["ot2"]
+        if overtime == "":
+            overtime = 0
+
         discBns = request.form["dbns2"]
+        if discBns == "":
+            discBns = 0
+
         NSF = request.form["nsf"]
+        if NSF == "":
+            NSF = 0
+
         otherAlw = request.form["oalw2"]
+        if otherAlw == "":
+            otherAlw = 0
+
         tax = request.form["txdes2"]
+        if tax == "":
+            tax = 0
+
         medical = request.form["med2"]
+        if medical == "":
+            medical = 0
+
         transport = request.form["tran2"]
+        if transport == "":
+            transport = 0
+
         ntax = request.form["ntxdes2"]
+        if ntax == "":
+            ntax = 0
+
         edf = request.form["edf"]
+        if edf == "":
+            edf = 0
+
         arrears = request.form["arr2"]
+        if arrears == "":
+            arrears = 0
+
         attendance = request.form["atbns2"]
-        # travel = request.form["tran"]
+        if attendance == "":
+            attendance = 0
+
         eoy = request.form["eoy"]
+        if eoy == "":
+            eoy = 0
+
         loan = request.form["lrep"]
+        if loan == "":
+            loan = 0
+
         car = request.form["car"]
+        if car == "":
+            car = 0
+
         leaveRef = request.form["lref2"]
+        if leaveRef == "":
+            leaveRef = 0
+
         paye = request.form["paye3"]
+        if paye == "":
+            paye = 0
+
         slevy = request.form["levy"]
+        if slevy == "":
+            slevy = 0
+
         speBns = request.form["spbonus2"]
+        if speBns == "":
+            speBns = 0
+
         lateness = request.form["late"]
+        if lateness == "":
+            lateness = 0
+
         educationRel = request.form["edu"]
+        if educationRel == "":
+            educationRel = 0
+
         SpeProBns = request.form["spbonus3"]
+        if SpeProBns == "":
+            SpeProBns = 0
+
         NPS = request.form["nps"]
+        if NPS == "":
+            NPS = 0
+
         medicalRel = request.form["mrel"]
+        if medicalRel == "":
+            medicalRel = 0
+
         Payable = request.form["pay"]
+        if Payable == "":
+            Payable = 0
+
         Deduction = request.form["ded"]
+        if Deduction == "":
+            Deduction = 0
+
         Net = request.form["npay"]
+        if Net == "":
+            Net = 0
+
         cgross = request.form["cgrs"]
+        if cgross == "":
+            cgross = 0
+
         pgross = request.form["pgrs"]
+        if pgross == "":
+            pgross = 0
+
         iet = request.form["iet"]
+        if iet == "":
+            iet = 0
+
         netch = request.form["netch"]
+        if netch == "":
+            netch = 0
+
         cpaye = request.form["paye2"]
+        if cpaye == "":
+            cpaye = 0
+
         ppaye = request.form["ppaye"]
+        if ppaye == "":
+            ppaye = 0
+
         ecsg = request.form["nps2"]
+        if ecsg == "":
+            ecsg = 0
+
         ensf = request.form["nsf2"]
+        if ensf == "":
+            ensf = 0
+
         elevy = request.form["ivbt"]
+        if elevy == "":
+            elevy = 0
+
         prgf = request.form["prgf"]
+        if prgf == "":
+            prgf = 0
+
         pthes = request.form["ths2"]
+        if pthes == "":
+            pthes = 0
+
         thes = request.form["ths"]
+        if thes == "":
+            thes = 0
+
         netchar = request.form["netchar"]
+        if netchar == "":
+            netchar = 0
+
         clevy = request.form["clevy"]
+        if clevy == "":
+            clevy = 0
+
         plevy = request.form["plevy"]
+        if plevy == "":
+            plevy = 0
+
         slevypay = request.form["levypay"]
+        if slevypay == "":
+            slevypay = 0
+
         cgtax = request.form["gtax3"]
+        if cgtax == "":
+            cgtax = 0
 
         absence = request.form["abs"]
-        month = request.form["mon"]
-        fname = request.form["fname"]
-        eid = request.form["eid"]
-        UNQ = month + " " + fname
-        NetPaysheet = request.form["pnet"]
-        overseas = request.form["oseas"]
+        if absence == "":
+            absence = 0
 
+        month = request.form["mon"]
+
+        fname = request.form["fname"]
+
+        eid = request.form["eid"]
+
+        UNQ = month + " " + fname
+
+        NetPaysheet = request.form["pnet"]
+        if NetPaysheet == "":
+            NetPaysheet = 0
+
+        overseas = request.form["oseas"]
+        if overseas == "":
+            overseas = 0
+
+
+
+        # travel = request.form["tran"]
         otherAlw2 = int(otherAlw) + int(speBns) + int(SpeProBns)
 
         ded = int(Deduction) + int(slevy)
@@ -2553,7 +2706,7 @@ def process_salary():
 
                 if int(last_year) >= int(year) or last_year == 1:
                     print("Year Is Correct")
-                    if int(last_mon) >= int(id) or last_mon == 1:
+                    if int(last_mon) >= int(id):
                         print("In Start Process")
                         
 
@@ -3664,6 +3817,7 @@ def process_salary():
                     get_empid = "SELECT EmployeeID FROM salary WHERE UNQ = %s"
                     cursor.execute(get_empid, data3)
                     emp_id = cursor.fetchall()
+                    msg = "Employee Not Working , Re Processing Complete"
 
                     if emp_id != []:
                         print("In Delete Employee")
@@ -3694,6 +3848,8 @@ def process_salary():
                         delete_contri = "DELETE FROM contribution WHERE UNQ = %s"
                         cursor.execute(delete_contri,data3)
                         print("Delete From Contribution Data")
+
+                        msg = "Employee Not Working , Re Processing Complete"
 
                 query15 = "SELECT Basic FROM cnpcsv WHERE month = %s"
                 data7 = [month]
@@ -4016,9 +4172,9 @@ def process_salary():
 
                     msg = ""
                     
-                    if int(last_year) >= int(year) or last_year == 1:
+                    if int(last_year) >= int(year) or (last_year == 1 and last_mon == 1):
                         print("Year Is Correct")
-                        if int(last_mon) >= int(id) or last_mon == 1:
+                        if int(last_mon) >= int(id) or (last_year == 1 and last_mon == 1):
                             print("In Start Process")
                             query1 = "SELECT FirstName FROM employee WHERE EmployeeID = %s"
                             cursor.execute(query1,data)
@@ -7993,7 +8149,6 @@ def summary():
                 net_total.append(net_sum)                                                                
 
 # ==========================================================================================================================================================================
-
 
                 data2.append(pay_data)
 
