@@ -928,6 +928,8 @@ def employee():
 
         expatriate = request.form["optradiod4"]
         print("expatriate " , expatriate)
+        if expatriate == "":
+            expatriate = "No"
 
         edf = request.form["edf"]
         if edf == "":

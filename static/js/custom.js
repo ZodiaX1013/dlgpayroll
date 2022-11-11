@@ -864,7 +864,7 @@ function calculatehr1(){
     hour = parseInt(0)
   }
 
-  alert(hour)
+  
   var basic = document.getElementById('bsal').value;
   if(basic == ""){
     basic = parseInt(0)
@@ -951,7 +951,7 @@ function calculatehr5(){
   if(basic == ""){
     basic = parseInt(0)
   }
-  
+
   var perday = Math.round(parseInt(basic) / 26)
   // var perhour = Math.round(parseInt(perday) / 8)
   var total = parseInt(perday) * parseInt(day)
