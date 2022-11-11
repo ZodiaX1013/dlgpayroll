@@ -2706,9 +2706,9 @@ def process_salary():
                 UNQ = month + " " + fname
                 data3 = [UNQ]
 
-                if int(last_year) >= int(year) or last_year == 1:
+                if int(last_year) >= int(year) or (last_year == 1 and last_mon == 1):
                     print("Year Is Correct")
-                    if int(last_mon) >= int(id):
+                    if int(last_mon) >= int(id) or (last_year == 1 and last_mon == 1):
                         print("In Start Process")
                         
 
