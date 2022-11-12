@@ -4044,6 +4044,10 @@ def process_salary():
 
 # =================================================================================================================== #
 
+# ==================== For Employee ID "ALL" ========================================================================
+
+# =================================================================================================================== #
+
             elif eid == "ALL":                 
                 # print(month)
                 month = request.form["mon"]
@@ -4053,51 +4057,51 @@ def process_salary():
                 month = month.lower()          
                 if month == "January" or month=="january":
                     print("In Jan")
-                    get_date='01-' + str(year)
+                    
                     id = 1
                 elif month == "February" or month=="february":
                     print("In Feb")
-                    get_date=str(2) + str(year)
+                    
                     id = 2
                 elif month == "March" or month=="march":
                     print("In Mar")
-                    get_date=str(3) + str(year)
+                    
                     id = 3
                 elif month == "April" or month=="april":
                     print("In Apr")
-                    get_date=str(4) + str(year)
+                    
                     id = 4
                 elif month == "May" or month=="may":
                     print("In May")
-                    get_date=str(5) + str(year)
+                    
                     id = 5
                 elif month == "June" or month=="june":
                     print("In Jun")
-                    get_date=str(6) + str(year)
+                    
                     id = 6
                 elif month == "July" or month=="july":
                     print("In Jul")
-                    get_date=str(7) + str(year)
+                    
                     id = 7
                 elif month == "August" or month=="august":
                     print("In Aug")
-                    get_date=str(8) + str(year)
+                    
                     id = 8
                 elif month == "September" or month=="september":
                     print("In Sep")
-                    get_date=str(9) + str(year)
+                    
                     id = 9
                 elif month == "October" or month=="october":
                     print("In Oct")
-                    get_date=str(10) + str(year)
+                    
                     id = 10
                 elif month == "November" or month=="november":
                     print("In Nov")
-                    get_date=str(11) + str(year)
+                    
                     id = 11
                 elif month == "December" or month=="december":
                     print("In Dec")
-                    get_date=str(12) + str(year)
+
                     id = 12
                 else:  
                     print("In Else")
@@ -4167,12 +4171,15 @@ def process_salary():
                     # if mon == 0:
                     #     mon = id    
 
+                    #  last month = employee last month
+                    #  last year = employee last year
+
                     print("last Year ", last_year)
                     print("year ", year)
                     print("last month ", last_mon)
                     print("month ", id)
 
-                    msg = ""
+                    msg = "Processing Complete"
                     
                     if int(last_year) >= int(year) or (last_year == 1 and last_mon == 1):
                         print("Year Is Correct")
@@ -5238,12 +5245,6 @@ def process_salary():
 
                         print("Contribution Update Complete")
 
-
-                        if msg == "Processing Complete":
-                            msg = "Processing Complete"
-                            # return render_template("process.html", msg = msg)
-                        else:
-                            msg = "Salary Already Processed"
                 return render_template("process.html", msg = msg)                                
         except Error as e:
                 print("Error While connecting to MySQL : ", e)
