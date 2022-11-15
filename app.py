@@ -70,6 +70,25 @@ def login():
             hash = d.hexdigest()
             print(hash)
 
+            data = ['MCS-BS001']
+            hire_date = "SELECT hire FROM employee WHERE EmployeeID= %s"
+            cursor.execute(hire_date, data)
+            hire_date_emp = cursor.fetchall()
+            
+            print(hire_date_emp)
+            hire_dt = str(hire_date_emp[0][0])
+
+            current_date = "2022-07-01"
+
+            print(hire_dt)
+            print(current_date)
+
+            if hire_dt > current_date:
+                print("Not Process")
+            else:
+                print("Process")
+
+
             if mail == user:
                 print("User Name Is Correct")
                 if hash == password:
@@ -4044,7 +4063,7 @@ def process_salary():
 
 # =================================================================================================================== #
 
-# ==================== For Employee ID "ALL" ========================================================================
+# ========================================== For Employee ID "ALL" ================================================== #
 
 # =================================================================================================================== #
 
@@ -4167,6 +4186,12 @@ def process_salary():
                     emp_year = cursor.fetchall()
 
                     last_year = emp_year[0][0]
+
+                    hire_date = "SELECT hire FROM employee WHERE EmployeeID= %s"
+                    cursor.execute(hire_date, data)
+                    hire_date_emp = cursor.fetchall()
+                    
+                    hire_dt = hire_date_emp[0][0]
 
                     # if mon == 0:
                     #     mon = id    

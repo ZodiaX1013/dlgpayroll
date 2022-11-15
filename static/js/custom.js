@@ -440,7 +440,7 @@ function calculateSalary(){
   }
   else{
     transTax = 0
-    ntransTax = 0
+    ntransTax = transport
   }
   var tax
   var ntax
