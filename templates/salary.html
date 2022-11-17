@@ -709,10 +709,10 @@
 										<div class="form-group col-md-3">
 											{% if wdays %}
 											<label> Working Days</label>
-											<input type="text" name="wdays" id="wdays" value="{{wdays}}" class="form-control" placeholder="Working Days">
+											<input type="text" name="wdays" id="wdays" value="{{wdays}}" class="form-control" placeholder="Working Days" readonly>
 											{% else %}
 											<label> Working Days</label>
-											<input type="text" name="wdays" id="wdays" value="" class="form-control" placeholder="Working Days">
+											<input type="text" name="wdays" id="wdays" value="" class="form-control" placeholder="Working Days" readonly>
 											{% endif %}
 										</div>
 										
@@ -1390,7 +1390,7 @@
 											{% endif %}
 										</div>
 										<div class="form-group col-md-4">
-											{% if cgross %}
+											{% if paygross %}
 											<label style="color: black;">Gross Amount (Paysheet) </label>
 											<input type="text" name="cgrs" id="cgrs" value="{{cgross}}" class="form-control" placeholder="Gross Amount (Paysheet)" readonly>
 											{% else %}
@@ -1419,14 +1419,14 @@
 											{% endif %}
 										</div>
 										<div class="form-group col-md-4">
-											{% if pgross %}
-											<label style="color: black;"> Previous Gross Taxable</label>
-											<input type="text" name="pgrs" id="pgrs" value="{{pgross}}" class="form-control" placeholder="Previous Gross" readonly>
+											{% if cgross %}
+											<label style="color: black;">Current Gross Taxable </label>
+											<input type="text" name="cgrs2" id="cgrs2" value="{{cgross}}" class="form-control" placeholder="Gross Amount (Paysheet)" readonly>
 											{% else %}
-											<label style="color: black;"> Previous Gross Taxable</label>
-											<input type="text" name="pgrs" id="pgrs" value="" class="form-control" placeholder="Previous Gross" readonly>
+											<label style="color: black;">Current Gross Taxable</label>
+											<input type="text" name="cgrs2" id="cgrs2" value="" class="form-control" placeholder="Gross Amount (Paysheet)" readonly>
 											{% endif %}
-										</div>										
+										</div>
 									</div>
 									<div class="form-row">
 										<div class="form-group col-md-4">
@@ -1448,15 +1448,14 @@
 											{% endif %}
 										</div>
 										<div class="form-group col-md-4">
-											{% if gtax %}
-											<label style="color: black;"> Total Gross Taxable</label>
-											<input type="text" name="gtax" id="gtax" value="{{gtax}}" class="form-control" placeholder="Total Gross Taxable" readonly>
+											{% if pgross %}
+											<label style="color: black;"> Previous Gross Taxable</label>
+											<input type="text" name="pgrs" id="pgrs" value="{{pgross}}" class="form-control" placeholder="Previous Gross" readonly>
 											{% else %}
-											<label style="color: black;"> Total Currect Gross Taxable</label>
-											<input type="text" name="gtax" id="gtax" value="{{gtax}}" class="form-control" placeholder="Total Gross Taxable" readonly>
+											<label style="color: black;"> Previous Gross Taxable</label>
+											<input type="text" name="pgrs" id="pgrs" value="" class="form-control" placeholder="Previous Gross" readonly>
 											{% endif %}
-										</div>
-										
+										</div>										
 									</div>
 									<div class="form-row">
 										<div class="form-group col-md-4">
@@ -1478,12 +1477,12 @@
 											{% endif %}
 										</div>
 										<div class="form-group col-md-4">
-											{% if iet %}
-											<label style="color: red;"> IET</label>
-											<input type="text" name="iet" id="iet" value="{{iet}}" class="form-control" placeholder="IET" readonly>
+											{% if gtax %}
+											<label style="color: black;"> Total Gross Taxable</label>
+											<input type="text" name="gtax" id="gtax" value="{{gtax}}" class="form-control" placeholder="Total Gross Taxable" readonly>
 											{% else %}
-											<label style="color: red;"> IET</label>
-											<input type="text" name="iet" id="iet" value="" class="form-control" placeholder="IET" readonly>
+											<label style="color: black;"> Total Gross Taxable</label>
+											<input type="text" name="gtax" id="gtax" value="{{gtax}}" class="form-control" placeholder="Total Gross Taxable" readonly>
 											{% endif %}
 										</div>
 									</div>
@@ -1507,12 +1506,12 @@
 											{% endif %}
 										</div>
 										<div class="form-group col-md-4">
-											{% if netch %}
-											<label style="color: blue;">Net Ch</label>
-											<input type="text" name="netch" id="netch" value="{{netch}}" class="form-control" placeholder="Net Ch" readonly>
+											{% if iet %}
+											<label style="color: red;"> IET</label>
+											<input type="text" name="iet" id="iet" value="{{iet}}" class="form-control" placeholder="IET" readonly>
 											{% else %}
-											<label style="color: blue;">Net Ch</label>
-											<input type="text" name="netch" id="netch" class="form-control" placeholder="Net Ch" readonly>
+											<label style="color: red;"> IET</label>
+											<input type="text" name="iet" id="iet" value="" class="form-control" placeholder="IET" readonly>
 											{% endif %}
 										</div>
 									</div>
@@ -1575,8 +1574,17 @@
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="form-group col-md-4">
+										<div class="form-group col-md-2">
 
+										</div>
+										<div class="form-group col-md-4">
+											{% if netch %}
+											<label style="color: blue;">Net Ch</label>
+											<input type="text" name="netch" id="netch" value="{{netch}}" class="form-control" placeholder="Net Ch" readonly>
+											{% else %}
+											<label style="color: blue;">Net Ch</label>
+											<input type="text" name="netch" id="netch" class="form-control" placeholder="Net Ch" readonly>
+											{% endif %}
 										</div>
 										<div class="form-group col-md-4">
 											{% if paye %}

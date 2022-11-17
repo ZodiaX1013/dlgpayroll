@@ -410,6 +410,7 @@ function calculateSalary(){
   var eoy = document.getElementById("eoy").value
   var speProBns = document.getElementById("spbonus3").value
   
+  // alert(tbasic)
   var loan = document.getElementById("lrep").value
   var paye = document.getElementById("paye").value
   var nps = document.getElementById("nps").value
@@ -429,6 +430,7 @@ function calculateSalary(){
 
   var basic = parseInt(tbasic) - parseInt(abs)
   
+  // alert(basic)
   var cgross, grossTax
   
   var transTax
@@ -482,6 +484,8 @@ function calculateSalary(){
   cgross = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car) + parseInt(ntax)
   
   grossTax = parseInt(basic) + parseInt(overtime) + parseInt(tax) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow)  + parseInt(speProBns) + parseInt(attBns) + parseInt(car)
+
+  var pay_gross = parseInt(tbasic) + parseInt(overtime) + parseInt(otherAllow)  + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(speBns) + parseInt(speProBns) + parseInt(fixAllow) + parseInt(DiscBonus) + parseInt(attBns) + parseInt(tax) + parseInt(ntax)
 
   // var gtax = parseInt(cgross) + parseInt(transport)
   var gross = parseInt(pgross) + parseInt(grossTax)
@@ -628,6 +632,7 @@ function calculateSalary(){
   var levypay = parseInt(slevy) - parseInt(plevy)
   
   document.getElementById("bsal").value = basic
+  // alert(basic)
   document.getElementById("falw2").value = fixAllow
   document.getElementById("oded2").value = otherDed
   document.getElementById("ot2").value = overtime
@@ -660,8 +665,8 @@ function calculateSalary(){
   document.getElementById("npay").value = net
   document.getElementById("bsal2").value = basic
   document.getElementById("dbns3").value = DiscBonus
-  // document.getElementById("cgrs").value = gtax
-  document.getElementById("cgrs").value = grossTax
+  document.getElementById("cgrs2").value = grossTax
+  document.getElementById("cgrs").value = pay_gross
   document.getElementById("ot3").value = overtime
   document.getElementById("falw3").value = fixAllow
   document.getElementById("pgrs").value = pgross
