@@ -916,7 +916,10 @@ def employee():
 
         position = request.form["pos"]
         dep = request.form["dep"]
-        sdep = request.form["sdep"]
+        print("Dep ", dep)
+        # sdep = request.form["sdep"]
+        # print("Sub Dep ", sdep)
+        sdep = ""
         paye = request.form["psch"]
         per = request.form["per"]
 
