@@ -870,11 +870,16 @@ function calculatehr1(){
     basic = parseInt(0)
   }
 
-  var perday = Math.round(parseInt(basic) / 26)
-  var perhour = Math.round(parseInt(perday) / 8)
+  var wdays = document.getElementById("wdays").value;
+  if(wdays == ""){
+    wdays = parseInt(26)
+  }
 
-  var rate = parseInt(perhour) * parseInt(hour)
-  var total = parseInt(rate) * 1
+  var perday = parseInt(basic) / parseInt(wdays)
+  var perhour = parseInt(perday) / 8
+
+  var rate = perhour * hour
+  var total = Math.round(parseInt(rate) * 1)
 
   document.getElementById('am1').value = parseInt(total)
 
@@ -891,10 +896,15 @@ function calculatehr2(){
     basic = parseInt(0)
   }
 
-  var perday = Math.round(parseInt(basic) / 26)
-  var perhour = Math.round(parseInt(perday) / 8)
+  var wdays = document.getElementById("wdays").value;
+  if(wdays == ""){
+    wdays = parseInt(26)
+  }
+
+  var perday = parseInt(basic) / parseInt(wdays)
+  var perhour = parseInt(perday) / 8
   
-  var rate = parseInt(perhour) * parseInt(hour)
+  var rate = perhour * hour
   var total = Math.round(parseInt(rate) * 1.5)
 
   document.getElementById('am2').value = parseInt(total)
@@ -911,11 +921,16 @@ function calculatehr3(){
     basic = parseInt(0)
   }
 
-  var perday = Math.round(parseInt(basic) / 26)
-  var perhour = Math.round(parseInt(perday) / 8)
+  var wdays = document.getElementById("wdays").value;
+  if(wdays == ""){
+    wdays = parseInt(26)
+  }
 
-  var rate = parseInt(perhour) * parseInt(hour)
-  var total = parseInt(rate) * 2
+  var perday = parseInt(basic) / parseInt(wdays)
+  var perhour = parseInt(perday) / 8
+
+  var rate = perhour * hour
+  var total = Math.round(parseInt(rate) * 2)
 
   document.getElementById('am3').value = parseInt(total)
 }
@@ -931,12 +946,17 @@ function calculatehr4(){
     basic = parseInt(0)
   }
 
-  var perday = Math.round(parseInt(basic) / 26)
-  var perhour = Math.round(parseInt(perday) / 8)
-  
-  var rate = parseInt(perhour) * parseInt(hour)
+  var wdays = document.getElementById("wdays").value;
+  if(wdays == ""){
+    wdays = parseInt(26)
+  }
 
-  var total = parseInt(rate) * 1
+  var perday = parseInt(basic) / parseInt(wdays)
+  var perhour = parseInt(perday) / 8
+  
+  var rate = perhour * hour
+
+  var total = Math.round(parseInt(rate) * 1)
 
   document.getElementById('am4').value = parseInt(total)
 }
@@ -952,11 +972,18 @@ function calculatehr5(){
     basic = parseInt(0)
   }
 
-  var perday = Math.round(parseInt(basic) / 26)
-  // var perhour = Math.round(parseInt(perday) / 8)
-  var total = parseInt(perday) * parseInt(day)
+  var wdays = document.getElementById("wdays").value;
+  if(wdays == ""){
+    wdays = parseInt(26)
+  }
 
-  document.getElementById('abs').value = parseInt(total)
+  var perday = parseInt(basic) / parseInt(wdays)
+  // var perhour = Math.round(parseInt(perday) / 8)
+  
+
+  var total = perday * day
+
+  document.getElementById('abs').value = Math.round(total)
 }
 
 function utilities(){

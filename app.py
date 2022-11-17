@@ -1475,7 +1475,13 @@ def salary():
                 variable_data = cursor.fetchall()
                 length = len(variable_data)
 
-                return render_template("salary.html", basic=basic, falw=falw, otherded=otherded, ot=ot, disc=disc, nsf=nsf, oalw=oalw, tax=tax, med=med, tran=tran, ntax=ntax, edf=edf, arr=arr, att=att, eoy=eoy, loan=loan, car=car, leave=leave, slevy=slevy, spebns=spebns, late=late, edurel=edurel, speprobns=speprobns, nps=nps, medrel=medrel, payable=payable, ded=ded, net=net, cgross=cgross, pgross=pgross, iet=iet, netch=netch, cpaye=cpaye, ppaye=ppaye, paye=paye, ecsg=ecsg, ensf=ensf, elevy=elevy, absence=absence, eid=eid, fname=fname, lname=lname, pos=pos, month=month, year=year, pnet=pnet, piet=piet, pthes=pthes, ths=ths, plevy=plevy, slevypay = slevypay, netchar=netchar, prgf = prgf, gtax=gtax, vdata = variable_data, length = length)
+                query55 = "SELECT Workingdays FROM employee WHERE EmployeeID = %s"
+                cursor.execute(query55,data2)
+                wdays = cursor.fetchall()
+                for i in range(len(wdays)):
+                    wdays = ''.join(wdays[i])
+
+                return render_template("salary.html", basic=basic, falw=falw, otherded=otherded, ot=ot, disc=disc, nsf=nsf, oalw=oalw, tax=tax, med=med, tran=tran, ntax=ntax, edf=edf, arr=arr, att=att, eoy=eoy, loan=loan, car=car, leave=leave, slevy=slevy, spebns=spebns, late=late, edurel=edurel, speprobns=speprobns, nps=nps, medrel=medrel, payable=payable, ded=ded, net=net, cgross=cgross, pgross=pgross, iet=iet, netch=netch, cpaye=cpaye, ppaye=ppaye, paye=paye, ecsg=ecsg, ensf=ensf, elevy=elevy, absence=absence, eid=eid, fname=fname, lname=lname, pos=pos, month=month, year=year, pnet=pnet, piet=piet, pthes=pthes, ths=ths, plevy=plevy, slevypay = slevypay, netchar=netchar, prgf = prgf, gtax=gtax, vdata = variable_data, length = length, wdays=wdays)
 # ============================================================================================================================================================================================                
             else:
 # ============================================================================================================================================================================================                                
@@ -1798,9 +1804,15 @@ def salary():
                 variable_data = cursor.fetchall()
                 length = len(variable_data)
 
+                query55 = "SELECT Workingdays FROM employee WHERE EmployeeID = %s"
+                cursor.execute(query55,data2)
+                wdays = cursor.fetchall()
+                for i in range(len(wdays)):
+                    wdays = ''.join(wdays[i])
+
                 print("Before Salary 2")
 
-                return render_template("salary2.html", basic=basic, falw=falw, otherded=otherded, ot=ot, disc=disc, nsf=nsf, oalw=oalw, tax=tax, med=med, tran=tran, ntax=ntax, edf=edf, arr=arr, att=att, eoy=eoy, loan=loan, car=car, leave=leave, slevy=slevy, spebns=spebns, late=late, edurel=edurel, speprobns=speprobns, nps=nps, medrel=medrel, payable=payable, ded=ded, net=net, cgross=cgross, pgross=pgross, iet=iet, netch=netch, cpaye=cpaye, ppaye=ppaye, paye=paye, ecsg=ecsg, ensf=ensf, elevy=elevy, absence=absence, eid=eid, fname=fname, lname=lname, pos=pos, month=month, year=year, pnet=pnet, piet=piet, pthes=pthes, ths=ths, plevy=plevy, slevypay = slevypay, netchar=netchar, prgf = prgf, gtax=gtax, vdata = variable_data, length = length)
+                return render_template("salary2.html", basic=basic, falw=falw, otherded=otherded, ot=ot, disc=disc, nsf=nsf, oalw=oalw, tax=tax, med=med, tran=tran, ntax=ntax, edf=edf, arr=arr, att=att, eoy=eoy, loan=loan, car=car, leave=leave, slevy=slevy, spebns=spebns, late=late, edurel=edurel, speprobns=speprobns, nps=nps, medrel=medrel, payable=payable, ded=ded, net=net, cgross=cgross, pgross=pgross, iet=iet, netch=netch, cpaye=cpaye, ppaye=ppaye, paye=paye, ecsg=ecsg, ensf=ensf, elevy=elevy, absence=absence, eid=eid, fname=fname, lname=lname, pos=pos, month=month, year=year, pnet=pnet, piet=piet, pthes=pthes, ths=ths, plevy=plevy, slevypay = slevypay, netchar=netchar, prgf = prgf, gtax=gtax, vdata = variable_data, length = length, wdays=wdays)
         except Error as e:
                 print("Error While connecting to MySQL : ", e)
         finally:
@@ -1961,9 +1973,9 @@ def salary():
 
 # ============================================================================================================================================================
 
-        basic = request.form["bsal"]
-        if basic == "":
-            basic = 0
+        # basic = request.form["bsal"]
+        # if basic == "":
+        #     basic = 0
 
         fixedAlw = request.form["falw2"]
         if fixedAlw == "":
@@ -2188,6 +2200,15 @@ def salary():
             UNQ = month + " " + fname
             data3 = [UNQ]
             
+            data1 = [eid]
+            query1 = "SELECT salary From employee WHERE EmployeeID = %s"
+            cursor.execute(query1, data1)
+            basic = cursor.fetchall()
+            for i in range(len(basic)):
+                basic = ''.join(basic[i])
+
+            print("Basic ", basic)
+
             query11 = "SELECT LockSal From salary WHERE UNQ = %s"
             cursor.execute(query11,data3)
             lockSal = cursor.fetchall()
@@ -2608,51 +2629,64 @@ def process_salary():
                 # print(month)
                 if month == "January" or month=="january":
                     print("In Jan")
+
+                    current_date = "2022-"+"01-"+"01"
                     
                     id = 1
                 elif month == "February" or month=="february":
                     print("In Feb")
                     
+                    current_date = "2022-"+"02-"+"01"
                     id = 2
                 elif month == "March" or month=="march":
                     print("In Mar")
                     
+                    current_date = "2022-"+"03-"+"01"
                     id = 3
                 elif month == "April" or month=="april":
                     print("In Apr")
                     
+                    current_date = "2022-"+"04-"+"01"
                     id = 4
                 elif month == "May" or month=="may":
                     print("In May")
                     
+                    current_date = "2022-"+"05-"+"01"
                     id = 5
                 elif month == "June" or month=="june":
                     print("In Jun")
                     
+                    current_date = "2022-"+"06-"+"01"
                     id = 6
                 elif month == "July" or month=="july":
                     print("In Jul")
                     
+                    current_date = "2022-"+"07-"+"01"
                     id = 7
                 elif month == "August" or month=="august":
                     print("In Aug")
                     
+                    current_date = "2022-"+"08-"+"01"
                     id = 8
                 elif month == "September" or month=="september":
                     print("In Sep")
                     
+                    current_date = "2022-"+"09-"+"01"
                     id = 9
                 elif month == "October" or month=="october":
                     print("In Oct")
                     
+                    current_date = "2022-"+"10-"+"01"
                     id = 10
                 elif month == "November" or month=="november":
                     print("In Nov")
                     
+                    current_date = "2022-"+"11-"+"01"
                     id = 11
                 elif month == "December" or month=="december":
                     print("In Dec")
                     
+                    current_date = "2022-"+"12-"+"01"
                     id = 12
                 else:  
                     print("In Else")
@@ -2725,11 +2759,17 @@ def process_salary():
                 UNQ = month + " " + fname
                 data3 = [UNQ]
 
-                if int(last_year) >= int(year) or (last_year == 1 and last_mon == 1):
+                hire_date = "SELECT hire FROM employee WHERE EmployeeID= %s"
+                cursor.execute(hire_date, data)
+                hire_date_emp = cursor.fetchall()
+                
+                print(hire_date_emp)
+                hire_dt = str(hire_date_emp[0][0])
+
+                if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt < current_date):
                     print("Year Is Correct")
                     if int(last_mon) >= int(id) or (last_year == 1 and last_mon == 1):
                         print("In Start Process")
-                        
 
                         query2 = "SELECT LastName FROM employee WHERE EmployeeID = %s"
                         cursor.execute(query2,data)
@@ -3706,7 +3746,7 @@ def process_salary():
                             cursor.execute(update_prgf, prgf_data)
                             print("Update PRGF Complete")
 
-                        get_cnpcsv  = "SELECT EmployeeID FROM prgfcsv WHERE UNQ = %s"
+                        get_cnpcsv  = "SELECT EmployeeID FROM cnpcsv WHERE UNQ = %s"
                         cursor.execute(get_cnpcsv, data3)
                         cnpcsv_id = cursor.fetchall()
 
@@ -3762,7 +3802,7 @@ def process_salary():
 
                             print("Update CNP Complete")
 
-                        get_contribution  = "SELECT prgf FROM contribution WHERE UNQ = %s"
+                        get_contribution  = "SELECT EmployeeID FROM contribution WHERE UNQ = %s"
                         cursor.execute(get_contribution, data3)
                         contri_id = cursor.fetchall()
 
@@ -4077,50 +4117,62 @@ def process_salary():
                 if month == "January" or month=="january":
                     print("In Jan")
                     
+                    current_date = "2022-"+"01-"+"01"
                     id = 1
                 elif month == "February" or month=="february":
                     print("In Feb")
                     
+                    current_date = "2022-"+"02-"+"01"
                     id = 2
                 elif month == "March" or month=="march":
                     print("In Mar")
                     
+                    current_date = "2022-"+"03-"+"01"
                     id = 3
                 elif month == "April" or month=="april":
                     print("In Apr")
                     
+                    current_date = "2022-"+"04-"+"01"
                     id = 4
                 elif month == "May" or month=="may":
                     print("In May")
                     
+                    current_date = "2022-"+"05-"+"01"
                     id = 5
                 elif month == "June" or month=="june":
                     print("In Jun")
                     
+                    current_date = "2022-"+"06-"+"01"
                     id = 6
                 elif month == "July" or month=="july":
                     print("In Jul")
                     
+                    current_date = "2022-"+"07-"+"01"
                     id = 7
                 elif month == "August" or month=="august":
                     print("In Aug")
                     
+                    current_date = "2022-"+"08-"+"01"
                     id = 8
                 elif month == "September" or month=="september":
                     print("In Sep")
                     
+                    current_date = "2022-"+"09-"+"01"
                     id = 9
                 elif month == "October" or month=="october":
                     print("In Oct")
                     
+                    current_date = "2022-"+"10-"+"01"
                     id = 10
                 elif month == "November" or month=="november":
                     print("In Nov")
                     
+                    current_date = "2022-"+"11-"+"01"
                     id = 11
                 elif month == "December" or month=="december":
                     print("In Dec")
 
+                    current_date = "2022-"+"12-"+"01"
                     id = 12
                 else:  
                     print("In Else")
@@ -4205,8 +4257,15 @@ def process_salary():
                     print("month ", id)
 
                     msg = "Processing Complete"
+
+                    hire_date = "SELECT hire FROM employee WHERE EmployeeID = %s"
+                    cursor.execute(hire_date, data)
+                    hire_date_emp = cursor.fetchall()
                     
-                    if int(last_year) >= int(year) or (last_year == 1 and last_mon == 1):
+                    print(hire_date_emp)
+                    hire_dt = str(hire_date_emp[0][0])
+                    
+                    if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt < current_date):
                         print("Year Is Correct")
                         if int(last_mon) >= int(id) or (last_year == 1 and last_mon == 1):
                             print("In Start Process")
