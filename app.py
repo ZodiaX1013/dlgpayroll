@@ -4570,11 +4570,18 @@ def process_salary():
                     
                     print(hire_date_emp)
                     hire_dt = str(hire_date_emp[0][0])
+
+                    pension_query = "SELECT NPS FROM employee WHERE EmployeeID= %s"
+                    cursor.execute(pension_query , data)
+                    pension = cursor.fetchall()
+
+                    pension = pension[0][0]
                     
                     if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt < current_date):
                         print("Year Is Correct")
                         if int(last_mon) >= int(id) or (last_year == 1 and last_mon == 1):
                             print("In Start Process")
+
                             query1 = "SELECT FirstName FROM employee WHERE EmployeeID = %s"
                             cursor.execute(query1,data)
                             fname = cursor.fetchall()
@@ -4758,255 +4765,394 @@ def process_salary():
                             if ProcSal == "No":
                                 print("In Process Salary")
 
-                                query = """INSERT INTO payslip(
-                                        JoinDate,
-                                        Company,
-                                        EmpName,
-                                        Position,
-                                        NIC,
-                                        BasicSalary,
-                                        TravelAlw,
-                                        Bonus,
-                                        Gross,
-                                        PAYE,
-                                        NPF,
-                                        NSF,
-                                        SLevy,
-                                        Deduction,
-                                        NetPay,
-                                        Payable,
-                                        NetPayAcc,
-                                        eNPF,
-                                        eNSF,
-                                        eLevy,
-                                        ePRGF,
-                                        month,
-                                        year,
-                                        UNQ
-                                        )
-                                        VALUES(
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s,
-                                        %s
-                                        );
-                                        """
-                                
-                                
-                                flname = lname + " " + fname
+                                if pension == 'Paid':
+                                    flname = lname + " " + fname
+
+                                    # Values We Don't Get
+                                    ot = 0
+                                    otherAllow = 0
+                                    arrears = 0
+                                    eoy = 0
+                                    leave = 0
+                                    speBns = 0
+                                    discBns = 0
+                                    tax = 0
+                                    ntax = 0
+                                    attBns = 0
+                                    overseas = tax + ntax
+
+                                    loan = 0
+                                    lateness = 0
+                                    otherDed = 0
+                                    ab = 0
+
+                                    # Previous Data
+                                    # print(type(prevGross))
+                                    # print(prevGross)
+                                    if prevGross == "":
+                                        prevGross = 0
+                                    else:
+                                        prevGross = int(prevGross)
+
+                                    if piet == "":
+                                        piet = 0
+                                    else:
+                                        piet = int(piet)
+                                    
+                                    if ppaye == "":
+                                        ppaye = 0
+                                    else:
+                                        ppaye = int(ppaye)
+                                    
+                                    if pths == "":
+                                        pths = 0
+                                    else:
+                                        pths = int(pths)
+                                    # print(pths)
+                                    if plevy == "":
+                                        plevy = 0
+                                    else:
+                                        plevy = int(plevy)
+                            
+                                    basic = int(tbasic) - int(ab)
+                                    # Calculations
+                                    payable = basic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
+                                    bonus = speBns + SpeProBns + otherAllow + fixAllow + discBns + attBns
+
+                                    pay_gross = tbasic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
+                                    
+                                    # For Overseas Amount
+                                    if overseas > 0:
+                                        ntax = round(int(basic) * 0.06)
+                                        tax = round(int(overseas) - int(ntax))
+                                    else:
+                                        ntax = 0
+                                        tax = 0
+
+                                    if trans > 20000:
+                                        transTax = trans - 20000
+                                        ntransTax = trans - transTax
+                                    else:
+                                        transTax = 0
+                                        ntransTax = 0
+
+                                    cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
+
+                                    grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car
+
+                                    # print("prev Gross " , prevGross)
+                                    # print("Curr Gross " , cgross)
+                                    gross = prevGross + grossTax
+                                    # print("gross" , gross)
+                                    medf = round(int(edf) / 13)
+                                    ciet = round(( int(edf) + int(Medicalrel) + int(education)) / 13)
+                                    
+                                    iet = int(ciet) + int(piet)
+                                    # print("ciet" , ciet)
+                                    # print("piet", piet)
+                                    # print("iet", iet)
+
+                                    netch = gross - iet
+
+                                    # print("netch" , netch)
+                                    if netch < 0:
+                                        netch = 0
+                                    else:
+                                        netch = netch
+
+                                    if int(basic) > 50000:
+                                        nps = round(basic * 0.03)
+                                        # cpaye =  round(netch * 0.15)
+                                        enps = round(basic * 0.06)
+                                    else:
+                                        nps = round(basic * 0.015)
+                                        # cpaye = round(netch * 0.1)
+                                        enps = round(basic * 0.03)
+
+                                    check = int(basic) + int(otherAllow) - int(medf)
+                                    if check < 53846:
+                                        cpaye = round(netch* 0.1)
+                                    elif check >= 53846 and check < 75000:
+                                        cpaye = round(netch* 0.125)
+                                    else:
+                                        cpaye = round(netch* 0.15)
+
+                                    if cpaye < 0:
+                                        cpaye = 0
+                                    else:
+                                        cpaye = int(cpaye)
+                                    
+                                    if ppaye < 0:
+                                        ppaye =0
+                                    else:
+                                        ppaye = int(ppaye)
+
+                                    # print("cpaye", cpaye)
+                                    # print("ppaye", ppaye)
+                                    paye = int(cpaye) - int(ppaye)
+                                    # print("paye", paye)
+                                    if paye < 0:
+                                        paye =0
+                                    else:
+                                        paye = int(paye)
+
+                                    nsf = int(basic * 0.01)
+
+                                    if nsf > 214:
+                                        nsf = 214
+                                    else:
+                                        nsf = int(nsf)
+
+                                    temp = int(cgross) * 13
+                                    slevy = 0
+                                    tths = round(3000000/13)
+                                    ths = int(pths) + int(tths)
+                                    # print(ths)
+                                    netchar = int(gross) - int(iet) - int(ths)
+                                    print("gross", gross)
+                                    print("iet", iet)
+                                    print("ths", ths)
+                                    if netchar < 0 :
+                                        netchar = 0
+                                    else:
+                                        netchar = netchar
+                                    print("netchar", netchar)
+                                    print("grossTax", grossTax)
+
+                                    if int(temp) > 3000000:
+                                        slevy1 = round(netchar * 0.25)
+                                        slevy2 = round(gross * 0.1)
+                                        print("slevy1", slevy1)
+                                        print("slevy2", slevy2)
+                                        if slevy1 > slevy2:
+                                            slevy = int(slevy2)
+                                        else:
+                                            slevy = int(slevy1)
+                                    else:
+                                        slevy = 0
+                                    print("slevy", slevy)
+                                    ensf = round(basic * 0.025)
+                                    if ensf > 536:
+                                        ensf = 536
+                                    else:
+                                        ensf = round(ensf)
+                                    levy = round(int(basic) * 0.015)
+                                    deduction = int(loan) + int(paye) + int(lateness) + int(nps) + int(otherDed) + int(nsf) + int(medical)
+                                    net = int(payable) - int(deduction)
+                                    # print(slevy)
+                                    NetPaysheet = int(net) - int(slevy)
+                                    slevypay = slevy - plevy
+                                    print("slevypay", slevypay)
+                                    otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
+                                    
+                                    tax = int(tax) + int(transTax)
+                                    ntax = int(ntax) + int(ntransTax)
+                                    # Payslip Calculation
+
+                                    paygross = int(basic) + int(trans) + int(bonus)
+
+                                    pay_gross = tbasic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
+
+                                    totalDeduction = int(paye) + int(nps) + int(nsf)
+
+                                    netpay = paygross - totalDeduction
+                                    # eprgf = 0
+                                    if basic < 200000:
+                                        eprgf = round((int(basic) + int(bonus)) * 0.035) # + commission
+                                    else:
+                                        eprgf = 0
+                                else:
+                                    flname = lname + " " + fname
 
                                 # Values We Don't Get
-                                ot = 0
-                                otherAllow = 0
-                                arrears = 0
-                                eoy = 0
-                                leave = 0
-                                speBns = 0
-                                discBns = 0
-                                tax = 0
-                                ntax = 0
-                                attBns = 0
-                                overseas = tax + ntax
-
-                                loan = 0
-                                lateness = 0
-                                otherDed = 0
-                                ab = 0
-
-                                # Previous Data
-                                # print(type(prevGross))
-                                # print(prevGross)
-                                if prevGross == "":
-                                    prevGross = 0
-                                else:
-                                    prevGross = int(prevGross)
-
-                                if piet == "":
-                                    piet = 0
-                                else:
-                                    piet = int(piet)
-                                
-                                if ppaye == "":
-                                    ppaye = 0
-                                else:
-                                    ppaye = int(ppaye)
-                                
-                                if pths == "":
-                                    pths = 0
-                                else:
-                                    pths = int(pths)
-                                # print(pths)
-                                if plevy == "":
-                                    plevy = 0
-                                else:
-                                    plevy = int(plevy)
-                        
-                                basic = int(tbasic) - int(ab)
-                                # Calculations
-                                payable = basic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
-                                bonus = speBns + SpeProBns + otherAllow + fixAllow + discBns + attBns
-
-                                pay_gross = tbasic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
-                                
-                                # For Overseas Amount
-                                if overseas > 0:
-                                    ntax = round(int(basic) * 0.06)
-                                    tax = round(int(overseas) - int(ntax))
-                                else:
-                                    ntax = 0
+                                    ot = 0
+                                    otherAllow = 0
+                                    arrears = 0
+                                    eoy = 0
+                                    leave = 0
+                                    speBns = 0
+                                    discBns = 0
                                     tax = 0
+                                    ntax = 0
+                                    attBns = 0
+                                    overseas = tax + ntax
 
-                                if trans > 20000:
-                                    transTax = trans - 20000
-                                    ntransTax = trans - transTax
-                                else:
-                                    transTax = 0
-                                    ntransTax = 0
+                                    loan = 0
+                                    lateness = 0
+                                    otherDed = 0
+                                    ab = 0
 
-                                cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
+                                    # Previous Data
+                                    # print(type(prevGross))
+                                    # print(prevGross)
+                                    prevGross = 0
+                                    piet = 0
+                                    ppaye = 0
+                                    pths = 0
+                                    plevy = 0
+                                    
+                            
+                                    basic = int(tbasic) - int(ab)
+                                    # Calculations
+                                    payable = basic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
+                                    bonus = speBns + SpeProBns + otherAllow + fixAllow + discBns + attBns
 
-                                grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car
-
-                                # print("prev Gross " , prevGross)
-                                # print("Curr Gross " , cgross)
-                                gross = prevGross + grossTax
-                                # print("gross" , gross)
-                                medf = round(int(edf) / 13)
-                                ciet = round(( int(edf) + int(Medicalrel) + int(education)) / 13)
-                                
-                                iet = int(ciet) + int(piet)
-                                # print("ciet" , ciet)
-                                # print("piet", piet)
-                                # print("iet", iet)
-
-                                netch = gross - iet
-
-                                # print("netch" , netch)
-                                if netch < 0:
-                                    netch = 0
-                                else:
-                                    netch = netch
-
-                                if int(basic) > 50000:
-                                    nps = round(basic * 0.03)
-                                    # cpaye =  round(netch * 0.15)
-                                    enps = round(basic * 0.06)
-                                else:
-                                    nps = round(basic * 0.015)
-                                    # cpaye = round(netch * 0.1)
-                                    enps = round(basic * 0.03)
-
-                                check = int(basic) + int(otherAllow) - int(medf)
-                                if check < 53846:
-                                    cpaye = round(netch* 0.1)
-                                elif check >= 53846 and check < 75000:
-                                    cpaye = round(netch* 0.125)
-                                else:
-                                    cpaye = round(netch* 0.15)
-
-                                if cpaye < 0:
-                                    cpaye = 0
-                                else:
-                                    cpaye = int(cpaye)
-                                
-                                if ppaye < 0:
-                                    ppaye =0
-                                else:
-                                    ppaye = int(ppaye)
-
-                                # print("cpaye", cpaye)
-                                # print("ppaye", ppaye)
-                                paye = int(cpaye) - int(ppaye)
-                                # print("paye", paye)
-                                if paye < 0:
-                                    paye =0
-                                else:
-                                    paye = int(paye)
-
-                                nsf = int(basic * 0.01)
-
-                                if nsf > 214:
-                                    nsf = 214
-                                else:
-                                    nsf = int(nsf)
-
-                                temp = int(cgross) * 13
-                                slevy = 0
-                                tths = round(3000000/13)
-                                ths = int(pths) + int(tths)
-                                # print(ths)
-                                netchar = int(gross) - int(iet) - int(ths)
-                                print("gross", gross)
-                                print("iet", iet)
-                                print("ths", ths)
-                                if netchar < 0 :
-                                    netchar = 0
-                                else:
-                                    netchar = netchar
-                                print("netchar", netchar)
-                                print("grossTax", grossTax)
-
-                                if int(temp) > 3000000:
-                                    slevy1 = round(netchar * 0.25)
-                                    slevy2 = round(gross * 0.1)
-                                    print("slevy1", slevy1)
-                                    print("slevy2", slevy2)
-                                    if slevy1 > slevy2:
-                                        slevy = int(slevy2)
+                                    pay_gross = tbasic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
+                                    
+                                    # For Overseas Amount
+                                    if overseas > 0:
+                                        ntax = round(int(basic) * 0.06)
+                                        tax = round(int(overseas) - int(ntax))
                                     else:
-                                        slevy = int(slevy1)
-                                else:
+                                        ntax = 0
+                                        tax = 0
+
+                                    if trans > 20000:
+                                        transTax = trans - 20000
+                                        ntransTax = trans - transTax
+                                    else:
+                                        transTax = 0
+                                        ntransTax = 0
+
+                                    cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
+
+                                    grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car
+
+                                    # print("prev Gross " , prevGross)
+                                    # print("Curr Gross " , cgross)
+                                    gross = prevGross + grossTax
+                                    # print("gross" , gross)
+                                    medf = round(int(edf) / 13)
+                                    ciet = round(( int(edf) + int(Medicalrel) + int(education)) / 13)
+                                    
+                                    iet = int(ciet) + int(piet)
+                                    # print("ciet" , ciet)
+                                    # print("piet", piet)
+                                    # print("iet", iet)
+
+                                    netch = gross - iet
+
+                                    # print("netch" , netch)
+                                    if netch < 0:
+                                        netch = 0
+                                    else:
+                                        netch = netch
+
+                                    nps = 0
+                                    enps = 0
+
+                                    # if int(basic) > 50000:
+                                    #     nps = round(basic * 0.03)
+                                    #     # cpaye =  round(netch * 0.15)
+                                    #     enps = round(basic * 0.06)
+                                    # else:
+                                    #     nps = round(basic * 0.015)
+                                    #     # cpaye = round(netch * 0.1)
+                                    #     enps = round(basic * 0.03)
+
+                                    cpaye = 0
+                                    ppaye = 0
+
+                                    # check = int(basic) + int(otherAllow) - int(medf)
+                                    # if check < 53846:
+                                    #     cpaye = round(netch* 0.1)
+                                    # elif check >= 53846 and check < 75000:
+                                    #     cpaye = round(netch* 0.125)
+                                    # else:
+                                    #     cpaye = round(netch* 0.15)
+
+                                    # if cpaye < 0:
+                                    #     cpaye = 0
+                                    # else:
+                                    #     cpaye = int(cpaye)
+                                    
+                                    # if ppaye < 0:
+                                    #     ppaye =0
+                                    # else:
+                                    #     ppaye = int(ppaye)
+
+                                    # print("cpaye", cpaye)
+                                    # print("ppaye", ppaye)
+                                    paye = int(cpaye) - int(ppaye)
+                                    # print("paye", paye)
+                                    if paye < 0:
+                                        paye =0
+                                    else:
+                                        paye = int(paye)
+
+                                    nsf = 0
+                                    # nsf = int(basic * 0.01)
+
+                                    # if nsf > 214:
+                                    #     nsf = 214
+                                    # else:
+                                    #     nsf = int(nsf)
+
+                                    temp = int(cgross) * 13
                                     slevy = 0
-                                print("slevy", slevy)
-                                ensf = round(basic * 0.025)
-                                if ensf > 536:
-                                    ensf = 536
-                                else:
-                                    ensf = round(ensf)
-                                levy = round(int(basic) * 0.015)
-                                deduction = int(loan) + int(paye) + int(lateness) + int(nps) + int(otherDed) + int(nsf) + int(medical)
-                                net = int(payable) - int(deduction)
-                                # print(slevy)
-                                NetPaysheet = int(net) - int(slevy)
-                                slevypay = slevy - plevy
-                                print("slevypay", slevypay)
-                                otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
-                                
-                                tax = int(tax) + int(transTax)
-                                ntax = int(ntax) + int(ntransTax)
-                                # Payslip Calculation
+                                    tths = round(3000000/13)
+                                    ths = int(pths) + int(tths)
+                                    # print(ths)
+                                    netchar = int(gross) - int(iet) - int(ths)
+                                    # print("gross", gross)
+                                    # print("iet", iet)
+                                    # print("ths", ths)
+                                    if netchar < 0 :
+                                        netchar = 0
+                                    else:
+                                        netchar = netchar
+                                    # print("netchar", netchar)
+                                    # print("grossTax", grossTax)
 
-                                paygross = int(basic) + int(trans) + int(bonus)
+                                    slevy = 0
+                                    # if int(temp) > 3000000:
+                                    #     slevy1 = round(netchar * 0.25)
+                                    #     slevy2 = round(gross * 0.1)
+                                    #     print("slevy1", slevy1)
+                                    #     print("slevy2", slevy2)
+                                    #     if slevy1 > slevy2:
+                                    #         slevy = int(slevy2)
+                                    #     else:
+                                    #         slevy = int(slevy1)
+                                    # else:
+                                    #     slevy = 0
+                                    # print("slevy", slevy)
+                                    
+                                    ensf = 0
+                                    # ensf = round(basic * 0.025)
 
-                                pay_gross = tbasic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
+                                    # if ensf > 536:
+                                    #     ensf = 536
+                                    # else:
+                                    #     ensf = round(ensf)
 
-                                totalDeduction = int(paye) + int(nps) + int(nsf)
+                                    levy = 0
+                                    # levy = round(int(basic) * 0.015)
 
-                                netpay = paygross - totalDeduction
-                                # eprgf = 0
-                                if basic < 200000:
-                                    eprgf = round((int(basic) + int(bonus)) * 0.035) # + commission
-                                else:
+                                    deduction = int(loan) + int(paye) + int(lateness) + int(nps) + int(otherDed) + int(nsf) + int(medical)
+                                    net = int(payable) - int(deduction)
+                                    # print(slevy)
+                                    NetPaysheet = int(net) - int(slevy)
+                                    slevypay = slevy - plevy
+                                    # print("slevypay", slevypay)
+                                    otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
+                                    
+                                    tax = int(tax) + int(transTax)
+                                    ntax = int(ntax) + int(ntransTax)
+                                    # Payslip Calculation
+
+                                    paygross = int(basic) + int(trans) + int(bonus)
+
+                                    pay_gross = tbasic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
+
+                                    totalDeduction = int(paye) + int(nps) + int(nsf)
+
+                                    netpay = paygross - totalDeduction
+                                    # eprgf = 0
+                                    # if basic < 200000:
+                                    #     eprgf = round((int(basic) + int(bonus)) * 0.035) # + commission
+                                    # else:
+                                    #    eprgf = 0
                                     eprgf = 0
 
                                 insert_query = """
@@ -5261,11 +5407,63 @@ def process_salary():
                                 cursor.execute(insert_query2, data1)
                                 print("Salary Query Executed")
 
+                                query = """INSERT INTO payslip(
+                                        JoinDate,
+                                        Company,
+                                        EmpName,
+                                        Position,
+                                        NIC,
+                                        BasicSalary,
+                                        TravelAlw,
+                                        Bonus,
+                                        Gross,
+                                        PAYE,
+                                        NPF,
+                                        NSF,
+                                        SLevy,
+                                        Deduction,
+                                        NetPay,
+                                        Payable,
+                                        NetPayAcc,
+                                        eNPF,
+                                        eNSF,
+                                        eLevy,
+                                        ePRGF,
+                                        month,
+                                        year,
+                                        UNQ
+                                        )
+                                        VALUES(
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s,
+                                        %s
+                                        );
+                                        """
                                 
                                 data3 = [hire, "Demo" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay , totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, month, year, UNQ ]
                                 cursor.execute(query, data3)
                                 print("Payslip Query Executed")
-                                
 
                                 query14 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
                                 cursor.execute(query14, data)
