@@ -2755,7 +2755,7 @@ def process_salary():
                 month2 = calendar.month_name[mid]
                 month2 = month2.lower()
 
-                query = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, medical, Specialbonus FROM employee WHERE EmployeeID = %s"
+                query = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, Medicalrel, Specialbonus FROM employee WHERE EmployeeID = %s"
                 
                 cursor.execute(query, data)
                 emp_data = cursor.fetchall()
@@ -2771,8 +2771,9 @@ def process_salary():
                 edf = int(emp_data[0][4])
                 education = int(emp_data[0][5])
                 Medicalrel = int(emp_data[0][6])
-                # medical = int(emp_data2[7])
-                medical = 0
+                temp_medical = int(emp_data2[7])
+                medical = round(int(temp_medical) / 12)
+                # medical = 0
                 SpeProBns = int(emp_data[0][8])
 
                 # lwork = emp_data2[10]
@@ -4494,7 +4495,7 @@ def process_salary():
 
                 # query3 = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, medical, Specialbonus FROM employee WHERE EmployeeID = %s "
                 # query3 = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, medical, Specialbonus, EmployeeID FROM employee"
-                query = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, medical, Specialbonus, EmployeeID FROM employee"
+                query = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, Medicalrel, Specialbonus, EmployeeID FROM employee"
                 # cursor.execute(query3, data)
                 cursor.execute(query)
                 emp_data = cursor.fetchall()
@@ -4521,8 +4522,9 @@ def process_salary():
                     edf = int(emp_data2[4])
                     education = int(emp_data2[5])
                     Medicalrel = int(emp_data2[6])
-                    # medical = int(emp_data2[7])
-                    medical = 0
+                    temp_medical = int(emp_data2[7])
+                    medical = round(int(temp_medical) / 12)
+                    # medical = 0
                     SpeProBns = int(emp_data2[8])
                     eid = emp_data2[9]
 
