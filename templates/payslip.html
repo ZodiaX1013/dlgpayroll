@@ -28,6 +28,18 @@
     <link href="{{ url_for('static', filename='css/style.css', _external=True) }}" rel="stylesheet" >
     <!-- <link rel="stylesheet" href="../static/css/style.css" , _external="true"> -->
     <script src="https://kit.fontawesome.com/e6163d7cbc.js" crossorigin="anonymous"></script>
+	<style>
+        .blink {
+            animation: blinker 1.5s linear infinite;
+            color: rgb(21, 82, 248);
+            font-family: sans-serif;
+        }
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
     
     
 

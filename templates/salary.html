@@ -24,6 +24,18 @@
 	<!-- vendor css -->
 	<link rel="stylesheet" href="../static/css/style.css">
 	<script src="https://kit.fontawesome.com/e6163d7cbc.js" crossorigin="anonymous"></script>
+	<style>
+        .blink {
+            animation: blinker 1.5s linear infinite;
+            color: rgb(21, 82, 248);
+            font-family: sans-serif;
+        }
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
 
 </head>
 <body class="">
@@ -433,7 +445,7 @@
 		<!-- [ breadcrumb ] end -->
 		<!-- [ Main Content ] start -->
 		{% if msg %}
-		<h4>{{msg}}</h4>
+		<h4><p class="blink" style="font-size: 2rem;text-align: center;"> {{msg}}  </p></h4>
 		{% endif %}
 
 		<div class="row">

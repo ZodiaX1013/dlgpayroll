@@ -896,6 +896,7 @@
 												<div>
 													<label>NPS</label>
 												</div>
+												{% if pension == 'Paid' %}
 												<label class="custom-control custom-radio radio-inline custom-control-inline">
 													<input type="radio" name="optradio2" value="Paid"  checked>Paid
 												  </label>
@@ -903,6 +904,15 @@
 													<input type="radio" name="optradio2"  value="Not Paid" >Not Paid
 												  </label>
 												</lable>
+												{% else %}
+												<label class="custom-control custom-radio radio-inline custom-control-inline">
+													<input type="radio" name="optradio2" value="Paid">Paid
+												  </label>
+												  <label class="custom-control custom-radio radio-inline custom-control-inline">
+													<input type="radio" name="optradio2"  value="Not Paid" checked >Not Paid
+												  </label>
+												</lable>
+												{% endif %}
 											</div>
 											<div class="form-group col-md-6">
 												{% if car %}
@@ -1235,13 +1245,23 @@
 												<div>
 													<label>Expatriate</label>
 												</div>
+												{% if exp == 'Yes' %}
 												<label class="custom-control custom-radio radio-inline custom-control-inline">
-													<input type="radio" name="optradio4" id="optradiod3" value="Yes" >Yes
+													<input type="radio" name="optradio4" id="optradiod4" value="Yes" >Yes
 												  </label>
 												  <label class="custom-control custom-radio radio-inline custom-control-inline">
-													<input type="radio" name="optradio4" id="optradiod3" value="No" checked>No
+													<input type="radio" name="optradio4" id="optradiod4" value="No" checked>No
 												  </label>
 												</lable>
+												{% else %}
+												<label class="custom-control custom-radio radio-inline custom-control-inline">
+													<input type="radio" name="optradio4" id="optradiod4" value="Yes" >Yes
+												  </label>
+												  <label class="custom-control custom-radio radio-inline custom-control-inline">
+													<input type="radio" name="optradio4" id="optradiod4" value="No" checked>No
+												  </label>
+												</lable>
+												{% endif %}
 											</div>
 										</div>
 										
