@@ -70,25 +70,6 @@ def login():
             hash = d.hexdigest()
             print(hash)
 
-            data = ['MCS-BS001']
-            hire_date = "SELECT hire FROM employee WHERE EmployeeID= %s"
-            cursor.execute(hire_date, data)
-            hire_date_emp = cursor.fetchall()
-            
-            print(hire_date_emp)
-            hire_dt = str(hire_date_emp[0][0])
-
-            current_date = "2022-07-01"
-
-            print(hire_dt)
-            print(current_date)
-
-            if hire_dt > current_date:
-                print("Not Process")
-            else:
-                print("Process")
-
-
             if mail == user:
                 print("User Name Is Correct")
                 if hash == password:
@@ -2221,10 +2202,8 @@ def salary():
         if overseas == "":
             overseas = 0
 
-
-
         # travel = request.form["tran"]
-        otherAlw2 = int(otherAlw) + int(speBns) + int(SpeProBns)
+        otherAlw2 = int(otherAlw) 
 
         ded = int(Deduction) + int(slevy)
         netpay = int(Payable) - int(ded)
@@ -2428,6 +2407,8 @@ def salary():
                         UNQ
                         )
                         VALUES(
+                        %s,
+                        %s,
                         %s,
                         %s,
                         %s,
@@ -3188,6 +3169,7 @@ def process_salary():
                             NetPaysheet = int(net) - int(slevy)
                             slevypay = slevy - plevy
                             print("slevypay", slevypay)
+
                             otherAllow2 = int(otherAllow) 
                             
                             tax = int(tax) + int(transTax)
@@ -4437,7 +4419,7 @@ def process_salary():
 
 # =================================================================================================================== #
 
-            elif eid == "ALL":                 
+            elif eid == "ALL":
                 # print(month)
                 month = request.form["mon"]
         
@@ -4570,11 +4552,11 @@ def process_salary():
 
                     last_year = emp_year[0][0]
 
-                    hire_date = "SELECT hire FROM employee WHERE EmployeeID= %s"
-                    cursor.execute(hire_date, data)
-                    hire_date_emp = cursor.fetchall()
+                    # hire_date = "SELECT hire FROM employee WHERE EmployeeID= %s"
+                    # cursor.execute(hire_date, data)
+                    # hire_date_emp = cursor.fetchall()
                     
-                    hire_dt = hire_date_emp[0][0]
+                    # hire_dt = hire_date_emp[0][0]
 
                     # if mon == 0:
                     #     mon = id    
@@ -4608,7 +4590,7 @@ def process_salary():
 
                     expatriate = expatriate[0][0]
                     
-                    if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt < current_date):
+                    if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt <= current_date):
                         print("Year Is Correct")
                         if int(last_mon) >= int(id) or (last_year == 1 and last_mon == 1):
                             print("In Start Process")
@@ -4982,7 +4964,7 @@ def process_salary():
 
                                     paygross = int(basic) + int(trans) + int(bonus)
 
-                                    pay_gross = tbasic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
+                                    # pay_gross = tbasic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
 
                                     totalDeduction = int(paye) + int(nps) + int(nsf)
 
@@ -4992,6 +4974,9 @@ def process_salary():
                                         eprgf = round((int(basic) + int(bonus)) * 0.035) # + commission
                                     else:
                                         eprgf = 0
+
+# ===============================================================================================================================================================================================                                       
+ 
                                 else:
                                     flname = lname + " " + fname
 
@@ -5174,7 +5159,7 @@ def process_salary():
 
                                     paygross = int(basic) + int(trans) + int(bonus)
 
-                                    pay_gross = tbasic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
+                                    # pay_gross = tbasic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
 
                                     totalDeduction = int(paye) + int(nps) + int(nsf)
 
@@ -7964,7 +7949,7 @@ def eoy():
                     print("Update PAYE CSV Query Executed")
 
                     msg = "End Of Year Bonus Re-Processing Complete For " + flname + " "
-            elif last_year == current_year:
+            elif proc != [] and last_year == current_year:
                 prevGross = 0
                 piet = 0
                 ppaye = 0
