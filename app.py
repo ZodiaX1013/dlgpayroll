@@ -2771,7 +2771,7 @@ def process_salary():
                 edf = int(emp_data[0][4])
                 education = int(emp_data[0][5])
                 Medicalrel = int(emp_data[0][6])
-                temp_medical = int(emp_data2[7])
+                temp_medical = int(emp_data[0][7])
                 medical = round(int(temp_medical) / 12)
                 # medical = 0
                 SpeProBns = int(emp_data[0][8])
@@ -2818,8 +2818,21 @@ def process_salary():
                 cursor.execute(hire_date, data)
                 hire_date_emp = cursor.fetchall()
                 
-                print(hire_date_emp)
+                # print("hire_date_emp ", hire_date_emp)
+
+                
+
+
+                # hire_date = "SELECT hire FROM employee WHERE EmployeeID= %s"
+                # cursor.execute(hire_date, data)
+                # hire_date_emp = cursor.fetchall()
+                
+                # print(hire_date_emp)
                 hire_dt = str(hire_date_emp[0][0])
+
+                print("Hire Date ", hire_dt)
+                print("Current Date " , current_date)
+
 
                 pension_query = "SELECT NPS FROM employee WHERE EmployeeID= %s"
                 cursor.execute(pension_query , data)
@@ -2827,7 +2840,13 @@ def process_salary():
 
                 pension = pension[0][0]
 
-                if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt < current_date):
+                expatriate_query = "SELECT expatriate FROM employee WHERE EmployeeID = %s"
+                cursor.execute(expatriate_query, data)
+                expatriate = cursor.fetchall()
+
+                expatriate = expatriate[0][0]
+
+                if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt <= current_date):
                     print("Year Is Correct")
                     if int(last_mon) >= int(id) or (last_year == 1 and last_mon == 1):
                         print("In Start Process")
@@ -3912,58 +3931,11 @@ def process_salary():
 
                         emolument = int(basic) + int(arrears) + int(overseas) + int(otherAllow) + int(car) + int(ot) + int(eoy) + int(leave) + int(fixAllow) + int(discBns) + int(SpeProBns) + int(speBns) 
 
+# ===========================================================================================================================================================
+
                         get_payecsv  = "SELECT EmployeeID FROM payecsv WHERE UNQ = %s"
                         cursor.execute(get_payecsv, data3)
                         payecsv_id = cursor.fetchall()
-
-                        if payecsv_id == []:
-                            print("Insert")
-                            paye_query = """ INSERT INTO payecsv(
-                                            EmployeeID,
-                                            LastName,
-                                            FirstName,
-                                            Emoluments,
-                                            PAYE,
-                                            working,
-                                            SLevy,
-                                            EmolumentsNet,
-                                            month,
-                                            UNQ
-                                            )
-                                            VALUES(
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s
-                                            );"""
-                            data4 = [nic, lname, fname, emolument, paye, 'Yes', slevypay, emolument, month, UNQ]
-
-                            cursor.execute(paye_query, data4)
-                            print("PAYE Query Executed")
-                        else:
-                            print("Update")
-                            update_payecsv = """UPDATE payecsv
-                                            SET
-                                            EmployeeID = %s,
-                                            LastName = %s,
-                                            FirstName = %s,
-                                            Emoluments = %s,
-                                            PAYE = %s,
-                                            SLevy = %s,
-                                            EmolumentsNet = %s
-                                            WHERE
-                                            UNQ = %s;
-                                            """
-
-                            data4 = [nic, lname, fname, emolument, paye, slevypay, emolument, UNQ]
-                            cursor.execute(update_payecsv, data4)
-                            print("Update PAYE CSV Query Executed")
 
                         query12 = "SELECT NPS FROM employee WHERE EmployeeID = %s"
                         cursor.execute(query12, data)
@@ -3988,126 +3960,177 @@ def process_salary():
                         commission = 0
 
                         totalRem = int(basic) + int(allowance)
-
+                        
                         get_prgfcsv  = "SELECT EmployeeID FROM prgfcsv WHERE UNQ = %s"
                         cursor.execute(get_prgfcsv, data3)
                         prgfcsv_id = cursor.fetchall()
 
-                        if prgfcsv_id == []:
-                            prgf_query = """INSERT INTO prgfcsv(
+                        if expatriate == "No":
+
+                            if payecsv_id == []:
+                                print("Insert")
+                                paye_query = """ INSERT INTO payecsv(
+                                                EmployeeID,
+                                                LastName,
+                                                FirstName,
+                                                Emoluments,
+                                                PAYE,
+                                                working,
+                                                SLevy,
+                                                EmolumentsNet,
+                                                month,
+                                                UNQ
+                                                )
+                                                VALUES(
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s
+                                                );"""
+                                data4 = [nic, lname, fname, emolument, paye, 'Yes', slevypay, emolument, month, UNQ]
+
+                                cursor.execute(paye_query, data4)
+                                print("PAYE Query Executed")
+                            else:
+                                print("Update")
+                                update_payecsv = """UPDATE payecsv
+                                                SET
+                                                EmployeeID = %s,
+                                                LastName = %s,
+                                                FirstName = %s,
+                                                Emoluments = %s,
+                                                PAYE = %s,
+                                                SLevy = %s,
+                                                EmolumentsNet = %s
+                                                WHERE
+                                                UNQ = %s;
+                                                """
+
+                                data4 = [nic, lname, fname, emolument, paye, slevypay, emolument, UNQ]
+                                cursor.execute(update_payecsv, data4)
+                                print("Update PAYE CSV Query Executed")
+
+                            if prgfcsv_id == []:
+                                prgf_query = """INSERT INTO prgfcsv(
+                                                EmployeeID,
+                                                LastName,
+                                                FirstName,
+                                                Pension,
+                                                Working,
+                                                Hire,
+                                                Basic,
+                                                Allowance,
+                                                Commission,
+                                                TotalRem,
+                                                PRGF,
+                                                reason,
+                                                month,
+                                                UNQ
+                                                )
+                                                VALUES(
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s
+                                                );"""
+                                if basic < 200000:
+                                    data5 = [nic, lname, fname, "No", working, hire, basic, allowance, commission, totalRem, eprgf, " " , month, UNQ]
+                                else:
+                                    data5 = [nic, lname, fname, "No", working, hire, basic, 0, 0, 0, 0, " " , month, UNQ]
+                                
+                                cursor.execute(prgf_query, data5)
+                                print("PRGF Insert Query Executed")
+                            
+                            else:
+                                update_prgf = """UPDATE prgfcsv
+                                            SET
+                                            EmployeeID = %s,
+                                            LastName = %s,
+                                            FirstName = %s,
+                                            Basic = %s,
+                                            Allowance = %s,
+                                            Commission = %s,
+                                            TotalRem = %s,
+                                            PRGF = %s
+                                            WHERE
+                                            UNQ = %s;
+                                            """
+                                prgf_data = [eid, lname, fname, basic, allowance, commission, totalRem, eprgf, UNQ]
+
+                                cursor.execute(update_prgf, prgf_data)
+                                print("Update PRGF Complete")
+
+                            get_cnpcsv  = "SELECT EmployeeID FROM cnpcsv WHERE UNQ = %s"
+                            cursor.execute(get_cnpcsv, data3)
+                            cnpcsv_id = cursor.fetchall()
+
+                            if cnpcsv_id == []:
+                                cnp_query = """INSERT INTO cnpcsv(
                                             EmployeeID,
                                             LastName,
                                             FirstName,
-                                            Pension,
-                                            Working,
-                                            Hire,
                                             Basic,
-                                            Allowance,
-                                            Commission,
-                                            TotalRem,
-                                            PRGF,
-                                            reason,
+                                            Basic2,
+                                            Season,
+                                            Alphabet,
+                                            Number,
+                                            Working,
+                                            Blank1,
+                                            Blank2,
                                             month,
                                             UNQ
                                             )
                                             VALUES(
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s
                                             );"""
-                            if basic < 200000:
-                                data5 = [nic, lname, fname, "No", working, hire, basic, allowance, commission, totalRem, eprgf, " " , month, UNQ]
+                                data6 = [nic, lname, fname, basic, basic, "S2", "M", "1", working, " ", " ", month, UNQ]
+
+                                cursor.execute(cnp_query, data6)
+                                print("CNP Insert Query Executed")
+
                             else:
-                                data5 = [nic, lname, fname, "No", working, hire, basic, 0, 0, 0, 0, " " , month, UNQ]
-                            
-                            cursor.execute(prgf_query, data5)
-                            print("PRGF Insert Query Executed")
-                        
-                        else:
-                            update_prgf = """UPDATE prgfcsv
-                                        SET
-                                        EmployeeID = %s,
-                                        LastName = %s,
-                                        FirstName = %s,
-                                        Basic = %s,
-                                        Allowance = %s,
-                                        Commission = %s,
-                                        TotalRem = %s,
-                                        PRGF = %s
-                                        WHERE
-                                        UNQ = %s;
-                                        """
-                            prgf_data = [eid, lname, fname, basic, allowance, commission, totalRem, eprgf, UNQ]
+                                update_cnp = """UPDATE cnpcsv
+                                            SET
+                                            EmployeeID = %s,
+                                            LastName = %s,
+                                            FirstName = %s,
+                                            Basic = %s,
+                                            Basic2 = %s
+                                            WHERE
+                                            UNQ = %s;
+                                            """
+                                cnp_data = [eid, lname, fname, basic, basic, UNQ]
+                                cursor.execute(update_cnp, cnp_data)
 
-                            cursor.execute(update_prgf, prgf_data)
-                            print("Update PRGF Complete")
-
-                        get_cnpcsv  = "SELECT EmployeeID FROM cnpcsv WHERE UNQ = %s"
-                        cursor.execute(get_cnpcsv, data3)
-                        cnpcsv_id = cursor.fetchall()
-
-                        if cnpcsv_id == []:
-                            cnp_query = """INSERT INTO cnpcsv(
-                                        EmployeeID,
-                                        LastName,
-                                        FirstName,
-                                        Basic,
-                                        Basic2,
-                                        Season,
-                                        Alphabet,
-                                        Number,
-                                        Working,
-                                        Blank1,
-                                        Blank2,
-                                        month,
-                                        UNQ
-                                        )
-                                        VALUES(
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s
-                                        );"""
-                            data6 = [nic, lname, fname, basic, basic, "S2", "M", "1", working, " ", " ", month, UNQ]
-
-                            cursor.execute(cnp_query, data6)
-                            print("CNP Insert Query Executed")
-
-                        else:
-                            update_cnp = """UPDATE cnpcsv
-                                        SET
-                                        EmployeeID = %s,
-                                        LastName = %s,
-                                        FirstName = %s,
-                                        Basic = %s,
-                                        Basic2 = %s
-                                        WHERE
-                                        UNQ = %s;
-                                        """
-                            cnp_data = [eid, lname, fname, basic, basic, UNQ]
-                            cursor.execute(update_cnp, cnp_data)
-
-                            print("Update CNP Complete")
+                                print("Update CNP Complete")
 
                         get_contribution  = "SELECT EmployeeID FROM contribution WHERE UNQ = %s"
                         cursor.execute(get_contribution, data3)
@@ -4522,7 +4545,7 @@ def process_salary():
                     edf = int(emp_data2[4])
                     education = int(emp_data2[5])
                     Medicalrel = int(emp_data2[6])
-                    temp_medical = int(emp_data2[7])
+                    temp_medical = int(emp_data[7])
                     medical = round(int(temp_medical) / 12)
                     # medical = 0
                     SpeProBns = int(emp_data2[8])
@@ -4578,6 +4601,12 @@ def process_salary():
                     pension = cursor.fetchall()
 
                     pension = pension[0][0]
+
+                    expatriate_query = "SELECT expatriate FROM employee WHERE EmployeeID = %s"
+                    cursor.execute(expatriate_query, data)
+                    expatriate = cursor.fetchall()
+
+                    expatriate = expatriate[0][0]
                     
                     if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt < current_date):
                         print("Year Is Correct")
@@ -5479,34 +5508,7 @@ def process_salary():
                                     
                                 emolument = int(basic) + int(arrears) + int(overseas) + int(otherAllow) + int(car) + int(ot) + int(eoy) + int(leave) + int(fixAllow) + int(discBns) + int(SpeProBns) + int(speBns) 
 
-                                paye_query = """ INSERT INTO payecsv(
-                                            EmployeeID,
-                                            LastName,
-                                            FirstName,
-                                            Emoluments,
-                                            PAYE,
-                                            working,
-                                            SLevy,
-                                            EmolumentsNet,
-                                            month,
-                                            UNQ
-                                            )
-                                            VALUES(
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s,
-                                                %s
-                                            );"""
-                                data4 = [nic, lname, fname, emolument, paye, 'Yes', slevypay, emolument, month, UNQ]
-
-                                cursor.execute(paye_query, data4)
-                                print("PAYE Query Executed")
+#  ============================================================================================================================================================================================================================
 
                                 query12 = "SELECT NPS FROM employee WHERE EmployeeID = %s"
                                 cursor.execute(query12, data)
@@ -5535,81 +5537,112 @@ def process_salary():
                                 commission = 0
 
                                 totalRem = int(basic) + int(allowance)
-                                
-                                prgf_query = """INSERT INTO prgfcsv(
+
+                                if expatriate == "No":
+
+                                    paye_query = """ INSERT INTO payecsv(
+                                                EmployeeID,
+                                                LastName,
+                                                FirstName,
+                                                Emoluments,
+                                                PAYE,
+                                                working,
+                                                SLevy,
+                                                EmolumentsNet,
+                                                month,
+                                                UNQ
+                                                )
+                                                VALUES(
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s,
+                                                    %s
+                                                );"""
+                                    data4 = [nic, lname, fname, emolument, paye, 'Yes', slevypay, emolument, month, UNQ]
+
+                                    cursor.execute(paye_query, data4)
+                                    print("PAYE Query Executed")
+
+                                    prgf_query = """INSERT INTO prgfcsv(
+                                                EmployeeID,
+                                                LastName,
+                                                FirstName,
+                                                Pension,
+                                                Working,
+                                                Hire,
+                                                Basic,
+                                                Allowance,
+                                                Commission,
+                                                TotalRem,
+                                                PRGF,
+                                                reason,
+                                                month,
+                                                UNQ
+                                                )
+                                                VALUES(
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s
+                                                );"""
+                                    if basic < 200000:
+                                        data5 = [nic, lname, fname, "No", working, hire, basic, allowance, commission, totalRem, eprgf, " " , month, UNQ]
+                                    else:
+                                        data5 = [nic, lname, fname, "No", working, hire, basic, 0, 0, 0, 0, " " , month, UNQ]
+                                    
+                                    cursor.execute(prgf_query, data5)
+                                    print("PRGF Insert Query Executed")
+
+                                    cnp_query = """INSERT INTO cnpcsv(
                                             EmployeeID,
                                             LastName,
                                             FirstName,
-                                            Pension,
-                                            Working,
-                                            Hire,
                                             Basic,
-                                            Allowance,
-                                            Commission,
-                                            TotalRem,
-                                            PRGF,
-                                            reason,
+                                            Basic2,
+                                            Season,
+                                            Alphabet,
+                                            Number,
+                                            Working,
+                                            Blank1,
+                                            Blank2,
                                             month,
                                             UNQ
                                             )
                                             VALUES(
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s,
+                                                %s
                                             );"""
-                                if basic < 200000:
-                                    data5 = [nic, lname, fname, "No", working, hire, basic, allowance, commission, totalRem, eprgf, " " , month, UNQ]
-                                else:
-                                    data5 = [nic, lname, fname, "No", working, hire, basic, 0, 0, 0, 0, " " , month, UNQ]
-                                
-                                cursor.execute(prgf_query, data5)
-                                print("PRGF Insert Query Executed")
+                                    data6 = [nic, lname, fname, basic, basic, "S2", "M", "1", working, " ", " ", month, UNQ]
 
-                                cnp_query = """INSERT INTO cnpcsv(
-                                        EmployeeID,
-                                        LastName,
-                                        FirstName,
-                                        Basic,
-                                        Basic2,
-                                        Season,
-                                        Alphabet,
-                                        Number,
-                                        Working,
-                                        Blank1,
-                                        Blank2,
-                                        month,
-                                        UNQ
-                                        )
-                                        VALUES(
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s,
-                                            %s
-                                        );"""
-                                data6 = [nic, lname, fname, basic, basic, "S2", "M", "1", working, " ", " ", month, UNQ]
-
-                                cursor.execute(cnp_query, data6)
-                                print("CNP CSV Query Executed")
+                                    cursor.execute(cnp_query, data6)
+                                    print("CNP CSV Query Executed")
 
                                 insert_contri = """INSERT INTO contribution(
                                                 EmployeeID,
