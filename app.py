@@ -3169,7 +3169,7 @@ def process_salary():
                             NetPaysheet = int(net) - int(slevy)
                             slevypay = slevy - plevy
                             print("slevypay", slevypay)
-                            otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
+                            otherAllow2 = int(otherAllow) 
                             
                             tax = int(tax) + int(transTax)
                             ntax = int(ntax) + int(ntransTax)
@@ -3404,7 +3404,7 @@ def process_salary():
                             NetPaysheet = int(net) - int(slevy)
                             slevypay = slevy - plevy
                             print("slevypay", slevypay)
-                            otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
+                            otherAllow2 = int(otherAllow)
                             
                             tax = int(tax) + int(transTax)
                             ntax = int(ntax) + int(ntransTax)
@@ -4945,7 +4945,7 @@ def process_salary():
                                     NetPaysheet = int(net) - int(slevy)
                                     slevypay = slevy - plevy
                                     print("slevypay", slevypay)
-                                    otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
+                                    otherAllow2 = int(otherAllow) 
                                     
                                     tax = int(tax) + int(transTax)
                                     ntax = int(ntax) + int(ntransTax)
@@ -5137,7 +5137,7 @@ def process_salary():
                                     NetPaysheet = int(net) - int(slevy)
                                     slevypay = slevy - plevy
                                     # print("slevypay", slevypay)
-                                    otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
+                                    otherAllow2 = int(otherAllow) 
                                     
                                     tax = int(tax) + int(transTax)
                                     ntax = int(ntax) + int(ntransTax)
@@ -6303,7 +6303,7 @@ def eoy():
                     slevypay = slevy - plevy
                     
                     print("slevypay", slevypay)
-                    otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
+                    otherAllow2 = int(otherAllow) 
                     
                     tax = int(tax) + int(transTax)
                     ntax = int(ntax) + int(ntransTax)
@@ -6850,7 +6850,7 @@ def eoy():
                 slevypay = slevy - plevy
                 
                 print("slevypay", slevypay)
-                otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
+                otherAllow2 = int(otherAllow) 
                 
                 tax = int(tax) + int(transTax)
                 ntax = int(ntax) + int(ntransTax)
@@ -7706,7 +7706,7 @@ def eoy():
                     slevypay = slevy - plevy
                     
                     print("slevypay", slevypay)
-                    otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
+                    otherAllow2 = int(otherAllow) 
                     
                     tax = int(tax) + int(transTax)
                     ntax = int(ntax) + int(ntransTax)
@@ -8061,7 +8061,7 @@ def eoy():
                 slevypay = slevy - plevy
                 
                 print("slevypay", slevypay)
-                otherAllow2 = int(otherAllow) + int(speBns) + int(SpeProBns)
+                otherAllow2 = int(otherAllow) 
                 
                 tax = int(tax) + int(transTax)
                 ntax = int(ntax) + int(ntransTax)
