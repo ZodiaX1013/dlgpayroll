@@ -2665,63 +2665,63 @@ def process_salary():
                 if month == "January" or month=="january":
                     print("In Jan")
 
-                    current_date = "2022-"+"01-"+"01"
+                    current_date = "2022-"+"01-"+"31"
                     
                     id = 1
                 elif month == "February" or month=="february":
                     print("In Feb")
                     
-                    current_date = "2022-"+"02-"+"01"
+                    current_date = "2022-"+"02-"+"31"
                     id = 2
                 elif month == "March" or month=="march":
                     print("In Mar")
                     
-                    current_date = "2022-"+"03-"+"01"
+                    current_date = "2022-"+"03-"+"31"
                     id = 3
                 elif month == "April" or month=="april":
                     print("In Apr")
                     
-                    current_date = "2022-"+"04-"+"01"
+                    current_date = "2022-"+"04-"+"31"
                     id = 4
                 elif month == "May" or month=="may":
                     print("In May")
                     
-                    current_date = "2022-"+"05-"+"01"
+                    current_date = "2022-"+"05-"+"31"
                     id = 5
                 elif month == "June" or month=="june":
                     print("In Jun")
                     
-                    current_date = "2022-"+"06-"+"01"
+                    current_date = "2022-"+"06-"+"31"
                     id = 6
                 elif month == "July" or month=="july":
                     print("In Jul")
                     
-                    current_date = "2022-"+"07-"+"01"
+                    current_date = "2022-"+"07-"+"31"
                     id = 7
                 elif month == "August" or month=="august":
                     print("In Aug")
                     
-                    current_date = "2022-"+"08-"+"01"
+                    current_date = "2022-"+"08-"+"31"
                     id = 8
                 elif month == "September" or month=="september":
                     print("In Sep")
                     
-                    current_date = "2022-"+"09-"+"01"
+                    current_date = "2022-"+"09-"+"31"
                     id = 9
                 elif month == "October" or month=="october":
                     print("In Oct")
                     
-                    current_date = "2022-"+"10-"+"01"
+                    current_date = "2022-"+"10-"+"31"
                     id = 10
                 elif month == "November" or month=="november":
                     print("In Nov")
                     
-                    current_date = "2022-"+"11-"+"01"
+                    current_date = "2022-"+"11-"+"31"
                     id = 11
                 elif month == "December" or month=="december":
                     print("In Dec")
                     
-                    current_date = "2022-"+"12-"+"01"
+                    current_date = "2022-"+"12-"+"31"
                     id = 12
                 else:  
                     print("In Else")
@@ -4429,62 +4429,62 @@ def process_salary():
                 if month == "January" or month=="january":
                     print("In Jan")
                     
-                    current_date = "2022-"+"01-"+"01"
+                    current_date = "2022-"+"01-"+"31"
                     id = 1
                 elif month == "February" or month=="february":
                     print("In Feb")
                     
-                    current_date = "2022-"+"02-"+"01"
+                    current_date = "2022-"+"02-"+"31"
                     id = 2
                 elif month == "March" or month=="march":
                     print("In Mar")
                     
-                    current_date = "2022-"+"03-"+"01"
+                    current_date = "2022-"+"03-"+"31"
                     id = 3
                 elif month == "April" or month=="april":
                     print("In Apr")
                     
-                    current_date = "2022-"+"04-"+"01"
+                    current_date = "2022-"+"04-"+"31"
                     id = 4
                 elif month == "May" or month=="may":
                     print("In May")
                     
-                    current_date = "2022-"+"05-"+"01"
+                    current_date = "2022-"+"05-"+"31"
                     id = 5
                 elif month == "June" or month=="june":
                     print("In Jun")
                     
-                    current_date = "2022-"+"06-"+"01"
+                    current_date = "2022-"+"06-"+"31"
                     id = 6
                 elif month == "July" or month=="july":
                     print("In Jul")
                     
-                    current_date = "2022-"+"07-"+"01"
+                    current_date = "2022-"+"07-"+"31"
                     id = 7
                 elif month == "August" or month=="august":
                     print("In Aug")
                     
-                    current_date = "2022-"+"08-"+"01"
+                    current_date = "2022-"+"08-"+"31"
                     id = 8
                 elif month == "September" or month=="september":
                     print("In Sep")
                     
-                    current_date = "2022-"+"09-"+"01"
+                    current_date = "2022-"+"09-"+"31"
                     id = 9
                 elif month == "October" or month=="october":
                     print("In Oct")
                     
-                    current_date = "2022-"+"10-"+"01"
+                    current_date = "2022-"+"10-"+"31"
                     id = 10
                 elif month == "November" or month=="november":
                     print("In Nov")
                     
-                    current_date = "2022-"+"11-"+"01"
+                    current_date = "2022-"+"11-"+"31"
                     id = 11
                 elif month == "December" or month=="december":
                     print("In Dec")
 
-                    current_date = "2022-"+"12-"+"01"
+                    current_date = "2022-"+"12-"+"31"
                     id = 12
                 else:  
                     print("In Else")
