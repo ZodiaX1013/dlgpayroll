@@ -4527,7 +4527,7 @@ def process_salary():
                     edf = int(emp_data2[4])
                     education = int(emp_data2[5])
                     Medicalrel = int(emp_data2[6])
-                    temp_medical = int(emp_data[7])
+                    temp_medical = int(emp_data2[7])
                     medical = round(int(temp_medical) / 12)
                     # medical = 0
                     SpeProBns = int(emp_data2[8])
