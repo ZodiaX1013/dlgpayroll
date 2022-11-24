@@ -243,25 +243,61 @@ function calculateSalary(){
 
   // Changable Amount is travel allowance
 
-  var arrears = document.getElementById("arr").value
+  var arrears1 = document.getElementById("arr").value
   
-  if(arrears == ""){
-    arrears = parseInt(0)
+  if(arrears1 == ""){
+    arrears1 = parseInt(0)
     
   }
   else{
-    arrears = parseInt(arrears)
+    arrears1 = parseInt(arrears1)
     
   }
+
+  var arrears2 = document.getElementById("arr2").value
   
-  var localRef = document.getElementById("lref").value
-  if(localRef == ""){
-    localRef = 0
+  if(arrears2 == ""){
+    arrears2 = parseInt(0)
+    
   }
   else{
-    localRef = parseInt(localRef)
+    arrears2 = parseInt(arrears2)
+    
   }
+
+  var arrears = parseInt(arrears1) + parseInt(arrears2)
+
+// =============================================================================================================================
   
+  var localRef1 = document.getElementById("lref").value
+  if(localRef1 == ""){
+    localRef1 = 0
+  }
+  else{
+    localRef1 = parseInt(localRef1)
+  }
+
+  var leaveRef = document.getElementById("lref2").value
+  if(leaveRef == ""){
+    leaveRef = 0
+  }
+  else{
+    leaveRef = parseInt(leaveRef)
+  }
+
+  var sick = document.getElementById("sref").value
+  if(sick == ""){
+    sick = 0
+  }
+  else{
+    sick = parseInt(sick)
+  }
+
+  var localRef = parseInt(localRef1) + parseInt(leaveRef) + parseInt(sick)
+
+  
+// =============================================================================================================================
+
   var tfixAllow  = document.getElementById("falw").value
   if(tfixAllow == ""){
     tfixAllow = 0
@@ -271,22 +307,56 @@ function calculateSalary(){
   }
 
   var dfixAllow = document.getElementById("falw2").value
-
-  var DiscBonus = document.getElementById("dbns").value
-  if(DiscBonus == ""){
-    DiscBonus = 0
+  if(dfixAllow == ""){
+    dfixAllow = 0
   }
   else{
-    DiscBonus = parseInt(DiscBonus)
+    dfixAllow = parseInt(dfixAllow)
   }
 
-  var attBns = document.getElementById("atbns").value
-  if(attBns == ""){
-    attBns = 0
+  var fixAllow = parseInt(tfixAllow) + parseInt(dfixAllow)
+
+// =============================================================================================================================
+
+  var DiscBonus1 = document.getElementById("dbns").value
+  if(DiscBonus1 == ""){
+    DiscBonus1 = 0
   }
   else{
-    attBns = parseInt(attBns)
+    DiscBonus1 = parseInt(DiscBonus1)
   }
+
+  var DiscBonus2 = document.getElementById("dbns2").value
+  if(DiscBonus2 == ""){
+    DiscBonus2 = 0
+  }
+  else{
+    DiscBonus2 = parseInt(DiscBonus2)
+  }
+
+  var DiscBonus = parseInt(DiscBonus1) + parseInt(DiscBonus2)
+
+// =============================================================================================================================
+
+  var attBns1 = document.getElementById("atbns").value
+  if(attBns1 == ""){
+    attBns1 = 0
+  }
+  else{
+    attBns1 = parseInt(attBns1)
+  }
+
+  var attBns2 = document.getElementById("atbns2").value
+  if(attBns2 == ""){
+    attBns2 = 0
+  }
+  else{
+    attBns2 = parseInt(attBns2)
+  }
+
+  var attBns = parseInt(attBns1) + parseInt(attBns2)
+
+// =============================================================================================================================
 
   var transport1 = document.getElementById("tran").value
   if(transport1 == ""){
@@ -303,22 +373,29 @@ function calculateSalary(){
   else{
     transport2 = parseInt(transport2)
   }
+  var transport = parseInt(transport1) + parseInt(transport2)
 
-  var sick = document.getElementById("sref").value
-  if(sick == ""){
-    sick = 0
+// =============================================================================================================================
+
+  var speBns1 = document.getElementById("sbns").value
+  if(speBns1 == ""){
+    speBns1 = 0
   }
   else{
-    sick = parseInt(sick)
+    speBns1 = parseInt(speBns1)
   }
 
-  var speBns = document.getElementById("sbns").value
-  if(speBns == ""){
-    speBns = 0
+  var speBns2 = document.getElementById("spbonus2").value
+  if(speBns2 == ""){
+    speBns2 = 0
   }
   else{
-    speBns = parseInt(speBns)
+    speBns2 = parseInt(speBns2)
   }
+
+  var speBns = parseInt(speBns1) + parseInt(speBns2)
+
+// =============================================================================================================================
 
   var totherAllow = document.getElementById("oalw").value
   if(totherAllow == ""){
@@ -329,14 +406,36 @@ function calculateSalary(){
   }
 
   var dotherAllow = document.getElementById("oalw2").value
-
-  var otherDed = document.getElementById("oded").value
-  if(otherDed == ""){
-    otherDed = 0
+  if(dotherAllow == ""){
+    dotherAllow = 0
   }
   else{
-    otherDed = parseInt(otherDed)
+    dotherAllow = parseInt(dotherAllow)
   }
+
+  var otherAllow = parseInt(totherAllow) + parseInt(dotherAllow)
+
+// =============================================================================================================================
+
+  var otherDed1 = document.getElementById("oded").value
+  if(otherDed1 == ""){
+    otherDed1 = 0
+  }
+  else{
+    otherDed1 = parseInt(otherDed1)
+  }
+
+  var otherDed2 = document.getElementById("oded2").value
+  if(otherDed2 == ""){
+    otherDed2 = 0
+  }
+  else{
+    otherDed2 = parseInt(otherDed2)
+  }
+
+  var otherDed = parseInt(otherDed1) + parseInt(otherDed2)
+
+// =============================================================================================================================
 
   var abs = document.getElementById("abs").value
   if(abs == ""){
@@ -400,11 +499,7 @@ function calculateSalary(){
   else{
     overseas = parseInt(overseas)
   }
-
-  var transport = parseInt(transport1) + parseInt(transport2)
   
-  var otherAllow = parseInt(totherAllow) + parseInt(dotherAllow)
-  var fixAllow = parseInt(tfixAllow) + parseInt(dfixAllow)
   var tbasic = document.getElementById("bsal").value
   var overtime = parseInt(ot1) + parseInt(ot2) +parseInt(ot3)
   var eoy = document.getElementById("eoy").value
@@ -768,52 +863,52 @@ function Export2Word(element, filename = 'paysheet'){
 
 // Export To Doc With Image
 
-function ExportToDoc2(filename = ''){
+// function ExportToDoc2(filename = ''){
   
-  var HtmlHead = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
-  var css = (
-    '<style>' +
-    '@page WordSection1{size: 841.95pt 595.35pt;mso-page-orientation: landscape;}' +
-    'div.WordSection1 {page: WordSection1;}' +
-    'table{border-collapse:collapse;}td{border:1px gray solid;width:5em;padding:2px;}'+
-    '</style>'
-  );
-  var EndHtml = "</body></html>";
+//   var HtmlHead = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+//   var css = (
+//     '<style>' +
+//     '@page WordSection1{size: 841.95pt 595.35pt;mso-page-orientation: landscape;}' +
+//     'div.WordSection1 {page: WordSection1;}' +
+//     'table{border-collapse:collapse;}td{border:1px gray solid;width:5em;padding:2px;}'+
+//     '</style>'
+//   );
+//   var EndHtml = "</body></html>";
 
-  //complete html
-  var html = HtmlHead + document.getElementById("exportContent").innerHTML+EndHtml;
+//   //complete html
+//   var html = HtmlHead + document.getElementById("exportContent").innerHTML+EndHtml;
 
-  //specify the type
-  var blob = new Blob(['\ufeff', css + html], {
-      type: 'application/msword'
-  });
+//   //specify the type
+//   var blob = new Blob(['\ufeff', css + html], {
+//       type: 'application/msword'
+//   });
   
-  // Specify link url
-  var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+//   // Specify link url
+//   var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
   
-  // Specify file name
-  filename = filename?filename+'.doc':'document.doc';
+//   // Specify file name
+//   filename = filename?filename+'.doc':'document.doc';
   
-  // Create download link element
-  var downloadLink = document.createElement("a");
+//   // Create download link element
+//   var downloadLink = document.createElement("a");
 
-  document.body.appendChild(downloadLink);
+//   document.body.appendChild(downloadLink);
   
-  if(navigator.msSaveOrOpenBlob ){
-      navigator.msSaveOrOpenBlob(blob, filename);
-  }else{
-      // Create a link to the file
-      downloadLink.href = url;
+//   if(navigator.msSaveOrOpenBlob ){
+//       navigator.msSaveOrOpenBlob(blob, filename);
+//   }else{
+//       // Create a link to the file
+//       downloadLink.href = url;
       
-      // Setting the file name
-      downloadLink.download = filename;
+//       // Setting the file name
+//       downloadLink.download = filename;
       
-      //triggering the function
-      downloadLink.click();
-  }
+//       //triggering the function
+//       downloadLink.click();
+//   }
   
-  document.body.removeChild(downloadLink);
-}
+//   document.body.removeChild(downloadLink);
+// }
 
 function ExportToDoc(filename = ''){
   
