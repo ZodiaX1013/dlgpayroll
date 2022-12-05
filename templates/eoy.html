@@ -460,9 +460,7 @@
                         <div class="card-body">
                             <div class="form-row">
                                 <!-- table card-1 start -->
-                                <div class="form-group col-md-3">
-                                    
-                                </div>
+                                
                                 <div class="form-group col-md-6">
                                     <label for="inputState">Employee</label>
                                     <select id="inputState" name="eid" class="form-control" required>
@@ -474,6 +472,11 @@
                                         {% endif %}
                                     </select>
                                 </div>
+                                    <div class="form-group col-md-6">
+                                        <label> End Of Year Bonus Amount </label>
+                                        <input type="text" name="eoy" id="eoy" class="form-control" placeholder="Enter End Of Year Bonus">
+                                    </div>
+                                
                                 <!-- <div class="form-group col-md-6">
                                     <label> End Of Year Bonus </label>
                                     <input type="text" name="eoy" id="eoy" class="form-control" placeholder="Enter End Of Year Bonus">
@@ -491,11 +494,13 @@
                                 <div class="form-group">
                                     <!-- widget primary card start -->
                                     <br>
-                                    <div class="slide-progress-bar col-md-9">                                        
+                                    <!-- <div class="slide-progress-bar col-md-9">                                         -->
+                                        <center>
                                         <button type="submit" name="action" value="reprocess" class="btn btn-info" style="float: right; margin-right:16px; margin-bottom: 25px;" onclick="return confirm('Are You Sure You Want To Re Process The Bonus Of This Employee?')" ><i class="fa-solid fa-play" style="margin-right: 0.5rem;"></i>Re-Process</button>    
                                         <button type="submit" name="action" value="process" class="btn btn-success" style="float: right; margin-right:16px; margin-bottom: 25px;"><i class="fa-solid fa-play" style="margin-right: 0.5rem;"></i>Proceed</button> 
+                                    </center>
                                         <!--progress-bar-->
-                                    </div>
+                                    <!-- </div> -->
                                     <!-- widget primary card end -->
                                 </div>
                             </div>
