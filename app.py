@@ -2736,7 +2736,7 @@ def process_salary():
                 month2 = calendar.month_name[mid]
                 month2 = month2.lower()
 
-                query = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, Medicalrel, Specialbonus FROM employee WHERE EmployeeID = %s"
+                query = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, Medicalrel, Specialbonus, months FROM employee WHERE EmployeeID = %s"
                 
                 cursor.execute(query, data)
                 emp_data = cursor.fetchall()
@@ -2752,10 +2752,10 @@ def process_salary():
                 edf = int(emp_data[0][4])
                 education = int(emp_data[0][5])
                 Medicalrel = int(emp_data[0][6])
-                temp_medical = int(emp_data[0][7])
-                medical = round(int(temp_medical) / 12)
+                medical = round(int(emp_data[0][7]) / 12)
                 # medical = 0
                 SpeProBns = int(emp_data[0][8])
+                month_count = int(emp_data[0][9])
 
                 # lwork = emp_data2[10]
                 # print(lwork)
@@ -2798,17 +2798,7 @@ def process_salary():
                 hire_date = "SELECT hire FROM employee WHERE EmployeeID= %s"
                 cursor.execute(hire_date, data)
                 hire_date_emp = cursor.fetchall()
-                
-                # print("hire_date_emp ", hire_date_emp)
-
-                
-
-
-                # hire_date = "SELECT hire FROM employee WHERE EmployeeID= %s"
-                # cursor.execute(hire_date, data)
-                # hire_date_emp = cursor.fetchall()
-                
-                # print(hire_date_emp)
+        
                 hire_dt = str(hire_date_emp[0][0])
 
                 print("Hire Date ", hire_dt)
@@ -3057,7 +3047,7 @@ def process_salary():
                                 ntransTax = trans - transTax
                             else:
                                 transTax = 0
-                                ntransTax = 0
+                                ntransTax = trans
 
                             # Current Gross
                             cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
@@ -3068,8 +3058,8 @@ def process_salary():
                             # print("Curr Gross " , cgross)
                             gross = prevGross + grossTax  # Total Gross
                             # print("gross" , gross)
-                            medf = round(int(edf) / 13)
-                            ciet = round(( int(edf) + int(Medicalrel) + int(education)) / 13)
+                            medf = round(int(edf) / int(month_count))
+                            ciet = round(( int(edf) + int(Medicalrel) + int(education)) / int(month_count))
                             
                             iet = int(ciet) + int(piet)
                             # print("ciet" , ciet)
@@ -3166,8 +3156,9 @@ def process_salary():
                             deduction = int(loan) + int(paye) + int(lateness) + int(nps) + int(otherDed) + int(nsf) + int(medical)
                             net = int(payable) - int(deduction)
                             # print(slevy)
-                            NetPaysheet = int(net) - int(slevy)
+                            
                             slevypay = slevy - plevy
+                            NetPaysheet = int(net) - int(slevy)
                             print("slevypay", slevypay)
 
                             otherAllow2 = int(otherAllow) 
@@ -3178,12 +3169,20 @@ def process_salary():
 
                             paygross = int(basic) + int(trans) + int(bonus)
 
-                            totalDeduction = int(paye) + int(nps) + int(nsf)
+                            totalDeduction = int(paye) + int(nps) + int(nsf) + int(slevypay)
 
                             netpay = paygross - totalDeduction
                             # eprgf = 0
-                            if basic < 200000:
-                                eprgf = round((int(basic) + int(bonus)) * 0.035) # + commission
+                            # if basic < 200000:
+                            #     eprgf = round((int(basic) + int(bonus)) * 0.035) # + commission
+                            # else:
+                            #     eprgf = 0
+
+                            if expatriate == "No":
+                                if basic < 200000:
+                                    eprgf = round((int(basic) + int(bonus)) * 0.035) # + commission
+                                else:
+                                    eprgf = 0
                             else:
                                 eprgf = 0
 
@@ -3268,19 +3267,19 @@ def process_salary():
                             pay_gross = tbasic + ot + otherAllow + trans + arrears + eoy + leave + speBns + SpeProBns + fixAllow + discBns + overseas + attBns
 
                             # For Overseas Amount
-                            if overseas > 0:
-                                ntax = round(int(basic) * 0.06)
-                                tax = round(int(overseas) - int(ntax))
-                            else:
-                                ntax = 0
-                                tax = 0
+                            # if overseas > 0:
+                            #     ntax = round(int(basic) * 0.06)
+                            #     tax = round(int(overseas) - int(ntax))
+                            # else:
+                            #     ntax = 0
+                            #     tax = 0
 
                             if trans > 20000:
                                 transTax = trans - 20000
                                 ntransTax = trans - transTax
                             else:
                                 transTax = 0
-                                ntransTax = 0
+                                ntransTax = trans
 
                             # Current Gross
                             cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
@@ -3291,8 +3290,8 @@ def process_salary():
                             # print("Curr Gross " , cgross)
                             gross = prevGross + grossTax  # Total Gross
                             # print("gross" , gross)
-                            medf = round(int(edf) / 13)
-                            ciet = round(( int(edf) + int(Medicalrel) + int(education)) / 13)
+                            medf = round(int(edf) / int(month_count))
+                            ciet = round(( int(edf) + int(Medicalrel) + int(education)) / int(month_count))
                             
                             iet = int(ciet) + int(piet)
                             # print("ciet" , ciet)
@@ -3341,12 +3340,12 @@ def process_salary():
 
                             # print("cpaye", cpaye)
                             # print("ppaye", ppaye)
-                            paye = int(cpaye) - int(ppaye)
+                            # paye = int(cpaye) - int(ppaye)
                             # print("paye", paye)
-                            if paye < 0:
-                                paye =0
-                            else:
-                                paye = int(paye)
+                            # if paye < 0:
+                            #     paye =0
+                            # else:
+                            #     paye = int(paye)
 
                             # nsf = int(basic * 0.01)
                             nsf = 0
@@ -3358,7 +3357,7 @@ def process_salary():
 
                             temp = int(cgross) * 13
                             slevy = 0
-                            tths = round(3000000/13)
+                            tths = round(3000000/int(month_count))
                             ths = int(pths) + int(tths)
                             # print(ths)
                             netchar = int(gross) - int(iet) - int(ths)
@@ -3402,8 +3401,9 @@ def process_salary():
                             deduction = int(loan) + int(paye) + int(lateness) + int(nps) + int(otherDed) + int(nsf) + int(medical)
                             net = int(payable) - int(deduction)
                             # print(slevy)
-                            NetPaysheet = int(net) - int(slevy)
                             slevypay = slevy - plevy
+                            NetPaysheet = int(net) - int(slevy)
+                            
                             print("slevypay", slevypay)
                             otherAllow2 = int(otherAllow)
                             
@@ -3413,12 +3413,20 @@ def process_salary():
 
                             paygross = int(basic) + int(trans) + int(bonus)
 
-                            totalDeduction = int(paye) + int(nps) + int(nsf)
+                            totalDeduction = int(paye) + int(nps) + int(nsf) + int(slevypay)
 
                             netpay = paygross - totalDeduction
                             # eprgf = 0
-                            if basic < 200000:
-                                eprgf = round((int(basic) + int(bonus)) * 0.035) # + commission
+                            # if basic < 200000:
+                            #     eprgf = round((int(basic) + int(bonus)) * 0.035) # + commission
+                            # else:
+                            #     eprgf = 0
+
+                            if expatriate == "No":
+                                if basic < 200000:
+                                    eprgf = round((int(basic) + int(bonus)) * 0.035) # + commission
+                                else:
+                                    eprgf = 0
                             else:
                                 eprgf = 0
 
@@ -4222,7 +4230,7 @@ def process_salary():
                         cursor.execute(delete_contri,data3)
                         print("Delete From Contribution Data")
 
-                        msg = "Employee Not Working , Re Processing Complete"
+                        
 
                 query15 = "SELECT Basic FROM cnpcsv WHERE month = %s"
                 data7 = [month]
@@ -4320,6 +4328,23 @@ def process_salary():
 
 # =================================================================================================================================
 
+                query23 = "SELECT prgf FROM contribution WHERE month = %s"
+                cursor.execute(query23, data7)
+                prgf_con = cursor.fetchall()
+
+                prgf1 = []
+                prgf2 = []
+
+                for i in range(len(prgf_con)):
+                    prgf1 = ''.join(prgf_con[i])
+                    prgf2.append(prgf1)
+                prgf_total = 0
+
+                for i in range(len(prgf2)):
+                    prgf_total = int(prgf_total) + int(prgf2[i])                    
+
+# =================================================================================================================================
+
                 query20 = "SELECT csg FROM contribution WHERE month = %s"
                 cursor.execute(query20, data7)
                 csg_con = cursor.fetchall()
@@ -4371,22 +4396,20 @@ def process_salary():
 
 # =================================================================================================================================
 
-                query23 = "SELECT prgf FROM contribution WHERE month = %s"
-                cursor.execute(query23, data7)
-                prgf_con = cursor.fetchall()
+                query24 = "SELECT paye FROM contribution WHERE month = %s"
+                cursor.execute(query24, data7)
+                paye_con = cursor.fetchall()
 
-                prgf1 = []
-                prgf2 = []
+                paye1 = []
+                paye2 = []
 
-                print(prgf_con)
+                for i in range(len(paye_con)):
+                    paye1 = ''.join(paye_con[i])
+                    paye2.append(paye1)
+                paye_total = 0
 
-                for i in range(len(prgf_con)):
-                    prgf1 = ''.join(prgf_con[i])
-                    prgf2.append(prgf1)
-                prgf_total = 0
-
-                for i in range(len(prgf2)):
-                    prgf_total = int(prgf_total) + int(prgf2[i])
+                for i in range(len(paye2)):
+                    paye_total = int(paye_total) + int(paye2[i])     
 
 # =================================================================================================================================
 
@@ -4399,12 +4422,13 @@ def process_salary():
                 totalprgf = %s,
                 totalcsg = %s,
                 totalnsf = %s,
-                totalslevy = %s
+                totalslevy = %s,
+                totalpaye = %s
                 WHERE 
                 month = %s;
                 """
 
-                update_contri_data = [bas_total, ecsg_total, elevy_total, ensf_total, prgf_total, csg_total, nsf_total, slevy_total, month]
+                update_contri_data = [bas_total, ecsg_total, elevy_total, ensf_total, prgf_total, csg_total, nsf_total, slevy_total, paye_total, month]
 
                 cursor.execute(update_contri, update_contri_data)
 
@@ -4511,7 +4535,7 @@ def process_salary():
                 for index,lst in enumerate(emp_data):
                     arrays[str(index+1)] = lst
                 # print(arrays)
-                
+                msg = ""
                 for i in arrays:
                     # print(i)
                     emp_data2 = list(arrays[i])
@@ -4815,7 +4839,7 @@ def process_salary():
                                         ntransTax = trans - transTax
                                     else:
                                         transTax = 0
-                                        ntransTax = 0
+                                        ntransTax = trans
 
                                     cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
 
@@ -4990,7 +5014,7 @@ def process_salary():
                                         ntransTax = trans - transTax
                                     else:
                                         transTax = 0
-                                        ntransTax = 0
+                                        ntransTax = trans
 
                                     cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
 
@@ -5436,11 +5460,11 @@ def process_salary():
                                 for i in range(len(working)):
                                     working = ''.join(working[i])
                                 
-                                query14 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
-                                cursor.execute(query14, data)
-                                nic = cursor.fetchall()
-                                for i in range(len(nic)):
-                                    nic = ''.join(nic[i])
+                                # query14 = "SELECT NICno FROM employee WHERE EmployeeID = %s"
+                                # cursor.execute(query14, data)
+                                # nic = cursor.fetchall()
+                                # for i in range(len(nic)):
+                                #     nic = ''.join(nic[i])
 
                                 allowance = int(otherAllow) + int(fixAllow) + int(speBns) + int(SpeProBns) + int(discBns) + int(attBns)
                                 commission = 0
@@ -6109,6 +6133,12 @@ def eoy():
             for i in range(len(working)):
                 working = ''.join(working[i])
 
+            query13 = "SELECT months FROM employee WHERE EmployeeID = %s"
+            cursor.execute(query13,data)
+            month_count = cursor.fetchall()
+            for i in range(len(month_count)):
+                month_count = ''.join(month_count[i])
+
 # ============================================================================================================================
 
             query_day = "SELECT DAY(hire) AS Month FROM employee WHERE EmployeeID= %s"
@@ -6186,8 +6216,8 @@ def eoy():
             # print("Curr Gross " , cgross)
             gross = prevGross + grossTax
             # print("gross" , gross)
-            medf = round(int(edf) / 13)
-            ciet = round(( int(edf) + int(Medicalrel) + int(education)) / 13)
+            medf = round(int(edf) / int(month_count))
+            ciet = round(( int(edf) + int(Medicalrel) + int(education)) / int(month_count))
             
             iet = int(ciet) + int(piet)
             # print("ciet" , ciet)
@@ -7305,6 +7335,7 @@ def eoy():
 # ===========================================================================================================================================================
 
             eid = request.form["eid"]
+            eoyBns = request.form["eoy"]
             month = "EOY"
             year = date.today().year
             
@@ -7425,8 +7456,8 @@ def eoy():
 
 # ================================================================================================================================================================================            
 
-            query12 = "SELECT Absences From salary WHERE EmployeeID = %s"
-            cursor.execute(query12,data)
+            query14 = "SELECT Absences From salary WHERE EmployeeID = %s"
+            cursor.execute(query14,data)
             ab_all = cursor.fetchall()
             ab1 = []
             ab2 = []
@@ -7442,7 +7473,7 @@ def eoy():
 # ================================================================================================================================================================================            
 
             # - (Basic + O/TIME + Local Leave Refund + Other Allowance - Absence ) / 12
-            eoyBns = round((basic_total + overtime_total + leave_total + other_total - ab_total) / 12)
+            # eoyBns = round((basic_total + overtime_total + leave_total + other_total - ab_total) / 12)
             print(basic_total)
             print(overtime_total)
             print(leave_total)
@@ -7452,7 +7483,7 @@ def eoy():
 
 # ================================================================================================================================================================================            
             
-            query14 = "SELECT salary From employee WHERE EmployeeID = %s "
+            query15 = "SELECT salary From employee WHERE EmployeeID = %s "
             cursor.execute(query14,data)
             basic_nov = cursor.fetchall()
             basic_mon = basic_nov[0][0]
@@ -7466,7 +7497,8 @@ def eoy():
             total_month = 12 - int(last_mon)
             days = total_month * 26
 
-            eoyBns2 = round((int(basic_mon) /  365) * days)
+            # eoyBns2 = round((int(basic_mon) /  365) * days)
+            eoyBns2 = eoyBns
             
             print("basic_mon ", basic_mon)
             print("days ", days)
@@ -7515,6 +7547,23 @@ def eoy():
             if nic != 0:
                 nic = ''.join(map(str,nic))
 
+            query11 = "SELECT LastName FROM employee WHERE EmployeeID = %s"
+            cursor.execute(query11,data)
+            ebasic = cursor.fetchall()
+            for i in range(len(ebasic)):
+                ebasic = ''.join(ebasic[i])
+
+            query12 = "SELECT working FROM employee WHERE EmployeeID = %s"
+            cursor.execute(query12,data)
+            working = cursor.fetchall()
+            for i in range(len(working)):
+                working = ''.join(working[i])
+
+            query13 = "SELECT months FROM employee WHERE EmployeeID = %s"
+            cursor.execute(query13,data)
+            month_count = cursor.fetchall()
+            for i in range(len(month_count)):
+                month_count = ''.join(month_count[i])
 # ============================================================================================================================
 
             query_day = "SELECT DAY(hire) AS Month FROM employee WHERE EmployeeID= %s"
@@ -7589,8 +7638,8 @@ def eoy():
                     # print("Curr Gross " , cgross)
                     gross = prevGross + grossTax
                     # print("gross" , gross)
-                    medf = round(int(edf) / 13)
-                    ciet = round(( int(edf) + int(Medicalrel) + int(education)) / 13)
+                    medf = round(int(edf) / int(month_count))
+                    ciet = round(( int(edf) + int(Medicalrel) + int(education)) / int(month_count))
                     
                     iet = int(ciet) + int(piet)
                     # print("ciet" , ciet)
@@ -7669,9 +7718,10 @@ def eoy():
                     net = int(payable) - int(deduction)
                     
                     # print(slevy)
-                    NetPaysheet = int(net) - int(slevy)
-                    
                     slevypay = slevy - plevy
+                    NetPaysheet = int(net) - int(slevypay)
+                    
+                    
                     
                     print("slevypay", slevypay)
                     otherAllow2 = int(otherAllow) 
@@ -7682,7 +7732,7 @@ def eoy():
 
                     paygross = int(basic) + int(trans) + int(bonus)
 
-                    totalDeduction = int(paye) + int(nps) + int(nsf)
+                    totalDeduction = int(paye) + int(nps) + int(nsf) + int(slevypay)
 
                     netpay = paygross - totalDeduction
                     # eprgf = 0
@@ -7944,8 +7994,8 @@ def eoy():
                 # print("Curr Gross " , cgross)
                 gross = prevGross + grossTax
                 # print("gross" , gross)
-                medf = round(int(edf) / 13)
-                ciet = round(( int(edf) + int(Medicalrel) + int(education)) / 13)
+                medf = round(int(edf) / int(month_count))
+                ciet = round(( int(edf) + int(Medicalrel) + int(education)) / int(month_count))
                 
                 iet = int(ciet) + int(piet)
                 # print("ciet" , ciet)
@@ -8024,9 +8074,10 @@ def eoy():
                 net = int(payable) - int(deduction)
                 
                 # print(slevy)
-                NetPaysheet = int(net) - int(slevy)
-                
                 slevypay = slevy - plevy
+                NetPaysheet = int(net) - int(slevypay)
+                
+                
                 
                 print("slevypay", slevypay)
                 otherAllow2 = int(otherAllow) 
@@ -8037,7 +8088,7 @@ def eoy():
 
                 paygross = int(basic) + int(trans) + int(bonus)
 
-                totalDeduction = int(paye) + int(nps) + int(nsf)
+                totalDeduction = int(paye) + int(nps) + int(nsf) + int(slevypay)
 
                 netpay = paygross - totalDeduction
                 # eprgf = 0
