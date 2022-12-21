@@ -2205,6 +2205,8 @@ def salary():
         # travel = request.form["tran"]
         otherAlw2 = int(otherAlw) 
 
+        otherAllowance = int(otherAlw1) + int(speBns1) + int(SpeProBns) + int(discBns1) + int(localRef) + int(attendance1) + int(sickRef)
+
         ded = int(Deduction) + int(slevy)
         netpay = int(Payable) - int(ded)
         bonus = int(otherAlw2) + int(fixedAlw) + int(discBns) + int(attendance) + int(overseas)
@@ -2303,7 +2305,7 @@ def salary():
                             Absences = %s
                             WHERE 
                             UNQ = %s;"""
-                data1 = [basic ,fixedAlw, otherDed, overtime, discBns, NSF, otherAlw2, tax, medical, transport, overseas, ntax, edf, arrears, attendance, eoy, loan, car, leaveRef, slevy, speBns, lateness, educationRel, SpeProBns, NPS, medicalRel, Payable, Deduction, Net, NetPaysheet, paysheet_gross, cgross, cgtax, pgross, iet, netch, cpaye, ppaye, paye, ecsg, ensf, elevy, prgf, pthes, thes, netchar, clevy , plevy, slevypay, absence, UNQ ]
+                data1 = [basic ,fixedAlw, otherDed, overtime, discBns, NSF, otherAllowance, tax, medical, transport, overseas, ntax, edf, arrears, attendance, eoy, loan, car, leaveRef, slevy, speBns, lateness, educationRel, SpeProBns, NPS, medicalRel, Payable, Deduction, Net, NetPaysheet, paysheet_gross, cgross, cgtax, pgross, iet, netch, cpaye, ppaye, paye, ecsg, ensf, elevy, prgf, pthes, thes, netchar, clevy , plevy, slevypay, absence, UNQ ]
                 cursor.execute(query1, data1)
                 print("Database Updated Successfully")
 
@@ -2754,8 +2756,8 @@ def process_salary():
                 edf = int(emp_data[0][4])
                 education = int(emp_data[0][5])
                 Medicalrel = int(emp_data[0][6])
-                # medical = round(int(emp_data[0][7]) / 12)
-                medical = 0
+                medical = round(int(emp_data[0][7]) / 12)
+                # medical = 0
                 SpeProBns = int(emp_data[0][8])
                 month_count = int(emp_data[0][9])
 
@@ -4194,6 +4196,10 @@ def process_salary():
                             cursor.execute(update_contri, contri_data)
                             print("Update Contribution Complete")
 
+                            delete_modify = "DELETE FROM ModifyVariables WHERE UNQ = %s"
+                            cursor.execute(delete_modify,data3)
+                            print("Delete From Modify Data")
+
                         msg = "Re Processing Complete For " + flname + " "
                         print(msg)
                 
@@ -4555,8 +4561,8 @@ def process_salary():
                     education = int(emp_data2[5])
                     Medicalrel = int(emp_data2[6])
                     # temp_medical = int(emp_data2[7])
-                    # medical = round(int(Medicalrel) / 12)
-                    medical = 0
+                    medical = round(int(Medicalrel) / 12)
+                    # medical = 0
                     SpeProBns = int(emp_data2[8])
                     eid = emp_data2[9]
                     month_count = int(emp_data2[10])
