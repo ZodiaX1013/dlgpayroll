@@ -466,7 +466,7 @@
                                         <tr>
                                             <th>Payslip For The Period</th>
                                             {% if month %}
-                                            <th> {{month}} - {{data[i][21]}}</th>
+                                            <th> {{month}} - {{data2[i][20]}}</th>
                                             {% else %}
                                             <th> </th>
                                             {% endif %}
@@ -501,19 +501,35 @@
                                         </tr>
                                         <tr>
                                             <td>A. Basic Pay</td>
-                                            <td>{{data[i][5]}}</td>
+                                            <td>{{data2[i][0]}}</td>
                                         </tr>
                                         <tr>
                                             <td>B. Travel Allowance</td>
-                                            <td>{{data[i][6]}}</td>
+                                            <td>{{data2[i][1]}}</td>
                                         </tr>
                                         <tr>
-                                            <td>C. Bonus</td>
-                                            <td>{{data[i][7]}}</td>
+                                            <td>C. Attendance Bonus</td>
+                                            <td>{{data2[i][2]}}</td>
                                         </tr>
                                         <tr>
-                                            <th>D. Gross Pay = (A + B + C)</th>
-                                            <th>{{data[i][8]}}</th>
+                                            <td>D. OT Amount </td>
+                                            <td>{{data2[i][3]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>E. Other Allowance </td>
+                                            <td>{{data2[i][4]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>F. OVERSEAS </td>
+                                            <td>{{data2[i][5]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>G. ARREARS </td>
+                                            <td>{{data2[i][6]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>H. Gross Pay = (A + B + C + D + E + F + G) </th>
+                                            <th>{{data2[i][7]}}</th>
                                         </tr>
                                         <tr>
                                             <td></td>
@@ -524,44 +540,48 @@
                                             <th></th>
                                         </tr>
                                         <tr>
-                                            <td>E. PAYE Tax withheld and deposited to MRA</td>
-                                            <td>{{data[i][9]}}</td>
+                                            <td>I. Absence Amount</td>
+                                            <td>{{data2[i][8]}}</td>
                                         </tr>
                                         <tr>
-                                            <td>F. NPF Employee Contribution</td>
-                                            <td>{{data[i][10]}}</td>
+                                            <td>J. PAYE Tax withheld and deposited to MRA</td>
+                                            <td>{{data2[i][9]}}</td>
                                         </tr>
                                         <tr>
-                                            <td>G. NSF Employee Contribution</td>
-                                            <td>{{data[i][11]}}</td>
+                                            <td>K. CSG Employee Contribution</td>
+                                            <td>{{data2[i][10]}}</td>
                                         </tr>
                                         <tr>
-                                            <td>H. Solidarity Levy</td>
-                                            <td>{{data[i][12]}}</td>
+                                            <td>L. NSF Employee Contribution</td>
+                                            <td>{{data2[i][11]}}</td>
                                         </tr>
                                         <tr>
-                                            <th>I. Total Deductions (E + F + G + H)</th>
-                                            <th>{{data[i][13]}}</th>
+                                            <td>M. MED Contribution</td>
+                                            <td>{{data2[i][12]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>N. Solidarity Levy</td>
+                                            <td>{{data2[i][13]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>O. Total Deductions (I + J + K + L + M + N)</th>
+                                            <th>{{data2[i][14]}}</th>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <th>J. Net Pay (D - I)</th>
-                                            <th>{{data[i][14]}}</th>
+                                            <th>P. Net Pay (H - O)</th>
+                                            <th>{{data2[i][15]}}</th>
                                         </tr>
                                         <tr>
-                                            <td>K. Reimbursements</td>
-                                            <td>0</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total amount paid (J + K)</td>
-                                            <td>{{data[i][15]}}</td>
+                                            <td>Total amount paid (P)</td>
+                                            <td>{{data2[i][15]}}</td>
                                         </tr>
                                         <tr>
                                             <th>Net Pay Credited to Account</th>
-                                            <th>{{data[i][16]}}</th>
+                                            <th>{{data2[i][15]}}</th>
                                         </tr>
                                         <tr>
                                             <td></td>
@@ -572,20 +592,20 @@
                                             <th></th>
                                         </tr>
                                         <tr>
-                                            <td>NPF</td>
-                                            <td>{{data[i][17]}}</td>
+                                            <td>CSG</td>
+                                            <td>{{data2[i][16]}}</td>
                                         </tr>
                                         <tr>
                                             <td>NSF</td>
-                                            <td>{{data[i][18]}}</td>
+                                            <td>{{data2[i][17]}}</td>
                                         </tr>
                                         <tr>
                                             <td>Levy</td>
-                                            <td>{{data[i][19]}}</td>
+                                            <td>{{data2[i][18]}}</td>
                                         </tr>
                                         <tr>
                                             <td>PRGF</td>
-                                            <td>{{data[i][20]}}</td>
+                                            <td>{{data2[i][19]}}</td>
                                         </tr>  
                                     </table>
                                 </div>

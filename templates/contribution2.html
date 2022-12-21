@@ -188,12 +188,12 @@
                                         <!-- <table style="width: 100%;"> -->
                                                 <table id="excel">
                                                     <tr>
-                                                        <th colspan="12" style="text-align: center;">
+                                                        <th colspan="14" style="text-align: center;">
                                                             MAXCITY ASSET MANAGERS LTD
                                                         </th>
                                                     </tr>
                                                     <tr>
-                                                        <th colspan="12" style="text-align: center;">
+                                                        <th colspan="14" style="text-align: center;">
                                                             {% if month %}
                                                             Datails of contributions for Employer and Employee -&nbsp; {{month}} -&nbsp; {{year}} 
                                                             {% else %}
@@ -205,7 +205,7 @@
                                                         <th colspan="6"></th>
                                                         <th colspan="4">Employer Contribution</th>
                                                         <th colspan="2">Employee Contribution</th>
-                                                        
+                                                        <th colspan="2">Employee Deduction</th>
                                                     </tr>
                                                     <tr>
                                                         <!-- <th></th> -->
@@ -221,6 +221,8 @@
                                                         <th>PRGF</th>
                                                         <th>CSG</th>
                                                         <th>NSF</th>
+                                                        <th>S. levy</th>
+                                                        <th>PAYE</th>
                                                         <!-- <th></th> -->
                                                         <!-- <th>S.Levy</th> -->
                                                     </tr> 
@@ -273,6 +275,18 @@
                                                         
                                                         {% if totalnsf %}
                                                             <th>{{totalnsf}}</th>
+                                                        {% else %}
+                                                            <th></th>
+                                                        {% endif %}
+
+                                                        {% if totalslevy %}
+                                                            <th>{{totalslevy}}</th>
+                                                        {% else %}
+                                                            <th></th>
+                                                        {% endif %}
+
+                                                        {% if totalpaye %}
+                                                            <th>{{totalpaye}}</th>
                                                         {% else %}
                                                             <th></th>
                                                         {% endif %}

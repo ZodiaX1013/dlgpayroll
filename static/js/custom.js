@@ -500,7 +500,10 @@ function calculateSalary(){
     overseas = parseInt(overseas)
   }
   
+  // var tbasic = document.getElementById("bsal").value
   var tbasic = document.getElementById("bsal").value
+  // alert(tbasic)
+  // var tbasic = parseInt(0)
   var overtime = parseInt(ot1) + parseInt(ot2) +parseInt(ot3)
   var eoy = document.getElementById("eoy").value
   var speProBns = document.getElementById("spbonus3").value
