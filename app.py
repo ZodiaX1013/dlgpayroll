@@ -4063,7 +4063,7 @@ def process_salary():
                                             WHERE
                                             UNQ = %s;
                                             """
-                                prgf_data = [eid, lname, fname, basic, allowance, commission, totalRem, eprgf, UNQ]
+                                prgf_data = [nic, lname, fname, basic, allowance, commission, totalRem, eprgf, UNQ]
 
                                 cursor.execute(update_prgf, prgf_data)
                                 print("Update PRGF Complete")
@@ -4119,7 +4119,7 @@ def process_salary():
                                             WHERE
                                             UNQ = %s;
                                             """
-                                cnp_data = [eid, lname, fname, basic, basic, UNQ]
+                                cnp_data = [nic, lname, fname, basic, basic, UNQ]
                                 cursor.execute(update_cnp, cnp_data)
 
                                 print("Update CNP Complete")
@@ -4142,8 +4142,8 @@ def process_salary():
                                                 prgf,
                                                 csg,
                                                 nsf,
-                                                blank2,
                                                 slevy,
+                                                paye,
                                                 month,
                                                 year,
                                                 UNQ
@@ -4168,7 +4168,7 @@ def process_salary():
                                                 %s
                                                 );
                                                 """
-                            contri_data = [eid, lname, fname, nic, basic, " ", enps, levy, ensf, eprgf, nps, nsf, " ", slevypay, month, year, UNQ]
+                            contri_data = [eid, lname, fname, nic, basic, " ", enps, levy, ensf, eprgf, nps, nsf, slevypay, paye , month, year, UNQ]
                             cursor.execute(insert_contri, contri_data)
                             print("Contribution Insert Query Executed")
 
@@ -4185,11 +4185,12 @@ def process_salary():
                                             prgf = %s,
                                             csg = %s,
                                             nsf = %s,
-                                            slevy = %s
+                                            slevy = %s,
+                                            paye = %s
                                             WHERE
                                             UNQ = %s;
                                             """
-                            contri_data = [eid, lname, fname, basic, enps, levy, ensf, eprgf, nps, nsf, slevypay, UNQ]
+                            contri_data = [eid, lname, fname, basic, enps, levy, ensf, eprgf, nps, nsf, slevypay , paye, UNQ]
                             cursor.execute(update_contri, contri_data)
                             print("Update Contribution Complete")
 
@@ -5428,7 +5429,7 @@ def process_salary():
                                         );
                                         """
                                 
-                                data_payslip = [hire, "CARE Ratings (Africa) Private Limitedivate Limited" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay , totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, month, year, UNQ ]
+                                data_payslip = [hire, "Demo" , flname, pos, nic, basic, trans, bonus, paygross, paye, nps, nsf, slevypay , totalDeduction, netpay,netpay, netpay, enps, ensf, levy, eprgf, month, year, UNQ ]
                                 cursor.execute(query, data_payslip)
                                 print("Payslip Query Executed")
                                 
