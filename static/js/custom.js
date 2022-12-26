@@ -982,7 +982,7 @@ function calculatehr1(){
   var perhour = parseInt(perday) / 8
 
   var rate = perhour * hour
-  var total = Math.round(parseInt(rate) * 1)
+  var total = Math.ceil(rate * 1)
 
   document.getElementById('am1').value = parseInt(total)
 
@@ -1008,7 +1008,9 @@ function calculatehr2(){
   var perhour = parseInt(perday) / 8
   
   var rate = perhour * hour
-  var total = Math.round(parseInt(rate) * 1.5)
+  // alert(rate)
+  var total = Math.ceil(rate * 1.5)
+  // alert(total)
 
   document.getElementById('am2').value = parseInt(total)
 }
@@ -1033,7 +1035,8 @@ function calculatehr3(){
   var perhour = parseInt(perday) / 8
 
   var rate = perhour * hour
-  var total = Math.round(parseInt(rate) * 2)
+  // alert(rate)
+  var total = Math.ceil(rate * 2)
 
   document.getElementById('am3').value = parseInt(total)
 }
