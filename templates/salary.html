@@ -719,14 +719,15 @@
 											{% endif %}
 										</div>
 										<div class="form-group col-md-3">
-											{% if wdays %}
-											<label> Working Days</label>
-											<input type="text" name="wdays" id="wdays" value="{{wdays}}" class="form-control" placeholder="Working Days" readonly>
+											{% if vdata[i][26] %}
+											<label style="color: red;">Medical</label>
+											<input type="text" name="medical" id="medical" class="form-control" value="{{vdata[i][26]}}" placeholder="Enter Other Deduction">
 											{% else %}
-											<label> Working Days</label>
-											<input type="text" name="wdays" id="wdays" value="" class="form-control" placeholder="Working Days" readonly>
+											<label style="color: red;">Medical</label>
+											<input type="text" name="medical" id="medical" class="form-control" placeholder="Enter Medical">
 											{% endif %}
 										</div>
+										
 										
 									</div>
 								</p>
@@ -794,8 +795,6 @@
 										</div>
 										<div class="form-row">
 											<div class="form-group col-md-2">
-											</div>
-											<div class="form-group col-md-2">
 												{% if vdata[i][18] %}
 												<label style="color: red;"> Lateness - Hours</label>
 												<input type="text" class="form-control" name="hr4" id="hr4" value="{{vdata[i][18]}}" placeholder="Enter Hour" onblur="calculatehr4()">
@@ -829,6 +828,15 @@
 												{% else %}
 												<label style="color: red;">Absences Amount</label>
 												<input type="text" name="abs" id="abs" class="form-control" placeholder="Enter Absence Amount">
+												{% endif %}
+											</div>
+											<div class="form-group col-md-2">
+												{% if wdays %}
+												<label> Working Days</label>
+												<input type="text" name="wdays" id="wdays" value="{{wdays}}" class="form-control" placeholder="Working Days" readonly>
+												{% else %}
+												<label> Working Days</label>
+												<input type="text" name="wdays" id="wdays" value="" class="form-control" placeholder="Working Days" readonly>
 												{% endif %}
 											</div>
 										</div>
@@ -940,14 +948,9 @@
 									<label style="color: red;">Other Deduction</label>
 									<input type="text" name="oded" id="oded" class="form-control" placeholder="Enter Other Deduction">
 								</div>
-								<div class="form-group col-md-3">
-									{% if wdays %}
-									<label> Working Days</label>
-									<input type="text" name="wdays" id="wdays" value="{{wdays}}" class="form-control" placeholder="Working Days" readonly>
-									{% else %}
-									<label> Working Days</label>
-									<input type="text" name="wdays" id="wdays" value="" class="form-control" placeholder="Working Days" readonly>
-									{% endif %}
+								<div class="form-group col-md-3">										
+									<label style="color: red;">Medical</label>
+									<input type="text" name="medical" id="medical" class="form-control" placeholder="Enter Medical">
 								</div>
 								
 							</div>
@@ -986,7 +989,8 @@
 									</div>
 								</div>
 								<div class="form-row">
-									<div class="form-group col-md-2">
+									<div class="form-group col-md-1">
+
 									</div>
 									<div class="form-group col-md-2">
 										<label style="color: red;"> Lateness - Hours</label>
@@ -1003,6 +1007,15 @@
 									<div class="form-group col-md-2">
 										<label style="color: red;">Absences Amount</label>
 										<input type="text" name="abs" id="abs" class="form-control" placeholder="Enter Absence Amount">
+									</div>
+									<div class="form-group col-md-2">
+										{% if wdays %}
+										<label> Working Days</label>
+										<input type="text" name="wdays" id="wdays" value="{{wdays}}" class="form-control" placeholder="Working Days" readonly>
+										{% else %}
+										<label> Working Days</label>
+										<input type="text" name="wdays" id="wdays" value="" class="form-control" placeholder="Working Days" readonly>
+										{% endif %}
 									</div>
 										
 								</div>

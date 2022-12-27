@@ -1471,7 +1471,7 @@ def salary():
                     gtax = ''.join(gtax[i])
                 
                 print("Before Query Execute")
-                query54 = "SELECT Arrears, LocalRef, FixedAllowance, DiscBns, AttBns, Transport, SickRef, SpeBns, OtherAlw, Overseas, OtherDed, Absences, ot1, amt1, ot2, amt2, ot3, amt3, lateness, amt4, TaxDes, tax, NTaxDes, ntax, absenceDays, amt5 FROM ModifyVariables WHERE EmployeeID = %s AND Month = %s"
+                query54 = "SELECT Arrears, LocalRef, FixedAllowance, DiscBns, AttBns, Transport, SickRef, SpeBns, OtherAlw, Overseas, OtherDed, Absences, ot1, amt1, ot2, amt2, ot3, amt3, lateness, amt4, TaxDes, tax, NTaxDes, ntax, absenceDays, amt5, medical FROM ModifyVariables WHERE EmployeeID = %s AND Month = %s"
                 cursor.execute(query54, data1)
                 variable_data = cursor.fetchall()
                 length = len(variable_data)
@@ -1996,6 +1996,12 @@ def salary():
         else:
             ntaxamt = ntaxamt
 
+        medicalMod = request.form["medical"]
+        if medicalMod == "":
+            medicalMod = 0
+        else:
+            medicalMod = medicalMod
+
 # ============================================================================================================================================================
 
         # basic = request.form["bsal"]
@@ -2409,6 +2415,7 @@ def salary():
                         tax,
                         NTaxDes,
                         ntax,
+                        medical,
                         Month,
                         UNQ
                         )
@@ -2441,9 +2448,10 @@ def salary():
                         %s,
                         %s,
                         %s,
+                        %s,
                         %s
                         );"""
-                    data4 = [eid, arrears1, localRef, fixedAlw1, discBns1, attendance1, transport1, sickRef, speBns1, otherAlw1, overseas1, otherDed1, absence,  ot1, amt1, ot2, amt2, ot3, amt3, lateness, amt4, absence_hr , absence  , taxDes, taxamt, ntaxDes, ntaxamt, month, UNQ]
+                    data4 = [eid, arrears1, localRef, fixedAlw1, discBns1, attendance1, transport1, sickRef, speBns1, otherAlw1, overseas1, otherDed1, absence,  ot1, amt1, ot2, amt2, ot3, amt3, lateness, amt4, absence_hr , absence  , taxDes, taxamt, ntaxDes, ntaxamt, medicalMod, month, UNQ]
                     cursor.execute(insert_query, data4)
 
                     print("Insert Modify Variables")

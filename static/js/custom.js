@@ -435,6 +435,27 @@ function calculateSalary(){
 
   var otherDed = parseInt(otherDed1) + parseInt(otherDed2)
 
+  // =============================================================================================================================
+
+  var medical1 = document.getElementById("medical").value
+  if(medical1 == ""){
+    medical1 = 0
+  }
+  else{
+    medical1 = parseInt(medical1)
+  }
+
+  var medical2 = document.getElementById("med2").value
+  if(medical2 == ""){
+    medical2 = 0
+  }
+  else{
+    medical2 = parseInt(medical2)
+  }
+
+  var medical = medical1 + medical2
+  // alert(medical)
+
 // =============================================================================================================================
 
   var abs = document.getElementById("abs").value
@@ -513,7 +534,7 @@ function calculateSalary(){
   var paye = document.getElementById("paye").value
   var nps = document.getElementById("nps").value
   var nsf = document.getElementById("nsf").value
-  var medical = document.getElementById("med2").value
+  
 
   var edf = document.getElementById("edf").value
   var car = document.getElementById("car").value
@@ -1062,7 +1083,7 @@ function calculatehr4(){
   
   var rate = perhour * hour
 
-  var total = Math.round(parseInt(rate) * 1)
+  var total = Math.ceil(rate * 1)
 
   document.getElementById('am4').value = parseInt(total)
 }
@@ -1087,7 +1108,7 @@ function calculatehr5(){
   // var perhour = Math.round(parseInt(perday) / 8)
   
 
-  var total = perday * day
+  var total = Math.ceil(perday * day)
 
   document.getElementById('abs').value = Math.round(total)
 }
