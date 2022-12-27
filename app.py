@@ -3360,6 +3360,7 @@ def process_salary():
                             #     paye = int(paye)
 
                             # nsf = int(basic * 0.01)
+                            paye = 0
                             nsf = 0
 
                             # if nsf > 214:
