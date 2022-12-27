@@ -1000,7 +1000,7 @@ function calculatehr1(){
   }
 
   var perday = parseInt(basic) / parseInt(wdays)
-  var perhour = parseInt(perday) / 8
+  var perhour = perday / 8
 
   var rate = perhour * hour
   var total = Math.ceil(rate * 1)
@@ -1026,7 +1026,7 @@ function calculatehr2(){
   }
 
   var perday = parseInt(basic) / parseInt(wdays)
-  var perhour = parseInt(perday) / 8
+  var perhour = perday / 8
   
   var rate = perhour * hour
   // alert(rate)
@@ -1053,7 +1053,7 @@ function calculatehr3(){
   }
 
   var perday = parseInt(basic) / parseInt(wdays)
-  var perhour = parseInt(perday) / 8
+  var perhour = perday / 8
 
   var rate = perhour * hour
   // alert(rate)
@@ -1079,7 +1079,7 @@ function calculatehr4(){
   }
 
   var perday = parseInt(basic) / parseInt(wdays)
-  var perhour = parseInt(perday) / 8
+  var perhour = perday / 8
   
   var rate = perhour * hour
 
