@@ -532,7 +532,7 @@ function calculateSalary(){
   // alert(tbasic)
   var loan = document.getElementById("lrep").value
   var paye = document.getElementById("paye").value
-  var nps = document.getElementById("nps").value
+  var csg = document.getElementById("nps").value
   var nsf = document.getElementById("nsf").value
   
 
@@ -625,30 +625,44 @@ function calculateSalary(){
   var nps
   var cpaye
   var enps
-  if(basic > 50000){
-    nps = Math.round(parseInt(basic) * 0.03)
-    // cpaye = Math.round(parseInt(netch) * 0.15)
-    enps = Math.round(parseInt(basic) * 0.06)
+  if(csg == 0){
+    nps = 0
+    enps = 0
   }
   else{
-    nps = Math.round(parseInt(basic) * 0.015)
-    // cpaye = Math.round(parseInt(netch) * 0.1)
-    enps = Math.round(parseInt(basic) * 0.03)
+    if(basic > 50000){
+      nps = Math.round(parseInt(basic) * 0.03)
+      // cpaye = Math.round(parseInt(netch) * 0.15)
+      enps = Math.round(parseInt(basic) * 0.06)    
+    }
+    else{
+      nps = Math.round(parseInt(basic) * 0.015)
+      // cpaye = Math.round(parseInt(netch) * 0.1)
+      enps = Math.round(parseInt(basic) * 0.03)
+    }
   }
+  
   var medf = Math.round(parseInt(edf) / 13)
   var check = parseInt(basic) + parseInt(otherAllow) - parseInt(medf)
-  if(check < 53846){
-    
-    cpaye = Math.round(parseInt(netch) * 0.1)
-  }
-  else if(check >=53846 && check < 75000 ){
-    
-    cpaye = Math.round(parseInt(netch) * 0.125)
+
+  if(csg == 0){
+    cpaye = 0
   }
   else{
+    if(check < 53846){
     
-    cpaye = Math.round(parseInt(netch) * 0.15)
+      cpaye = Math.round(parseInt(netch) * 0.1)
+    }
+    else if(check >=53846 && check < 75000 ){
+      
+      cpaye = Math.round(parseInt(netch) * 0.125)
+    }
+    else{
+      
+      cpaye = Math.round(parseInt(netch) * 0.15)
+    }
   }
+  
 
   if(cpaye < 0){
     cpaye = 0
@@ -673,7 +687,12 @@ function calculateSalary(){
     paye = parseInt(paye)
   }
   
-  nsf = Math.round(parseInt(basic) * 0.01)
+  if(csg == 0){
+    nsf = 0
+  }
+  else{
+    nsf = Math.round(parseInt(basic) * 0.01)
+  }
 
   if(nsf > 214){
     nsf = 214
@@ -692,28 +711,48 @@ function calculateSalary(){
   var cths = Math.round(3000000 / 13)
   var ths = parseInt(cths) + parseInt(pths)
   var netchar = parseInt(gross) - parseInt(iet) - parseInt(ths)
-  if(temp > 3000000){
-    slevy1 = Math.round(parseInt(netchar) * 0.25)
-    slevy2 = Math.round(parseInt(gross) * 0.1)
-    
-    if(slevy1 > slevy2){
-      slevy = Math.round(slevy2)
-    }
-    else{
-      slevy = Math.round(slevy1)
-    }
-  }
-  else{
+
+  if(csg == 0){
     slevy = 0
   }
-  var ensf = Math.round(parseInt(basic) * 0.025)
+  else{
+    if(temp > 3000000){
+      slevy1 = Math.round(parseInt(netchar) * 0.25)
+      slevy2 = Math.round(parseInt(gross) * 0.1)
+      
+      if(slevy1 > slevy2){
+        slevy = Math.round(slevy2)
+      }
+      else{
+        slevy = Math.round(slevy1)
+      }
+    }
+    else{
+      slevy = 0
+    }
+  }
+
+  var ensf
+  if(csg == 0){
+    ensf = 0
+  }
+  else{
+    ensf = Math.round(parseInt(basic) * 0.025)
+  }
   if(ensf > 536){
     ensf = 536
   }
   else{
     ensf = Math.round(ensf)
   }
-  var levy = Math.round(parseInt(basic) * 0.015)
+  var levy
+  
+  if(csg == 0){
+    levy = 0
+  }
+  else{
+    var levy = Math.round(parseInt(basic) * 0.015)
+  }
 
   var deduction = parseInt(loan) + parseInt(paye) + parseInt(lateness) + parseInt(nps) + parseInt(otherDed) + parseInt(nsf) + parseInt(medical)
 
@@ -739,12 +778,17 @@ function calculateSalary(){
 
   var eprgf
   var teprgf
-  if(basic < 200000){
-    teprgf = parseInt(basic) + parseInt(otherAllow) 
-    eprgf = Math.round(teprgf * 0.035)
+  if(csg == 0){
+    eprgf = 0
   }
   else{
-    eprgf = 0
+    if(basic < 200000){
+      teprgf = parseInt(basic) + parseInt(otherAllow) 
+      eprgf = Math.round(teprgf * 0.035)
+    }
+    else{
+      eprgf = 0
+    }
   }
   
 
