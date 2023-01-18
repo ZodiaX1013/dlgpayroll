@@ -2191,6 +2191,7 @@ def salary():
         month = request.form["mon"]
 
         fname = request.form["fname"]
+        print("fname ", fname)
 
         eid = request.form["eid"]
 
@@ -2313,6 +2314,7 @@ def salary():
                             UNQ = %s;"""
                 data1 = [basic ,fixedAlw, otherDed, overtime, discBns, NSF, otherAllowance, tax, medical, transport, overseas, ntax, edf, arrears, attendance, eoy, loan, car, leaveRef, slevy, speBns, lateness, educationRel, SpeProBns, NPS, medicalRel, Payable, Deduction, Net, NetPaysheet, paysheet_gross, cgross, cgtax, pgross, iet, netch, cpaye, ppaye, paye, ecsg, ensf, elevy, prgf, pthes, thes, netchar, clevy , plevy, slevypay, absence, UNQ ]
                 cursor.execute(query1, data1)
+                print(UNQ)
                 print("Database Updated Successfully")
 
                 
@@ -2673,6 +2675,13 @@ def process_salary():
                 id = 0
                 month = month.lower()
                 data = [eid]
+
+                cur_date = date.today()
+                res = calendar.monthrange(cur_date.year, cur_date.month)
+                day = res[1]
+
+                cur_date = str(cur_date)
+
                 # print(month)
                 if month == "January" or month=="january":
                     print("In Jan")
@@ -2829,7 +2838,7 @@ def process_salary():
 
                 expatriate = expatriate[0][0]
 
-                if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt <= current_date):
+                if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt <= cur_date):
                     print("Year Is Correct")
                     if int(last_mon) >= int(id) or (last_year == 1 and last_mon == 1):
                         print("In Start Process")
@@ -4466,6 +4475,20 @@ def process_salary():
                 month = request.form["mon"]
         
                 year = request.form["year"]
+
+                cur_date = date.today()
+
+                res = calendar.monthrange(cur_date.year, cur_date.month)
+                day = res[1]
+                
+                # print(day)
+
+                # print(cur_date)
+                # print(type(cur_date))
+                # print(type(str(cur_date)))
+
+                cur_date = str(cur_date)
+
                 id = 0
                 month = month.lower()          
                 if month == "January" or month=="january":
@@ -4616,7 +4639,7 @@ def process_salary():
 
                     expatriate = expatriate[0][0]
                     
-                    if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt <= current_date):
+                    if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt <= cur_date):
                         print("Year Is Correct ", eid)
                         if int(last_mon) >= int(id) or (last_year == 1 and last_mon == 1):
                             print("In Start Process")
