@@ -2849,6 +2849,9 @@ def process_salary():
                             for i in range(len(lname)):
                                 lname = ''.join(lname[i])
 
+                            print(lname)
+                            print(fname)
+
                             query3 = "SELECT cGrossTax FROM salary WHERE EmployeeID= %s AND Month = %s"
                             cursor.execute(query3,data2)
                             prevGross = cursor.fetchall()
@@ -3071,9 +3074,9 @@ def process_salary():
                                 ntransTax = trans
 
                             # Current Gross
-                            cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
+                            cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car + speBns
 
-                            grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car
+                            grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car + speBns
 
                             # print("prev Gross " , prevGross)
                             # print("Curr Gross " , cgross)
@@ -3215,7 +3218,8 @@ def process_salary():
                             lname = cursor.fetchall()
                             for i in range(len(lname)):
                                 lname = ''.join(lname[i])
-
+                            print(lname)
+                            print(fname)
                             prevGross = 0                                
 
                             piet = 0
@@ -4648,12 +4652,14 @@ def process_salary():
                             fname = cursor.fetchall()
                             for i in range(len(fname)):
                                 fname = ''.join(fname[i])
+                            print(fname)
 
                             query2 = "SELECT LastName FROM employee WHERE EmployeeID = %s"
                             cursor.execute(query2,data)
                             lname = cursor.fetchall()
                             for i in range(len(lname)):
                                 lname = ''.join(lname[i])
+                            print(lname)
 
                             query3 = "SELECT cGrossTax FROM salary WHERE EmployeeID= %s AND Month = %s"
                             cursor.execute(query3,data2)
@@ -4809,10 +4815,12 @@ def process_salary():
                             #     print("In Else")
                             #     working = "Yes"
                             
+                            flname = lname + " " + fname
+
+                            print(flname)
 
                             if ProcSal == "No":                        
                                 if pension == 'Paid':
-                                    flname = lname + " " + fname
 
                                     # Values We Don't Get
                                     ot = 0
