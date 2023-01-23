@@ -600,9 +600,9 @@ function calculateSalary(){
   
   var payable = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow)  + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(speBns) + parseInt(speProBns) + parseInt(fixAllow) + parseInt(DiscBonus) + parseInt(attBns) + parseInt(tax) + parseInt(ntax)
   
-  cgross = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car) + parseInt(ntax)
+  cgross = parseInt(basic) + parseInt(overtime) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow) + parseInt(tax) + parseInt(speProBns) + parseInt(attBns) + parseInt(car) + parseInt(ntax) + parseInt(speBns)
   
-  grossTax = parseInt(basic) + parseInt(overtime) + parseInt(tax) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow)  + parseInt(speProBns) + parseInt(attBns) + parseInt(car)
+  grossTax = parseInt(basic) + parseInt(overtime) + parseInt(tax) + parseInt(otherAllow) + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(DiscBonus) + parseInt(fixAllow)  + parseInt(speProBns) + parseInt(attBns) + parseInt(car) + parseInt(speBns)
 
   var pay_gross = parseInt(tbasic) + parseInt(overtime) + parseInt(otherAllow)  + parseInt(arrears) + parseInt(eoy) + parseInt(localRef) + parseInt(speBns) + parseInt(speProBns) + parseInt(fixAllow) + parseInt(DiscBonus) + parseInt(attBns) + parseInt(tax) + parseInt(ntax)
 

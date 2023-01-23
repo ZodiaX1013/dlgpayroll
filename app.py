@@ -3307,9 +3307,9 @@ def process_salary():
                                 ntransTax = trans
 
                             # Current Gross
-                            cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
+                            cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car + speBns
 
-                            grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car
+                            grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car + speBns
 
                             # print("prev Gross " , prevGross)
                             # print("Curr Gross " , cgross)
@@ -4890,9 +4890,9 @@ def process_salary():
                                         transTax = 0
                                         ntransTax = trans
 
-                                    cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
+                                    cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car + speBns
 
-                                    grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car
+                                    grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car + speBns
 
                                     # print("prev Gross " , prevGross)
                                     # print("Curr Gross " , cgross)
@@ -5065,9 +5065,9 @@ def process_salary():
                                         transTax = 0
                                         ntransTax = trans
 
-                                    cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car
+                                    cgross = basic + ot + otherAllow + trans + arrears + eoy + leave + discBns + fixAllow + tax + SpeProBns + attBns + car + speBns
 
-                                    grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car
+                                    grossTax = basic + ot + transTax +otherAllow + arrears + eoy + leave + discBns + fixAllow  + tax + SpeProBns + attBns + car + speBns
 
                                     # print("prev Gross " , prevGross)
                                     # print("Curr Gross " , cgross)
