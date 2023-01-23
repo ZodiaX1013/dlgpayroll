@@ -2757,7 +2757,7 @@ def process_salary():
                 month2 = calendar.month_name[mid]
                 month2 = month2.lower()
 
-                query = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, Medicalrel, Specialbonus, months FROM employee WHERE EmployeeID = %s"
+                query = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, Medicalrel, Specialbonus, months, Houseinterest FROM employee WHERE EmployeeID = %s"
                 
                 cursor.execute(query, data)
                 emp_data = cursor.fetchall()
@@ -2777,6 +2777,7 @@ def process_salary():
                 # medical = 0
                 SpeProBns = int(emp_data[0][8])
                 month_count = int(emp_data[0][9])
+                house = int(emp_data[0][10])
 
                 # lwork = emp_data2[10]
                 # print(lwork)
@@ -3083,7 +3084,7 @@ def process_salary():
                             gross = prevGross + grossTax  # Total Gross
                             # print("gross" , gross)
                             medf = round(int(edf) / int(month_count))
-                            ciet = round(( int(edf) + int(Medicalrel) + int(education)) / int(month_count))
+                            ciet = round(( int(edf) + int(Medicalrel) + int(education) + int(house)) / int(month_count))
                             
                             iet = int(ciet) + int(piet)
                             # print("ciet" , ciet)
@@ -4569,7 +4570,7 @@ def process_salary():
 
                 # query3 = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, medical, Specialbonus FROM employee WHERE EmployeeID = %s "
                 # query3 = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, medical, Specialbonus, EmployeeID FROM employee"
-                query = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, Medicalrel, Specialbonus, EmployeeID, months FROM employee"
+                query = "SELECT Carbenefit, salary, Fixedallow, Travelallow, EDF, Educationrel, Medicalrel, Medicalrel, Specialbonus, EmployeeID, months, Houseinterest FROM employee"
                 # cursor.execute(query3, data)
                 cursor.execute(query)
                 emp_data = cursor.fetchall()
@@ -4602,6 +4603,7 @@ def process_salary():
                     SpeProBns = int(emp_data2[8])
                     eid = emp_data2[9]
                     month_count = int(emp_data2[10])
+                    house = int(emp_data2[11])
 
                     # lwork = emp_data2[10]
                     # print(lwork)
@@ -4899,7 +4901,7 @@ def process_salary():
                                     gross = prevGross + grossTax
                                     # print("gross" , gross)
                                     medf = round(int(edf) / int(month_count))
-                                    ciet = round(( int(edf) + int(Medicalrel) + int(education)) / int(month_count))
+                                    ciet = round(( int(edf) + int(Medicalrel) + int(education) + int(house)) / int(month_count))
                                     
                                     iet = int(ciet) + int(piet)
                                     # print("ciet" , ciet)
