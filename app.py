@@ -4486,12 +4486,13 @@ def process_salary():
                 res = calendar.monthrange(cur_date.year, cur_date.month)
                 day = res[1]
                 
-                # print(day)
+                print(day)
 
-                # print(cur_date)
-                # print(type(cur_date))
-                # print(type(str(cur_date)))
+                print(cur_date)
+                print(type(cur_date))
+                print(type(str(cur_date)))
 
+                
                 cur_date = str(cur_date)
 
                 id = 0
@@ -4499,62 +4500,62 @@ def process_salary():
                 if month == "January" or month=="january":
                     print("In Jan")
                     
-                    current_date = "2022-"+"01-"+"31"
+                    current_date = str(year) +"-01-"+"31"
                     id = 1
                 elif month == "February" or month=="february":
                     print("In Feb")
                     
-                    current_date = "2022-"+"02-"+"31"
+                    current_date = str(year)+"-02-"+"29"
                     id = 2
                 elif month == "March" or month=="march":
                     print("In Mar")
                     
-                    current_date = "2022-"+"03-"+"31"
+                    current_date = str(year)+"-03-"+"31"
                     id = 3
                 elif month == "April" or month=="april":
                     print("In Apr")
                     
-                    current_date = "2022-"+"04-"+"31"
+                    current_date = str(year)+"-04-"+"30"
                     id = 4
                 elif month == "May" or month=="may":
                     print("In May")
                     
-                    current_date = "2022-"+"05-"+"31"
+                    current_date = str(year)+"-05-"+"31"
                     id = 5
                 elif month == "June" or month=="june":
                     print("In Jun")
                     
-                    current_date = "2022-"+"06-"+"31"
+                    current_date = str(year)+"-06-"+"30"
                     id = 6
                 elif month == "July" or month=="july":
                     print("In Jul")
                     
-                    current_date = "2022-"+"07-"+"31"
+                    current_date = str(year)+"-07-"+"31"
                     id = 7
                 elif month == "August" or month=="august":
                     print("In Aug")
                     
-                    current_date = "2022-"+"08-"+"31"
+                    current_date = str(year)+"-08-"+"31"
                     id = 8
                 elif month == "September" or month=="september":
                     print("In Sep")
                     
-                    current_date = "2022-"+"09-"+"31"
+                    current_date = str(year)+"-09-"+"30"
                     id = 9
                 elif month == "October" or month=="october":
                     print("In Oct")
                     
-                    current_date = "2022-"+"10-"+"31"
+                    current_date = str(year)+"-10-"+"31"
                     id = 10
                 elif month == "November" or month=="november":
                     print("In Nov")
                     
-                    current_date = "2022-"+"11-"+"31"
+                    current_date = str(year)+"-11-"+"30"
                     id = 11
                 elif month == "December" or month=="december":
                     print("In Dec")
 
-                    current_date = "2022-"+"12-"+"31"
+                    current_date = str(year)+"-12-"+"31"
                     id = 12
                 else:  
                     print("In Else")
@@ -4644,8 +4645,10 @@ def process_salary():
                     expatriate = cursor.fetchall()
 
                     expatriate = expatriate[0][0]
+
+                    print("Current Date : ", current_date)
                     
-                    if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt <= cur_date):
+                    if (int(last_year) >= int(year) or (last_year == 1 and last_mon == 1)) and (hire_dt <= current_date):
                         print("Year Is Correct ", eid)
                         if int(last_mon) >= int(id) or (last_year == 1 and last_mon == 1):
                             print("In Start Process")
@@ -4823,6 +4826,7 @@ def process_salary():
 
                             if ProcSal == "No":                        
                                 if pension == 'Paid':
+                                    print("In process Salary")
 
                                     # Values We Don't Get
                                     ot = 0
